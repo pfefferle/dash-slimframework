@@ -10,7 +10,7 @@ Install by opening Dash.app preferences, switch to `Downloads`, click `+`, and e
 
 ## Thanks
 
-The [`sync.sh`][] and [`rebuild.py`][] scripts are based on [@willnorris][]' awesome [RFCDash Docset][]
+The [`sync.sh`][] and [`rebuild.py`][] scripts are based on [@willnorris][]' awesome [RFCDash Docset][] versions.
 
 [Dash.app]: http://kapeli.com/dash
 [open an issue]: https://github.com/pfefferle/dash-slimframework/issues

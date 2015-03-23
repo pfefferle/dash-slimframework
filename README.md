@@ -7,7 +7,7 @@ dash-slimframework is a docset for [Dash.app][] containing the latest Slim Frame
 ## Installing
 
 Install by opening Dash.app preferences, switch to `Downloads`, click `+`, and enter the feed URL
-`https://raw.githubusercontent.com/pfefferle/dash-slimframework/master/SlimFramework.xml`.
+`https://raw.githubusercontent.com/pfefferle/dash-slimframework/master/Slim_Framework.xml`.
 
 ## Build
 

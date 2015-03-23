@@ -3,10 +3,10 @@
 import copy, os, re, sqlite3, string, urllib
 from bs4 import BeautifulSoup, NavigableString, Tag
 
-DOCUMENTS_DIR = os.path.join('SlimFramework.docset', 'Contents', 'Resources', 'Documents')
+DOCUMENTS_DIR = os.path.join('Slim_Framework.docset', 'Contents', 'Resources', 'Documents')
 HTML_DIR = os.path.join('docs.slimframework.com')
 
-db = sqlite3.connect('SlimFramework.docset/Contents/Resources/docSet.dsidx')
+db = sqlite3.connect('Slim_Framework.docset/Contents/Resources/docSet.dsidx')
 cur = db.cursor()
 
 try: cur.execute('DROP TABLE searchIndex;')

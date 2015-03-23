@@ -1,6 +1,6 @@
 # dash-slimframework
 
-dash-slimframework is a docset for [Dash.app][] containing the latest SlimFramework documentation.
+dash-slimframework is a docset for [Dash.app][] containing the latest Slim Framework documentation.
 
 ![](screenshot.png)
 

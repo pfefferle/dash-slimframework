@@ -1,3603 +1,579 @@
 <!DOCTYPE html>
-<html><!-- Mirrored from docs.slimframework.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Mar 2015 17:56:29 GMT --><head>
-        <meta charset="utf-8"/>
-        <title>Slim Framework Documentation</title>
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
-        <link href="bootstrap/css/responsive.css" rel="stylesheet"/>
-        <link href="styles/css/all.css" rel="stylesheet"/>
-    </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-static-top">
-            <div class="navbar-inner">
-                <a class="brand" href="http://www.slimframework.com/" target="_blank">Slim Framework Documentation</a>
-                
-            </div>
-        </div>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><!-- Mirrored from docs.slimframework.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2015 15:50:46 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
-        <div class="container-fluid pts">
-    <div class="row-fluid">
-        <div class="span4">
-            <div class="well well-small">
-                <ul class="nav nav-list">
-                                        <li class="nav-header"><a href="#Getting-Started">Getting Started</a></li>
-                                        <li class="nav-page"><a href="#Installation">Installation</a></li>
-                                        <li class="nav-page"><a href="#System-Requirements">System Requirements</a></li>
-                                        <li class="nav-page"><a href="#Hello-World">Hello World</a></li>
-                    
-                                        <li class="nav-header"><a href="#Configuration">Configuration</a></li>
-                                        <li class="nav-page"><a href="#Configuration-Overview">Configuration Overview</a></li>
-                                        <li class="nav-page"><a href="#Application-Settings">Application Settings</a></li>
-                                        <li class="nav-page"><a href="#Application-Names-and-Scopes">Application Names and Scopes</a></li>
-                                        <li class="nav-page"><a href="#Application-Modes">Application Modes</a></li>
-                    
-                                        <li class="nav-header"><a href="#Routing">Routing</a></li>
-                                        <li class="nav-page"><a href="#Routing-Overview">Routing Overview</a></li>
-                                        <li class="nav-page"><a href="#GET-Routes">GET Routes</a></li>
-                                        <li class="nav-page"><a href="#POST-Routes">POST Routes</a></li>
-                                        <li class="nav-page"><a href="#PUT-Routes">PUT Routes</a></li>
-                                        <li class="nav-page"><a href="#DELETE-Routes">DELETE Routes</a></li>
-                                        <li class="nav-page"><a href="#OPTIONS-Routes">OPTIONS Routes</a></li>
-                                        <li class="nav-page"><a href="#PATCH-Routes">PATCH Routes</a></li>
-                                        <li class="nav-page"><a href="#Custom-HTTP-Methods">Custom HTTP Methods</a></li>
-                                        <li class="nav-page"><a href="#Route-Parameters">Route Parameters</a></li>
-                                        <li class="nav-page"><a href="#Route-Names">Route Names</a></li>
-                                        <li class="nav-page"><a href="#Route-Conditions">Route Conditions</a></li>
-                                        <li class="nav-page"><a href="#Route-Middleware">Route Middleware</a></li>
-                                        <li class="nav-page"><a href="#Route-Groups">Route Groups</a></li>
-                                        <li class="nav-page"><a href="#Route-Helpers">Route Helpers</a></li>
-                                        <li class="nav-page"><a href="#Route-URL-Rewriting">Route URL Rewriting</a></li>
-                    
-                                        <li class="nav-header"><a href="#Environment">Environment</a></li>
-                                        <li class="nav-page"><a href="#Environment-Overview">Environment Overview</a></li>
-                    
-                                        <li class="nav-header"><a href="#Request">Request</a></li>
-                                        <li class="nav-page"><a href="#Request-Overview">Request Overview</a></li>
-                                        <li class="nav-page"><a href="#Request-Method">Request Method</a></li>
-                                        <li class="nav-page"><a href="#Request-Headers">Request Headers</a></li>
-                                        <li class="nav-page"><a href="#Request-Body">Request Body</a></li>
-                                        <li class="nav-page"><a href="#Request-Variables">Request Variables</a></li>
-                                        <li class="nav-page"><a href="#Request-Cookies">Request Cookies</a></li>
-                                        <li class="nav-page"><a href="#Request-Paths">Request Paths</a></li>
-                                        <li class="nav-page"><a href="#XMLHttpRequest">XMLHttpRequest</a></li>
-                                        <li class="nav-page"><a href="#Request-Helpers">Request Helpers</a></li>
-                    
-                                        <li class="nav-header"><a href="#Response">Response</a></li>
-                                        <li class="nav-page"><a href="#Response-Overview">Response Overview</a></li>
-                                        <li class="nav-page"><a href="#Response-Status">Response Status</a></li>
-                                        <li class="nav-page"><a href="#Response-Headers">Response Headers</a></li>
-                                        <li class="nav-page"><a href="#Response-Body">Response Body</a></li>
-                                        <li class="nav-page"><a href="#Response-Cookies">Response Cookies</a></li>
-                                        <li class="nav-page"><a href="#Response-Helpers">Response Helpers</a></li>
-                    
-                                        <li class="nav-header"><a href="#View">View</a></li>
-                                        <li class="nav-page"><a href="#View-Overview">View Overview</a></li>
-                                        <li class="nav-page"><a href="#Rendering">Rendering</a></li>
-                                        <li class="nav-page"><a href="#Custom-Views">Custom Views</a></li>
-                                        <li class="nav-page"><a href="#View-Data">View Data</a></li>
-                    
-                                        <li class="nav-header"><a href="#HTTP-Caching">HTTP Caching</a></li>
-                                        <li class="nav-page"><a href="#HTTP-Caching-Overview">HTTP Caching Overview</a></li>
-                                        <li class="nav-page"><a href="#ETag">ETag</a></li>
-                                        <li class="nav-page"><a href="#Last-Modified">Last Modified</a></li>
-                                        <li class="nav-page"><a href="#Expires">Expires</a></li>
-                    
-                                        <li class="nav-header"><a href="#Middleware">Middleware</a></li>
-                                        <li class="nav-page"><a href="#Middleware-Overview">Middleware Overview</a></li>
-                                        <li class="nav-page"><a href="#How-to-Use-Middleware">How to Use Middleware</a></li>
-                                        <li class="nav-page"><a href="#How-to-Write-Middleware">How to Write Middleware</a></li>
-                    
-                                        <li class="nav-header"><a href="#Hooks">Hooks</a></li>
-                                        <li class="nav-page"><a href="#Hooks-Overview">Hooks Overview</a></li>
-                                        <li class="nav-page"><a href="#How-to-Use-Hooks">How to Use Hooks</a></li>
-                                        <li class="nav-page"><a href="#Default-Hooks">Default Hooks</a></li>
-                                        <li class="nav-page"><a href="#Custom-Hooks">Custom Hooks</a></li>
-                    
-                                        <li class="nav-header"><a href="#Flash-Messages">Flash Messages</a></li>
-                                        <li class="nav-page"><a href="#Flash-Messaging-Overview">Flash Messaging Overview</a></li>
-                                        <li class="nav-page"><a href="#Flash-Next">Flash Next</a></li>
-                                        <li class="nav-page"><a href="#Flash-Now">Flash Now</a></li>
-                                        <li class="nav-page"><a href="#Flash-Keep">Flash Keep</a></li>
-                    
-                                        <li class="nav-header"><a href="#Sessions">Sessions</a></li>
-                                        <li class="nav-page"><a href="#Native-Session-Store">Native Session Store</a></li>
-                                        <li class="nav-page"><a href="#Cookie-Session-Store">Cookie Session Store</a></li>
-                    
-                                        <li class="nav-header"><a href="#Logging">Logging</a></li>
-                                        <li class="nav-page"><a href="#Logging-Overview">Logging Overview</a></li>
-                                        <li class="nav-page"><a href="#Activate-Logging">Activate Logging</a></li>
-                                        <li class="nav-page"><a href="#Log-Levels">Log Levels</a></li>
-                                        <li class="nav-page"><a href="#Log-Writers">Log Writers</a></li>
-                    
-                                        <li class="nav-header"><a href="#Error-Handling">Error Handling</a></li>
-                                        <li class="nav-page"><a href="#Error-Handling-Overview">Error Handling Overview</a></li>
-                                        <li class="nav-page"><a href="#Error-Handler">Error Handler</a></li>
-                                        <li class="nav-page"><a href="#Not-Found-Handler">Not Found Handler</a></li>
-                                        <li class="nav-page"><a href="#Debugging">Debugging</a></li>
-                                        <li class="nav-page"><a href="#Output-Redirection">Output Redirection</a></li>
-                    
-                                        <li class="nav-header"><a href="#Dependency-Injection">Dependency Injection</a></li>
-                                        <li class="nav-page"><a href="#DI-Overview">DI Overview</a></li>
-                    
-                    
-                </ul>
-            </div>
-        </div>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  
+  <title>Slim Framework v2</title>
+  
 
-        <div class="span8">
-                        <section class="page-section" id="Getting-Started">
-                <h1 class="page-header">Getting Started <a class="bookmark" href="index.html#Getting-Started"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Installation">
-                    <header>
-                        <h2 class="page-article-header">Installation</h2>
-                    </header>
-                    <h3>Composer Install</h3>
+  
+  
 
-<p>Install composer in your project:</p>
+  <link href="css/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="css/theme_extra.css" rel="stylesheet" type="text/css"/>
+  <link href="css/highlight.css" rel="stylesheet"/>
 
-<pre><code>curl -s https://getcomposer.org/installer | php
-</code></pre>
+  
+  
+  
+  
 
-<p>Create a <code>composer.json</code> file in your project root:</p>
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style> 
+</head>
 
-<pre><code>{
-    "require": {
-        "slim/slim": "2.*"
-    }
-}
-</code></pre>
+<body class="wy-body-for-nav" role="document">
 
-<p>Install via composer:</p>
+  <div class="wy-grid-for-nav">
 
-<pre><code>php composer.phar install
-</code></pre>
-
-<p>Add this line to your application’s <code>index.php</code> file:</p>
-
-<pre><code>&lt;?php
-require 'vendor/autoload.php';
-</code></pre>
-
-<h3>Manual Install</h3>
-
-<p>Download and extract the Slim Framework into your project directory and <code>require</code> it in your application’s <code>index.php</code>
-file. You’ll also need to register Slim’s autoloader.</p>
-
-<pre><code>&lt;?php
-require 'Slim/Slim.php';
-\Slim\Slim::registerAutoloader();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="System-Requirements">
-                    <header>
-                        <h2 class="page-article-header">System Requirements</h2>
-                    </header>
-                    <ul>
-<li>PHP &gt;= 5.3.0</li>
-</ul>
-
-<p>The <code>mcrypt</code> extension is required <em>only</em> if you use encrypted cookies.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Hello-World">
-                    <header>
-                        <h2 class="page-article-header">Hello World</h2>
-                    </header>
-                    <p>Instantiate a Slim application:</p>
-
-<pre><code>$app = new \Slim\Slim();
-</code></pre>
-
-<p>Define a HTTP GET route:</p>
-
-<pre><code>$app-&gt;get('/hello/:name', function ($name) {
-    echo "Hello, $name";
-});
-</code></pre>
-
-<p>Run the Slim application:</p>
-
-<pre><code>$app-&gt;run();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Configuration">
-                <h1 class="page-header">Configuration <a class="bookmark" href="index.html#Configuration"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Configuration-Overview">
-                    <header>
-                        <h2 class="page-article-header">Configuration Overview</h2>
-                    </header>
-                    <p>There are two ways to apply settings to the Slim application. First during Slim application instantiation and second
-after instantiation. All settings can be applied at instantiation time by passing Slim’s constructor an associative
-array. All settings can be retrieved and modified after instantiation, however some of them can not be done simply by
-using the config application instance method but will be demonstrated as necessary below. Before I list the available
-settings, I want to quickly explain how you may define and inspect settings with your Slim application.</p>
-
-<h3>During Instantiation</h3>
-
-<p>To define settings upon instantiation, pass an associative array into the Slim constructor.</p>
-
-<pre><code>&lt;?php
-$app = new Slim(array(
-    'debug' =&gt; true
-));
-</code></pre>
-
-<h3>After Instantiation</h3>
-
-<p>To define settings after instantiation, the majority can use the config application instance method; the first
-argument is the setting name and the second argument is the setting value.</p>
-
-<pre><code>&lt;?php
-$app-&gt;config('debug', false);
-</code></pre>
-
-<p>You may also define multiple settings at once using an associative array:</p>
-
-<pre><code>&lt;?php
-$app-&gt;config(array(
-    'debug' =&gt; true,
-    'templates.path' =&gt; '../templates'
-));
-</code></pre>
-
-<p>To retrieve the value of a setting, you also use the config application instance method; however, you only pass one
-argument - the name of the setting you wish to inspect. If the setting you request does not exist, <code>null</code> is returned.</p>
-
-<pre><code>&lt;?php
-$settingValue = $app-&gt;config('templates.path'); //returns "../templates"
-</code></pre>
-
-<p>You are not limited to the settings shown below; you may also define your own.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Application-Settings">
-                    <header>
-                        <h2 class="page-article-header">Application Settings</h2>
-                    </header>
-                    <h3>mode</h3>
-
-<p>This is an identifier for the application’s current mode of operation. The mode does not affect a Slim application’s
-internal functionality. Instead, the mode is only for you to optionally invoke your own code for a given mode with the
-<code>configMode()</code> application method.</p>
-
-<p>The application mode is declared during instantiation, either as an environment variable or as an argument to the
-Slim application constructor. It cannot be changed afterward. The mode may be anything you want — “development”,
-“test”, and “production” are typical, but you are free to use anything you want (e.g. “foo”).</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim(array(
-    'mode' =&gt; 'development'
-));
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>string</dd>
-
-<dt>Default Value</dt>
-<dd>“development”</dd>
-</dl>
-
-<h3>debug</h3>
-
-<div class="alert alert-info">
-    <strong>Heads Up!</strong> Slim converts errors into `ErrorException` instances.
-</div>
-
-<p>If debugging is enabled, Slim will use its built-in error handler to display diagnostic information for uncaught
-Exceptions. If debugging is disabled, Slim will instead invoke your custom error handler, passing it the otherwise
-uncaught Exception as its first and only argument.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim(array(
-    'debug' =&gt; true
-));
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>boolean</dd>
-
-<dt>Default Value</dt>
-<dd>true</dd>
-</dl>
-
-<h3>log.writer</h3>
-
-<p>Use a custom log writer to direct logged messages to the appropriate output destination. By default, Slim’s logger will
-write logged messages to <code>STDERR</code>. If you use a custom log writer, it must implement this interface:</p>
-
-<pre><code>public write(mixed $message, int $level);
-</code></pre>
-
-<p>The <code>write()</code> method is responsible for sending the logged message (not necessarily a string) to the appropriate output
-destination (e.g. a text file, a database, or a remote web service).</p>
-
-<p>To specify a custom log writer after instantiation you must access Slim’s logger directly and use its <code>setWriter()</code> method:</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'log.writer' =&gt; new \My\LogWriter()
-));
-
-// After instantiation
-$log = $app-&gt;getLog();
-$log-&gt;setWriter(new \My\LogWriter());
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>mixed</dd>
-
-<dt>Default Value</dt>
-<dd>\Slim\LogWriter</dd>
-</dl>
-
-<h3>log.level</h3>
-
-<div class="alert alert-info">
-    <strong>Heads Up!</strong> Use the constants defined in `\Slim\Log` instead of integers.
-</div>
-
-<p>Slim has these log levels:</p>
-
-<ul>
-<li>\Slim\Log::EMERGENCY</li>
-<li>\Slim\Log::ALERT</li>
-<li>\Slim\Log::CRITICAL</li>
-<li>\Slim\Log::ERROR</li>
-<li>\Slim\Log::WARN</li>
-<li>\Slim\Log::NOTICE</li>
-<li>\Slim\Log::INFO</li>
-<li>\Slim\Log::DEBUG</li>
-</ul>
-
-<p>The <code>log.level</code> application setting determines which logged messages will be honored and which will be ignored.
-For example, if the <code>log.level</code> setting is <code>\Slim\Log::INFO</code>, debug messages will be ignored while info, warn,
-error, and fatal messages will be logged.</p>
-
-<p>To change this setting after instantiation you must access Slim’s logger directly and use its <code>setLevel()</code> method.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'log.level' =&gt; \Slim\Log::DEBUG
-));
-
-// After instantiation
-$log = $app-&gt;getLog();
-$log-&gt;setLevel(\Slim\Log::WARN);
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>integer</dd>
-
-<dt>Default Value</dt>
-<dd>\Slim\Log::DEBUG</dd>
-</dl>
-
-<h3>log.enabled</h3>
-
-<p>This enables or disables Slim’s logger. To change this setting after instantiation you need to access Slim’s logger
-directly and use its <code>setEnabled()</code> method.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'log.enabled' =&gt; true
-));
-
-// After instantiation
-$log = $app-&gt;getLog();
-$log-&gt;setEnabled(true);
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>boolean</dd>
-
-<dt>Default Value</dt>
-<dd>true</dd>
-</dl>
-
-<h3>templates.path</h3>
-
-<p>The relative or absolute path to the filesystem directory that contains your Slim application’s template files.
-This path is referenced by the Slim application’s View to fetch and render templates.</p>
-
-<p>To change this setting after instantiation you need to access Slim’s view directly and use its <code>setTemplatesDirectory()</code>
-method.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'templates.path' =&gt; './templates'
-));
-
-// After instantiation
-$view = $app-&gt;view();
-$view-&gt;setTemplatesDirectory('./templates');
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>string</dd>
-
-<dt>Default Value</dt>
-<dd>”./templates”</dd>
-</dl>
-
-<h3>view</h3>
-
-<p>The View class or instance used by the Slim application. To change this setting after instantiation you need to
-use the Slim application’s <code>view()</code> method.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'view' =&gt; new \My\View()
-));
-
-// After instantiation
-$app-&gt;view(new \My\View());
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>string|\Slim\View</dd>
-
-<dt>Default Value</dt>
-<dd>\Slim\View</dd>
-</dl>
-
-<h3>cookies.encrypt</h3>
-
-<p>Determines if the Slim app should encrypt its HTTP cookies.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim(array(
-    'cookies.encrypt' =&gt; true
-));
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>boolean</dd>
-
-<dt>Default Value</dt>
-<dd>false</dd>
-</dl>
-
-<h3>cookies.lifetime</h3>
-
-<p>Determines the lifetime of HTTP cookies created by the Slim application. If this is an integer, it must be a valid
-UNIX timestamp at which the cookie expires. If this is a string, it is parsed by the <code>strtotime()</code> function to extrapolate
-a valid UNIX timestamp at which the cookie expires.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'cookies.lifetime' =&gt; '20 minutes'
-));
-
-// After instantiation
-$app-&gt;config('cookies.lifetime', '20 minutes');
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>integer|string</dd>
-
-<dt>Default Value</dt>
-<dd>“20 minutes”</dd>
-</dl>
-
-<h3>cookies.path</h3>
-
-<p>Determines the default HTTP cookie path if none is specified when invoking the Slim application’s <code>setCookie()</code> or
-<code>setEncryptedCookie()</code> methods.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'cookies.path' =&gt; '/'
-));
-
-// After instantiation
-$app-&gt;config('cookies.path', '/');
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>string</dd>
-
-<dt>Default Value</dt>
-<dd>”/”</dd>
-</dl>
-
-<h3>cookies.domain</h3>
-
-<p>Determines the default HTTP cookie domain if none specified when invoking the Slim application’s <code>setCookie()</code> or
-<code>setEncryptedCookie()</code> methods.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'cookies.domain' =&gt; 'domain.com'
-));
-
-// After instantiation
-$app-&gt;config('cookies.domain', 'domain.com');
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>string</dd>
-
-<dt>Default Value</dt>
-<dd>null</dd>
-</dl>
-
-<h3>cookies.secure</h3>
-
-<p>Determines whether or not cookies are delivered only via HTTPS. You may override this setting when invoking
-the Slim application’s <code>setCookie()</code> or <code>setEncryptedCookie()</code> methods.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'cookies.secure' =&gt; false
-));
-
-// After instantiation
-$app-&gt;config('cookies.secure', false);
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>boolean</dd>
-
-<dt>Default Value</dt>
-<dd>false</dd>
-</dl>
-
-<h3>cookies.httponly</h3>
-
-<p>Determines whether cookies should be accessible through client side scripts (false = accessible). You may override this setting when invoking
-the Slim application’s <code>setCookie()</code> or <code>setEncryptedCookie()</code> methods.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'cookies.httponly' =&gt; false
-));
-
-// After instantiation
-$app-&gt;config('cookies.httponly', false);
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>boolean</dd>
-
-<dt>Default Value</dt>
-<dd>false</dd>
-</dl>
-
-<h3>cookies.secret_key</h3>
-
-<p>The secret key used for cookie encryption. You should change this setting if you use encrypted HTTP cookies
-in your Slim application.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'cookies.secret_key' =&gt; 'secret'
-));
-
-// After instantiation
-$app-&gt;config('cookies.secret_key', 'secret');
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>string</dd>
-
-<dt>Default Value</dt>
-<dd>“CHANGE_ME”</dd>
-</dl>
-
-<h3>cookies.cipher</h3>
-
-<p>The mcrypt cipher used for HTTP cookie encryption. See <a href="http://php.net/manual/en/mcrypt.ciphers.php">available ciphers</a>.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'cookies.cipher' =&gt; MCRYPT_RIJNDAEL_256
-));
-
-// After instantiation
-$app-&gt;config('cookies.cipher', MCRYPT_RIJNDAEL_256);
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>integer</dd>
-
-<dt>Default Value</dt>
-<dd>MCRYPT_RIJNDAEL_256</dd>
-</dl>
-
-<h3>cookies.cipher_mode</h3>
-
-<p>The mcrypt cipher mode used for HTTP cookie encryption. See <a href="http://www.php.net/manual/en/mcrypt.constants.php">available cipher modes</a>.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'cookies.cipher_mode' =&gt; MCRYPT_MODE_CBC
-));
-
-// After instantiation
-$app-&gt;config('cookies.cipher_mode', MCRYPT_MODE_CBC);
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>integer</dd>
-
-<dt>Default Value</dt>
-<dd>MCRYPT_MODE_CBC</dd>
-</dl>
-
-<h3>http.version</h3>
-
-<p>By default, Slim returns an HTTP/1.1 response to the client. Use this setting if you need to return an HTTP/1.0
-response. This is useful if you use PHPFog or an nginx server configuration where you communicate with backend
-proxies rather than directly with the HTTP client.</p>
-
-<pre><code>&lt;?php
-// During instantiation
-$app = new \Slim\Slim(array(
-    'http.version' =&gt; '1.1'
-));
-
-// After instantiation
-$app-&gt;config('http.version', '1.1');
-</code></pre>
-
-<dl>
-<dt>Data Type</dt>
-<dd>string</dd>
-
-<dt>Default Value</dt>
-<dd>“1.1”</dd>
-</dl>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Application-Names-and-Scopes">
-                    <header>
-                        <h2 class="page-article-header">Application Names and Scopes</h2>
-                    </header>
-                    <p>When you build a Slim application you will enter various scopes in your code (e.g. global scope and function scope).
-You will likely need a reference to your Slim application in each scope. There are several ways to do this:</p>
-
-<ul>
-<li>Use application names with the Slim application’s <code>getInstance()</code> static method</li>
-<li>Curry an application instance into function scope with the <code>use</code> keyword</li>
-</ul>
-
-<h3>Application Names</h3>
-
-<p>Every Slim application may be given a name. <strong>This is optional</strong>. Names help you get a reference to a Slim
-application instance in any scope throughout your code. Here is how you set and get an application’s name:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;setName('foo');
-$name = $app-&gt;getName(); // "foo"
-</code></pre>
-
-<h3>Scope Resolution</h3>
-
-<p>So how do you get a reference to your Slim application? The example below demonstrates how to obtain a reference
-to a Slim application within a route callback function. The <code>$app</code> variable is used in the global scope to define
-the HTTP GET route. But the <code>$app</code> variable is also needed within the route’s callback scope to render a template.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', function () {
-    $app-&gt;render('foo.php'); // &lt;-- ERROR
-});
-</code></pre>
-
-<p>This example fails because the <code>$app</code> variable is unavailable inside the route callback function.</p>
-
-<h4>Currying</h4>
-
-<p>We can inject the <code>$app</code> variable into the callback function with the <code>use</code> keyword:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', function () use ($app) {
-    $app-&gt;render('foo.php'); // &lt;-- SUCCESS
-});
-</code></pre>
-
-<h4>Fetch by Name</h4>
-
-<p>You can use the Slim application’s <code>getInstance()</code> static method, too:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', 'foo');
-function foo() {
-    $app = Slim::getInstance();
-    $app-&gt;render('foo.php');
-}
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Application-Modes">
-                    <header>
-                        <h2 class="page-article-header">Application Modes</h2>
-                    </header>
-                    <p>It is common practice to run web applications in a specific mode depending on the current state of the project.
-If you are developing the application, you will run the application in “development” mode; if you are testing the
-application, you will run the application in “test” mode; if you launch the application, you will run the application
-in “production” mode.</p>
-
-<p>Slim supports the concept of modes in that you may define your own modes and prompt Slim to prepare itself
-appropriately for the current mode. For example, you may want to enable debugging in “development” mode but not
-in “production” mode. The examples below demonstrate how to configure Slim differently for a given mode.</p>
-
-<h3>What is a mode?</h3>
-
-<p>Technically, an application mode is merely a string of text - like “development” or “production” - that has an
-associated callback function used to prepare the Slim application appropriately. The application mode may be
-anything you like: “testing”, “production”, “development”, or even “foo”.</p>
-
-<h3>How do I set the application mode?</h3>
-
-<div class="alert alert-info">
-    <strong>Heads Up!</strong> The application mode may only be set during application instantiation. It may
-    not be changed afterward.
-</div>
-
-<h4>Use an environment variable</h4>
-
-<p>If Slim sees an environment variable named “SLIM_MODE”, it will set the application mode to that variable’s value.</p>
-
-<pre><code>&lt;?php
-$_ENV['SLIM_MODE'] = 'production';
-</code></pre>
-
-<h4>Use application setting</h4>
-
-<p>If an environment variable is not found, Slim will next look for the mode in the application settings.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim(array(
-    'mode' =&gt; 'production'
-));
-</code></pre>
-
-<h4>Default mode</h4>
-
-<p>If the environment variable and application setting are not found, Slim will set the application mode to “development”.</p>
-
-<h3>Configure for a Specific Mode</h3>
-
-<p>After you instantiate a Slim application, you may configure the Slim application for a specific mode
-with the Slim application’s <code>configureMode()</code> method. This method accepts two arguments: the name of the target mode
- and a callable function to be immediately invoked if the first argument matches the current application mode.</p>
-
-<p>Assume the current application mode is “production”. Only the callable associated with the “production” mode will
-be invoked. The callable associated with the “development” mode will be ignored until the application mode is
-changed to “development”.</p>
-
-<pre><code>&lt;?php
-// Set the current mode
-$app = new \Slim\Slim(array(
-    'mode' =&gt; 'production'
-));
-
-// Only invoked if mode is "production"
-$app-&gt;configureMode('production', function () use ($app) {
-    $app-&gt;config(array(
-        'log.enable' =&gt; true,
-        'debug' =&gt; false
-    ));
-});
-
-// Only invoked if mode is "development"
-$app-&gt;configureMode('development', function () use ($app) {
-    $app-&gt;config(array(
-        'log.enable' =&gt; false,
-        'debug' =&gt; true
-    ));
-});
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Routing">
-                <h1 class="page-header">Routing <a class="bookmark" href="index.html#Routing"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Routing-Overview">
-                    <header>
-                        <h2 class="page-article-header">Routing Overview</h2>
-                    </header>
-                    <p>The Slim Framework helps you map resource URIs to callback functions for specific HTTP request methods
-(e.g. GET, POST, PUT, DELETE, OPTIONS or HEAD). A Slim application will invoke the first route that matches the
-current HTTP request’s URI and method.</p>
-
-<p>If the Slim application does not find routes with URIs that match the HTTP request URI and method, it will
-automatically return a <strong>404 Not Found</strong> response.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="GET-Routes">
-                    <header>
-                        <h2 class="page-article-header">GET Routes</h2>
-                    </header>
-                    <p>Use the Slim application’s <code>get()</code> method to map a callback function to a resource URI that is requested with
-the HTTP GET method.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/books/:id', function ($id) {
-    //Show book identified by $id
-});
-</code></pre>
-
-<p>In this example, an HTTP GET request for “/books/1” will invoke the associated callback function, passing “1” as the
-callback’s argument.</p>
-
-<p>The first argument of the Slim application’s <code>get()</code> method is the resource URI. The last argument is anything that
-returns <code>true</code> for <code>is_callable()</code>. Typically, the last argument will be an <a href="http://php.net/manual/en/functions.anonymous.php">anonymous function</a>.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="POST-Routes">
-                    <header>
-                        <h2 class="page-article-header">POST Routes</h2>
-                    </header>
-                    <p>Use the Slim application’s <code>post()</code> method to map a callback function to a resource URI that is requested with
-the HTTP POST method.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;post('/books', function () {
-    //Create book
-});
-</code></pre>
-
-<p>In this example, an HTTP POST request for “/books” will invoke the associated callback function</p>
-
-<p>The first argument of the Slim application’s <code>post()</code> method is the resource URI. The last argument is anything that
-returns <code>true</code> for <code>is_callable()</code>. Typically, the last argument will be an <a href="http://php.net/manual/en/functions.anonymous.php">anonymous function</a>.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="PUT-Routes">
-                    <header>
-                        <h2 class="page-article-header">PUT Routes</h2>
-                    </header>
-                    <p>Use the Slim application’s <code>put()</code> method to map a callback function to a resource URI that is requested with
-the HTTP PUT method.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;put('/books/:id', function ($id) {
-    //Update book identified by $id
-});
-</code></pre>
-
-<p>In this example, an HTTP PUT request for “/books/1” will invoke the associated callback function, passing “1” as
-the callback function’s argument.</p>
-
-<p>The first argument of the Slim application’s <code>put()</code> method is the resource URI. The last argument is anything that
-returns <code>true</code> for <code>is_callable()</code>. Typically, the last argument will be an <a href="http://php.net/manual/en/functions.anonymous.php">anonymous function</a>.</p>
-
-<h3>Method Override</h3>
-
-<p>Unfortunately, modern browsers do not provide native support for HTTP PUT requests. To work around this limitation,
-ensure your HTML form’s method attribute is “post”, then add a method override parameter to your HTML form like this:</p>
-
-<pre><code>&lt;form action="/books/1" method="post"&gt;
-    ... other form fields here...
-    &lt;input type="hidden" name="_METHOD" value="PUT"/&gt;
-    &lt;input type="submit" value="Update Book"/&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>If you are using <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> or a command-line HTTP client, you may also override the HTTP method by
-using the <strong>X-HTTP-Method-Override</strong> header.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="DELETE-Routes">
-                    <header>
-                        <h2 class="page-article-header">DELETE Routes</h2>
-                    </header>
-                    <p>Use the Slim application’s <code>delete()</code> method to map a callback function to a resource URI that is requested with
-the HTTP DELETE method.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;delete('/books/:id', function ($id) {
-    //Delete book identified by $id
-});
-</code></pre>
-
-<p>In this example, an HTTP DELETE request for “/books/1” will invoke the associated callback function, passing “1” as
-the callback function’s argument.</p>
-
-<p>The first argument of the Slim application’s <code>delete()</code> method is the resource URI. The last argument is anything that
-returns <code>true</code> for <code>is_callable()</code>. Typically, the last argument will be an <a href="http://php.net/manual/en/functions.anonymous.php">anonymous function</a>.</p>
-
-<h3>Method Override</h3>
-
-<p>Unfortunately, modern browsers do not provide native support for HTTP DELETE requests. To work around this limitation,
-ensure your HTML form’s method attribute is “post”, then add a method override parameter to your HTML form like this:</p>
-
-<pre><code>&lt;form action="/books/1" method="post"&gt;
-    ... other form fields here...
-    &lt;input type="hidden" name="_METHOD" value="DELETE"/&gt;
-    &lt;input type="submit" value="Delete Book"/&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>If you are using <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> or a command-line HTTP client, you may also override the HTTP method by
-using the <strong>X-HTTP-Method-Override</strong> header.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="OPTIONS-Routes">
-                    <header>
-                        <h2 class="page-article-header">OPTIONS Routes</h2>
-                    </header>
-                    <p>Use the Slim application’s <code>options()</code> method to map a callback function to a resource URI that is requested with
-the HTTP OPTIONS method.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;options('/books/:id', function ($id) {
-    //Return response headers
-});
-</code></pre>
-
-<p>In this example, an HTTP OPTIONS request for “/books/1” will invoke the associated callback function, passing “1” as
-the callback function’s argument.</p>
-
-<p>The first argument of the Slim application’s <code>options()</code> method is the resource URI. The last argument is anything that
-returns <code>true</code> for <code>is_callable()</code>. Typically, the last argument will be an <a href="http://php.net/manual/en/functions.anonymous.php">anonymous function</a>.</p>
-
-<h3>Method Override</h3>
-
-<p>Unfortunately, modern browsers do not provide native support for HTTP OPTIONS requests. To work around this limitation,
-ensure your HTML form’s method attribute is “post”, then add a method override parameter to your HTML form like this:</p>
-
-<pre><code>&lt;form action="/books/1" method="post"&gt;
-    ... other form fields here...
-    &lt;input type="hidden" name="_METHOD" value="OPTIONS"/&gt;
-    &lt;input type="submit" value="Fetch Options For Book"/&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>If you are using <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> or a command-line HTTP client, you may also override the HTTP method by
-using the <strong>X-HTTP-Method-Override</strong> header.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="PATCH-Routes">
-                    <header>
-                        <h2 class="page-article-header">PATCH Routes</h2>
-                    </header>
-                    <p>Use the Slim application’s <code>patch()</code> method to map a callback function to a resource URI that is requested with
-the HTTP PATCH method.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;patch('/books/:id', function ($id) {
-    // Patch book with given ID
-});
-</code></pre>
-
-<p>In this example, an HTTP PATCH request for “/books/1” will invoke the associated callback function, passing “1” as
-the callback function’s argument.</p>
-
-<p>The first argument of the Slim application’s <code>patch()</code> method is the resource URI. The last argument is anything that
-returns <code>true</code> for <code>is_callable()</code>. Typically, the last argument will be an [anonymous function][anon-func].</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Custom-HTTP-Methods">
-                    <header>
-                        <h2 class="page-article-header">Custom HTTP Methods</h2>
-                    </header>
-                    <h3>One route, multiple HTTP methods</h3>
-
-<p>Sometimes you may need a route to respond to multiple HTTP methods; sometimes you may need a route to respond to a
-custom HTTP method. You can accomplish both with the Route object’s <code>via()</code> method. This example demonstrates how
-to map a resource URI to a callback that responds to multiple HTTP methods.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;map('/foo/bar', function() {
-    echo "I respond to multiple HTTP methods!";
-})-&gt;via('GET', 'POST');
-$app-&gt;run();
-</code></pre>
-
-<p>The route defined in this example will respond to both GET and POST requests for the resource identified by “/foo/bar”.
-Specify each appropriate HTTP method as a separate string argument to the Route object’s <code>via()</code> method. Like other
-Route methods (e.g. <code>name()</code> and <code>conditions()</code>), the <code>via()</code> method is chainable:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;map('/foo/bar', function() {
-    echo "Fancy, huh?";
-})-&gt;via('GET', 'POST')-&gt;name('foo');
-$app-&gt;run();
-</code></pre>
-
-<h3>One route, custom http methods</h3>
-
-<p>The Route object’s <code>via()</code> method is not limited to just GET, POST, PUT, DELETE, and OPTIONS methods. You may also
-specify your own custom HTTP methods (e.g. if you were responding to WebDAV HTTP requests). You can define a route
-that responds to a custom “FOO” HTTP method like this:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;map('/hello', function() {
-    echo "Hello";
-})-&gt;via('FOO');
-$app-&gt;run();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Route-Parameters">
-                    <header>
-                        <h2 class="page-article-header">Route Parameters</h2>
-                    </header>
-                    <p>You can embed parameters into route resource URIs. In this example, I have two parameters in my
-route URI, “:one” and “:two”.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/books/:one/:two', function ($one, $two) {
-    echo "The first parameter is " . $one;
-    echo "The second parameter is " . $two;
-});
-</code></pre>
-
-<p>To create a URL parameter, prepend “:” to the parameter name in the route URI pattern. When the route matches the
-current HTTP request, the values for each route parameter are extracted from the HTTP request URI and are passed
-into the associated callback function in order of appearance.</p>
-
-<h3>Wildcard route parameters</h3>
-
-<p>You may also use wildcard route parameters. These will capture one or many URI segments that correspond to the route
-pattern’s wildcard parameter into an array. A wildcard parameter is identified by a “+” suffix; it otherwise acts
-the same as normal route parameters shown above. Here’s an example:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/hello/:name+', function ($name) {
-    // Do something
-});
-</code></pre>
-
-<p>When you invoke this example application with a resource URI “/hello/Josh/T/Lockhart”, the route callback’s <code>$name</code>
-argument will be equal to <code>array('Josh', 'T', Lockhart')</code>.</p>
-
-<h3>Optional route parameters</h3>
-
-<div class="alert alert-warning">
-    <strong>Heads Up!</strong> Optional route segments are experimental. They should only be used
-    in the manner demonstrated below.
-</div>
-
-<p>You may also have optional route parameters. These are ideal for using one route for a blog archive. To declare
-optional route parameters, specify your route pattern like this:</p>
-
-<pre><code>&lt;?php
-$app = new Slim();
-$app-&gt;get('/archive(/:year(/:month(/:day)))', function ($year = 2010, $month = 12, $day = 05) {
-    echo sprintf('%s-%s-%s', $year, $month, $day);
-});
-</code></pre>
-
-<p>Each subsequent route segment is optional. This route will accept HTTP requests for:</p>
-
-<ul>
-<li>/archive</li>
-<li>/archive/2010</li>
-<li>/archive/2010/12</li>
-<li>/archive/2010/12/05</li>
-</ul>
-
-<p>If an optional route segment is omitted from the HTTP request, the default values in the callback signature are
-used instead.</p>
-
-<p>Currently, you can only use optional route segments in situations like the example above where each route segment is
-subsequently optional. You may find this feature unstable when used in scenarios different from the example above.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Route-Names">
-                    <header>
-                        <h2 class="page-article-header">Route Names</h2>
-                    </header>
-                    <p>Slim lets you assign a name to a route. Naming a route enables you to dynamically generate URLs using the urlFor
-helper method. When you use the Slim application’s <code>urlFor()</code> method to create application URLs, you can freely
-change route patterns without breaking your application. Here is an example of a named route:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/hello/:name', function ($name) {
-    echo "Hello, $name!";
-})-&gt;name('hello');
-</code></pre>
-
-<p>You may now generate URLs for this route using the <code>urlFor()</code> method, described later in this documentation.
-The route <code>name()</code> method is also chainable:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/hello/:name', function ($name) {
-    echo "Hello, $name!";
-})-&gt;name('hello')-&gt;conditions(array('name' =&gt; '\w+'));
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Route-Conditions">
-                    <header>
-                        <h2 class="page-article-header">Route Conditions</h2>
-                    </header>
-                    <p>Slim lets you assign conditions to route parameters. If the specified conditions are not met, the route is not run.
-For example, if you need a route with a second segment that must be a valid 4-digit year, you could enforce
-this condition like this:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/archive/:year', function ($year) {
-    echo "You are viewing archives from $year";
-})-&gt;conditions(array('year' =&gt; '(19|20)\d\d'));
-</code></pre>
-
-<p>Invoke the Route object’s <code>conditions()</code> method. The first and only argument is an associative array with keys that
-match any of the route’s parameters and values that are regular expressions.</p>
-
-<h3>Application-wide route conditions</h3>
-
-<p>If many of your Slim application Routes accept the same parameters and use the same conditions, you can define
-default application-wide Route conditions like this:</p>
-
-<pre><code>&lt;?php
-\Slim\Route::setDefaultConditions(array(
-    'firstName' =&gt; '[a-zA-Z]{3,}'
-));
-</code></pre>
-
-<p>Define application-wide route conditions before you define application routes. When you define a route, the route
-will automatically be assigned any application-wide Route conditions defined with <code>\Slim\Route::setDefaultConditions()</code>.
-If for whatever reason you need to get the application-wide default route conditions, you can fetch them with
-<code>\Slim\Route::getDefaultConditions()</code>. This static method returns an array exactly as the default route conditions
-were defined.</p>
-
-<p>You may override a default route condition by redefining the route’s condition when you define the route, like this:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/hello/:firstName', $callable)
-    -&gt;conditions(array('firstName' =&gt; '[a-z]{10,}'));
-</code></pre>
-
-<p>You may append new conditions to a given route like this:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/hello/:firstName/:lastName', $callable)
-    -&gt;conditions(array('lastName' =&gt; '[a-z]{10,}'));
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Route-Middleware">
-                    <header>
-                        <h2 class="page-article-header">Route Middleware</h2>
-                    </header>
-                    <p>Slim enables you to associate middleware with a specific application route. When the given route matches the current
-HTTP request and is invoked, Slim will first invoke the associated middleware in the order they are defined.</p>
-
-<h3>What is route middleware?</h3>
-
-<p>Route middleware is anything that returns <code>true</code> for <code>is_callable</code>. Route middleware will be invoked in the sequence
-defined before its related route callback is invoked.</p>
-
-<h3>How do I add route middleware?</h3>
-
-<p>When you define a new application route with the Slim application’s <code>get()</code>, <code>post()</code>, <code>put()</code>, or <code>delete()</code> methods
-you must define a route pattern and a callable to be invoked when the route matches an HTTP request.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', function () {
-    //Do something
-});
-</code></pre>
-
-<p>In the example above, the first argument is the route pattern. The last argument is the callable to be invoked when
-the route matches the current HTTP request. The route pattern must always be the first argument. The route callable
-must always be the last argument.</p>
-
-<p>You can assign middleware to this route by passing each middleware as a separate interior or… (ahem) middle…
-argument like this:</p>
-
-<pre><code>&lt;?php
-function mw1() {
-    echo "This is middleware!";
-}
-function mw2() {
-    echo "This is middleware!";
-}
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', 'mw1', 'mw2', function () {
-    //Do something
-});
-</code></pre>
-
-<p>When the /foo route is invoked, the <code>mw1</code> and <code>mw2</code> functions will be invoked in sequence before the route’s callable
-is invoked.</p>
-
-<p>Suppose you wanted to authenticate the current user against a given role for a specific route. You could use some
-closure magic like this:</p>
-
-<pre><code>&lt;?php
-$authenticateForRole = function ( $role = 'member' ) {
-    return function () use ( $role ) {
-        $user = User::fetchFromDatabaseSomehow();
-        if ( $user-&gt;belongsToRole($role) === false ) {
-            $app = \Slim\Slim::getInstance();
-            $app-&gt;flash('error', 'Login required');
-            $app-&gt;redirect('/login');
-        }
-    };
-};
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', $authenticateForRole('admin'), function () {
-    //Display admin control panel
-});
-</code></pre>
-
-<h3>What arguments are passed into each route middleware callable?</h3>
-
-<p>Each middleware callable is invoked with one argument, the currently matched <code>\Slim\Route</code> object.</p>
-
-<pre><code>&lt;?php
-$aBitOfInfo = function (\Slim\Route $route) {
-    echo "Current route is " . $route-&gt;getName();
-};
-
-$app-&gt;get('/foo', $aBitOfInfo, function () {
-    echo "foo";
-});
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Route-Groups">
-                    <header>
-                        <h2 class="page-article-header">Route Groups</h2>
-                    </header>
-                    <p>Slim lets you group related routes. This is helpful when you find yourself repeating the same URL segments
-for multiple routes. This is best explained with an example. Let’s pretend we are building an API for
-books.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-// API group
-$app-&gt;group('/api', function () use ($app) {
-
-    // Library group
-    $app-&gt;group('/library', function () use ($app) {
-
-        // Get book with ID
-        $app-&gt;get('/books/:id', function ($id) {
-
-        });
-
-        // Update book with ID
-        $app-&gt;put('/books/:id', function ($id) {
-
-        });
-
-        // Delete book with ID
-        $app-&gt;delete('/books/:id', function ($id) {
-
-        });
-
-    });
-
-});
-</code></pre>
-
-<p>The routes defined above would be accessible at, respectively:</p>
-
-<pre><code>GET    /api/library/books/:id
-PUT    /api/library/books/:id
-DELETE /api/library/books/:id
-</code></pre>
-
-<p>Route groups are very useful to group related routes and avoid repeating common URL segments
-for each route definition.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Route-Helpers">
-                    <header>
-                        <h2 class="page-article-header">Route Helpers</h2>
-                    </header>
-                    <p>Slim provides several helper methods (exposed via the Slim application instance) that will help you control the flow
-of your application.</p>
-
-<p>Please be aware that the following application instance method helpers <code>halt()</code>, <code>pass()</code>, <code>redirect()</code> and <code>stop()</code>
-are implemented using Exceptions. Each will throw a <code>\Slim\Exception\Stop</code> or <code>\Slim\Exception\Pass</code> exception.
-Throwing the Exception in these cases is a simple way to stop user code from processing, have the framework take over,
-and  immediately send the necessary response to the client. This behavior can be surprising if unexpected. Take a look
-at the following code.</p>
-
-<pre><code>&lt;?php
-$app-&gt;get('/', function() use ($app, $obj) {
-    try {
-        $obj-&gt;thisMightThrowException();
-        $app-&gt;redirect('/success');
-    } catch(\Exception $e) {
-        $app-&gt;flash('error', $e-&gt;getMessage());
-        $app-&gt;redirect('/error');
-    }
-});
-</code></pre>
-
-<p>If <code>$obj-&gt;thisMightThrowException()</code> does throw an Exception the code will run as expected. However, if no exception
-is thrown the call to $app-&gt;redirect() will throw a <code>\Slim\Exception\Stop</code> Exception that will be caught by the
-user <code>catch</code> block rather than by the framework redirecting the browser to the “/error” page. Where possible
-in your own application you should use typed Exceptions so your <code>catch</code> blocks are more targeted rather than
-swallowing all Exceptions. In some situations the <code>thisMightThrowException()</code> might be an external component call
-that you don’t control, in which case typing all exceptions thrown may not be feasible. For these instances we can
-adjust our code slightly by moving the success <code>$app-&gt;redirect()</code> after the try/catch block to fix the issues.
-Since processing will stop on the error redirect this code will now execute as expected.</p>
-
-<pre><code>&lt;?php
-$app-&gt;get('/', function() use ($app, $obj) {
-    try {
-        $obj-&gt;thisMightThrowException();
-    } catch(Exception $e) {
-        $app-&gt;flash('error', $e-&gt;getMessage());
-        $app-&gt;redirect('/error');
-    }
-    $app-&gt;redirect('/success');
-});
-</code></pre>
-
-<h3>Halt</h3>
-
-<p>The Slim application’s <code>halt()</code> method will immediately return an HTTP response with a given status code and body.
-This method accepts two arguments: the HTTP status code and an optional message. Slim will immediately halt the current
-application and send an HTTP response to the client with the specified status and optional message (as the response body).
-This will override the existing <code>\Slim\Http\Response</code> object.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-//Send a default 500 error response
-$app-&gt;halt(500);
-
-//Or if you encounter a Balrog...
-$app-&gt;halt(403, 'You shall not pass!');
-</code></pre>
-
-<p>If you would like to render a template with a list of error messages, you should use the Slim application’s <code>render()</code>
-method instead.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', function () use ($app) {
-    $errorData = array('error' =&gt; 'Permission Denied');
-    $app-&gt;render('errorTemplate.php', $errorData, 403);
-});
-$app-&gt;run();
-</code></pre>
-
-<p>The <code>halt()</code> method may send any type of HTTP response to the client: informational, success, redirect, not found,
-client error, or server error.</p>
-
-<h3>Pass</h3>
-
-<p>A route can tell the Slim application to continue to the next matching route with the Slim application’s <code>pass()</code>
-method. When this method is invoked, the Slim application will immediately stop processing the current matching route
-and invoke the next matching route. If no subsequent matching route is found, a <strong>404 Not Found</strong> response is sent to
-the client. Here is an example. Assume an HTTP request for “GET /hello/Frank”.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/hello/Frank', function () use ($app) {
-    echo "You won't see this...";
-    $app-&gt;pass();
-});
-$app-&gt;get('/hello/:name', function ($name) use ($app) {
-    echo "But you will see this!";
-});
-$app-&gt;run();
-</code></pre>
-
-<h3>Redirect</h3>
-
-<p>It is easy to redirect the client to another URL with the Slim application’s <code>redirect()</code> method. This method accepts
-two arguments: the first argument is the URL to which the client will redirect; the second optional argument is the
-HTTP status code. By default the <code>redirect()</code> method will send a <strong>302 Temporary Redirect</strong> response.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', function () use ($app) {
-    $app-&gt;redirect('/bar');
-});
-$app-&gt;run();
-</code></pre>
-
-<p>Or if you wish to use a permanent redirect, you must specify the destination URL as the first parameter and the
-HTTP status code as the second parameter.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/old', function () use ($app) {
-    $app-&gt;redirect('/new', 301);
-});
-$app-&gt;run();
-</code></pre>
-
-<p>This method will automatically set the Location: header. The HTTP redirect response will be sent to the HTTP
-client immediately.</p>
-
-<h3>Stop</h3>
-
-<p>The Slim application’s <code>stop()</code> method will stop the Slim application and send the current HTTP response to the
-client as is. No ifs, ands, or buts.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', function () use ($app) {
-    echo "You will see this...";
-    $app-&gt;stop();
-    echo "But not this";
-});
-$app-&gt;run();
-</code></pre>
-
-<h3>URL For</h3>
-
-<p>The Slim applications’ <code>urlFor()</code> method lets you dynamically create URLs for a named route so that, were a route
-pattern to change, your URLs would update automatically without breaking your application. This example demonstrates
-how to generate URLs for a named route.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-//Create a named route
-$app-&gt;get('/hello/:name', function ($name) use ($app) {
-    echo "Hello $name";
-})-&gt;name('hello');
-
-//Generate a URL for the named route
-$url = $app-&gt;urlFor('hello', array('name' =&gt; 'Josh'));
-</code></pre>
-
-<p>In this example, $url is “/hello/Josh”. To use the <code>urlFor()</code> method, you must first assign a name to a route.
-Next, invoke the <code>urlFor()</code> method. The first argument is the name of the route, and the second argument is an
-associative array used to replace the route’s URL parameters with actual values; the array’s keys must match
-parameters in the route’s URI and the values will be used as substitutions.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Route-URL-Rewriting">
-                    <header>
-                        <h2 class="page-article-header">Route URL Rewriting</h2>
-                    </header>
-                    <p>I strongly encourage you to use a web server that supports URL rewriting; this will let you enjoy clean, human-friendly
-URLs with your Slim application. To enable URL rewriting, you should use the appropriate tools provided by your
-web server to forward all HTTP requests to the PHP file in which you instantiate and run your Slim application.
-The following are sample, bare minimum, configurations for Apache with mod_php and nginx. These are not meant to
-be production ready configurations but should be enough to get you up and running. To read more on server deployment
-in general you can continue reading <a href="http://www.phptherightway.com/">http://www.phptherightway.com</a>.</p>
-
-<h3>Apache and mod_rewrite</h3>
-
-<p>Here is an example directory structure:</p>
-
-<pre><code>/path/www.mysite.com/
-    public_html/ &lt;-- Document root!
-        .htaccess
-        index.php &lt;-- I instantiate Slim here!
-    lib/
-        Slim/ &lt;-- I store Slim lib files here!
-</code></pre>
-
-<p>The <strong>.htaccess</strong> file in the directory structure above contains:</p>
-
-<pre><code>RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [QSA,L]
-</code></pre>
-
-<p>You also need a directory directive to enable <strong>.htaccess</strong> files and allow the <strong>RewriteEngine</strong> directive to be used.
-This is sometimes done globally in the <strong>httpd.conf</strong> file, but its generally a good idea to limit the directive to
-just your virtual host by enclosing it in your <strong>VirtualHost</strong> configuration block. This is generally setup in your
-configuration in the form of:</p>
-
-<pre><code>&lt;VirtualHost *:80&gt;
-    ServerAdmin me@mysite.com
-    DocumentRoot "/path/www.mysite.com/public_html"
-    ServerName mysite.com
-    ServerAlias www.mysite.com
-
-    #ErrorLog "logs/mysite.com-error.log"
-    #CustomLog "logs/mysite.com-access.log" combined
-
-    &lt;Directory "/path/www.mysite.com/public_html"&gt;
-        AllowOverride All
-        Order allow,deny
-        Allow from all
-    &lt;/Directory&gt;
-&lt;/VirtualHost&gt;
-</code></pre>
-
-<p>As a result, Apache will send all requests for non-existent files to my <strong>index.php</strong> script in which I instantiate
-and run my Slim application. With URL rewriting enabled and assuming the following Slim application is defined in
-<strong>index.php</strong>, you can access the application route below at “/foo” rather than “/index.php/foo”.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', function () {
-    echo "Foo!";
-});
-$app-&gt;run();
-</code></pre>
-
-<h3>nginx</h3>
-
-<p>We will use the same example directory structure as before, but with nginx our configuration will go into <strong>nginx.conf</strong>.</p>
-
-<pre><code>/path/www.mysite.com/
-    public_html/ &lt;-- Document root!
-        index.php &lt;-- I instantiate Slim here!
-    lib/
-        Slim/ &lt;-- I store Slim lib files here!
-</code></pre>
-
-<p>Here is a snippet of a <strong>nginx.conf</strong> in which we use the <strong>try_files</strong> directive to serve the file if it exists,
-good for static files (images, css, js etc), and otherwise forward it on to the <strong>index.php</strong> file.</p>
-
-<pre><code>server {
-    listen       80;
-    server_name  www.mysite.com mysite.com;
-    root         /path/www.mysite.com/public_html;
-
-    try_files $uri /index.php;
-
-    # this will only pass index.php to the fastcgi process which is generally safer but
-    # assumes the whole site is run via Slim.
-    location /index.php {
-        fastcgi_connect_timeout 3s;     # default of 60s is just too long
-        fastcgi_read_timeout 10s;       # default of 60s is just too long
-        include fastcgi_params;
-        fastcgi_pass 127.0.0.1:9000;    # assumes you are running php-fpm locally on port 9000
-    }
-}
-</code></pre>
-
-<p>Most installations will have a default <strong>fastcgi_params</strong> file setup that you can just include as shown above.
-Some configurations don’t include the <strong>SCRIPT_FILENAME</strong> parameter. You must ensure you include this parameter
-otherwise you might end up with a No input file specified error from the fastcgi process. This can be done directly
-in the location block or simply added to the <strong>fastcgi_params</strong> file. Either way it looks like this:</p>
-
-<pre><code>fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-</code></pre>
-
-<h3>Without URL Rewriting</h3>
-
-<p>Slim will work without URL rewriting. In this scenario, you must include the name of the PHP file in which you
-instantiate and run the Slim application in the resource URI. For example, assume the following Slim application
-is defined in <strong>index.php</strong> at the top level of your virtual host’s document root:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/foo', function () {
-    echo "Foo!";
-});
-$app-&gt;run();
-</code></pre>
-
-<p>You can access the defined route at “/index.php/foo”. If the same application is instead defined in <strong>index.php</strong>
-inside of the physical subdirectory blog/, you can access the defined route at /blog/index.php/foo.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Environment">
-                <h1 class="page-header">Environment <a class="bookmark" href="index.html#Environment"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Environment-Overview">
-                    <header>
-                        <h2 class="page-article-header">Environment Overview</h2>
-                    </header>
-                    <p>The Slim Framework implements a derivation of the <a href="http://rack.rubyforge.org/doc/files/SPEC.html">Rack protocol</a>. When
-you instantiate a Slim application, it immediately inspects the <code>$_SERVER</code> superglobal and derives a set of environment
-variables that dictate application behavior.</p>
-
-<h3>What is the Environment?</h3>
-
-<p>A Slim application’s “environment” is an associative array of settings that are parsed once and made accessible to
-the Slim application and its middleware. You are free to modify the environment variables during runtime; changes
-will propagate immediately throughout the application.</p>
-
-<p>When you instantiate a Slim application, the environment variables are derived from the <code>$_SERVER</code> superglobal; you do
-not need to set these yourself. However, you are free to modify or supplement these variables in Slim middleware.</p>
-
-<p>These variables are fundamental to determining how your Slim application runs: the resource URI, the HTTP method,
-the HTTP request body, the URL query parameters, error output, and more. Middleware, described later, gives you
-the power to - among other things - manipulate environment variables before and/or after the Slim application is run.</p>
-
-<h3>Environment Variables</h3>
-
-<p>The following text respectfully borrows the same information originally available at
-<a href="http://rack.rubyforge.org/doc/files/SPEC.html">http://rack.rubyforge.org/doc/files/SPEC.html</a>. The environment array must include these variables:</p>
-
-<dl>
-<dt>REQUEST_METHOD</dt>
-<dd>The HTTP request method. This is required and may never be an empty string.</dd>
-
-<dt>SCRIPT_NAME</dt>
-<dd>The initial portion of the request URI’s “path” that corresponds to the physical directory in which the Slim
-application is installed — so that the application knows its virtual “location”. This may be an empty string if the
-application is installed in the top-level of the public document root directory. This will never have a trailing slash.</dd>
-
-<dt>PATH_INFO</dt>
-<dd>The remaining portion of the request URI’s “path” that determines the “virtual” location of the HTTP request’s target resource within the Slim application context. This will always have a leading slash; it may or may not have a trailing slash.</dd>
-
-<dt>QUERY_STRING</dt>
-<dd>The part of the HTTP request’s URI after, but not including, the “?”. This is required but may be an empty string.</dd>
-
-<dt>SERVER_NAME</dt>
-<dd>When combined with <code>SCRIPT_NAME</code> and <code>PATH_INFO</code>, this can be used to create a fully qualified URL to an application resource. However, if <code>HTTP_HOST</code> is present, that should be used instead of this. This is required and may never be an empty string.</dd>
-
-<dt>SERVER_PORT</dt>
-<dd>When combined with <code>SCRIPT_NAME</code> and <code>PATH_INFO</code>, this can be used to create a fully qualified URL to any application resource. This is required and may never be an empty string.</dd>
-
-<dt>HTTP_*</dt>
-<dd>Variables matching the HTTP request headers sent by the client. The existence of these variables correspond with those sent in the current HTTP request.</dd>
-
-<dt>slim.url_scheme</dt>
-<dd>Will be “http” or “https” depending on the HTTP request URL.</dd>
-
-<dt>slim.input</dt>
-<dd>Will be a string representing the raw HTTP request body. If the HTTP request body is empty (e.g. with a GET request), this will be an empty string.</dd>
-
-<dt>slim.errors</dt>
-<dd>Must always be a writable resource; by default, this is a write-only resource handle to <code>php://stderr</code>.</dd>
-</dl>
-
-<p>The Slim application can store its own data in the environment, too. The environment array’s keys must contain at least
-one dot, and should be prefixed uniquely (e.g. “prefix.foo”). The prefix <strong>slim.</strong> is reserved for use by Slim itself
-and must not be used otherwise. The environment must not contain the keys <code>HTTP_CONTENT_TYPE</code> or <code>HTTP_CONTENT_LENGTH</code>
-(use the versions without HTTP_). The CGI keys (named without a period) must have String values. There are the
-following restrictions:</p>
-
-<ul>
-<li>slim.url_scheme must either be “http” or “https”.</li>
-<li><code>slim.input</code> must be a string.</li>
-<li>There must be a valid, writable resource in <code>slim.errors</code>.</li>
-<li>The <code>REQUEST_METHOD</code> must be a valid token.</li>
-<li>The <code>SCRIPT_NAME</code>, if non-empty, must start with “/”</li>
-<li>The <code>PATH_INFO</code>, if non-empty, must start with “/”</li>
-<li>The <code>CONTENT_LENGTH</code>, if given, must consist of digits only.</li>
-<li>One of <code>SCRIPT_NAME</code> or <code>PATH_INFO</code> must be set. <code>PATH_INFO</code> should be “/” if <code>SCRIPT_NAME</code> is empty. <code>SCRIPT_NAME</code>
-never should be “/”, but instead be an empty string.</li>
-</ul>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Request">
-                <h1 class="page-header">Request <a class="bookmark" href="index.html#Request"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Request-Overview">
-                    <header>
-                        <h2 class="page-article-header">Request Overview</h2>
-                    </header>
-                    <p>Each Slim application instance has one request object. The request object is an abstraction of the current
-HTTP request and allows you to easily interact with the Slim application’s environment variables. Although each
-Slim application includes a default request object, the <code>\Slim\Http\Request</code> class is idempotent; you may
-instantiate the class at will (in middleware or elsewhere in your Slim application) without affecting the application
-as a whole. You can obtain a reference to the Slim application’s request object like this:</p>
-
-<pre><code>&lt;?php
-// Returns instance of \Slim\Http\Request
-$request = $app-&gt;request;
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Request-Method">
-                    <header>
-                        <h2 class="page-article-header">Request Method</h2>
-                    </header>
-                    <p>Every HTTP request has a method (e.g. GET or POST). You can obtain the current HTTP request method via the Slim
-application’s request object:</p>
-
-<pre><code>/**
- * What is the request method?
- * @return string (e.g. GET, POST, PUT, DELETE)
- */
-$app-&gt;request-&gt;getMethod();
-
-/**
- * Is this a GET request?
- * @return bool
- */
-$app-&gt;request-&gt;isGet();
-
-/**
- * Is this a POST request?
- * @return bool
- */
-$app-&gt;request-&gt;isPost();
-
-/**
- * Is this a PUT request?
- * @return bool
- */
-$app-&gt;request-&gt;isPut();
-
-/**
- * Is this a DELETE request?
- * @return bool
- */
-$app-&gt;request-&gt;isDelete();
-
-/**
- * Is this a HEAD request?
- * @return bool
- */
-$app-&gt;request-&gt;isHead();
-
-/**
- * Is this a OPTIONS request?
- * @return bool
- */
-$app-&gt;request-&gt;isOptions();
-
-/**
- * Is this a PATCH request?
- * @return bool
- */
-$app-&gt;request-&gt;isPatch();
-
-/**
- * Is this a XHR/AJAX request?
- * @return bool
- */
-$app-&gt;request-&gt;isAjax();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Request-Headers">
-                    <header>
-                        <h2 class="page-article-header">Request Headers</h2>
-                    </header>
-                    <p>A Slim application will automatically parse all HTTP request headers. You can access the request headers using the
-request object’s public <code>headers</code> property. The <code>headers</code> property is an instance of <code>\Slim\Helper\Set</code>, meaning
-it provides a simple, standardized interface to interactive with the HTTP request headers.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-// Get request headers as associative array
-$headers = $app-&gt;request-&gt;headers;
-
-// Get the ACCEPT_CHARSET header
-$charset = $app-&gt;request-&gt;headers-&gt;get('ACCEPT_CHARSET');
-</code></pre>
-
-<p>The HTTP specification states that HTTP header names may be uppercase, lowercase, or mixed-case. Slim is smart enough
-to parse and return header values whether you request a header value using upper, lower, or mixed case header name,
-with either underscores or dashes. So use the naming convention with which you are most comfortable.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Request-Body">
-                    <header>
-                        <h2 class="page-article-header">Request Body</h2>
-                    </header>
-                    <p>Use the request object’s <code>getBody()</code> method to fetch the raw HTTP request body sent by the HTTP client. This is
-particularly useful for Slim application’s that consume JSON or XML requests.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$body = $app-&gt;request-&gt;getBody();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Request-Variables">
-                    <header>
-                        <h2 class="page-article-header">Request Variables</h2>
-                    </header>
-                    <p>An HTTP request may have associated variables (not to be confused with route variables). The GET, POST, or PUT
-variables sent with the current HTTP request are exposed via the Slim application’s request object.</p>
-
-<p>If you want to quickly fetch a request variable value without considering its type, use the request object’s <code>params()</code>
-method:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$paramValue = $app-&gt;request-&gt;params('paramName');
-</code></pre>
-
-<p>The <code>params()</code> method will first search PUT variables, then POST variables, then GET variables. If no variables
-are found, <code>null</code> is returned. If you only want to search for a specific type of variable, you can use these
-methods instead:</p>
-
-<pre><code>&lt;?php
-//GET variable
-$paramValue = $app-&gt;request-&gt;get('paramName');
-
-//POST variable
-$paramValue = $app-&gt;request-&gt;post('paramName');
-
-//PUT variable
-$paramValue = $app-&gt;request-&gt;put('paramName');
-</code></pre>
-
-<p>If a variable does not exist, each method above will return <code>null</code>. You can also invoke any of these functions without
-an argument to obtain an array of all variables of the given type:</p>
-
-<pre><code>&lt;?php
-$allGetVars = $app-&gt;request-&gt;get();
-$allPostVars = $app-&gt;request-&gt;post();
-$allPutVars = $app-&gt;request-&gt;put();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Request-Cookies">
-                    <header>
-                        <h2 class="page-article-header">Request Cookies</h2>
-                    </header>
-                    <h3>Get Cookies</h3>
-
-<p>A Slim application will automatically parse cookies sent with the current HTTP request. You can fetch cookie values
-with the Slim application’s <code>getCookie()</code> helper method like this:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$foo = $app-&gt;getCookie('foo');
-</code></pre>
-
-<p>Only Cookies sent with the current HTTP request are accessible with this method. If you set a cookie during the
-current request, it will not be accessible with this method until the subsequent request. Bear in mind the \Slim\Slim
-object’s <code>getCookie()</code> method is a convenience. You may also retrieve the complete set of HTTP request cookies
-directly from the \Slim\Http\Request object like this:</p>
-
-<pre><code>&lt;?php
-$cookies = $app-&gt;request-&gt;cookies;
-</code></pre>
-
-<p>This will return an instance of \Slim\Helper\Set so you can use its simple, standardized interface to inspect the
-request’s cookies.</p>
-
-<h3>Cookie Encryption</h3>
-
-<p>You can optionally choose to encrypt all cookies stored on the HTTP client with the Slim app’s <code>cookies.encrypt</code>
-setting. When this setting is <code>true</code>, all cookies will be encrypted using your designated secret key and cipher.</p>
-
-<p>It’s really that easy. Cookies will be encrypted automatically before they are sent to the client. They will also
-be decrypted on-demand when you request them with <code>\Slim\Slim::getCookie()</code> during subsequent requests.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Request-Paths">
-                    <header>
-                        <h2 class="page-article-header">Request Paths</h2>
-                    </header>
-                    <p>Every HTTP request received by a Slim application will have a root URI and a resource URI.</p>
-
-<h3>Root URI</h3>
-
-<p>The <strong>root URI</strong> is the physical URL path of the directory in which the Slim application is instantiated and run.
-If a Slim application is instantiated in <strong>index.php</strong> within the top-most directory of the virtual host’s
-document root, the root URI will be an empty string. If a Slim application is instantiated and run in <strong>index.php</strong>
-within a physical subdirectory of the virtual host’s document root, the root URI will be the path to that
-subdirectory with a leading slash and without a trailing slash.</p>
-
-<h3>Resource URI</h3>
-
-<p>The <strong>resource URI</strong> is the virtual URI path of an application resource. The resource URI will be matched to the
-Slim application’s routes.</p>
-
-<p>Assume the Slim application is installed in a physical subdirectory <strong>/foo</strong> beneath your virtual host’s document root.
-Also assume the full HTTP request URL (what you’d see in the browser location bar) is <strong>/foo/books/1</strong>. The root URI
-is <strong>/foo</strong> (the path to the physical directory in which the Slim application is instantiated) and the resource URI
-is <strong>/books/1</strong> (the path to the application resource).</p>
-
-<p>You can get the HTTP request’s root URI and resource URI with the request object’s
-<code>getRootUri()</code> and <code>getResourceUri()</code> methods:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-// Get request object
-$req = $app-&gt;request;
-
-//Get root URI
-$rootUri = $req-&gt;getRootUri();
-
-//Get resource URI
-$resourceUri = $req-&gt;getResourceUri();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="XMLHttpRequest">
-                    <header>
-                        <h2 class="page-article-header">XMLHttpRequest</h2>
-                    </header>
-                    <p>When using a Javascript framework like MooTools or jQuery to execute an XMLHttpRequest, the XMLHttpRequest will
-usually be sent with a <strong>X-Requested-With</strong> HTTP header. The Slim application will detect the HTTP
-request’s <strong>X-Requested-With</strong> header and flag the request as such. If for some reason an XMLHttpRequest cannot
-be sent with the <strong>X-Requested-With</strong> HTTP header, you can force the Slim application to assume an HTTP request
-is an XMLHttpRequest by setting a GET, POST, or PUT parameter in the HTTP request named “isajax” with a truthy value.</p>
-
-<p>Use the request object’s <code>isAjax()</code> or <code>isXhr()</code> method to tell if the current request is an XHR/Ajax request:</p>
-
-<pre><code>&lt;?php
-$isXHR = $app-&gt;request-&gt;isAjax();
-$isXHR = $app-&gt;request-&gt;isXhr();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Request-Helpers">
-                    <header>
-                        <h2 class="page-article-header">Request Helpers</h2>
-                    </header>
-                    <p>The Slim application’s request object provides several helper methods to fetch common HTTP request information:</p>
-
-<h3>Content Type</h3>
-
-<p>Fetch the request’s content type (e.g. “application/json;charset=utf-8”):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getContentType();
-</code></pre>
-
-<h3>Media Type</h3>
-
-<p>Fetch the request’s media type (e.g. “application/json”):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getMediaType();
-</code></pre>
-
-<h3>Media Type Params</h3>
-
-<p>Fetch the request’s media type parameters (e.g. [charset =&gt; “utf-8”]):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getMediaTypeParams();
-</code></pre>
-
-<h3>Content Charset</h3>
-
-<p>Fetch the request’s content character set (e.g. “utf-8”):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getContentCharset();
-</code></pre>
-
-<h3>Content Length</h3>
-
-<p>Fetch the request’s content length:</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getContentLength();
-</code></pre>
-
-<h3>Host</h3>
-
-<p>Fetch the request’s host (e.g. “slimframework.com”):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getHost();
-</code></pre>
-
-<h3>Host with Port</h3>
-
-<p>Fetch the request’s host with port (e.g. “slimframework.com:80”):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getHostWithPort();
-</code></pre>
-
-<h3>Port</h3>
-
-<p>Fetch the request’s port (e.g. 80):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getPort();
-</code></pre>
-
-<h3>Scheme</h3>
-
-<p>Fetch the request’s scheme (e.g. “http” or “https”):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getScheme();
-</code></pre>
-
-<h3>Path</h3>
-
-<p>Fetch the request’s path (root URI + resource URI):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getPath();
-</code></pre>
-
-<h3>URL</h3>
-
-<p>Fetch the request’s URL (scheme + host [ + port if non-standard ]):</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getUrl();
-</code></pre>
-
-<h3>IP Address</h3>
-
-<p>Fetch the request’s IP address:</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getIp();
-</code></pre>
-
-<h3>Referer</h3>
-
-<p>Fetch the request’s referrer:</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getReferrer();
-</code></pre>
-
-<h3>User Agent</h3>
-
-<p>Fetch the request’s user agent string:</p>
-
-<pre><code>&lt;?php
-$req = $app-&gt;request;
-$req-&gt;getUserAgent();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Response">
-                <h1 class="page-header">Response <a class="bookmark" href="index.html#Response"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Response-Overview">
-                    <header>
-                        <h2 class="page-article-header">Response Overview</h2>
-                    </header>
-                    <p>Each Slim application instance has one response object. The response object is an abstraction of your Slim application’s
-HTTP response that is returned to the HTTP client. Although each Slim application includes a default response object,
-the <code>\Slim\Http\Response</code> class is idempotent; you may instantiate the class at will (in middleware or elsewhere in
-your Slim application) without affecting the application as a whole. You can obtain a reference to the Slim
-application’s response object with:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;response;
-</code></pre>
-
-<p>An HTTP response has three primary properties:</p>
-
-<ul>
-<li>Status</li>
-<li>Header</li>
-<li>Body</li>
-</ul>
-
-<p>The response object provides helper methods, described next, that help you interact with these HTTP response
-properties. The default response object will return a <strong>200 OK</strong> HTTP response with the <strong>text/html</strong> content type.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Response-Status">
-                    <header>
-                        <h2 class="page-article-header">Response Status</h2>
-                    </header>
-                    <p>The HTTP response returned to the client will have a status code indicating the response’s type
-(e.g. 200 OK, 400 Bad Request, or 500 Server Error). You can use the Slim application’s response object to set the
-HTTP response’s status like this:</p>
-
-<pre><code>&lt;?php
-$app-&gt;response-&gt;setStatus(400);
-</code></pre>
-
-<p>You only need to set the response object’s status if you intend to return an HTTP response that <em>does not</em> have
-a 200 OK status. You can just as easily fetch the response object’s current HTTP status by invoking the same
-method without an argument, like this:</p>
-
-<pre><code>&lt;?php
-$status = $app-&gt;response-&gt;getStatus();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Response-Headers">
-                    <header>
-                        <h2 class="page-article-header">Response Headers</h2>
-                    </header>
-                    <p>The HTTP response returned to the HTTP client will have a header. The HTTP header is a list of keys and values that
-provide metadata about the HTTP response. You can use the Slim application’s response object to set the HTTP
-response’s header. The response object has a public property <code>headers</code> that is an instance of <code>\Slim\Helper\Set</code>;
-this provides a simple, standardized interface to manipulate the HTTP response headers.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;response-&gt;headers-&gt;set('Content-Type', 'application/json');
-</code></pre>
-
-<p>You may also fetch headers from the response object’s <code>headers</code> property, too:</p>
-
-<pre><code>&lt;?php
-$contentType = $app-&gt;response-&gt;headers-&gt;get('Content-Type');
-</code></pre>
-
-<p>If a header with the given name does not exist, <code>null</code> is returned. You may specify header names with upper, lower,
-or mixed case with dashes or underscores. Use the naming convention with which you are most comfortable.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Response-Body">
-                    <header>
-                        <h2 class="page-article-header">Response Body</h2>
-                    </header>
-                    <p>The HTTP response returned to the client will have a body. The HTTP body is the actual content of the HTTP response
-delivered to the client. You can use the Slim application’s response object to set the HTTP response’s body:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-// Overwrite response body
-$app-&gt;response-&gt;setBody('Foo');
-
-// Append response body
-$app-&gt;response-&gt;write('Bar');
-</code></pre>
-
-<p>When you overwrite or append the response object’s body, the response object will automatically set the
-<strong>Content-Length</strong> header based on the bytesize of the new response body.</p>
-
-<p>You can fetch the response object’s body like this:</p>
-
-<pre><code>&lt;?php
-$body = $app-&gt;response-&gt;getBody();
-</code></pre>
-
-<p>Usually, you will never need to manually set the response body with the <code>setBody()</code> or <code>write()</code> methods; instead,
-the Slim app will do this for you. Whenever you <code>echo()</code> content inside a route’s callback function, the
-<code>echo()</code>’d content is captured in an output buffer and appended to the response body before the HTTP response
-is returned to the client.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Response-Cookies">
-                    <header>
-                        <h2 class="page-article-header">Response Cookies</h2>
-                    </header>
-                    <p>The Slim application provides helper methods to send cookies with the HTTP response.</p>
-
-<h3>Set Cookie</h3>
-
-<p>This example demonstrates how to use the Slim application’s <code>setCookie()</code> method to create an HTTP cookie to be sent
-with the HTTP response:</p>
-
-<pre><code>&lt;?php
-$app-&gt;setCookie('foo', 'bar', '2 days');
-</code></pre>
-
-<p>This creates an HTTP cookie with the name “foo” and value “bar” that expires two days from now. You may also provide
-additional cookie properties, including its path, domain, secure, and httponly settings. The Slim application’s
-<code>setCookie()</code> method uses the same signature as PHP’s native <code>setCookie()</code> function.</p>
-
-<pre><code>&lt;?php
-$app-&gt;setCookie(
-    $name,
-    $value,
-    $expiresAt,
-    $path,
-    $domain,
-    $secure,
-    $httponly
-);
-</code></pre>
-
-<h3>Set Encrypted Cookie</h3>
-
-<p>You can tell Slim to encrypt the response cookies by setting the app’s <code>cookies.encrypt</code> setting to <code>true</code>.
-When this setting is <code>true</code>, Slim will encrypt the response cookies automatically before they are returned to
-the HTTP client.</p>
-
-<p>Here are the available Slim app settings used for cookie encryption:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim(array(
-    'cookies.encrypt' =&gt; true,
-    'cookies.secret_key' =&gt; 'my_secret_key',
-    'cookies.cipher' =&gt; MCRYPT_RIJNDAEL_256,
-    'cookies.cipher_mode' =&gt; MCRYPT_MODE_CBC
-));
-</code></pre>
-
-<h3>Delete Cookie</h3>
-
-<p>You can delete a cookie using the Slim application’s <code>deleteCookie()</code> method. This will remove the cookie from
-the HTTP client before the next HTTP request. This method accepts the same signature as the Slim application’s
-<code>setCookie()</code> instance method, <em>without</em> the <code>$expires</code> argument. Only the first argument is required.</p>
-
-<pre><code>&lt;?php
-$app-&gt;deleteCookie('foo');
-</code></pre>
-
-<p>If you need to also specify the path and domain:</p>
-
-<pre><code>&lt;?php
-$app-&gt;deleteCookie('foo', '/', 'foo.com');
-</code></pre>
-
-<p>You may also further specify the secure and httponly properties:</p>
-
-<pre><code>&lt;?php
-$app-&gt;deleteCookie('foo', '/', 'foo.com', true, true);
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Response-Helpers">
-                    <header>
-                        <h2 class="page-article-header">Response Helpers</h2>
-                    </header>
-                    <p>The response object provides helper methods to inspect and interact with the underlying HTTP response.</p>
-
-<h3>Finalize</h3>
-
-<p>The response object’s <code>finalize()</code> method returns a numeric array of <code>[status, header, body]</code>. The status is
-an integer; the header is an iterable data structure; and the body is a string. Were you to create a new
-<code>\Slim\Http\Response</code> object in your Slim application or its middleware, you would call the response object’s
-<code>finalize()</code> method to produce the status, header, and body for the underlying HTTP response.</p>
-
-<pre><code>&lt;?php
-/**
- * Prepare new response object
- */
-$res = new \Slim\Http\Response();
-$res-&gt;setStatus(400);
-$res-&gt;write('You made a bad request');
-$res-&gt;headers-&gt;set('Content-Type', 'text/plain');
-
-/**
- * Finalize
- * @return [
- *     200,
- *     ['Content-type' =&gt; 'text/plain'],
- *     'You made a bad request'
- * ]
- */
-$array = $res-&gt;finalize();
-</code></pre>
-
-<h3>Redirect</h3>
-
-<p>The response object’s <code>redirect()</code> method will set the response status and its <strong>Location:</strong> header needed to
-return a <strong>3xx Redirect</strong> response.</p>
-
-<pre><code>&lt;?php
-$app-&gt;response-&gt;redirect('/foo', 303);
-</code></pre>
-
-<h3>Status Introspection</h3>
-
-<p>The response object provides other helper methods to inspect its current status. All of the following methods
-return a boolean value:</p>
-
-<pre><code>&lt;?php
-$res = $app-&gt;response;
-
-//Is this an informational response?
-$res-&gt;isInformational();
-
-//Is this a 200 OK response?
-$res-&gt;isOk();
-
-//Is this a 2xx successful response?
-$res-&gt;isSuccessful();
-
-//Is this a 3xx redirection response?
-$res-&gt;isRedirection();
-
-//Is this a specific redirect response? (301, 302, 303, 307)
-$res-&gt;isRedirect();
-
-//Is this a forbidden response?
-$res-&gt;isForbidden();
-
-//Is this a not found response?
-$res-&gt;isNotFound();
-
-//Is this a client error response?
-$res-&gt;isClientError();
-
-//Is this a server error response?
-$res-&gt;isServerError();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="View">
-                <h1 class="page-header">View <a class="bookmark" href="index.html#View"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="View-Overview">
-                    <header>
-                        <h2 class="page-article-header">View Overview</h2>
-                    </header>
-                    <p>A Slim application delegates rendering of templates to its view object. A Slim application view is a subclass
-of <code>\Slim\View</code> that implements this interface:</p>
-
-<pre><code>&lt;?php
-public render(string $template);
-</code></pre>
-
-<p>The view object’s <code>render</code> method must return the rendered content of the template specified by its
-<code>$template</code> argument.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Rendering">
-                    <header>
-                        <h2 class="page-article-header">Rendering</h2>
-                    </header>
-                    <p>You can use the Slim application’s <code>render()</code> method to ask the current view object to render a template with a
-given set of variables. The Slim application’s <code>render()</code> method will <code>echo()</code> the output returned from the view
-object to be captured by an output buffer and appended automatically to the response object’s body. This assumes
-nothing about how the template is rendered; that is delegated to the view object.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/books/:id', function ($id) use ($app) {
-    $app-&gt;render('myTemplate.php', array('id' =&gt; $id));
-});
-</code></pre>
-
-<p>If you need to pass data from the route callback into the view object, you must explicitly do so by passing an
-array as the second argument of the Slim application’s <code>render()</code> method like this:</p>
-
-<pre><code>&lt;?php
-$app-&gt;render(
-    'myTemplate.php',
-    array( 'name' =&gt; 'Josh' )
-);
-</code></pre>
-
-<p>You can also set the HTTP response status when you render a template:</p>
-
-<pre><code>&lt;?php
-$app-&gt;render(
-    'myTemplate.php',
-    array( 'name' =&gt; 'Josh' ),
-    404
-);
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Custom-Views">
-                    <header>
-                        <h2 class="page-article-header">Custom Views</h2>
-                    </header>
-                    <p>A Slim application delegates rendering of templates to its view object. A custom view is a subclass
-of <code>\Slim\View</code> that implements this interface:</p>
-
-<pre><code>&lt;?php
-public render(string $template);
-</code></pre>
-
-<p>The view object’s <code>render</code> method must return the rendered content of the template specified by its
-<code>$template</code> argument. When the custom view’s render method is invoked, it is passed the desired template
-pathname (relative to the Slim application’s “templates.path” setting) as its argument. Here’s an example
-custom view:</p>
-
-<pre><code>&lt;?php
-class CustomView extends \Slim\View
-{
-    public function render($template)
-    {
-        return 'The final rendered template';
-    }
-}
-</code></pre>
-
-<p>The custom view can do whatever it wants internally so long as it returns the template’s rendered output as a string.
-A custom view makes it easy to integrate popular PHP template systems like Twig or Smarty.</p>
-
-<div class="alert alert-info">
-    <strong>Heads Up!</strong> A custom view may access data passed to it by the Slim application’s
-    <code>render()</code> method with <code>$this-&gt;data</code>.
-</div>
-
-<p>You can browse ready-to-use custom views that work with popular PHP template engines in the Slim-Extras repository
-on GitHub.</p>
-
-<h3>Example View</h3>
-
-<pre><code>&lt;?php
-class CustomView extends \Slim\View
-{
-    public function render($template)
-    {
-        // $template === 'show.php'
-        // $this-&gt;data['title'] === 'Sahara'
-    }
-}
-</code></pre>
-
-<h3>Example Integration</h3>
-
-<p>If the custom view is not discoverable by a registered autoloader, it must be required before the Slim application
-is instantiated.</p>
-
-<pre><code>&lt;?php
-require 'CustomView.php';
-
-$app = new \Slim\Slim(array(
-    'view' =&gt; new CustomView()
-));
-
-$app-&gt;get('/books/:id', function ($id) use ($app) {
-    $app-&gt;render('show.php', array('title' =&gt; 'Sahara'));
-});
-
-$app-&gt;run();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="View-Data">
-                    <header>
-                        <h2 class="page-article-header">View Data</h2>
-                    </header>
-                    <div class="alert alert-info">
-    <strong>Heads Up!</strong> Rarely will you set or append data directly on the view object. Usually, you
-    pass data to the view with the Slim application’s `render()` method.
-    See <a href="http://docs.slimframework.com/pages/view-rendering-templates">Rendering Templates</a>.
-</div>
-
-<p>The view object’s <code>setData()</code> and <code>appendData()</code> methods inject data into the view object; the injected data is
-available to view templates. View data is stored internally as a key-value array.</p>
-
-<h3>Setting Data</h3>
-
-<p>The view object’s <code>setData()</code> instance method will overwrite existing view data. You may use this method to set a
-single variable to a given value:</p>
-
-<pre><code>&lt;?php
-$app-&gt;view-&gt;setData('color', 'red');
-</code></pre>
-
-<p>The view’s data will now contain a key “color” with value “red”. You may also use the view’s <code>setData()</code> method
-to batch assign an entire array of data:</p>
-
-<pre><code>&lt;?php
-$app-&gt;view-&gt;setData(array(
-    'color' =&gt; 'red',
-    'size' =&gt; 'medium'
-));
-</code></pre>
-
-<p>Remember, the view’s <code>setData()</code> method will replace all previous data.</p>
-
-<h3>Appending Data</h3>
-
-<p>The view object also has a <code>appendData()</code> method that appends data to the view’s existing data. This method accepts
-an array as its one and only argument:</p>
-
-<pre><code>&lt;?php
-$app-&gt;view-&gt;appendData(array(
-    'foo' =&gt; 'bar'
-));
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="HTTP-Caching">
-                <h1 class="page-header">HTTP Caching <a class="bookmark" href="index.html#HTTP-Caching"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="HTTP-Caching-Overview">
-                    <header>
-                        <h2 class="page-article-header">HTTP Caching Overview</h2>
-                    </header>
-                    <p>A Slim application provides built-in support for HTTP caching with its <code>etag()</code>, <code>lastModified()</code>, and <code>expires()</code>
-helper methods. It is best to use one of <code>etag()</code> or <code>lastModified()</code> - in conjunction with <code>expires()</code> - per route;
-never use both <code>etag()</code> and <code>lastModified()</code> together in the same route callback.</p>
-
-<p>The <code>etag()</code> and <code>lastModified()</code> methods should be invoked in a route callback before other code; this allows Slim
-to check conditional GET requests before processing the route callback’s remaining code.</p>
-
-<p>Both <code>etag()</code> and <code>lastModified()</code> instruct the HTTP client to store the resource response in a client-side cache.
-The <code>expires()</code> method indicates to the HTTP client when the client-side cache should be considered stale.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="ETag">
-                    <header>
-                        <h2 class="page-article-header">ETag</h2>
-                    </header>
-                    <p>A Slim application provides built-in support for HTTP caching using ETags. An ETag is a unique identifier for a
-resource URI. When an ETag header is set with the Slim application’s <code>etag()</code> method, the HTTP client will send
-an <strong>If-None-Match</strong> header with each subsequent HTTP request of the same resource URI. If the ETag value for the
-resource URI matches the <strong>If-None-Match</strong> HTTP request header, the Slim application will return a
-<strong>304 Not Modified</strong> HTTP response that will prompt the HTTP client to continue using its cache; this also prevents
-the Slim application from serving the entire markup for the resource URI, saving bandwidth and response time.</p>
-
-<p>Setting an ETag with Slim is very simple. Invoke the Slim application’s <code>etag()</code> method in your route callback,
-passing it a unique ID as the first and only argument.</p>
-
-<pre><code>&lt;?php
-$app-&gt;get('/foo', function () use ($app) {
-    $app-&gt;etag('unique-id');
-    echo "This will be cached after the initial request!";
-});
-</code></pre>
-
-<p>That’s it. Make sure the ETag ID is unique for the given resource. Also make sure the ETag ID changes as your
-resource changes; otherwise, the HTTP client will continue serving its outdated cache.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Last-Modified">
-                    <header>
-                        <h2 class="page-article-header">Last Modified</h2>
-                    </header>
-                    <p>A Slim application provides built-in support for HTTP caching using the resource’s last modified date. When you
-specify a last modified date, Slim tells the HTTP client the date and time the current resource was last modified.
-The HTTP client will then send a <strong>If-Modified-Since</strong> header with each subsequent HTTP request for the given
-resource URI. If the last modification date you specify matches the <strong>If-Modified-Since</strong> HTTP request header,
-the Slim application will return a <strong>304 Not Modified</strong> HTTP response that will prompt the HTTP client to use
-its cache; this also prevents the Slim application from serving the entire markup for the resource URI saving
-bandwidth and response time.</p>
-
-<p>Setting a last modified date with Slim is very simple. You only need to invoke the Slim application’s <code>lastModified()</code>
-method in your route callback passing in a UNIX timestamp of the last modification date for the given resource.
-Be sure the <code>lastModified()</code> method’s timestamp updates along with the resource’s last modification date; otherwise,
-the browser client will continue serving its outdated cache.</p>
-
-<pre><code>&lt;?php
-$app-&gt;get('/foo', function () use ($app) {
-    $app-&gt;lastModified(1286139652);
-    echo "This will be cached after the initial request!";
-});
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Expires">
-                    <header>
-                        <h2 class="page-article-header">Expires</h2>
-                    </header>
-                    <p>Used in conjunction with the Slim application’s <code>etag()</code> or <code>lastModified()</code> methods, the <code>expires()</code> method sets an
-<strong>Expires</strong> header on the HTTP response informing the HTTP client when its client-side cache for the current
-resource should be considered stale. The HTTP client will continue serving from its client-side cache until the
-expiration date is reached, at which time the HTTP client will send a conditional GET request to the Slim application.</p>
-
-<p>The <code>expires()</code> method accepts one argument: an integer UNIX timestamp, or a string to be parsed with <code>strtotime()</code>.</p>
-
-<pre><code>&lt;?php
-$app-&gt;get('/foo', function () use ($app) {
-    $app-&gt;etag('unique-resource-id');
-    $app-&gt;expires('+1 week');
-    echo "This will be cached client-side for one week";
-});
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Middleware">
-                <h1 class="page-header">Middleware <a class="bookmark" href="index.html#Middleware"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Middleware-Overview">
-                    <header>
-                        <h2 class="page-article-header">Middleware Overview</h2>
-                    </header>
-                    <p>The Slim Framework implements a version of the Rack protocol. As a result, a Slim application can have middleware
-that may inspect, analyze, or modify the application environment, request, and response before and/or after the
-Slim application is invoked.</p>
-
-<h3>Middleware Architecture</h3>
-
-<p>Think of a Slim application as the core of an onion. Each layer of the onion is middleware. When you invoke the
-Slim application’s <code>run()</code> method, the outer-most middleware layer is invoked first. When ready, that middleware
-layer is responsible for optionally invoking the next middleware layer that it surrounds. This process steps deeper
-into the onion - through each middleware layer - until the core Slim application is invoked. This stepped process
-is possible because each middleware layer, and the Slim application itself, all implement a public <code>call()</code> method.
-When you add new middleware to a Slim application, the added middleware will become a new outer layer and surround
-the previous outer middleware layer (if available) or the Slim application itself.</p>
-
-<h3>Application Reference</h3>
-
-<p>The purpose of middleware is to inspect, analyze, or modify the application environment, request, and response
-before and/or after the Slim application is invoked. It is easy for each middleware to obtain references to the
-primary Slim application, its environment, its request, and its response:</p>
-
-<pre><code>&lt;?php
-class MyMiddleware extends \Slim\Middleware
-{
-    public function call()
-    {
-        //The Slim application
-        $app = $this-&gt;app;
-
-        //The Environment object
-        $env = $app-&gt;environment;
-
-        //The Request object
-        $req = $app-&gt;request;
-
-        //The Response object
-        $res = $app-&gt;response;
-    }
-}
-</code></pre>
-
-<p>Changes made to the environment, request, and response objects will propagate immediately throughout the application
-and its other middleware layers. This is possible because every middleware layer is given a reference to the same
-Slim application object.</p>
-
-<h3>Next Middleware Reference</h3>
-
-<p>Each middleware layer also has a reference to the next inner middleware layer with <code>$this-&gt;next</code>. It is each
-middleware’s responsibility to optionally call the next middleware. Doing so will allow the Slim application
-to complete its full lifecycle. If a middleware layer chooses <strong>not</strong> to call the next inner middleware layer,
-further inner middleware and the Slim application itself will not be run, and the application response will
-be returned to the HTTP client as is.</p>
-
-<pre><code>&lt;?php
-class MyMiddleware extends \Slim\Middleware
-{
-    public function call()
-    {
-        //Optionally call the next middleware
-        $this-&gt;next-&gt;call();
-    }
-}
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="How-to-Use-Middleware">
-                    <header>
-                        <h2 class="page-article-header">How to Use Middleware</h2>
-                    </header>
-                    <p>Use the Slim application’s <code>add()</code> instance method to add new middleware to a Slim application. New middleware will
-surround previously added middleware, or the Slim application itself if no middleware has yet been added.</p>
-
-<h3>Example Middleware</h3>
-
-<p>This example middleware will capitalize the Slim application’s HTTP response body.</p>
-
-<pre><code>&lt;?php
-class AllCapsMiddleware extends \Slim\Middleware
-{
-    public function call()
-    {
-        // Get reference to application
-        $app = $this-&gt;app;
-
-        // Run inner middleware and application
-        $this-&gt;next-&gt;call();
-
-        // Capitalize response body
-        $res = $app-&gt;response;
-        $body = $res-&gt;getBody();
-        $res-&gt;setBody(strtoupper($body));
-    }
-}
-</code></pre>
-
-<h3>Add Middleware</h3>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;add(new \AllCapsMiddleware());
-$app-&gt;get('/foo', function () use ($app) {
-    echo "Hello";
-});
-$app-&gt;run();
-</code></pre>
-
-<p>The Slim application’s <code>add()</code> method accepts one argument: a middleware instance. If the middleware instance requires
-special configuration, it may implement its own constructor so that it may be configured before it is added to the
-Slim application.</p>
-
-<p>When the example Slim application above is run, the HTTP response body will be an enthusiastic “HELLO”;</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="How-to-Write-Middleware">
-                    <header>
-                        <h2 class="page-article-header">How to Write Middleware</h2>
-                    </header>
-                    <p>Slim application middleware must subclass <code>\Slim\Middleware</code> and implement a public <code>call()</code> method. The <code>call()</code>
-method does not accept arguments. Middleware may implement its own constructor, properties, and methods. I encourage
-you to look at Slim’s built-in middleware for working examples (e.g. Slim/Middleware/ContentTypes.php or
-Slim/Middleware/SessionCookie.php).</p>
-
-<p>This example is the most simple implementation of Slim application middleware. It extends <code>\Slim\Middleware</code>,
-implements a public <code>call()</code> method, and calls the next inner middleware.</p>
-
-<pre><code>&lt;?php
-class MyMiddleware extends \Slim\Middleware
-{
-    public function call()
-    {
-        $this-&gt;next-&gt;call();
-    }
-}
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Hooks">
-                <h1 class="page-header">Hooks <a class="bookmark" href="index.html#Hooks"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Hooks-Overview">
-                    <header>
-                        <h2 class="page-article-header">Hooks Overview</h2>
-                    </header>
-                    <p>A Slim application provides a set of hooks to which you can register your own callbacks.</p>
-
-<h3>What is a hook?</h3>
-
-<p>A “hook” is a moment in the Slim application lifecycle at which a priority list of callables assigned to the hook
-will be invoked. A hook is identified by a string name.</p>
-
-<p>A “callable” is anything that returns <code>true</code> for <code>is_callable()</code>. A callable is assigned to a hook and is invoked
-when the hook is called. If multiple callables are assigned to a single hook, each callable is invoked in the order
-assigned.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="How-to-Use-Hooks">
-                    <header>
-                        <h2 class="page-article-header">How to Use Hooks</h2>
-                    </header>
-                    <p>A callable is assigned to a hook using the Slim application’s <code>hook()</code> method:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;hook('the.hook.name', function () {
-    //Do something
-});
-</code></pre>
-
-<p>The first argument is the hook name, and the second argument is the callable. Each hook maintains a priority
-list of registered callables. By default, each callable assigned to a hook is given a priority of 10. You can give
-your callable a different priority by passing an integer as the third parameter of the <code>hook()</code> method:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;hook('the.hook.name', function () {
-    //Do something
-}, 5);
-</code></pre>
-
-<p>The example above assigns a priority of 5 to the callable. When the hook is called, it will sort all callables
-assigned to it by priority (ascending). A callable with priority 1 will be invoked before a callable with priority 10.</p>
-
-<p>Hooks do not pass arguments to their callables. If a callable needs to access the Slim application, you can inject
-the application into the callback with the <code>use</code> keyword or with the Slim application’s static <code>getInstance()</code> method:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;hook('the.hook.name', function () use ($app) {
-    // Do something
-});
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Default-Hooks">
-                    <header>
-                        <h2 class="page-article-header">Default Hooks</h2>
-                    </header>
-                    <p>These are the default hooks always invoked in a Slim application.</p>
-
-<dl>
-<dt>slim.before</dt>
-<dd>This hook is invoked before the Slim application is run and before output buffering is turned on. This hook is invoked once during the Slim application lifecycle.</dd>
-
-<dt>slim.before.router</dt>
-<dd>This hook is invoked after output buffering is turned on and before the router is dispatched. This hook is invoked once during the Slim application lifecycle.</dd>
-
-<dt>slim.before.dispatch</dt>
-<dd>This hook is invoked before the current matching route is dispatched. Usually this hook is invoked only once during the Slim application lifecycle; however, this hook may be invoked multiple times if a matching route chooses to pass to a subsequent matching route.</dd>
-
-<dt>slim.after.dispatch</dt>
-<dd>This hook is invoked after the current matching route is dispatched. Usually this hook is invoked only once during the Slim application lifecycle; however, this hook may be invoked multiple times if a matching route chooses to pass to a subsequent matching route.</dd>
-
-<dt>slim.after.router</dt>
-<dd>This hook is invoked after the router is dispatched, before the Response is sent to the client, and after output buffering is turned off. This hook is invoked once during the Slim application lifecycle.</dd>
-
-<dt>slim.after</dt>
-<dd>This hook is invoked after output buffering is turned off and after the Response is sent to the client. This hook is invoked once during the Slim application lifecycle.</dd>
-</dl>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Custom-Hooks">
-                    <header>
-                        <h2 class="page-article-header">Custom Hooks</h2>
-                    </header>
-                    <p>Custom hooks may be created and invoked in a Slim application. When a custom hook is invoked with <code>applyHook()</code>, it will
-invoke all callables assigned to that hook. This is exactly how the Slim application’s default hooks work. In this
-example, I apply a custom hook called “my.hook.name”. All callables previously registered for this hook will be invoked.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;applyHook('my.hook.name');
-</code></pre>
-
-<p>When you run the above code, any callables previously assigned to the hook “my.hook.name” will be invoked in order of
-priority (ascending).</p>
-
-<p>You should register callables to a hook before the hook is applied. Think of it this way: when you invoke the Slim
-application’s <code>applyHook()</code> method, you are asking Slim to invoke all callables already registered for that hook name.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Flash-Messages">
-                <h1 class="page-header">Flash Messages <a class="bookmark" href="index.html#Flash-Messages"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Flash-Messaging-Overview">
-                    <header>
-                        <h2 class="page-article-header">Flash Messaging Overview</h2>
-                    </header>
-                    <div class="alert alert-info">
-    <strong>Heads Up!</strong> Flash messages require sessions. If you do not use the
-    <code>\Slim\Middleware\SessionCookie</code> middleware, you must start a native PHP session yourself.
-</div>
-
-<p>Slim supports flash messaging much like Rails and other larger web frameworks. Flash messaging allows you to define
-messages that will persist until the next HTTP request but no further. This is helpful to display messages to the user
-after a given event or error occurs.</p>
-
-<p>As shown below, the Slim application’s <code>flash()</code> and <code>flashNow()</code> methods accept two arguments: a key and a message.
-The key may be whatever you want and defines how the message will be accessed in the view templates. For example,
-if I invoke the Slim application’s <code>flash('foo', 'The foo message')</code> method with those arguments, I can access that
-message in the next request’s templates with <code>flash['foo']</code>.</p>
-
-<p>Flash messages are persisted with sessions; sessions are required for flash messages to work. Flash messages are
-stored in <code>$_SESSION['slim.flash']</code>.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Flash-Next">
-                    <header>
-                        <h2 class="page-article-header">Flash Next</h2>
-                    </header>
-                    <p>The Slim application’s <code>flash()</code> method sets a message that will be available in the next request’s view templates.
-The message in this example will be available in the template variable <code>flash['error']</code>.</p>
-
-<pre><code>&lt;?php
-$app-&gt;flash('error', 'User email is required');
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Flash-Now">
-                    <header>
-                        <h2 class="page-article-header">Flash Now</h2>
-                    </header>
-                    <p>The Slim application’s <code>flashNow()</code> method sets a message that will be available in the current request’s view
-templates. Messages set with the <code>flashNow()</code> application instance method will not be available in the next request.
-The message in the example below will be available in the template variable <code>flash['info']</code>.</p>
-
-<pre><code>&lt;?php
-$app-&gt;flashNow('info', 'Your credit card is expired');
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Flash-Keep">
-                    <header>
-                        <h2 class="page-article-header">Flash Keep</h2>
-                    </header>
-                    <p>This method tells the Slim application to keep existing flash messages set in the previous request so they will be
-available to the next request. This method is helpful for persisting flash messages across HTTP redirects.</p>
-
-<pre><code>&lt;?php
-$app-&gt;flashKeep();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Sessions">
-                <h1 class="page-header">Sessions <a class="bookmark" href="index.html#Sessions"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Native-Session-Store">
-                    <header>
-                        <h2 class="page-article-header">Native Session Store</h2>
-                    </header>
-                    <p>A Slim application does not presume anything about sessions. If you prefer to use a PHP session, you must configure
-and start a native PHP session with <code>session_start()</code> before you instantiate the Slim application.</p>
-
-<p>You should also disable PHP’s session cache limiter so that PHP does not send conflicting cache expiration headers
-with the HTTP response. You can disable PHP’s session cache limiter with:</p>
-
-<pre><code>&lt;?php
-session_cache_limiter(false);
-session_start();
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Cookie-Session-Store">
-                    <header>
-                        <h2 class="page-article-header">Cookie Session Store</h2>
-                    </header>
-                    <p>You may also use the <code>\Slim\Middleware\SessionCookie</code> middleware to persist session data in encrypted, hashed
-HTTP cookies. To enable the session cookie middleware, add the <code>\Slim\Middleware\SessionCookie</code> middleware to your
-Slim application:</p>
-
-<pre><code>&lt;?php
-$app = new Slim();
-$app-&gt;add(new \Slim\Middleware\SessionCookie(array(
-    'expires' =&gt; '20 minutes',
-    'path' =&gt; '/',
-    'domain' =&gt; null,
-    'secure' =&gt; false,
-    'httponly' =&gt; false,
-    'name' =&gt; 'slim_session',
-    'secret' =&gt; 'CHANGE_ME',
-    'cipher' =&gt; MCRYPT_RIJNDAEL_256,
-    'cipher_mode' =&gt; MCRYPT_MODE_CBC
-)));
-</code></pre>
-
-<p>The second argument is optional; it is shown here so you can see the default middleware settings. The session cookie
-middleware will work seamlessly with the <code>$_SESSION</code> superglobal so you can easily migrate to this session storage
-middleware with zero changes to your application code.</p>
-
-<p>If you use the session cookie middleware, you DO NOT need to start a native PHP session. The <code>$_SESSION</code> superglobal
-will still be available, and it will be persisted into an HTTP cookie via the middleware layer rather than with
-PHP’s native session management.</p>
-
-<p>Remember, HTTP cookies are inherently limited to only 4 kilobytes of data. If your encrypted session data will exceed
-this length, you should instead rely on PHP’s native sessions or an alternate session store.</p>
-
-<div class="alert">
-    <strong>PLEASE NOTE:</strong> Client-side storage of session data is not recommended if you are
-    dealing with sensitive information, even when using Slim’s encrypted session cookie middleware.
-    If you need to store sensitive information, you should encrypt and store the session information
-    on your server.
-</div>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Logging">
-                <h1 class="page-header">Logging <a class="bookmark" href="index.html#Logging"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Logging-Overview">
-                    <header>
-                        <h2 class="page-article-header">Logging Overview</h2>
-                    </header>
-                    <p>A Slim application provides a log object that writes data to a specific output. The actual writing of data is
-delegated to a log writer.</p>
-
-<h3>How to log data</h3>
-
-<p>To log data in a Slim application, get a reference to the log object:</p>
-
-<pre><code>&lt;?php
-$log = $app-&gt;log;
-</code></pre>
-
-<p>The log object provides the following PSR-3 interface</p>
-
-<pre><code>$app-&gt;log-&gt;debug(mixed $object);
-$app-&gt;log-&gt;info(mixed $object);
-$app-&gt;log-&gt;notice(mixed $object);
-$app-&gt;log-&gt;warning(mixed $object);
-$app-&gt;log-&gt;error(mixed $object);
-$app-&gt;log-&gt;critical(mixed $object);
-$app-&gt;log-&gt;alert(mixed $object);
-$app-&gt;log-&gt;emergency(mixed $object);
-</code></pre>
-
-<p>Each log object method accepts one mixed argument. The argument is usually a string, but the argument can be
-anything. The log object will pass the argument to its log writer. It is the log writer’s responsibility to write
-arbitrary input to the appropriate destination.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Activate-Logging">
-                    <header>
-                        <h2 class="page-article-header">Activate Logging</h2>
-                    </header>
-                    <p>The Slim application’s log object provides the following public methods to enable or disable logging during runtime.</p>
-
-<pre><code>&lt;?php
-//Enable logging
-$app-&gt;log-&gt;setEnabled(true);
-
-//Disable logging
-$app-&gt;log-&gt;setEnabled(false);
-</code></pre>
-
-<p>You may enable or disable the log object during application instantiation like this:</p>
-
-<pre><code>&lt;?php
-$app = new Slim(array(
-    'log.enabled' =&gt; true
-));
-</code></pre>
-
-<p>If logging is disabled, the log object will ignore all logged messages until it is enabled.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Log-Levels">
-                    <header>
-                        <h2 class="page-article-header">Log Levels</h2>
-                    </header>
-                    <div class="alert alert-info">
-    <strong>Heads Up!</strong> Use the <code>\Slim\Log</code> constants when setting the log level instead
-    of using raw integers.
-</div>
-
-<p>The Slim application’s log object will respect or ignore logged messages based on its log level setting. When you
-invoke the log objects’s methods, you are inherently assigning a level to the logged message.
-The available log levels are:</p>
-
-<dl>
-<dt>\Slim\Log::EMERGENCY</dt>
-<dd>Level 1</dd>
-
-<dt>\Slim\Log::ALERT</dt>
-<dd>Level 2</dd>
-
-<dt>\Slim\Log::CRITICAL</dt>
-<dd>Level 3</dd>
-
-<dt>\Slim\Log::ERROR</dt>
-<dd>Level 4</dd>
-
-<dt>\Slim\Log::WARN</dt>
-<dd>Level 5</dd>
-
-<dt>\Slim\Log::NOTICE</dt>
-<dd>Level 6</dd>
-
-<dt>\Slim\Log::INFO</dt>
-<dd>Level 7</dd>
-
-<dt>\Slim\Log::DEBUG</dt>
-<dd>Level 8</dd>
-</dl>
-
-<p>Only messages that have a level less than the current log object’s level will be logged. For example, if the log
-object’s level is <code>\Slim\Log::WARN</code> (5), the log object will ignore <code>\Slim\Log::DEBUG</code> and <code>\Slim\Log::INFO</code> messages
-but will accept <code>\Slim\Log::WARN</code>, <code>\Slim\Log::ERROR</code>, and <code>\Slim\Log::CRITICAL</code> messages.</p>
-
-<h3>How to set the log level</h3>
-
-<pre><code>&lt;?php
-$app-&gt;log-&gt;setLevel(\Slim\Log::WARN);
-</code></pre>
-
-<p>You can set the log object’s level during application instantiation, too:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim(array(
-    'log.level' =&gt; \Slim\Log::WARN
-));
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Log-Writers">
-                    <header>
-                        <h2 class="page-article-header">Log Writers</h2>
-                    </header>
-                    <p>The Slim application’s log object has a log writer. The log writer is responsible for sending a logged message to
-the appropriate output (e.g. STDERR, a log file, a remote web service, Twitter, or a database). Out of the box,
-the Slim application’s log object has a log writer of class <code>\Slim\LogFileWriter</code>; this log writer directs output
-to the resource handle referenced by the application environment’s <strong>slim.errors</strong> key (by default, this is
-“php://stderr”). You may also define and use a custom log writer.</p>
-
-<h3>How to use a custom log writer</h3>
-
-<p>A custom log writer must implement the following public interface:</p>
-
-<pre><code>&lt;?php
-public function write(mixed $message);
-</code></pre>
-
-<p>You must tell the Slim application’s log object to use your custom log writer. You can do so in your application’s
-settings during instantiation like this:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim(array(
-    'log.writer' =&gt; new MyLogWriter()
-));
-</code></pre>
-
-<p>You may also set a custom log writer with middleware like this:</p>
-
-<pre><code>&lt;?php
-class CustomLogWriterMiddleware extends \Slim\Middleware
-{
-    public function call()
-    {
-        //Set the new log writer
-        $this-&gt;app-&gt;log-&gt;setWriter(new \MyLogWriter());
-
-        //Call next middleware
-        $this-&gt;next-&gt;call();
-    }
-}
-</code></pre>
-
-<p>You can set the log writer similarly in an application hook or route callback like this:</p>
-
-<pre><code>&lt;?php
-$app-&gt;hook('slim.before', function () use ($app) {
-    $app-&gt;log-&gt;setWriter(new \MyLogWriter());
-});
-</code></pre>
-
-<p>If you only need to redirect error output to a different resource handle, use the Slim application’s default log writer;
-it writes log messages to a resource handle. All you need to do is set the <strong>slim.errors</strong> environment variable to a
-valid resource handle.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Error-Handling">
-                <h1 class="page-header">Error Handling <a class="bookmark" href="index.html#Error-Handling"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="Error-Handling-Overview">
-                    <header>
-                        <h2 class="page-article-header">Error Handling Overview</h2>
-                    </header>
-                    <p>Let’s face it: sometimes things go wrong. It is important to intercept errors and respond to them appropriately. A
-Slim application provides helper methods to respond to errors and exceptions.</p>
-
-<h3>Important Notes</h3>
-
-<ul>
-<li>A Slim application respects your existing <code>error_reporting</code> setting;</li>
-<li>A Slim application only handles errors and exceptions generated inside the Slim application;</li>
-<li>A Slim application converts errors into <code>ErrorException</code> objects and throws them;</li>
-<li>A Slim application uses its built-in error handler if its <code>debug</code> setting is true; otherwise, it uses the custom error handler.</li>
-</ul>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Error-Handler">
-                    <header>
-                        <h2 class="page-article-header">Error Handler</h2>
-                    </header>
-                    <p>You may use the Slim application’s <code>error()</code> method to specify a custom error handler to be invoked when an error or
-exception occurs. Custom error handlers are only invoked if application debugging is disabled.</p>
-
-<p>A custom error handler should render a user-friendly message that mitigates user confusion. Similar to the Slim
-application’s <code>notFound()</code> method, the <code>error()</code> method acts as both a getter and a setter.</p>
-
-<h3>Set custom error handler</h3>
-
-<p>You may set a custom error handler by passing a callable into the Slim application’s <code>error()</code> method as its first
-and only argument.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;error(function (\Exception $e) use ($app) {
-    $app-&gt;render('error.php');
-});
-</code></pre>
-
-<p>In this example, the custom error handler accepts the caught Exception as its argument. This allows you to respond
-appropriately to different exceptions.</p>
-
-<h3>Invoke custom error handler</h3>
-
-<p>Usually, the Slim application will automatically invoke the error handler when an exception or error occurs.
-However, you may also manually invoke the error handler with the Slim application’s <code>error()</code> method
-(without an argument).</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Not-Found-Handler">
-                    <header>
-                        <h2 class="page-article-header">Not Found Handler</h2>
-                    </header>
-                    <p>It is an inevitability that someone will request a page that does not exist. The Slim application lets you easily
-define a custom Not Found handler with the Slim application’s <code>notFound()</code> method. The Not Found handler will be
-invoked when a matching route is not found for the current HTTP request. This method acts as both a getter and a setter.</p>
-
-<h3>Set not found handler</h3>
-
-<p>If you invoke the Slim application’s <code>notFound()</code> method and specify a callable object as its first and only
-argument, this method will register the callable object as the Not Found handler. However, the registered handler
-will not be invoked.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;notFound(function () use ($app) {
-    $app-&gt;render('404.html');
-});
-</code></pre>
-
-<h3>Invoke not found handler</h3>
-
-<p>If you invoke the Slim application’s <code>notFound()</code> method without any arguments, this method will invoke the
-previously registered Not Found handler.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;get('/hello/:name', function ($name) use ($app) {
-    if ( $name === 'Waldo' ) {
-        $app-&gt;notFound();
-    } else {
-        echo "Hello, $name";
-    }
-});
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Debugging">
-                    <header>
-                        <h2 class="page-article-header">Debugging</h2>
-                    </header>
-                    <p>You can enable debugging during application instantiation with this setting:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim(array(
-    'debug' =&gt; true
-));
-</code></pre>
-
-<p>You may also enable debugging during runtime with the Slim application’s <code>config()</code> instance method:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-//Enable debugging (on by default)
-$app-&gt;config('debug', true);
-
-//Disable debugging
-$app-&gt;config('debug', false);
-</code></pre>
-
-<p>If debugging is enabled and an exception or error occurs, a diagnostic screen will appear with the error description,
-the affected file, the file line number, and a stack trace. If debugging is disabled, the custom Error handler will
-be invoked instead.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                                <article class="page-article" id="Output-Redirection">
-                    <header>
-                        <h2 class="page-article-header">Output Redirection</h2>
-                    </header>
-                    <p>The Slim application’s environment will always contain a key <strong>slim.errors</strong> with a value that is a writable
-resource to which log and error messages may be written. The Slim application’s log object will write log messages
-to <strong>slim.errors</strong> whenever an Exception is caught or the log object is manually invoked.</p>
-
-<p>If you want to redirect error output to a different location, you can define your own writable resource by
-modifying the Slim application’s environment settings. I recommend you use middleware to update the environment:</p>
-
-<pre><code>&lt;?php
-class CustomErrorMiddleware extends \Slim\Middleware
-{
-    public function call()
-    {
-        // Set new error output
-        $env = $this-&gt;app-&gt;environment;
-        $env['slim.errors'] = fopen('/path/to/output', 'w');
-
-        // Call next middleware
-        $this-&gt;next-&gt;call();
-    }
-}
-</code></pre>
-
-<p>Remember, <strong>slim.errors</strong> does not have to point to a file; it can point to any valid writable resource.</p>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-                        <section class="page-section" id="Dependency-Injection">
-                <h1 class="page-header">Dependency Injection <a class="bookmark" href="index.html#Dependency-Injection"><i class="icon-bookmark"></i></a></h1>
-                                <article class="page-article" id="DI-Overview">
-                    <header>
-                        <h2 class="page-article-header">DI Overview</h2>
-                    </header>
-                    <p>Slim has a built-in resource locator, providing an easy way to inject objects into a Slim app, or
-to override any of the Slim app’s internal objects (e.g. Request, Response, Log).</p>
-
-<h2>Injecting simple values</h2>
-
-<p>If you want to use Slim as a simple key-value store, it is as simple as this:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-$app-&gt;foo = 'bar';
-</code></pre>
-
-<p>Now, you can fetch this value anywhere with <code>$app-&gt;foo</code> and get its value <code>bar</code>.</p>
-
-<h2>Using the resource locator</h2>
-
-<p>You can also use Slim as a resource locator by injecting closures that define how
-your desired objects will be constructed. When the injected closure is requested, it will
-be invoked and the closure’s return value will be returned.</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-// Determine method to create UUIDs
-$app-&gt;uuid = function () {
-    return exec('uuidgen');
-};
-
-// Get a new UUID
-$uuid = $app-&gt;uuid;
-</code></pre>
-
-<h3>Singleton resources</h3>
-
-<p>Sometimes, you may want your resource definitions to stay the same each time they are requested
-(i.e. they should be singletons within the scope of the Slim app). This is easy to do:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-// Define log resource
-$app-&gt;container-&gt;singleton('log', function () {
-    return new \My\Custom\Log();
-});
-
-// Get log resource
-$log = $app-&gt;log;
-</code></pre>
-
-<p>Every time you request the log resource with <code>$app-&gt;log</code>, it will return the same instance.</p>
-
-<h3>Closure resources</h3>
-
-<p>What if you want to literally store a closure as the raw value and not have it invoked? You can do that
-like this:</p>
-
-<pre><code>&lt;?php
-$app = new \Slim\Slim();
-
-// Define closure
-$app-&gt;myClosure = $app-&gt;container-&gt;protect(function () {});
-
-// Return raw closure without invoking it
-$myClosure = $app-&gt;myClosure;
-</code></pre>
-
-                    <div class="page-article-footer">
-                        <a class="btn" href="#top">Back to Top <i class="icon-arrow-up"></i></a>
-                    </div>
-                </article>
-                
-            </section>
-            
-        </div>
-    </div>
-</div>
-
-
-        
-        
     
+    <nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+      <div class="wy-side-nav-search">
+        <a class="icon icon-home" href="index.html"> Slim Framework v2</a>
+        
+      </div>
+
+      <div aria-label="main navigation" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+      <ul class="current">
+    
+        
+        <span>Get Started</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="start/get-started/index.html">Get started</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Configuration</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="configuration/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="configuration/settings/index.html">Settings</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="configuration/names-and-scopes/index.html">Names and Scopes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="configuration/modes/index.html">Modes</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Routing</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/get/index.html">GET Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/post/index.html">POST Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/put/index.html">PUT Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/delete/index.html">DELETE Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/options/index.html">OPTIONS Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/patch/index.html">PATCH Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/custom/index.html">Custom Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/params/index.html">Parameters</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/names/index.html">Names</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/conditions/index.html">Conditions</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/middleware/index.html">Middleware</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/groups/index.html">Groups</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="routing/rewrite/index.html">URL Rewriting</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Environment</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="environment/overview/index.html">Overview</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Request</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/method/index.html">Method</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/headers/index.html">Headers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/body/index.html">Body</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/variables/index.html">Variables</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/paths/index.html">Paths</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/xhr/index.html">XHR</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="request/content-types/index.html">Content-Types</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Response</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="response/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="response/status/index.html">Status</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="response/headers/index.html">Headers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="response/body/index.html">Body</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="response/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="response/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>View</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="view/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="view/rendering/index.html">Rendering</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="view/custom/index.html">Custom</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="view/data/index.html">Data</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>HTTP Cache</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="cache/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="cache/etag/index.html">ETag</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="cache/lastmodified/index.html">Last Modified</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="cache/expires/index.html">Expires</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Middleware</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="middleware/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="middleware/how-to-use/index.html">How to Use</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="middleware/how-to-write/index.html">How to Write</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Hooks</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="hooks/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="hooks/how-to-use/index.html">How to Use</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="hooks/defaults/index.html">Defaults</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="hooks/custom/index.html">Custom</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Flash Messages</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="flash/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="flash/next/index.html">Next</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="flash/now/index.html">Now</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="flash/keep/index.html">Keep</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Sessions</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="sessions/native/index.html">Native</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="sessions/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Logging</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="logging/activate/index.html">Activate</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="logging/levels/index.html">Levels</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="logging/writers/index.html">Writers</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Error Handling</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="errors/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="errors/500/index.html">500 System Error</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="errors/404/index.html">404 Not Found</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="errors/debug/index.html">Debug Mode</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="errors/output/index.html">Output</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Dependency Injection</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="di/overview/index.html">Overview</a>
+                    
+                </li>
+            
+        
+
+    
+</ul>
+
+      </div>
+       
+    </nav>
+
+    <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+
+      
+      <nav aria-label="top navigation" class="wy-nav-top" role="navigation">
+        <i class="icon icon-reorder" data-toggle="wy-nav-top"></i>
+        <a href="index.html"></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div aria-label="breadcrumbs navigation" role="navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> »</li>
+    <li>Home</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              <h1 id="slim-framework-v2"><a class="dashAnchor" name="//apple_ref/cpp/Section/Slim%20Framework%20v2"></a>Slim Framework v2</h1>
+<p></p>
+<p>Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs. Learn more at these links:</p>
+<ul>
+<li><a href="http://www.slimframework.com/">Website</a></li>
+<li><a href="index.html">Documentation</a></li>
+<li><a href="http://help.slimframework.com/">Support Forum</a></li>
+<li><a href="https://twitter.com/slimphp">Twitter</a></li>
+</ul>
+<p>This repository contains documentation for the legacy 2.x branch.</p>
+<h2 id="install"><a class="dashAnchor" name="//apple_ref/cpp/Section/Install"></a>Install</h2>
+<p>Via <a href="https://getcomposer.org/">Composer</a></p>
+<pre><code class="bash">$ composer require slim/slim:~2.0
+</code></pre>
+
+<p>Requires PHP 5.3.0 or newer.</p>
+<h2 id="usage"><a class="dashAnchor" name="//apple_ref/cpp/Section/Usage"></a>Usage</h2>
+<pre><code class="php">$app = new \Slim\Slim();
+$app-&gt;get('/hello/:name', function ($name) {
+    echo "Hello, " . $name;
+});
+$app-&gt;run();
+</code></pre>
+
+<h2 id="testing"><a class="dashAnchor" name="//apple_ref/cpp/Section/Testing"></a>Testing</h2>
+<pre><code class="bash">phpunit
+</code></pre>
+
+<h2 id="contributing"><a class="dashAnchor" name="//apple_ref/cpp/Section/Contributing"></a>Contributing</h2>
+<p>Please see <a href="https://github.com/slimphp/Slim/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> for details.</p>
+<h2 id="security"><a class="dashAnchor" name="//apple_ref/cpp/Section/Security"></a>Security</h2>
+<p>If you discover any security related issues, please email security@slimframework.com instead of using the issue tracker.</p>
+<h2 id="credits"><a class="dashAnchor" name="//apple_ref/cpp/Section/Credits"></a>Credits</h2>
+<ul>
+<li><a href="https://github.com/codeguy">Josh Lockhart</a></li>
+<li><a href="https://github.com/silentworks">Andrew Smith</a></li>
+<li><a href="https://github.com/gmanricks">Gabriel Manricks</a> </li>
+<li><a href="https://github.com/slimphp/Slim/graphs/contributors">All Contributors</a></li>
+</ul>
+<h2 id="license"><a class="dashAnchor" name="//apple_ref/cpp/Section/License"></a>License</h2>
+<p>The MIT License (MIT). Please see <a href="https://github.com/slimphp/Slim/blob/master/LICENSE.md">License File</a> for more information.</p>
+
+            </div>
+          </div>
+          <footer>
+  
+    <div aria-label="footer navigation" class="rst-footer-buttons" role="navigation">
+      
+        <a class="btn btn-neutral float-right" href="start/get-started/index.html" title="Get started">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      <span><a href="#" style="color: #fcfcfc;">« Previous</a></span>
+      <span style="margin-left: 15px"><a href="start/get-started/index.html" style="color: #fcfcfc">Next »</a></span>
+    </span>
+</div>
 
 
 
-</body><!-- Mirrored from docs.slimframework.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Mar 2015 17:56:30 GMT --></html>
+</body><!-- Mirrored from docs.slimframework.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2015 15:50:47 GMT --></html>

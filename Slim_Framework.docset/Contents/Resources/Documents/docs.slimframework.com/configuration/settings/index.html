@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><!-- Mirrored from docs.slimframework.com/configuration/settings/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2015 15:51:18 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  
+  <title>Settings - Slim Framework v2</title>
+  
+
+  
+  
+
+  <link href="../../css/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="../../css/theme_extra.css" rel="stylesheet" type="text/css"/>
+  <link href="../../css/highlight.css" rel="stylesheet"/>
+
+  
+  
+  
+  
+
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+      <div class="wy-side-nav-search">
+        <a class="icon icon-home" href="../../index.html"> Slim Framework v2</a>
+        
+      </div>
+
+      <div aria-label="main navigation" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+      <ul class="current">
+    
+        
+        <span>Get Started</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../start/get-started/index.html">Get started</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Configuration</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 current">
+                    <a class="current" href="index.html">Settings</a>
+                    
+                        <ul>
+                        
+                            <li class="toctree-l2"><a href="#mode">mode</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#debug">debug</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#logwriter">log.writer</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#loglevel">log.level</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#logenabled">log.enabled</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#templatespath">templates.path</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#view">view</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookiesencrypt">cookies.encrypt</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookieslifetime">cookies.lifetime</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookiespath">cookies.path</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookiesdomain">cookies.domain</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookiessecure">cookies.secure</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookieshttponly">cookies.httponly</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookiessecret_key">cookies.secret_key</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookiescipher">cookies.cipher</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookiescipher_mode">cookies.cipher_mode</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#httpversion">http.version</a></li>
+                            
+                        
+                        </ul>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../names-and-scopes/index.html">Names and Scopes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../modes/index.html">Modes</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Routing</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/get/index.html">GET Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/post/index.html">POST Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/put/index.html">PUT Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/delete/index.html">DELETE Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/options/index.html">OPTIONS Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/patch/index.html">PATCH Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/custom/index.html">Custom Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/params/index.html">Parameters</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/names/index.html">Names</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/conditions/index.html">Conditions</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/middleware/index.html">Middleware</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/groups/index.html">Groups</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/rewrite/index.html">URL Rewriting</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Environment</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../environment/overview/index.html">Overview</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Request</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/method/index.html">Method</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/headers/index.html">Headers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/body/index.html">Body</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/variables/index.html">Variables</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/paths/index.html">Paths</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/xhr/index.html">XHR</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/content-types/index.html">Content-Types</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Response</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/status/index.html">Status</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/headers/index.html">Headers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/body/index.html">Body</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>View</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/rendering/index.html">Rendering</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/custom/index.html">Custom</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/data/index.html">Data</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>HTTP Cache</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/etag/index.html">ETag</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/lastmodified/index.html">Last Modified</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/expires/index.html">Expires</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Middleware</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/how-to-use/index.html">How to Use</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/how-to-write/index.html">How to Write</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Hooks</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/how-to-use/index.html">How to Use</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/defaults/index.html">Defaults</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/custom/index.html">Custom</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Flash Messages</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/next/index.html">Next</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/now/index.html">Now</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/keep/index.html">Keep</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Sessions</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../sessions/native/index.html">Native</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../sessions/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Logging</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../logging/activate/index.html">Activate</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../logging/levels/index.html">Levels</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../logging/writers/index.html">Writers</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Error Handling</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/500/index.html">500 System Error</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/404/index.html">404 Not Found</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/debug/index.html">Debug Mode</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/output/index.html">Output</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Dependency Injection</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../di/overview/index.html">Overview</a>
+                    
+                </li>
+            
+        
+
+    
+</ul>
+
+      </div>
+       
+    </nav>
+
+    <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+
+      
+      <nav aria-label="top navigation" class="wy-nav-top" role="navigation">
+        <i class="icon icon-reorder" data-toggle="wy-nav-top"></i>
+        <a href="../../index.html"></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div aria-label="breadcrumbs navigation" role="navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> »</li>
+    <li>Settings</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              <h2 id="mode"><a class="dashAnchor" name="//apple_ref/cpp/Section/mode"></a>mode</h2>
+<p>This is an identifier for the application's current mode of operation. The mode does not affect a Slim application's
+internal functionality. Instead, the mode is only for you to optionally invoke your own code for a given mode with the
+<code>configMode()</code> application method.</p>
+<p>The application mode is declared during instantiation, either as an environment variable or as an argument to the
+Slim application constructor. It cannot be changed afterward. The mode may be anything you want — "development",
+"test", and "production" are typical, but you are free to use anything you want (e.g. "foo").</p>
+<pre><code>&lt;?php
+$app = new \Slim\Slim(array(
+    'mode' =&gt; 'development'
+));
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>string</dd>
+<dt>Default Value</dt>
+<dd>"development"</dd>
+</dl>
+<h2 id="debug"><a class="dashAnchor" name="//apple_ref/cpp/Section/debug"></a>debug</h2>
+<div class="alert alert-info">
+    <strong>Heads Up!</strong> Slim converts errors into `ErrorException` instances.
+</div>
+
+<p>If debugging is enabled, Slim will use its built-in error handler to display diagnostic information for uncaught
+Exceptions. If debugging is disabled, Slim will instead invoke your custom error handler, passing it the otherwise
+uncaught Exception as its first and only argument.</p>
+<pre><code>&lt;?php
+$app = new \Slim\Slim(array(
+    'debug' =&gt; true
+));
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>boolean</dd>
+<dt>Default Value</dt>
+<dd>true</dd>
+</dl>
+<h2 id="logwriter"><a class="dashAnchor" name="//apple_ref/cpp/Section/log.writer"></a>log.writer</h2>
+<p>Use a custom log writer to direct logged messages to the appropriate output destination. By default, Slim's logger will
+write logged messages to <code>STDERR</code>. If you use a custom log writer, it must implement this interface:</p>
+<pre><code>public write(mixed $message, int $level);
+</code></pre>
+<p>The <code>write()</code> method is responsible for sending the logged message (not necessarily a string) to the appropriate output
+destination (e.g. a text file, a database, or a remote web service).</p>
+<p>To specify a custom log writer after instantiation you must access Slim's logger directly and use its <code>setWriter()</code> method:</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'log.writer' =&gt; new \My\LogWriter()
+));
+
+// After instantiation
+$log = $app-&gt;getLog();
+$log-&gt;setWriter(new \My\LogWriter());
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>mixed</dd>
+<dt>Default Value</dt>
+<dd>\Slim\LogWriter</dd>
+</dl>
+<h2 id="loglevel"><a class="dashAnchor" name="//apple_ref/cpp/Section/log.level"></a>log.level</h2>
+<div class="alert alert-info">
+    <strong>Heads Up!</strong> Use the constants defined in `\Slim\Log` instead of integers.
+</div>
+
+<p>Slim has these log levels:</p>
+<ul>
+<li>\Slim\Log::EMERGENCY</li>
+<li>\Slim\Log::ALERT</li>
+<li>\Slim\Log::CRITICAL</li>
+<li>\Slim\Log::ERROR</li>
+<li>\Slim\Log::WARN</li>
+<li>\Slim\Log::NOTICE</li>
+<li>\Slim\Log::INFO</li>
+<li>\Slim\Log::DEBUG</li>
+</ul>
+<p>The <code>log.level</code> application setting determines which logged messages will be honored and which will be ignored.
+For example, if the <code>log.level</code> setting is <code>\Slim\Log::INFO</code>, debug messages will be ignored while info, warn,
+error, and fatal messages will be logged.</p>
+<p>To change this setting after instantiation you must access Slim's logger directly and use its <code>setLevel()</code> method.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'log.level' =&gt; \Slim\Log::DEBUG
+));
+
+// After instantiation
+$log = $app-&gt;getLog();
+$log-&gt;setLevel(\Slim\Log::WARN);
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>integer</dd>
+<dt>Default Value</dt>
+<dd>\Slim\Log::DEBUG</dd>
+</dl>
+<h2 id="logenabled"><a class="dashAnchor" name="//apple_ref/cpp/Section/log.enabled"></a>log.enabled</h2>
+<p>This enables or disables Slim's logger. To change this setting after instantiation you need to access Slim's logger
+directly and use its <code>setEnabled()</code> method.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'log.enabled' =&gt; true
+));
+
+// After instantiation
+$log = $app-&gt;getLog();
+$log-&gt;setEnabled(true);
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>boolean</dd>
+<dt>Default Value</dt>
+<dd>true</dd>
+</dl>
+<h2 id="templatespath"><a class="dashAnchor" name="//apple_ref/cpp/Section/templates.path"></a>templates.path</h2>
+<p>The relative or absolute path to the filesystem directory that contains your Slim application's template files.
+This path is referenced by the Slim application's View to fetch and render templates.</p>
+<p>To change this setting after instantiation you need to access Slim's view directly and use its <code>setTemplatesDirectory()</code>
+method.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'templates.path' =&gt; './templates'
+));
+
+// After instantiation
+$view = $app-&gt;view();
+$view-&gt;setTemplatesDirectory('./templates');
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>string</dd>
+<dt>Default Value</dt>
+<dd>"./templates"</dd>
+</dl>
+<h2 id="view"><a class="dashAnchor" name="//apple_ref/cpp/Section/view"></a>view</h2>
+<p>The View class or instance used by the Slim application. To change this setting after instantiation you need to
+use the Slim application's <code>view()</code> method.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'view' =&gt; new \My\View()
+));
+
+// After instantiation
+$app-&gt;view(new \My\View());
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>string|\Slim\View</dd>
+<dt>Default Value</dt>
+<dd>\Slim\View</dd>
+</dl>
+<h2 id="cookiesencrypt"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.encrypt"></a>cookies.encrypt</h2>
+<p>Determines if the Slim app should encrypt its HTTP cookies.</p>
+<pre><code>&lt;?php
+$app = new \Slim\Slim(array(
+    'cookies.encrypt' =&gt; true
+));
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>boolean</dd>
+<dt>Default Value</dt>
+<dd>false</dd>
+</dl>
+<h2 id="cookieslifetime"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.lifetime"></a>cookies.lifetime</h2>
+<p>Determines the lifetime of HTTP cookies created by the Slim application. If this is an integer, it must be a valid
+UNIX timestamp at which the cookie expires. If this is a string, it is parsed by the <code>strtotime()</code> function to extrapolate
+a valid UNIX timestamp at which the cookie expires.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'cookies.lifetime' =&gt; '20 minutes'
+));
+
+// After instantiation
+$app-&gt;config('cookies.lifetime', '20 minutes');
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>integer|string</dd>
+<dt>Default Value</dt>
+<dd>"20 minutes"</dd>
+</dl>
+<h2 id="cookiespath"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.path"></a>cookies.path</h2>
+<p>Determines the default HTTP cookie path if none is specified when invoking the Slim application's <code>setCookie()</code> or
+<code>setEncryptedCookie()</code> methods.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'cookies.path' =&gt; '/'
+));
+
+// After instantiation
+$app-&gt;config('cookies.path', '/');
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>string</dd>
+<dt>Default Value</dt>
+<dd>"/"</dd>
+</dl>
+<h2 id="cookiesdomain"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.domain"></a>cookies.domain</h2>
+<p>Determines the default HTTP cookie domain if none specified when invoking the Slim application's <code>setCookie()</code> or
+<code>setEncryptedCookie()</code> methods.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'cookies.domain' =&gt; 'domain.com'
+));
+
+// After instantiation
+$app-&gt;config('cookies.domain', 'domain.com');
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>string</dd>
+<dt>Default Value</dt>
+<dd>null</dd>
+</dl>
+<h2 id="cookiessecure"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.secure"></a>cookies.secure</h2>
+<p>Determines whether or not cookies are delivered only via HTTPS. You may override this setting when invoking
+the Slim application's <code>setCookie()</code> or <code>setEncryptedCookie()</code> methods.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'cookies.secure' =&gt; false
+));
+
+// After instantiation
+$app-&gt;config('cookies.secure', false);
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>boolean</dd>
+<dt>Default Value</dt>
+<dd>false</dd>
+</dl>
+<h2 id="cookieshttponly"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.httponly"></a>cookies.httponly</h2>
+<p>Determines whether cookies should be accessible through client side scripts (false = accessible). You may override this setting when invoking
+the Slim application's <code>setCookie()</code> or <code>setEncryptedCookie()</code> methods.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'cookies.httponly' =&gt; false
+));
+
+// After instantiation
+$app-&gt;config('cookies.httponly', false);
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>boolean</dd>
+<dt>Default Value</dt>
+<dd>false</dd>
+</dl>
+<h2 id="cookiessecret_key"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.secret_key"></a>cookies.secret_key</h2>
+<p>The secret key used for cookie encryption. You should change this setting if you use encrypted HTTP cookies
+in your Slim application.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'cookies.secret_key' =&gt; 'secret'
+));
+
+// After instantiation
+$app-&gt;config('cookies.secret_key', 'secret');
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>string</dd>
+<dt>Default Value</dt>
+<dd>"CHANGE_ME"</dd>
+</dl>
+<h2 id="cookiescipher"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.cipher"></a>cookies.cipher</h2>
+<p>The mcrypt cipher used for HTTP cookie encryption. See <a href="http://php.net/manual/en/mcrypt.ciphers.php">available ciphers</a>.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'cookies.cipher' =&gt; MCRYPT_RIJNDAEL_256
+));
+
+// After instantiation
+$app-&gt;config('cookies.cipher', MCRYPT_RIJNDAEL_256);
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>integer</dd>
+<dt>Default Value</dt>
+<dd>MCRYPT_RIJNDAEL_256</dd>
+</dl>
+<h2 id="cookiescipher_mode"><a class="dashAnchor" name="//apple_ref/cpp/Section/cookies.cipher_mode"></a>cookies.cipher_mode</h2>
+<p>The mcrypt cipher mode used for HTTP cookie encryption. See <a href="http://www.php.net/manual/en/mcrypt.constants.php">available cipher modes</a>.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'cookies.cipher_mode' =&gt; MCRYPT_MODE_CBC
+));
+
+// After instantiation
+$app-&gt;config('cookies.cipher_mode', MCRYPT_MODE_CBC);
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>integer</dd>
+<dt>Default Value</dt>
+<dd>MCRYPT_MODE_CBC</dd>
+</dl>
+<h2 id="httpversion"><a class="dashAnchor" name="//apple_ref/cpp/Section/http.version"></a>http.version</h2>
+<p>By default, Slim returns an HTTP/1.1 response to the client. Use this setting if you need to return an HTTP/1.0
+response. This is useful if you use PHPFog or an nginx server configuration where you communicate with backend
+proxies rather than directly with the HTTP client.</p>
+<pre><code>&lt;?php
+// During instantiation
+$app = new \Slim\Slim(array(
+    'http.version' =&gt; '1.1'
+));
+
+// After instantiation
+$app-&gt;config('http.version', '1.1');
+</code></pre>
+<dl>
+<dt>Data Type</dt>
+<dd>string</dd>
+<dt>Default Value</dt>
+<dd>"1.1"</dd>
+</dl>
+
+            </div>
+          </div>
+          <footer>
+  
+    <div aria-label="footer navigation" class="rst-footer-buttons" role="navigation">
+      
+        <a class="btn btn-neutral float-right" href="../names-and-scopes/index.html" title="Names and Scopes">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a class="btn btn-neutral" href="../overview/index.html" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      <span><a href="../overview/index.html" style="color: #fcfcfc;">« Previous</a></span>
+      <span style="margin-left: 15px"><a href="../names-and-scopes/index.html" style="color: #fcfcfc">Next »</a></span>
+    </span>
+</div>
+
+
+
+</body><!-- Mirrored from docs.slimframework.com/configuration/settings/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2015 15:51:29 GMT --></html>

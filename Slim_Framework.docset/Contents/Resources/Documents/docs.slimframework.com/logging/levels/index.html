@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><!-- Mirrored from docs.slimframework.com/logging/levels/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2015 15:58:27 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  
+  <title>Levels - Slim Framework v2</title>
+  
+
+  
+  
+
+  <link href="../../css/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="../../css/theme_extra.css" rel="stylesheet" type="text/css"/>
+  <link href="../../css/highlight.css" rel="stylesheet"/>
+
+  
+  
+  
+  
+
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+      <div class="wy-side-nav-search">
+        <a class="icon icon-home" href="../../index.html"> Slim Framework v2</a>
+        
+      </div>
+
+      <div aria-label="main navigation" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+      <ul class="current">
+    
+        
+        <span>Get Started</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../start/get-started/index.html">Get started</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Configuration</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../configuration/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../configuration/settings/index.html">Settings</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../configuration/names-and-scopes/index.html">Names and Scopes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../configuration/modes/index.html">Modes</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Routing</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/get/index.html">GET Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/post/index.html">POST Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/put/index.html">PUT Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/delete/index.html">DELETE Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/options/index.html">OPTIONS Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/patch/index.html">PATCH Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/custom/index.html">Custom Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/params/index.html">Parameters</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/names/index.html">Names</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/conditions/index.html">Conditions</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/middleware/index.html">Middleware</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/groups/index.html">Groups</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/rewrite/index.html">URL Rewriting</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Environment</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../environment/overview/index.html">Overview</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Request</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/method/index.html">Method</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/headers/index.html">Headers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/body/index.html">Body</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/variables/index.html">Variables</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/paths/index.html">Paths</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/xhr/index.html">XHR</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../request/content-types/index.html">Content-Types</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Response</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/status/index.html">Status</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/headers/index.html">Headers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/body/index.html">Body</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>View</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/rendering/index.html">Rendering</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/custom/index.html">Custom</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/data/index.html">Data</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>HTTP Cache</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/etag/index.html">ETag</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/lastmodified/index.html">Last Modified</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/expires/index.html">Expires</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Middleware</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/how-to-use/index.html">How to Use</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/how-to-write/index.html">How to Write</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Hooks</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/how-to-use/index.html">How to Use</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/defaults/index.html">Defaults</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/custom/index.html">Custom</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Flash Messages</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/next/index.html">Next</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/now/index.html">Now</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/keep/index.html">Keep</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Sessions</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../sessions/native/index.html">Native</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../sessions/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Logging</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../activate/index.html">Activate</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 current">
+                    <a class="current" href="index.html">Levels</a>
+                    
+                        <ul>
+                        
+                            <li class="toctree-l2"><a href="#how-to-set-the-log-level">How to set the log level</a></li>
+                            
+                        
+                        </ul>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../writers/index.html">Writers</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Error Handling</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/500/index.html">500 System Error</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/404/index.html">404 Not Found</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/debug/index.html">Debug Mode</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/output/index.html">Output</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Dependency Injection</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../di/overview/index.html">Overview</a>
+                    
+                </li>
+            
+        
+
+    
+</ul>
+
+      </div>
+       
+    </nav>
+
+    <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+
+      
+      <nav aria-label="top navigation" class="wy-nav-top" role="navigation">
+        <i class="icon icon-reorder" data-toggle="wy-nav-top"></i>
+        <a href="../../index.html"></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div aria-label="breadcrumbs navigation" role="navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> »</li>
+    <li>Levels</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              <div class="alert alert-info">
+    <strong>Heads Up!</strong> Use the <code>\Slim\Log</code> constants when setting the log level instead
+    of using raw integers.
+</div>
+
+<p>The Slim application’s log object will respect or ignore logged messages based on its log level setting. When you
+invoke the log objects’s methods, you are inherently assigning a level to the logged message.
+The available log levels are:</p>
+<dl>
+<dt>\Slim\Log::EMERGENCY</dt>
+<dd>Level 1</dd>
+<dt>\Slim\Log::ALERT</dt>
+<dd>Level 2</dd>
+<dt>\Slim\Log::CRITICAL</dt>
+<dd>Level 3</dd>
+<dt>\Slim\Log::ERROR</dt>
+<dd>Level 4</dd>
+<dt>\Slim\Log::WARN</dt>
+<dd>Level 5</dd>
+<dt>\Slim\Log::NOTICE</dt>
+<dd>Level 6</dd>
+<dt>\Slim\Log::INFO</dt>
+<dd>Level 7</dd>
+<dt>\Slim\Log::DEBUG</dt>
+<dd>Level 8</dd>
+</dl>
+<p>Only messages that have a level less than the current log object’s level will be logged. For example, if the log
+object’s level is <code>\Slim\Log::WARN</code> (5), the log object will ignore <code>\Slim\Log::DEBUG</code> and <code>\Slim\Log::INFO</code> messages
+but will accept <code>\Slim\Log::WARN</code>, <code>\Slim\Log::ERROR</code>, and <code>\Slim\Log::CRITICAL</code> messages.</p>
+<h3 id="how-to-set-the-log-level"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20to%20set%20the%20log%20level"></a>How to set the log level</h3>
+<pre><code>&lt;?php
+$app-&gt;log-&gt;setLevel(\Slim\Log::WARN);
+</code></pre>
+<p>You can set the log object’s level during application instantiation, too:</p>
+<pre><code>&lt;?php
+$app = new \Slim\Slim(array(
+    'log.level' =&gt; \Slim\Log::WARN
+));
+</code></pre>
+
+            </div>
+          </div>
+          <footer>
+  
+    <div aria-label="footer navigation" class="rst-footer-buttons" role="navigation">
+      
+        <a class="btn btn-neutral float-right" href="../writers/index.html" title="Writers">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a class="btn btn-neutral" href="../activate/index.html" title="Activate"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      <span><a href="../activate/index.html" style="color: #fcfcfc;">« Previous</a></span>
+      <span style="margin-left: 15px"><a href="../writers/index.html" style="color: #fcfcfc">Next »</a></span>
+    </span>
+</div>
+
+
+
+</body><!-- Mirrored from docs.slimframework.com/logging/levels/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2015 15:58:34 GMT --></html>

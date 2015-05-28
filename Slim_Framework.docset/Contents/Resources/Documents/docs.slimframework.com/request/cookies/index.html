@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><!-- Mirrored from docs.slimframework.com/request/cookies/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2015 15:54:19 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  
+  <title>Cookies - Slim Framework v2</title>
+  
+
+  
+  
+
+  <link href="../../css/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="../../css/theme_extra.css" rel="stylesheet" type="text/css"/>
+  <link href="../../css/highlight.css" rel="stylesheet"/>
+
+  
+  
+  
+  
+
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+      <div class="wy-side-nav-search">
+        <a class="icon icon-home" href="../../index.html"> Slim Framework v2</a>
+        
+      </div>
+
+      <div aria-label="main navigation" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+      <ul class="current">
+    
+        
+        <span>Get Started</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../start/get-started/index.html">Get started</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Configuration</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../configuration/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../configuration/settings/index.html">Settings</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../configuration/names-and-scopes/index.html">Names and Scopes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../configuration/modes/index.html">Modes</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Routing</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/get/index.html">GET Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/post/index.html">POST Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/put/index.html">PUT Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/delete/index.html">DELETE Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/options/index.html">OPTIONS Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/patch/index.html">PATCH Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/custom/index.html">Custom Routes</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/params/index.html">Parameters</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/names/index.html">Names</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/conditions/index.html">Conditions</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/middleware/index.html">Middleware</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/groups/index.html">Groups</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../routing/rewrite/index.html">URL Rewriting</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Environment</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../environment/overview/index.html">Overview</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Request</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../method/index.html">Method</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../headers/index.html">Headers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../body/index.html">Body</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../variables/index.html">Variables</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 current">
+                    <a class="current" href="index.html">Cookies</a>
+                    
+                        <ul>
+                        
+                            <li class="toctree-l2"><a href="#get-cookies">Get Cookies</a></li>
+                            
+                        
+                            <li class="toctree-l2"><a href="#cookie-encryption">Cookie Encryption</a></li>
+                            
+                        
+                        </ul>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../paths/index.html">Paths</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../xhr/index.html">XHR</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../content-types/index.html">Content-Types</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Response</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/status/index.html">Status</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/headers/index.html">Headers</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/body/index.html">Body</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../response/helpers/index.html">Helpers</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>View</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/rendering/index.html">Rendering</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/custom/index.html">Custom</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../view/data/index.html">Data</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>HTTP Cache</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/etag/index.html">ETag</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/lastmodified/index.html">Last Modified</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../cache/expires/index.html">Expires</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Middleware</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/how-to-use/index.html">How to Use</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../middleware/how-to-write/index.html">How to Write</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Hooks</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/how-to-use/index.html">How to Use</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/defaults/index.html">Defaults</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../hooks/custom/index.html">Custom</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Flash Messages</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/next/index.html">Next</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/now/index.html">Now</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../flash/keep/index.html">Keep</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Sessions</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../sessions/native/index.html">Native</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../sessions/cookies/index.html">Cookies</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Logging</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../logging/activate/index.html">Activate</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../logging/levels/index.html">Levels</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../logging/writers/index.html">Writers</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Error Handling</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/overview/index.html">Overview</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/500/index.html">500 System Error</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/404/index.html">404 Not Found</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/debug/index.html">Debug Mode</a>
+                    
+                </li>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../errors/output/index.html">Output</a>
+                    
+                </li>
+            
+        
+
+    
+        
+        <span>Dependency Injection</span>
+            
+                <li class="toctree-l1 ">
+                    <a class="" href="../../di/overview/index.html">Overview</a>
+                    
+                </li>
+            
+        
+
+    
+</ul>
+
+      </div>
+       
+    </nav>
+
+    <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+
+      
+      <nav aria-label="top navigation" class="wy-nav-top" role="navigation">
+        <i class="icon icon-reorder" data-toggle="wy-nav-top"></i>
+        <a href="../../index.html"></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div aria-label="breadcrumbs navigation" role="navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> »</li>
+    <li>Cookies</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              <h3 id="get-cookies"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20Cookies"></a>Get Cookies</h3>
+<p>A Slim application will automatically parse cookies sent with the current HTTP request. You can fetch cookie values
+with the Slim application’s <code>getCookie()</code> helper method like this:</p>
+<pre><code>&lt;?php
+$app = new \Slim\Slim();
+$foo = $app-&gt;getCookie('foo');
+</code></pre>
+<p>Only Cookies sent with the current HTTP request are accessible with this method. If you set a cookie during the
+current request, it will not be accessible with this method until the subsequent request. Bear in mind the \Slim\Slim
+object's <code>getCookie()</code> method is a convenience. You may also retrieve the complete set of HTTP request cookies
+directly from the \Slim\Http\Request object like this:</p>
+<pre><code>&lt;?php
+$cookies = $app-&gt;request-&gt;cookies;
+</code></pre>
+<p>This will return an instance of \Slim\Helper\Set so you can use its simple, standardized interface to inspect the
+request's cookies.</p>
+<h3 id="cookie-encryption"><a class="dashAnchor" name="//apple_ref/cpp/Section/Cookie%20Encryption"></a>Cookie Encryption</h3>
+<p>You can optionally choose to encrypt all cookies stored on the HTTP client with the Slim app's <code>cookies.encrypt</code>
+setting. When this setting is <code>true</code>, all cookies will be encrypted using your designated secret key and cipher.</p>
+<p>It's really that easy. Cookies will be encrypted automatically before they are sent to the client. They will also
+be decrypted on-demand when you request them with <code>\Slim\Slim::getCookie()</code> during subsequent requests.</p>
+
+            </div>
+          </div>
+          <footer>
+  
+    <div aria-label="footer navigation" class="rst-footer-buttons" role="navigation">
+      
+        <a class="btn btn-neutral float-right" href="../paths/index.html" title="Paths">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a class="btn btn-neutral" href="../variables/index.html" title="Variables"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      <span><a href="../variables/index.html" style="color: #fcfcfc;">« Previous</a></span>
+      <span style="margin-left: 15px"><a href="../paths/index.html" style="color: #fcfcfc">Next »</a></span>
+    </span>
+</div>
+
+
+
+</body><!-- Mirrored from docs.slimframework.com/request/cookies/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 May 2015 15:54:26 GMT --></html>

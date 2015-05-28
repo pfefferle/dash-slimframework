@@ -6,5 +6,4 @@ httrack http://docs.slimframework.com/ \
   --connection-per-second=5 --max-rate=250000 \
   --keep-alive --depth=5 --mirror --clean --robots=0 \
   --user-agent '$(httrack --version); dash-slimframework ()' \
-  "-docs.slimframework.com/_themes/*" "-docs.slimframework.com/pages/*" \
-  "+docs.slimframework.com/bootstrap/css/*" "+docs.slimframework.com/styles/*"
+  "-*" "+docs.slimframework.com/*"

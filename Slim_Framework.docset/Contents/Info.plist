@@ -8,6 +8,8 @@
 	<string>Slim Framework</string>
 	<key>DocSetPlatformFamily</key>
 	<string>slimframework</string>
+	<key>DashDocSetFamily</key>
+	<string>dashtoc</string>
 	<key>dashIndexFilePath</key>
 	<string>docs.slimframework.com/index.html</string>
 	<key>isDashDocset</key>

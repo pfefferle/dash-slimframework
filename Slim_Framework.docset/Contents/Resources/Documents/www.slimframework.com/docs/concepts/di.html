@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jun 2016 21:03:41 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Dependency Container - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Dependency Container" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="di.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../assets/css/all.css" rel="stylesheet"/>
+        <link href="../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+    </head>
+    <body style="padding-top: 5em">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="http://www.slimframework.com/"><img alt="Slim" height="24px" src="../../assets/images/favicon.png"/></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li class="active"><a href="../index.html">User Guide</a></li>
+                        <li><a href="http://discourse.slimframework.com/">Support</a></li>
+                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.stickermule.com/user/1070648464/stickers" target="_blank"><i class="fa fa-heart"></i> Goodies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <header class="site-header">
+            <div class="site-title"><a href="http://www.slimframework.com/">Slim</a></div>
+            <div class="site-slogan">a micro framework for PHP</div>
+        </header>
+
+        <div class="row">
+            <div class="col-md-3">
+                <form class="searchbox" novalidate="novalidate" onsubmit="return false;" style="visibility:hidden;height:0">
+                    <div class="searchbox__wrapper" role="search">
+                        <input autocomplete="off" class="searchbox__input" id="docsearch" name="search" placeholder="Search in the doc" required="required" type="search"/>
+                        <button class="searchbox__submit" title="Submit your search query." type="submit">
+                            <svg aria-label="Search" role="img">
+                                <use xlink:href="#sbx-icon-search-13" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                            </svg>
+                        </button>
+                        <button class="searchbox__reset hide" title="Clear the search query." type="reset">
+                            <svg aria-label="Reset" role="img">
+                                <use xlink:href="#sbx-icon-clear-3" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"></path></symbol>
+                        <symbol id="sbx-icon-search-13" viewBox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"></path></symbol>
+                    </svg>
+                </div>
+
+                
+                    
+                    
+                    <h3 class="toc-title">Get Started</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../index.html">Home</a></li>
+                        
+                        <li><a href="../start/installation.html">Installation</a></li>
+                        
+                        <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
+                        
+                        <li><a href="../start/web-servers.html">Web Servers</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Tutorial</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../tutorial/first-app.html">First Application</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title active">Concepts</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="value-objects.html">PSR 7</a></li>
+                        
+                        <li><a href="middleware.html">Middleware</a></li>
+                        
+                        <li><a href="di.html">Dependency Container</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">The Application</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../objects/application.html">Overview</a></li>
+                        
+                        <li><a href="../objects/application.html#application-configuration">Configuration</a></li>
+                        
+                        <li><a href="../objects/application.html#slim-default-settings">Default settings</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">The Request</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../objects/request.html">Overview</a></li>
+                        
+                        <li><a href="../objects/request.html#the-request-method">Method</a></li>
+                        
+                        <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
+                        
+                        <li><a href="../objects/request.html#the-request-body">Body</a></li>
+                        
+                        <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
+                        
+                        <li><a href="../objects/request.html#route-object">Route object</a></li>
+                        
+                        <li><a href="../objects/request.html#media-type-parsers">Media type parsers</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">The Response</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../objects/response.html">Overview</a></li>
+                        
+                        <li><a href="../objects/response.html#the-response-status">Status</a></li>
+                        
+                        <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
+                        
+                        <li><a href="../objects/response.html#the-response-body">Body</a></li>
+                        
+                        <li><a href="../objects/response.html#returning-json">JSON</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Routing</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../objects/router.html">Overview</a></li>
+                        
+                        <li><a href="../objects/router.html#how-to-create-routes">Create Routes</a></li>
+                        
+                        <li><a href="../objects/router.html#route-callbacks">Callbacks</a></li>
+                        
+                        <li><a href="../objects/router.html#route-strategies">Strategies</a></li>
+                        
+                        <li><a href="../objects/router.html#route-placeholders">Placeholders</a></li>
+                        
+                        <li><a href="../objects/router.html#route-names">Names</a></li>
+                        
+                        <li><a href="../objects/router.html#route-groups">Groups</a></li>
+                        
+                        <li><a href="../objects/router.html#route-middleware">Middleware</a></li>
+                        
+                        <li><a href="../objects/router.html#container-resolution">Container Resolution</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Error Handling</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../handlers/error.html">Error Handlers</a></li>
+                        
+                        <li><a href="../handlers/not-found.html">404 Not Found</a></li>
+                        
+                        <li><a href="../handlers/not-allowed.html">405 Not Allowed</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Cook book</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
+                        
+                        <li><a href="../cookbook/ip-address.html">Retrieving IP address</a></li>
+                        
+                        <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
+                        
+                        <li><a href="../cookbook/database-eloquent.html">Using Eloquent with Slim</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Add Ons</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../features/templates.html">Templates</a></li>
+                        
+                        <li><a href="../features/caching.html">HTTP Caching</a></li>
+                        
+                        <li><a href="../features/csrf.html">CSRF Protection</a></li>
+                        
+                        <li><a href="../features/flash.html">Flash Messages</a></li>
+                        
+                        <li><a href="https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x">3rd Party</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Contributing</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                        
+                        <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                        
+                    </ul>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Dependency%20Container"></a>Dependency Container</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-xs" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/concepts/di.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>Slim uses a dependency container to prepare, manage, and inject application
+dependencies. Slim supports containers that implement the <a href="https://github.com/container-interop/container-interop">Container-Interop</a> interface. You can use Slim’s built-in container (based on <a href="http://pimple.sensiolabs.org/">Pimple</a>)
+or third-party containers like <a href="https://github.com/jeremeamia/acclimate-container">Acclimate</a>
+or <a href="http://php-di.org/">PHP-DI</a>.</p>
+
+<h2 id="how-to-use-the-container"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20to%20use%20the%20container"></a>How to use the container</h2>
+
+<p>You don’t <em>have</em> to provide a dependency container. If you do, however, you must
+inject the container instance into the Slim application’s constructor.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$container = new \Slim\Container;
+$app = new \Slim\App($container);</code></pre></figure>
+
+<p>You can fetch services from your container explicitly or implicitly.
+You can fetch an explicit reference to the container instance from inside a Slim
+application route like this:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">/**
+ * Example GET route
+ *
+ * @param  \Psr\Http\Message\ServerRequestInterface $req  PSR7 request
+ * @param  \Psr\Http\Message\ResponseInterface      $res  PSR7 response
+ * @param  array                                    $args Route parameters
+ *
+ * @return \Psr\Http\Message\ResponseInterface
+ */
+$app-&gt;get('/foo', function ($req, $res, $args) {
+    $myService = $this-&gt;get('myService');
+
+    return $res;
+});</code></pre></figure>
+
+<p>You can implicitly fetch services from the container like this:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">/**
+ * Example GET route
+ *
+ * @param  \Psr\Http\Message\ServerRequestInterface $req  PSR7 request
+ * @param  \Psr\Http\Message\ResponseInterface      $res  PSR7 response
+ * @param  array                                    $args Route parameters
+ *
+ * @return \Psr\Http\Message\ResponseInterface
+ */
+$app-&gt;get('/foo', function ($req, $res, $args) {
+    $myService = $this-&gt;myService;
+
+    return $res;
+});</code></pre></figure>
+
+<p>Slim uses <code class="highlighter-rouge">__get()</code> and <code class="highlighter-rouge">__isset()</code> magic methods that defer to the application’s
+container for all properties that do not already exist on the application instance.</p>
+
+<h2 id="required-services"><a class="dashAnchor" name="//apple_ref/cpp/Section/Required%20services"></a>Required services</h2>
+
+<p>Your container MUST implement these required services. If you use Slim’s built-in container, these are provided for you. If you choose a third-party container, you must define these required services on your own.</p>
+
+<dl>
+  <dt>settings</dt>
+  <dd>Associative array of application settings, including keys:
+
+    <ul>
+      <li><code class="highlighter-rouge">httpVersion</code></li>
+      <li><code class="highlighter-rouge">responseChunkSize</code></li>
+      <li><code class="highlighter-rouge">outputBuffering</code></li>
+      <li><code class="highlighter-rouge">determineRouteBeforeAppMiddleware</code>.</li>
+      <li><code class="highlighter-rouge">displayErrorDetails</code>.</li>
+      <li><code class="highlighter-rouge">addContentLengthHeader</code>.</li>
+      <li><code class="highlighter-rouge">routerCacheFile</code>.</li>
+    </ul>
+  </dd>
+  <dt>environment</dt>
+  <dd>Instance of <code class="highlighter-rouge">\Slim\Interfaces\Http\EnvironmentInterface</code>.</dd>
+  <dt>request</dt>
+  <dd>Instance of <code class="highlighter-rouge">\Psr\Http\Message\ServerRequestInterface</code>.</dd>
+  <dt>response</dt>
+  <dd>Instance of <code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code>.</dd>
+  <dt>router</dt>
+  <dd>Instance of <code class="highlighter-rouge">\Slim\Interfaces\RouterInterface</code>.</dd>
+  <dt>foundHandler</dt>
+  <dd>Instance of <code class="highlighter-rouge">\Slim\Interfaces\InvocationStrategyInterface</code>.</dd>
+  <dt>phpErrorHandler</dt>
+  <dd>Callable invoked if a PHP 7 Error is thrown. The callable <strong>MUST</strong> return an instance of <code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code> and accept three arguments:</dd>
+</dl>
+
+<ol>
+  <li><code class="highlighter-rouge">\Psr\Http\Message\ServerRequestInterface</code></li>
+  <li><code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code></li>
+  <li><code class="highlighter-rouge">\Error</code></li>
+</ol>
+
+<dl>
+  <dt>errorHandler</dt>
+  <dd>Callable invoked if an Exception is thrown. The callable <strong>MUST</strong> return an instance of <code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code> and accept three arguments:</dd>
+</dl>
+
+<ol>
+  <li><code class="highlighter-rouge">\Psr\Http\Message\ServerRequestInterface</code></li>
+  <li><code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code></li>
+  <li><code class="highlighter-rouge">\Exception</code></li>
+</ol>
+
+<dl>
+  <dt>notFoundHandler</dt>
+  <dd>Callable invoked if the current HTTP request URI does not match an application route. The callable <strong>MUST</strong> return an instance of <code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code> and accept two arguments:</dd>
+</dl>
+
+<ol>
+  <li><code class="highlighter-rouge">\Psr\Http\Message\ServerRequestInterface</code></li>
+  <li><code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code></li>
+</ol>
+
+<dl>
+  <dt>notAllowedHandler</dt>
+  <dd>Callable invoked if an application route matches the current HTTP request path but not its method. The callable <strong>MUST</strong> return an instance of <code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code> and accept three arguments:</dd>
+</dl>
+
+<ol>
+  <li><code class="highlighter-rouge">\Psr\Http\Message\ServerRequestInterface</code></li>
+  <li><code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code></li>
+  <li>Array of allowed HTTP methods</li>
+</ol>
+
+<dl>
+  <dt>callableResolver</dt>
+  <dd>Instance of <code class="highlighter-rouge">\Slim\Interfaces\CallableResolverInterface</code>.</dd>
+</dl>
+
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <p>
+                Created and maintained by <br/>
+                <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+                <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+                <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
+                <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+            </p>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="margin: 0; padding-top: 20px" target="_blank">
+                <input name="cmd" type="hidden" value="_s-xclick"/>
+                <input name="hosted_button_id" type="hidden" value="9YRVXHRZT6H3L"/>
+                <input alt="PayPal - The safer, easier way to pay online!" border="0" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" type="image"/>
+                <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"/>
+            </form>
+        </footer>
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jun 2016 21:03:41 GMT --></html>

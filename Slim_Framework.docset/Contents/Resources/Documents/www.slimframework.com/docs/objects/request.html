@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jun 2016 21:03:42 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Request - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Request" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="request.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../assets/css/all.css" rel="stylesheet"/>
+        <link href="../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+    </head>
+    <body style="padding-top: 5em">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="http://www.slimframework.com/"><img alt="Slim" height="24px" src="../../assets/images/favicon.png"/></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li class="active"><a href="../index.html">User Guide</a></li>
+                        <li><a href="http://discourse.slimframework.com/">Support</a></li>
+                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.stickermule.com/user/1070648464/stickers" target="_blank"><i class="fa fa-heart"></i> Goodies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <header class="site-header">
+            <div class="site-title"><a href="http://www.slimframework.com/">Slim</a></div>
+            <div class="site-slogan">a micro framework for PHP</div>
+        </header>
+
+        <div class="row">
+            <div class="col-md-3">
+                <form class="searchbox" novalidate="novalidate" onsubmit="return false;" style="visibility:hidden;height:0">
+                    <div class="searchbox__wrapper" role="search">
+                        <input autocomplete="off" class="searchbox__input" id="docsearch" name="search" placeholder="Search in the doc" required="required" type="search"/>
+                        <button class="searchbox__submit" title="Submit your search query." type="submit">
+                            <svg aria-label="Search" role="img">
+                                <use xlink:href="#sbx-icon-search-13" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                            </svg>
+                        </button>
+                        <button class="searchbox__reset hide" title="Clear the search query." type="reset">
+                            <svg aria-label="Reset" role="img">
+                                <use xlink:href="#sbx-icon-clear-3" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"></path></symbol>
+                        <symbol id="sbx-icon-search-13" viewBox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"></path></symbol>
+                    </svg>
+                </div>
+
+                
+                    
+                    
+                    <h3 class="toc-title">Get Started</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../index.html">Home</a></li>
+                        
+                        <li><a href="../start/installation.html">Installation</a></li>
+                        
+                        <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
+                        
+                        <li><a href="../start/web-servers.html">Web Servers</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Tutorial</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../tutorial/first-app.html">First Application</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Concepts</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../concepts/value-objects.html">PSR 7</a></li>
+                        
+                        <li><a href="../concepts/middleware.html">Middleware</a></li>
+                        
+                        <li><a href="../concepts/di.html">Dependency Container</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">The Application</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="application.html">Overview</a></li>
+                        
+                        <li><a href="application.html#application-configuration">Configuration</a></li>
+                        
+                        <li><a href="application.html#slim-default-settings">Default settings</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title active">The Request</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="request.html">Overview</a></li>
+                        
+                        <li><a href="request.html#the-request-method">Method</a></li>
+                        
+                        <li><a href="request.html#the-request-headers">Headers</a></li>
+                        
+                        <li><a href="request.html#the-request-body">Body</a></li>
+                        
+                        <li><a href="request.html#request-helpers">Helpers</a></li>
+                        
+                        <li><a href="request.html#route-object">Route object</a></li>
+                        
+                        <li><a href="request.html#media-type-parsers">Media type parsers</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">The Response</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="response.html">Overview</a></li>
+                        
+                        <li><a href="response.html#the-response-status">Status</a></li>
+                        
+                        <li><a href="response.html#the-response-headers">Headers</a></li>
+                        
+                        <li><a href="response.html#the-response-body">Body</a></li>
+                        
+                        <li><a href="response.html#returning-json">JSON</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Routing</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="router.html">Overview</a></li>
+                        
+                        <li><a href="router.html#how-to-create-routes">Create Routes</a></li>
+                        
+                        <li><a href="router.html#route-callbacks">Callbacks</a></li>
+                        
+                        <li><a href="router.html#route-strategies">Strategies</a></li>
+                        
+                        <li><a href="router.html#route-placeholders">Placeholders</a></li>
+                        
+                        <li><a href="router.html#route-names">Names</a></li>
+                        
+                        <li><a href="router.html#route-groups">Groups</a></li>
+                        
+                        <li><a href="router.html#route-middleware">Middleware</a></li>
+                        
+                        <li><a href="router.html#container-resolution">Container Resolution</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Error Handling</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../handlers/error.html">Error Handlers</a></li>
+                        
+                        <li><a href="../handlers/not-found.html">404 Not Found</a></li>
+                        
+                        <li><a href="../handlers/not-allowed.html">405 Not Allowed</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Cook book</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
+                        
+                        <li><a href="../cookbook/ip-address.html">Retrieving IP address</a></li>
+                        
+                        <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
+                        
+                        <li><a href="../cookbook/database-eloquent.html">Using Eloquent with Slim</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Add Ons</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../features/templates.html">Templates</a></li>
+                        
+                        <li><a href="../features/caching.html">HTTP Caching</a></li>
+                        
+                        <li><a href="../features/csrf.html">CSRF Protection</a></li>
+                        
+                        <li><a href="../features/flash.html">Flash Messages</a></li>
+                        
+                        <li><a href="https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x">3rd Party</a></li>
+                        
+                    </ul>
+                
+                    
+                    
+                    <h3 class="toc-title">Contributing</h3>
+                    <ul class="toc-links">
+                        
+                        <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                        
+                        <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                        
+                    </ul>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Request"></a>Request</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-xs" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/objects/request.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>Your Slim app’s routes and middleware are given a PSR 7 request object that
+represents the current HTTP request received by your web server. The request
+object implements the <a href="http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-serverrequestinterface">PSR 7 ServerRequestInterface</a> with which you can
+inspect and manipulate the HTTP request method, headers, and body.</p>
+
+<h2 id="how-to-get-the-request-object"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20to%20get%20the%20Request%20object"></a>How to get the Request object</h2>
+
+<p>The PSR 7 request object is injected into your Slim application routes as the
+first argument to the route callback like this:</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">ResponseInterface</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Use the PSR 7 $request object
+</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span></code></pre></figure>
+
+<figcaption>Figure 1: Inject PSR 7 request into application route callback.</figcaption>
+</figure>
+
+<p>The PSR 7 request object is injected into your Slim application <em>middleware</em>
+as the first argument of the middleware callable like this:</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">ResponseInterface</span> <span class="nv">$response</span><span class="p">,</span> <span class="nx">callable</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Use the PSR 7 $request object
+</span>
+    <span class="k">return</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// Define app routes...
+</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span></code></pre></figure>
+
+<figcaption>Figure 2: Inject PSR 7 request into application middleware.</figcaption>
+</figure>
+
+<h2 id="the-request-method"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Request%20Method"></a>The Request Method</h2>
+
+<p>Every HTTP request has a method that is typically one of:</p>
+
+<ul>
+  <li>GET</li>
+  <li>POST</li>
+  <li>PUT</li>
+  <li>DELETE</li>
+  <li>HEAD</li>
+  <li>PATCH</li>
+  <li>OPTIONS</li>
+</ul>
+
+<p>You can inspect the HTTP request’s method with the Request object method
+appropriately named <code class="highlighter-rouge">getMethod()</code>.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$method = $request-&gt;getMethod();</code></pre></figure>
+
+<p>Because this is a common task, Slim’s
+built-in PSR 7 implementation also provides these proprietary methods that return
+<code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">$request-&gt;isGet()</code></li>
+  <li><code class="highlighter-rouge">$request-&gt;isPost()</code></li>
+  <li><code class="highlighter-rouge">$request-&gt;isPut()</code></li>
+  <li><code class="highlighter-rouge">$request-&gt;isDelete()</code></li>
+  <li><code class="highlighter-rouge">$request-&gt;isHead()</code></li>
+  <li><code class="highlighter-rouge">$request-&gt;isPatch()</code></li>
+  <li><code class="highlighter-rouge">$request-&gt;isOptions()</code></li>
+</ul>
+
+<p>It is possible to fake or <em>override</em> the HTTP request method. This is
+useful if, for example, you need to mimic a <code class="highlighter-rouge">PUT</code> request using a traditional
+web browser that only supports <code class="highlighter-rouge">GET</code> or <code class="highlighter-rouge">POST</code> requests.</p>
+
+<p>There are two ways to override the HTTP request method. You can include a
+<code class="highlighter-rouge">_METHOD</code> parameter in a <code class="highlighter-rouge">POST</code> request’s body. The HTTP request must use the
+<code class="highlighter-rouge">application/x-www-form-urlencoded</code> content type.</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">POST /path HTTP/1.1
+Host: example.com
+Content-type: application/x-www-form-urlencoded
+Content-length: 22
+
+data=value&amp;_METHOD=PUT</code></pre></figure>
+
+<figcaption>Figure 3: Override HTTP method with _METHOD parameter.</figcaption>
+</figure>
+
+<p>You can also override the HTTP request method with a custom
+<code class="highlighter-rouge">X-Http-Method-Override</code> HTTP request header. This works with any HTTP request
+content type.</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">POST /path HTTP/1.1
+Host: example.com
+Content-type: application/json
+Content-length: 16
+X-Http-Method-Override: PUT
+
+{"data":"value"}</code></pre></figure>
+
+<figcaption>Figure 4: Override HTTP method with X-Http-Method-Override header.</figcaption>
+</figure>
+
+<p>You can fetch the <em>original</em> (non-overridden) HTTP method with the PSR 7 Request
+object’s method named <code class="highlighter-rouge">getOriginalMethod()</code>.</p>
+
+<h2 id="the-request-uri"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Request%20URI"></a>The Request URI</h2>
+
+<p>Every HTTP request has a URI that identifies the requested application
+resource. The HTTP request URI has several parts:</p>
+
+<ul>
+  <li>Scheme (e.g. <code class="highlighter-rouge">http</code> or <code class="highlighter-rouge">https</code>)</li>
+  <li>Host (e.g. <code class="highlighter-rouge">example.com</code>)</li>
+  <li>Port (e.g. <code class="highlighter-rouge">80</code> or <code class="highlighter-rouge">443</code>)</li>
+  <li>Path (e.g. <code class="highlighter-rouge">/users/1</code>)</li>
+  <li>Query string (e.g. <code class="highlighter-rouge">sort=created&amp;dir=asc</code>)</li>
+</ul>
+
+<p>You can fetch the PSR 7 Request object’s <a href="http://www.php-fig.org/psr/psr-7/#3-5-psr-http-message-uriinterface">URI object</a> with its <code class="highlighter-rouge">getUri()</code> method:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$uri = $request-&gt;getUri();</code></pre></figure>
+
+<p>The PSR 7 Request object’s URI is itself an object that provides the following
+methods to inspect the HTTP request’s URL parts:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">getScheme()</code></li>
+  <li><code class="highlighter-rouge">getAuthority()</code></li>
+  <li><code class="highlighter-rouge">getUserInfo()</code></li>
+  <li><code class="highlighter-rouge">getHost()</code></li>
+  <li><code class="highlighter-rouge">getPort()</code></li>
+  <li><code class="highlighter-rouge">getPath()</code></li>
+  <li><code class="highlighter-rouge">getBasePath()</code></li>
+  <li><code class="highlighter-rouge">getQuery()</code> <small>(returns the full query string, e.g. <code class="highlighter-rouge">a=1&amp;b=2</code>)</small></li>
+  <li><code class="highlighter-rouge">getFragment()</code></li>
+  <li><code class="highlighter-rouge">getBaseUrl()</code></li>
+</ul>
+
+<p>You can get the query parameters as an associative array on the Request object using <code class="highlighter-rouge">getQueryParams()</code>.</p>
+
+<div class="alert alert-info">
+    <div><strong>Base Path</strong></div>
+    If your Slim application's front-controller lives in a physical subdirectory
+    beneath your document root directory, you can fetch the HTTP request's physical
+    base path (relative to the document root) with the Uri object's <code>getBasePath()</code>
+    method. This will be an empty string if the Slim application is installed
+    in the document root's top-most directory.
+</div>
+
+<h2 id="the-request-headers"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Request%20Headers"></a>The Request Headers</h2>
+
+<p>Every HTTP request has headers. These are metadata that describe the HTTP
+request but are not visible in the request’s body. Slim’s PSR 7
+Request object provides several methods to inspect its headers.</p>
+
+<h3 id="get-all-headers"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20All%20Headers"></a>Get All Headers</h3>
+
+<p>You can fetch all HTTP request headers as an associative array with the PSR 7
+Request object’s <code class="highlighter-rouge">getHeaders()</code> method. The resultant associative array’s keys
+are the header names and its values are themselves a numeric array of string
+values for their respective header name.</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$headers = $request-&gt;getHeaders();
+foreach ($headers as $name =&gt; $values) {
+    echo $name . ": " . implode(", ", $values);
+}</code></pre></figure>
+
+<figcaption>Figure 5: Fetch and iterate all HTTP request headers as an associative array.</figcaption>
+</figure>
+
+<h3 id="get-one-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20One%20Header"></a>Get One Header</h3>
+
+<p>You can get a single header’s value(s) with the PSR 7 Request object’s <code class="highlighter-rouge">getHeader($name)</code> method. This returns an array of values for the given header name. Remember, <em>a single
+HTTP header may have more than one value!</em></p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$headerValueArray = $request-&gt;getHeader('Accept');</code></pre></figure>
+
+<figcaption>Figure 6: Get values for a specific HTTP header.</figcaption>
+</figure>
+
+<p>You may also fetch a comma-separated string with all values for a given header
+with the PSR 7 Request object’s <code class="highlighter-rouge">getHeaderLine($name)</code> method. Unlike the
+<code class="highlighter-rouge">getHeader($name)</code> method, this method returns a comma-separated string.</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$headerValueString = $request-&gt;getHeaderLine('Accept');</code></pre></figure>
+
+<figcaption>Figure 7: Get single header's values as comma-separated string.</figcaption>
+</figure>
+
+<h3 id="detect-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Detect%20Header"></a>Detect Header</h3>
+
+<p>You can test for the presence of a header with the PSR 7 Request object’s
+<code class="highlighter-rouge">hasHeader($name)</code> method.</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">if ($request-&gt;hasHeader('Accept')) {
+    // Do something
+}</code></pre></figure>
+
+<figcaption>Figure 8: Detect presence of a specific HTTP request header.</figcaption>
+</figure>
+
+<h2 id="the-request-body"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Request%20Body"></a>The Request Body</h2>
+
+<p>Every HTTP request has a body. If you are building a Slim application that
+consumes JSON or XML data, you can use the PSR 7 Request object’s
+<code class="highlighter-rouge">getParsedBody()</code> method to parse the HTTP request body into a native PHP format.
+Slim can parse JSON, XML, and URL-encoded data out of the box.</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$parsedBody = $request-&gt;getParsedBody();</code></pre></figure>
+
+<figcaption>Figure 9: Parse HTTP request body into native PHP format</figcaption>
+</figure>
+
+<ul>
+  <li>JSON requests are converted into associative arrays with <code class="highlighter-rouge">json_decode($input, true)</code>.</li>
+  <li>XML requests are converted into a <code class="highlighter-rouge">SimpleXMLElement</code> with <code class="highlighter-rouge">simplexml_load_string($input)</code>.</li>
+  <li>URL-encoded requests are converted into a PHP array with <code class="highlighter-rouge">parse_str($input)</code>.</li>
+</ul>
+
+<p>Technically speaking, Slim’s PSR 7 Request object represents the HTTP request
+body as an instance of <code class="highlighter-rouge">\Psr\Http\Message\StreamInterface</code>. You can get
+the HTTP request body <code class="highlighter-rouge">StreamInterface</code> instance with the PSR 7 Request object’s
+<code class="highlighter-rouge">getBody()</code> method. The <code class="highlighter-rouge">getBody()</code> method is preferable if the incoming HTTP
+request size is unknown or too large for available memory.</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$body = $request-&gt;getBody();</code></pre></figure>
+
+<figcaption>Figure 10: Get HTTP request body</figcaption>
+</figure>
+
+<p>The resultant <code class="highlighter-rouge">\Psr\Http\Message\StreamInterface</code> instance provides the following
+methods to read and iterate its underlying PHP <code class="highlighter-rouge">resource</code>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">getSize()</code></li>
+  <li><code class="highlighter-rouge">tell()</code></li>
+  <li><code class="highlighter-rouge">eof()</code></li>
+  <li><code class="highlighter-rouge">isSeekable()</code></li>
+  <li><code class="highlighter-rouge">seek()</code></li>
+  <li><code class="highlighter-rouge">rewind()</code></li>
+  <li><code class="highlighter-rouge">isWritable()</code></li>
+  <li><code class="highlighter-rouge">write($string)</code></li>
+  <li><code class="highlighter-rouge">isReadable()</code></li>
+  <li><code class="highlighter-rouge">read($length)</code></li>
+  <li><code class="highlighter-rouge">getContents()</code></li>
+  <li><code class="highlighter-rouge">getMetadata($key = null)</code></li>
+</ul>
+
+<h2 id="request-helpers"><a class="dashAnchor" name="//apple_ref/cpp/Section/Request%20Helpers"></a>Request Helpers</h2>
+
+<p>Slim’s PSR 7 Request implementation provides these additional proprietary methods
+to help you further inspect the HTTP request.</p>
+
+<h3 id="detect-xhr-requests"><a class="dashAnchor" name="//apple_ref/cpp/Section/Detect%20XHR%20requests"></a>Detect XHR requests</h3>
+
+<p>You can detect XHR requests with the Request object’s <code class="highlighter-rouge">isXhr()</code> method. This
+method detects the presence of the <code class="highlighter-rouge">X-Requested-With</code> HTTP request header and
+ensures its value is <code class="highlighter-rouge">XMLHttpRequest</code>.</p>
+
+<figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">POST /path HTTP/1.1
+Host: example.com
+Content-type: application/x-www-form-urlencoded
+Content-length: 7
+X-Requested-With: XMLHttpRequest
+
+foo=bar</code></pre></figure>
+
+<figcaption>Figure 11: Example XHR request.</figcaption>
+</figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">if ($request-&gt;isXhr()) {
+    // Do something
+}</code></pre></figure>
+
+<h3 id="content-type"><a class="dashAnchor" name="//apple_ref/cpp/Section/Content%20Type"></a>Content Type</h3>
+
+<p>You can fetch the HTTP request content type with the Request object’s <code class="highlighter-rouge">getContentType()</code> method. This returns the <code class="highlighter-rouge">Content-Type</code> header’s full value as provided by the HTTP client.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$contentType = $request-&gt;getContentType();</code></pre></figure>
+
+<h3 id="media-type"><a class="dashAnchor" name="//apple_ref/cpp/Section/Media%20Type"></a>Media Type</h3>
+
+<p>You may not want the complete <code class="highlighter-rouge">Content-Type</code> header. What if, instead, you only want the media type? You can fetch the HTTP request media type with the Request object’s <code class="highlighter-rouge">getMediaType()</code> method.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$mediaType = $request-&gt;getMediaType();</code></pre></figure>
+
+<p>You can fetch the appended media type parameters as an associative array with the Request object’s <code class="highlighter-rouge">getMediaTypeParams()</code> method.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$mediaParams = $request-&gt;getMediaTypeParams();</code></pre></figure>
+
+<h3 id="character-set"><a class="dashAnchor" name="//apple_ref/cpp/Section/Character%20Set"></a>Character Set</h3>
+
+<p>One of the most common media type parameters is the HTTP request character set. The Request object provides a dedicated method to retrieve this media type parameter.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$charset = $request-&gt;getContentCharset();</code></pre></figure>
+
+<h3 id="content-length"><a class="dashAnchor" name="//apple_ref/cpp/Section/Content%20Length"></a>Content Length</h3>
+
+<p>You can fetch the HTTP request content length with the Request object’s <code class="highlighter-rouge">getContentLength()</code> method.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$length = $request-&gt;getContentLength();</code></pre></figure>
+
+<h2 id="route-object"><a class="dashAnchor" name="//apple_ref/cpp/Section/Route%20Object"></a>Route Object</h2>
+
+<p>Sometimes in middleware you require the parameter of your route.</p>
+
+<p>In this example we are checking first that the user is logged in and second that the user has permissions to view the particular video they are attempting to view.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">    $app-&gt;get('/course/{id}', Video::class.":watch")-&gt;add(Permission::class)-&gt;add(Auth::class);
+
+    //.. In the Permission Class's Invoke
+    /** @var $route \Slim\Route */
+    $route = $request-&gt;getAttribute('route');
+    $courseId = $route-&gt;getArgument('id');</code></pre></figure>
+
+<h2 id="media-type-parsers"><a class="dashAnchor" name="//apple_ref/cpp/Section/Media%20Type%20Parsers"></a>Media Type Parsers</h2>
+
+<p>Slim looks as the request’s media type and if it recognises it, will parse it into structured data available via <code class="highlighter-rouge">$request-&gt;getParsedBody()</code>. This is usually an array, but is an object for XML media types.</p>
+
+<p>The following media types are recognised and parsed:</p>
+
+<ul>
+  <li>application/x-www-form-urlencoded’</li>
+  <li>application/json</li>
+  <li>application/xml &amp; text/xml</li>
+</ul>
+
+<p>If you want Slim to parse content from a different media type then you need to either parse the raw body yourself or register a new media parser. Media parsers are simply callables that accept an <code class="highlighter-rouge">$input</code> string and return a parsed object or array.</p>
+
+<p>Register a new media parser in an application or route middleware. Note that you must register the parser before you try to access the parsed body for the first time.</p>
+
+<p>For example, to automatically parse JSON that is sent with a <code class="highlighter-rouge">text/javascript</code> content type, you register a media type parser in middleware like this:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">// Add the middleware
+$app-&gt;add(function ($request, $response, $next) {
+    // add media parser
+    $request-&gt;registerMediaTypeParser(
+        "text/javascript",
+        function ($input) {
+            return json_decode($input, true);
+        }
+    );
+    
+    return $next($request, $response);
+});</code></pre></figure>
+
+
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <p>
+                Created and maintained by <br/>
+                <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+                <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+                <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
+                <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+            </p>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="margin: 0; padding-top: 20px" target="_blank">
+                <input name="cmd" type="hidden" value="_s-xclick"/>
+                <input name="hosted_button_id" type="hidden" value="9YRVXHRZT6H3L"/>
+                <input alt="PayPal - The safer, easier way to pay online!" border="0" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" type="image"/>
+                <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"/>
+            </form>
+        </footer>
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jun 2016 21:03:42 GMT --></html>

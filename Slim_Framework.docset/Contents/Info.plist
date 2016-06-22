@@ -11,7 +11,7 @@
 	<key>DashDocSetFamily</key>
 	<string>dashtoc</string>
 	<key>dashIndexFilePath</key>
-	<string>docs.slimframework.com/index.html</string>
+	<string>www.slimframework.com/docs/index.html</string>
 	<key>isDashDocset</key>
 	<true/>
 </dict>

@@ -86,6 +86,13 @@ for root, dirs, files in os.walk(os.path.join(DOCUMENTS_DIR, HTML_DIR), topdown=
             if "href" in a.attrs and test.match(a["href"].strip()):
                 a.extract()
 
+        # remove header navbar with blog link
+        soup.find('nav', class_='navbar-fixed-top').decompose()
+        # remove Slim logo
+        soup.find('header', class_='site-header').decompose()
+        # remove left menu
+        soup.find('form', class_='searchbox').parent.decompose()
+
         fp = open(os.path.join(root, filename), 'w')
         fp.write(str(soup))
         fp.close()

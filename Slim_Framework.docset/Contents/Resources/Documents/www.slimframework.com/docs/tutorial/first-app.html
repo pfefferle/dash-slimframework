@@ -1,37 +1,49 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jun 2016 21:03:39 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
-
+<html lang="en">
+    
+<!-- Mirrored from www.slimframework.com/docs/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 06 Sep 2016 07:02:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
         <meta charset="utf-8"/>
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
-        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <title>First Application Walkthrough - Slim Framework</title>
-        <meta content="" name="description"/>
-        <meta content="index, follow" name="robots"/>
-        <meta content="First Application Walkthrough" property="og:title"/>
-        <meta content="Slim Framework" property="og:site_name"/>
-        <meta content="first-app.html" property="og:url"/>
-        <meta content="" property="og:description"/>
-        <meta content="website" property="og:type"/>
+        <meta name="description" content=""/>
+        <meta name="robots" content="index, follow"/>
+        <meta property="og:title" content="First Application Walkthrough"/>
+        <meta property="og:site_name" content="Slim Framework"/>
+        <meta property="og:url" content="first-app.html"/>
+        <meta property="og:description" content=""/>
+        <meta property="og:type" content="website"/>
         <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-        <link href="../../assets/css/all.css" rel="stylesheet"/>
-        <link href="../../assets/images/favicon.png" rel="shortcut icon"/>
-        <link href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
-        
-        
-        
+        <link rel="stylesheet" href="../../assets/css/all.css"/>
+        <link rel="shortcut icon" href="../../assets/images/favicon.png"/>
+        <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+        <script src="https://use.typekit.net/yjz4fyo.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-19430723-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
     </head>
     <body style="padding-top: 5em">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="http://www.slimframework.com/"><img alt="Slim" height="24px" src="../../assets/images/favicon.png"/></a>
+                    <a class="navbar-brand" href="http://www.slimframework.com/"><img src="../../assets/images/favicon.png" height="24px" alt="Slim"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,17 +68,17 @@
 
         <div class="row">
             <div class="col-md-3">
-                <form class="searchbox" novalidate="novalidate" onsubmit="return false;" style="visibility:hidden;height:0">
-                    <div class="searchbox__wrapper" role="search">
-                        <input autocomplete="off" class="searchbox__input" id="docsearch" name="search" placeholder="Search in the doc" required="required" type="search"/>
-                        <button class="searchbox__submit" title="Submit your search query." type="submit">
-                            <svg aria-label="Search" role="img">
-                                <use xlink:href="#sbx-icon-search-13" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                <form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0">
+                    <div role="search" class="searchbox__wrapper">
+                        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
+                        <button type="submit" title="Submit your search query." class="searchbox__submit" >
+                            <svg role="img" aria-label="Search">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
                             </svg>
                         </button>
-                        <button class="searchbox__reset hide" title="Clear the search query." type="reset">
-                            <svg aria-label="Reset" role="img">
-                                <use xlink:href="#sbx-icon-clear-3" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
+                            <svg role="img" aria-label="Reset">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
                             </svg>
                         </button>
                     </div>
@@ -74,8 +86,8 @@
 
                 <div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
                     <svg xmlns="http://www.w3.org/2000/svg">
-                        <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"></path></symbol>
-                        <symbol id="sbx-icon-search-13" viewBox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"></path></symbol>
+                        <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
+                        <symbol id="sbx-icon-search-13" viewBox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"/></symbol>
                     </svg>
                 </div>
 
@@ -85,13 +97,17 @@
                     <h3 class="toc-title">Get Started</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../index.html">Home</a></li>
+                          
+                          <li><a href="../index.html">Home</a></li>
                         
-                        <li><a href="../start/installation.html">Installation</a></li>
+                          
+                          <li><a href="../start/installation.html">Installation</a></li>
                         
-                        <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
+                          
+                          <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
                         
-                        <li><a href="../start/web-servers.html">Web Servers</a></li>
+                          
+                          <li><a href="../start/web-servers.html">Web Servers</a></li>
                         
                     </ul>
                 
@@ -100,7 +116,8 @@
                     <h3 class="toc-title active">Tutorial</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="first-app.html">First Application</a></li>
+                          
+                          <li><a href="first-app.html">First Application</a></li>
                         
                     </ul>
                 
@@ -109,11 +126,14 @@
                     <h3 class="toc-title">Concepts</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../concepts/value-objects.html">PSR 7</a></li>
+                          
+                          <li><a href="../concepts/value-objects.html">PSR 7</a></li>
                         
-                        <li><a href="../concepts/middleware.html">Middleware</a></li>
+                          
+                          <li><a href="../concepts/middleware.html">Middleware</a></li>
                         
-                        <li><a href="../concepts/di.html">Dependency Container</a></li>
+                          
+                          <li><a href="../concepts/di.html">Dependency Container</a></li>
                         
                     </ul>
                 
@@ -122,11 +142,14 @@
                     <h3 class="toc-title">The Application</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../objects/application.html">Overview</a></li>
+                          
+                          <li><a href="../objects/application.html">Overview</a></li>
                         
-                        <li><a href="../objects/application.html#application-configuration">Configuration</a></li>
+                          
+                          <li><a href="../objects/application.html#application-configuration">Configuration</a></li>
                         
-                        <li><a href="../objects/application.html#slim-default-settings">Default settings</a></li>
+                          
+                          <li><a href="../objects/application.html#slim-default-settings">Default settings</a></li>
                         
                     </ul>
                 
@@ -135,19 +158,26 @@
                     <h3 class="toc-title">The Request</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../objects/request.html">Overview</a></li>
+                          
+                          <li><a href="../objects/request.html">Overview</a></li>
                         
-                        <li><a href="../objects/request.html#the-request-method">Method</a></li>
+                          
+                          <li><a href="../objects/request.html#the-request-method">Method</a></li>
                         
-                        <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
+                          
+                          <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
                         
-                        <li><a href="../objects/request.html#the-request-body">Body</a></li>
+                          
+                          <li><a href="../objects/request.html#the-request-body">Body</a></li>
                         
-                        <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
+                          
+                          <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
                         
-                        <li><a href="../objects/request.html#route-object">Route object</a></li>
+                          
+                          <li><a href="../objects/request.html#route-object">Route object</a></li>
                         
-                        <li><a href="../objects/request.html#media-type-parsers">Media type parsers</a></li>
+                          
+                          <li><a href="../objects/request.html#media-type-parsers">Media type parsers</a></li>
                         
                     </ul>
                 
@@ -156,15 +186,20 @@
                     <h3 class="toc-title">The Response</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../objects/response.html">Overview</a></li>
+                          
+                          <li><a href="../objects/response.html">Overview</a></li>
                         
-                        <li><a href="../objects/response.html#the-response-status">Status</a></li>
+                          
+                          <li><a href="../objects/response.html#the-response-status">Status</a></li>
                         
-                        <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
+                          
+                          <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
                         
-                        <li><a href="../objects/response.html#the-response-body">Body</a></li>
+                          
+                          <li><a href="../objects/response.html#the-response-body">Body</a></li>
                         
-                        <li><a href="../objects/response.html#returning-json">JSON</a></li>
+                          
+                          <li><a href="../objects/response.html#returning-json">JSON</a></li>
                         
                     </ul>
                 
@@ -173,23 +208,32 @@
                     <h3 class="toc-title">Routing</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../objects/router.html">Overview</a></li>
+                          
+                          <li><a href="../objects/router.html">Overview</a></li>
                         
-                        <li><a href="../objects/router.html#how-to-create-routes">Create Routes</a></li>
+                          
+                          <li><a href="../objects/router.html#how-to-create-routes">Create Routes</a></li>
                         
-                        <li><a href="../objects/router.html#route-callbacks">Callbacks</a></li>
+                          
+                          <li><a href="../objects/router.html#route-callbacks">Callbacks</a></li>
                         
-                        <li><a href="../objects/router.html#route-strategies">Strategies</a></li>
+                          
+                          <li><a href="../objects/router.html#route-strategies">Strategies</a></li>
                         
-                        <li><a href="../objects/router.html#route-placeholders">Placeholders</a></li>
+                          
+                          <li><a href="../objects/router.html#route-placeholders">Placeholders</a></li>
                         
-                        <li><a href="../objects/router.html#route-names">Names</a></li>
+                          
+                          <li><a href="../objects/router.html#route-names">Names</a></li>
                         
-                        <li><a href="../objects/router.html#route-groups">Groups</a></li>
+                          
+                          <li><a href="../objects/router.html#route-groups">Groups</a></li>
                         
-                        <li><a href="../objects/router.html#route-middleware">Middleware</a></li>
+                          
+                          <li><a href="../objects/router.html#route-middleware">Middleware</a></li>
                         
-                        <li><a href="../objects/router.html#container-resolution">Container Resolution</a></li>
+                          
+                          <li><a href="../objects/router.html#container-resolution">Container Resolution</a></li>
                         
                     </ul>
                 
@@ -198,11 +242,14 @@
                     <h3 class="toc-title">Error Handling</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../handlers/error.html">Error Handlers</a></li>
+                          
+                          <li><a href="../handlers/error.html">Error Handlers</a></li>
                         
-                        <li><a href="../handlers/not-found.html">404 Not Found</a></li>
+                          
+                          <li><a href="../handlers/not-found.html">404 Not Found</a></li>
                         
-                        <li><a href="../handlers/not-allowed.html">405 Not Allowed</a></li>
+                          
+                          <li><a href="../handlers/not-allowed.html">405 Not Allowed</a></li>
                         
                     </ul>
                 
@@ -211,13 +258,23 @@
                     <h3 class="toc-title">Cook book</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
+                          
+                          <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
                         
-                        <li><a href="../cookbook/ip-address.html">Retrieving IP address</a></li>
+                          
+                          <li><a href="../cookbook/ip-address.html">Retrieving IP address</a></li>
                         
-                        <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
+                          
+                          <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
                         
-                        <li><a href="../cookbook/database-eloquent.html">Using Eloquent with Slim</a></li>
+                          
+                          <li><a href="../cookbook/database-eloquent.html">Using Eloquent with Slim</a></li>
+                        
+                          
+                          <li><a href="../cookbook/enable-cors.html">Enabling CORS</a></li>
+                        
+                          
+                          <li><a href="../cookbook/environment.html">Getting and Mocking the Environment</a></li>
                         
                     </ul>
                 
@@ -226,15 +283,20 @@
                     <h3 class="toc-title">Add Ons</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../features/templates.html">Templates</a></li>
+                          
+                          <li><a href="../features/templates.html">Templates</a></li>
                         
-                        <li><a href="../features/caching.html">HTTP Caching</a></li>
+                          
+                          <li><a href="../features/caching.html">HTTP Caching</a></li>
                         
-                        <li><a href="../features/csrf.html">CSRF Protection</a></li>
+                          
+                          <li><a href="../features/csrf.html">CSRF Protection</a></li>
                         
-                        <li><a href="../features/flash.html">Flash Messages</a></li>
+                          
+                          <li><a href="../features/flash.html">Flash Messages</a></li>
                         
-                        <li><a href="https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x">3rd Party</a></li>
+                          
+                          <li><a href="https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x/">3rd Party</a></li>
                         
                     </ul>
                 
@@ -243,18 +305,20 @@
                     <h3 class="toc-title">Contributing</h3>
                     <ul class="toc-links">
                         
-                        <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                          
+                          <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
                         
-                        <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                          
+                          <li><a href="../contributors/guidelines.html/index.html">Guidelines</a></li>
                         
                     </ul>
                 
             </div>
 
             <div class="col-md-8 docs-content">
-                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/First%20Application%20Walkthrough"></a>First Application Walkthrough</h1>
+                <h1 class="page-header">First Application Walkthrough</h1>
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
-                    <a class="btn btn-default btn-xs" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/tutorial/first-app.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/tutorial/first-app.md" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
                 <p>If you’re looking for a tour through all the ingredients for setting up a very simple Slim application (this one doesn’t use Twig, but does use Monolog and a PDO database connection) then you’re in the right place.  Either walk through the tutorial to build the example application, or adapt each step for your own needs.</p>
 
@@ -264,7 +328,7 @@
   <p>This tutorial walks through building an example application.  The <a href="https://github.com/slimphp/Tutorial-First-Application">code for the application is available</a> if you want to refer to it.</p>
 </blockquote>
 
-<h2 id="getting-set-up"><a class="dashAnchor" name="//apple_ref/cpp/Section/Getting%20Set%20Up"></a>Getting Set Up</h2>
+<h2 id="getting-set-up">Getting Set Up</h2>
 
 <p>Start by making a folder for your project (mine is called <code class="highlighter-rouge">project</code>, because naming things is hard).  I like to reserve the top level for things-that-are-not-code and then have a folder for source code, and a folder inside that which is my webroot, so my initial structure looks like this:</p>
 
@@ -275,7 +339,7 @@
 </code></pre>
 </div>
 
-<h3 id="installing-slim-framework"><a class="dashAnchor" name="//apple_ref/cpp/Section/Installing%20Slim%20Framework"></a>Installing Slim Framework</h3>
+<h3 id="installing-slim-framework">Installing Slim Framework</h3>
 
 <p><a href="https://getcomposer.org/">Composer</a> is the best way to install Slim Framework.  If you don’t have it already, you can follow the <a href="https://getcomposer.org/download/">installation instructions</a>, in my project I’ve just downloaded the <code class="highlighter-rouge">composer.phar</code> into my <code class="highlighter-rouge">src/</code> directory and I’ll use it locally.  So my first command looks like this (I’m in the <code class="highlighter-rouge">src/</code> directory):</p>
 
@@ -300,7 +364,7 @@
 
 <p>Now git won’t prompt you to add the files in <code class="highlighter-rouge">vendor/</code> to the repository - we don’t want to do this because we’re letting composer manage these dependencies rather than including them in our source control repository.</p>
 
-<h3 id="create-the-application"><a class="dashAnchor" name="//apple_ref/cpp/Section/Create%20The%20Application"></a>Create The Application</h3>
+<h3 id="create-the-application">Create The Application</h3>
 
 <p>There’s a really excellent and minimal example of an <code class="highlighter-rouge">index.php</code> for Slim Framework on the <a href="http://www.slimframework.com/">project homepage</a> so we’ll use that as our starting point.  Put the following code into <code class="highlighter-rouge">src/public/index.php</code>:</p>
 
@@ -329,7 +393,7 @@
 
 <p>Now we have an application, we’ll need to run it.  I’ll cover two options: the built-in PHP webserver, and an Apache virtual host setup.</p>
 
-<h3 id="run-your-application-with-phps-webserver"><a class="dashAnchor" name="//apple_ref/cpp/Section/Run%20Your%20Application%20With%20PHP%E2%80%99s%20Webserver"></a>Run Your Application With PHP’s Webserver</h3>
+<h3 id="run-your-application-with-phps-webserver">Run Your Application With PHP’s Webserver</h3>
 
 <p>This is my preferred “quick start” option because it doesn’t rely on anything else!  From the <code class="highlighter-rouge">src/public</code> directory run the command:</p>
 
@@ -341,7 +405,7 @@
 
 <p><strong>Note</strong> you’ll get an error message about “Page Not Found” at this URL - but it’s an error message <strong>from</strong> Slim, so this is expected.  Try http://localhost:8080/hello/joebloggs instead :)</p>
 
-<h3 id="run-your-application-with-apache"><a class="dashAnchor" name="//apple_ref/cpp/Section/Run%20Your%20Application%20With%20Apache"></a>Run Your Application With Apache</h3>
+<h3 id="run-your-application-with-apache">Run Your Application With Apache</h3>
 
 <p>To get this set up on a standard LAMP stack, we’ll need a couple of extra ingredients: some virtual host configuration, and one rewrite rule.</p>
 
@@ -370,24 +434,27 @@ RewriteRule . index.php [L]
 
 <p>With this setup, just remember to use http://slimproject.dev instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you’ll see an error page at http://slimproject.dev but crucially it’s <em>Slim’s</em> error page.  If you go to http://slimproject.dev/hello/joebloggs then something better should happen.</p>
 
-<h2 id="configuration-and-autoloaders"><a class="dashAnchor" name="//apple_ref/cpp/Section/Configuration%20and%20Autoloaders"></a>Configuration and Autoloaders</h2>
+<h2 id="configuration-and-autoloaders">Configuration and Autoloaders</h2>
 
 <p>Now we’ve set up the platform, we can start getting everything we need in place in the application itself.</p>
 
-<h3 id="add-config-settings-to-your-application"><a class="dashAnchor" name="//apple_ref/cpp/Section/Add%20Config%20Settings%20to%20Your%20Application"></a>Add Config Settings to Your Application</h3>
+<h3 id="add-config-settings-to-your-application">Add Config Settings to Your Application</h3>
 
 <p>The initial example uses all the Slim defaults, but we can easily add configuration to our application when we create it.  There are a few options but here I’ve just created an array of config options and then told Slim to take its settings from here when I create it.</p>
 
 <p>First the configuration itself:</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">$config['displayErrorDetails'] = true;
+$config['addContentLengthHeader'] = false;
 
 $config['db']['host']   = "localhost";
 $config['db']['user']   = "user";
 $config['db']['pass']   = "password";
 $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
-<p>The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you’re using the built in PHP webserver then you’ll see them in the console output which is helpful).  The other settings here are not specific keys/values, they’re just some data that I want to be able to access later.</p>
+<p>The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you’re using the built in PHP webserver then you’ll see them in the console output which is helpful). The second line allows the web server to set the Content-Length header which makes Slim behave more predictably.</p>
+
+<p>The other settings here are not specific keys/values, they’re just some data that I want to be able to access later.</p>
 
 <p>Now to feed this into Slim, we need to <em>change</em> where we create the <code class="highlighter-rouge">Slim/App</code> object so that it now looks like this:</p>
 
@@ -395,7 +462,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>We’ll be able to access any settings we put into that <code class="highlighter-rouge">$config</code> array from our application later on.</p>
 
-<h2 id="set-up-autoloading-for-your-own-classes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Set%20up%20Autoloading%20for%20Your%20Own%20Classes"></a>Set up Autoloading for Your Own Classes</h2>
+<h2 id="set-up-autoloading-for-your-own-classes">Set up Autoloading for Your Own Classes</h2>
 
 <p>We already added the composer autoloader file, but what about the code that we write that isn’t part of the composer libraries?  One option is to <a href="https://getcomposer.org/doc/04-schema.md#autoload">use Composer to manage autoloading rules</a> which is a great solution, but you can also add your own autoloader if you want to.</p>
 
@@ -407,7 +474,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>The <a href="http://php.net/spl_autoload_register">spl_autoload_register</a> function accepts the (namespaced) class name and then by the end of the function, the class code should have been included.</p>
 
-<h2 id="add-dependencies"><a class="dashAnchor" name="//apple_ref/cpp/Section/Add%20Dependencies"></a>Add Dependencies</h2>
+<h2 id="add-dependencies">Add Dependencies</h2>
 
 <p>Most applications will have some dependencies, and Slim handles them nicely using a DIC (Dependency Injection Container) built on <a href="http://pimple.sensiolabs.org/">Pimple</a>.  This example will use both <a href="https://github.com/Seldaek/monolog">Monolog</a> and a <a href="http://php.net/manual/en/book.pdo.php">PDO</a> connection to MySQL.</p>
 
@@ -419,7 +486,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>Now we have the <code class="highlighter-rouge">Slim\Container</code> object, we can add our services to it.</p>
 
-<h3 id="use-monolog-in-your-application"><a class="dashAnchor" name="//apple_ref/cpp/Section/Use%20Monolog%20In%20Your%20Application"></a>Use Monolog In Your Application</h3>
+<h3 id="use-monolog-in-your-application">Use Monolog In Your Application</h3>
 
 <p>If you’re not already familiar with Monolog, it’s an excellent logging framework for PHP applications, which is why I’m going to use it here.  First of all, get the Monolog library installed via Composer:</p>
 
@@ -446,7 +513,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>Having good application logging is a really important foundation for any application so I’d always recommend putting something like this in place.  This allows you to add as much or as little debugging as you want, and by using the appropriate log levels with each message, you can have as much or as little detail as is appropriate for what you’re doing in any one moment.</p>
 
-<h3 id="add-a-database-connection"><a class="dashAnchor" name="//apple_ref/cpp/Section/Add%20A%20Database%20Connection"></a>Add A Database Connection</h3>
+<h3 id="add-a-database-connection">Add A Database Connection</h3>
 
 <p>There are many database libraries available for PHP, but this example uses PDO - this is available in PHP as standard so it’s probably useful in every project, or you can use your own libraries by adapting the examples below.</p>
 
@@ -469,7 +536,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>This will fetch the <code class="highlighter-rouge">db</code> dependency from the DIC, creating it if necessary, and in this example just allows me to pass the <code class="highlighter-rouge">PDO</code> object straight into my mapper class.</p>
 
-<h2 id="create-routes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Create%20Routes"></a>Create Routes</h2>
+<h2 id="create-routes">Create Routes</h2>
 
 <p>“Routes” are the URL patterns that we’ll describe and attach functionality to.  Slim doesn’t use any automatic mapping or URL formulae so you can make any route pattern you like map onto any function you like, it’s very flexible.  Routes can be linked to a particular HTTP verb (such as GET or POST), or more than one verb.</p>
 
@@ -500,7 +567,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>This emphasis on Request and Response illustrates Slim 3 being based on the PSR-7 standard for HTTP Messaging.  Using the Request and Response object also makes the application more testable as we don’t need to make <strong>actual</strong> requests and responses, we can just set up the objects as desired.</p>
 
-<h3 id="routes-with-named-placeholders"><a class="dashAnchor" name="//apple_ref/cpp/Section/Routes%20with%20Named%20Placeholders"></a>Routes with Named Placeholders</h3>
+<h3 id="routes-with-named-placeholders">Routes with Named Placeholders</h3>
 
 <p>Sometimes, our URLs have variables in them that we want to use in our application.  In my bug tracking example, I want to have URLs like <code class="highlighter-rouge">/ticket/42</code> to refer to the ticket - and Slim has an easy way of parsing out the “42” bit and making it available for easy use in the code.  Here’s the route that does exactly that:</p>
 
@@ -515,7 +582,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>Look at where the route itself is defined: we write it as <code class="highlighter-rouge">/ticket/{id}</code>.  When we do this, the route will take the portion of the URL from where the <code class="highlighter-rouge"><span class="p">{</span><span class="err">id</span><span class="p">}</span></code> is declared, and it becomes available as <code class="highlighter-rouge">$args['id']</code> inside the callback.</p>
 
-<h3 id="using-get-parameters"><a class="dashAnchor" name="//apple_ref/cpp/Section/Using%20GET%20Parameters"></a>Using GET Parameters</h3>
+<h3 id="using-get-parameters">Using GET Parameters</h3>
 
 <p>Since GET and POST send data in such different ways, then the way that we get that data from the Request object differs hugely in Slim.</p>
 
@@ -527,7 +594,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>These can then be used (after validating of course) inside your callback.</p>
 
-<h3 id="working-with-post-data"><a class="dashAnchor" name="//apple_ref/cpp/Section/Working%20with%20POST%20Data"></a>Working with POST Data</h3>
+<h3 id="working-with-post-data">Working with POST Data</h3>
 
 <p>When working with incoming data, we can find this in the body.  We’ve already seen how we can parse data from the URL and how to obtain the GET variables by doing <code class="highlighter-rouge">$request-&gt;getQueryParams()</code> but what about POST data?  The POST request data can be found in the body of the request, and Slim has some good built in helpers to make it easier to get the information in a useful format.</p>
 
@@ -544,7 +611,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>What’s really neat here is that if you’re building an API or writing AJAX endpoints, for example, it’s super easy to work with data formats that arrive by POST but which aren’t a web form.  As long as the <code class="highlighter-rouge">Content-Type</code> header is set correctly, Slim will parse a JSON payload into an array and you can access it exactly the same way: by using <code class="highlighter-rouge">$request-&gt;getParsedBody()</code>.</p>
 
-<h2 id="views-and-templates"><a class="dashAnchor" name="//apple_ref/cpp/Section/Views%20and%20Templates"></a>Views and Templates</h2>
+<h2 id="views-and-templates">Views and Templates</h2>
 
 <p>Slim doesn’t have an opinion on the views that you should use, although there are some options that are ready to plug in.  Your best choices are either Twig or plain old PHP.  Both options have pros and cons: if you’re already familiar with Twig then it offers lots of excellent features and functionality such as layouts - but if you’re not already using Twig, it can be a large learning curve overhead to add to a microframework project.  If you’re looking for something dirt simple then the PHP views might be for you!  I picked PHP for this example project, but if you’re familiar with Twig then feel free to use that; the basics are mostly the same.</p>
 
@@ -605,7 +672,7 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <p>Did you notice something fun going on with <code class="highlighter-rouge">$router-&gt;pathFor()</code> right at the end of the example?  Let’s talk about named routes next :)</p>
 
-<h3 id="easy-url-building-with-named-routes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Easy%20URL%20Building%20with%20Named%20Routes"></a>Easy URL Building with Named Routes</h3>
+<h3 id="easy-url-building-with-named-routes">Easy URL Building with Named Routes</h3>
 
 <p>When we create a route, we can give it a name by calling <code class="highlighter-rouge">-&gt;setName()</code> on the route object.  In this case, I am adding the name to the route that lets me view an individual ticket so that I can quickly create the right URL for a ticket by just giving the name of the route, so my code now looks something like this (just the changed bits shown here):</p>
 
@@ -617,9 +684,9 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">    $response = $this-&gt;view-&gt;render($response, "tickets.phtml", ["tickets" =&gt; $tickets, "router" =&gt; $this-&gt;router]);</code></pre></figure>
 
-<p>With the <code class="highlighter-rouge">/tickets/{id}</code> route having a friendly name, and the router now available in our template, this is is what makes the <code class="highlighter-rouge">pathFor()</code> call in our template work.  By supplying the <code class="highlighter-rouge">id</code>, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it’s used.  This approach is definitely recomended, especially for links you’ll use a lot.</p>
+<p>With the <code class="highlighter-rouge">/tickets/{id}</code> route having a friendly name, and the router now available in our template, this is what makes the <code class="highlighter-rouge">pathFor()</code> call in our template work.  By supplying the <code class="highlighter-rouge">id</code>, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it’s used.  This approach is definitely recomended, especially for links you’ll use a lot.</p>
 
-<h2 id="where-next"><a class="dashAnchor" name="//apple_ref/cpp/Section/Where%20Next%3F"></a>Where Next?</h2>
+<h2 id="where-next">Where Next?</h2>
 
 <p>This article gave a walkthrough of how to get set up with a simple application of your own, which I hope will let you get quickly started, see some working examples, and build something awesome.</p>
 
@@ -637,24 +704,29 @@ $config['db']['dbname'] = "exampleapp";</code></pre></figure>
                 <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
                 <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
             </p>
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="margin: 0; padding-top: 20px" target="_blank">
-                <input name="cmd" type="hidden" value="_s-xclick"/>
-                <input name="hosted_button_id" type="hidden" value="9YRVXHRZT6H3L"/>
-                <input alt="PayPal - The safer, easier way to pay online!" border="0" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" type="image"/>
-                <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"/>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
             </form>
         </footer>
     </div>
 </div>
-        
-        
-        
-        
-        
-        
-    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="../../assets/scripts/build/production.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+        <script>
+        docsearch({
+          apiKey: 'b6e6f2d1ae81c64677b6192755f83a6e',
+          indexName: 'slimframework',
+          inputSelector: '#docsearch'
+        });
+        </script>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </body>
 
+<!-- Mirrored from www.slimframework.com/docs/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 06 Sep 2016 07:02:01 GMT -->
+</html>
 
-
-
-</body><!-- Mirrored from www.slimframework.com/docs/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jun 2016 21:03:39 GMT --></html>

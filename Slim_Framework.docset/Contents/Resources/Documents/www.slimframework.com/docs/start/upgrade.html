@@ -1,338 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-    
-<!-- Mirrored from www.slimframework.com/docs/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 06 Sep 2016 07:02:01 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Sep 2016 20:42:42 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
         <title>Upgrade Guide - Slim Framework</title>
-        <meta name="description" content=""/>
-        <meta name="robots" content="index, follow"/>
-        <meta property="og:title" content="Upgrade Guide"/>
-        <meta property="og:site_name" content="Slim Framework"/>
-        <meta property="og:url" content="upgrade.html"/>
-        <meta property="og:description" content=""/>
-        <meta property="og:type" content="website"/>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Upgrade Guide" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="upgrade.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
         <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-        <link rel="stylesheet" href="../../assets/css/all.css"/>
-        <link rel="shortcut icon" href="../../assets/images/favicon.png"/>
-        <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
-        <script src="https://use.typekit.net/yjz4fyo.js"></script>
-        <script>try{Typekit.load();}catch(e){}</script>
-        <script>
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-19430723-1']);
-            _gaq.push(['_trackPageview']);
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
+        <link href="../../assets/css/all.css" rel="stylesheet"/>
+        <link href="../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
     </head>
     <body style="padding-top: 5em">
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="http://www.slimframework.com/"><img src="../../assets/images/favicon.png" height="24px" alt="Slim"/></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
-                        <li class="active"><a href="../index.html">User Guide</a></li>
-                        <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
-                        <li><a href="https://www.stickermule.com/user/1070648464/stickers" target="_blank"><i class="fa fa-heart"></i> Goodies</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        
 
 <div class="wrapper docs">
     <div class="container-fluid">
-        <header class="site-header">
-            <div class="site-title"><a href="http://www.slimframework.com/">Slim</a></div>
-            <div class="site-slogan">a micro framework for PHP</div>
-        </header>
+        
 
         <div class="row">
-            <div class="col-md-3">
-                <form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0">
-                    <div role="search" class="searchbox__wrapper">
-                        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
-                        <button type="submit" title="Submit your search query." class="searchbox__submit" >
-                            <svg role="img" aria-label="Search">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
-                            </svg>
-                        </button>
-                        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
-                            <svg role="img" aria-label="Reset">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
-                            </svg>
-                        </button>
-                    </div>
-                </form>
-
-                <div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg">
-                        <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
-                        <symbol id="sbx-icon-search-13" viewBox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"/></symbol>
-                    </svg>
-                </div>
-
-                
-                    
-                    
-                    <h3 class="toc-title active">Get Started</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../index.html">Home</a></li>
-                        
-                          
-                          <li><a href="installation.html">Installation</a></li>
-                        
-                          
-                          <li><a href="upgrade.html">Upgrade Guide</a></li>
-                        
-                          
-                          <li><a href="web-servers.html">Web Servers</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Tutorial</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../tutorial/first-app.html">First Application</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Concepts</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../concepts/value-objects.html">PSR 7</a></li>
-                        
-                          
-                          <li><a href="../concepts/middleware.html">Middleware</a></li>
-                        
-                          
-                          <li><a href="../concepts/di.html">Dependency Container</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">The Application</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../objects/application.html">Overview</a></li>
-                        
-                          
-                          <li><a href="../objects/application.html#application-configuration">Configuration</a></li>
-                        
-                          
-                          <li><a href="../objects/application.html#slim-default-settings">Default settings</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">The Request</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../objects/request.html">Overview</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#the-request-method">Method</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#the-request-body">Body</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#route-object">Route object</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#media-type-parsers">Media type parsers</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">The Response</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../objects/response.html">Overview</a></li>
-                        
-                          
-                          <li><a href="../objects/response.html#the-response-status">Status</a></li>
-                        
-                          
-                          <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
-                        
-                          
-                          <li><a href="../objects/response.html#the-response-body">Body</a></li>
-                        
-                          
-                          <li><a href="../objects/response.html#returning-json">JSON</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Routing</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../objects/router.html">Overview</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#how-to-create-routes">Create Routes</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-callbacks">Callbacks</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-strategies">Strategies</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-placeholders">Placeholders</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-names">Names</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-groups">Groups</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-middleware">Middleware</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#container-resolution">Container Resolution</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Error Handling</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../handlers/error.html">Error Handlers</a></li>
-                        
-                          
-                          <li><a href="../handlers/not-found.html">404 Not Found</a></li>
-                        
-                          
-                          <li><a href="../handlers/not-allowed.html">405 Not Allowed</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Cook book</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
-                        
-                          
-                          <li><a href="../cookbook/ip-address.html">Retrieving IP address</a></li>
-                        
-                          
-                          <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
-                        
-                          
-                          <li><a href="../cookbook/database-eloquent.html">Using Eloquent with Slim</a></li>
-                        
-                          
-                          <li><a href="../cookbook/enable-cors.html">Enabling CORS</a></li>
-                        
-                          
-                          <li><a href="../cookbook/environment.html">Getting and Mocking the Environment</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Add Ons</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../features/templates.html">Templates</a></li>
-                        
-                          
-                          <li><a href="../features/caching.html">HTTP Caching</a></li>
-                        
-                          
-                          <li><a href="../features/csrf.html">CSRF Protection</a></li>
-                        
-                          
-                          <li><a href="../features/flash.html">Flash Messages</a></li>
-                        
-                          
-                          <li><a href="https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x/">3rd Party</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Contributing</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
-                        
-                          
-                          <li><a href="../contributors/guidelines.html/index.html">Guidelines</a></li>
-                        
-                    </ul>
-                
-            </div>
+            
 
             <div class="col-md-8 docs-content">
-                <h1 class="page-header">Upgrade Guide</h1>
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Upgrade%20Guide"></a>Upgrade Guide</h1>
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
-                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/start/upgrade.md" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
+                    <a class="btn btn-default btn-xs" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/start/upgrade.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
                 <p>If you are upgrading from version 2 to version 3, these are the significant changes that
 you need to be aware of.</p>
 
-<h2 id="new-php-version">New PHP version</h2>
+<h2 id="new-php-version"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20PHP%20version"></a>New PHP version</h2>
 <p>Slim 3 requires PHP 5.5+</p>
 
-<h2 id="new-route-function-signature">New Route Function Signature</h2>
+<h2 id="new-route-function-signature"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Route%20Function%20Signature"></a>New Route Function Signature</h2>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">$app-&gt;get('/', function (Request $req,  Response $res, $args = []) {
     return $res-&gt;withStatus(400)-&gt;write('Bad Request');
 });</code></pre></figure>
 
-<h2 id="getting-get-and-post-variables">Getting _GET and _POST variables</h2>
+<h2 id="getting-get-and-post-variables"><a class="dashAnchor" name="//apple_ref/cpp/Section/Getting%20_GET%20and%20_POST%20variables"></a>Getting _GET and _POST variables</h2>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">$app-&gt;get('/', function (Request $req,  Response $res, $args = []) {
     $myvar1 = $req-&gt;getParam('myvar'); //checks both _GET and _POST [NOT PSR-7 Compliant]
@@ -340,17 +55,17 @@ you need to be aware of.</p>
     $myvar3 = $req-&gt;getQueryParams()['myvar']; //checks _GET [IS PSR-7 compliant]
 });</code></pre></figure>
 
-<h2 id="hooks">Hooks</h2>
+<h2 id="hooks"><a class="dashAnchor" name="//apple_ref/cpp/Section/Hooks"></a>Hooks</h2>
 <p>Hooks are no longer part of Slim as of v3.  You should consider reimplementing any functionality associated with the <a href="http://docs.slimframework.com/hooks/defaults/">default hooks in Slim v2</a> as <a href="../concepts/middleware.html">middleware</a> instead.  If you need the ability to apply custom hooks at arbitrary points in your code (for example, within a route), you should consider a third-party package such as <a href="http://symfony.com/doc/current/components/event_dispatcher/introduction.html">Symfony’s EventDispatcher</a> or <a href="https://zend-eventmanager.readthedocs.org/en/latest/">Zend Framework’s EventManager</a>.</p>
 
-<h2 id="removal-http-cache">Removal HTTP Cache</h2>
+<h2 id="removal-http-cache"><a class="dashAnchor" name="//apple_ref/cpp/Section/Removal%20HTTP%20Cache"></a>Removal HTTP Cache</h2>
 <p>In Slim v3 we have removed the HTTP-Caching into its own module <a href="https://github.com/slimphp/Slim-HttpCache">Slim\Http\Cache</a>.</p>
 
-<h2 id="removal-of-stophalt">Removal of Stop/Halt</h2>
+<h2 id="removal-of-stophalt"><a class="dashAnchor" name="//apple_ref/cpp/Section/Removal%20of%20Stop%2FHalt"></a>Removal of Stop/Halt</h2>
 <p>Slim Core has removed Stop/Halt.
 In your applications, you should transition to using the withStatus() and withBody() methods.</p>
 
-<h2 id="changed-redirect">Changed Redirect</h2>
+<h2 id="changed-redirect"><a class="dashAnchor" name="//apple_ref/cpp/Section/Changed%20Redirect"></a>Changed Redirect</h2>
 <p>In Slim v2.x one would use the helper function $app-&gt;redirect(); to trigger a redirect request.
 In Slim v3.x one can do the same with using the Response class like so.</p>
 
@@ -360,7 +75,7 @@ In Slim v3.x one can do the same with using the Response class like so.</p>
   return $res-&gt;withStatus(302)-&gt;withHeader('Location', 'your-new-uri');
 });</code></pre></figure>
 
-<h2 id="middleware-signature">Middleware Signature</h2>
+<h2 id="middleware-signature"><a class="dashAnchor" name="//apple_ref/cpp/Section/Middleware%20Signature"></a>Middleware Signature</h2>
 <p>The middleware signature has changed from a class to a function.</p>
 
 <p>New signature:</p>
@@ -398,19 +113,19 @@ $app-&gt;add(new My\Middleware());
 // or
 $app-&gt;add(My\Middleware::class);</code></pre></figure>
 
-<h2 id="middleware-execution">Middleware Execution</h2>
+<h2 id="middleware-execution"><a class="dashAnchor" name="//apple_ref/cpp/Section/Middleware%20Execution"></a>Middleware Execution</h2>
 <p>Application middleware is executed as Last In First Executed (LIFE).</p>
 
-<h2 id="flash-messages">Flash Messages</h2>
+<h2 id="flash-messages"><a class="dashAnchor" name="//apple_ref/cpp/Section/Flash%20Messages"></a>Flash Messages</h2>
 <p>Flash messages are no longer a part of the Slim v3 core but instead have been moved to seperate <a href="../features/flash.html">Slim Flash</a> package.</p>
 
-<h2 id="cookies">Cookies</h2>
+<h2 id="cookies"><a class="dashAnchor" name="//apple_ref/cpp/Section/Cookies"></a>Cookies</h2>
 <p>In v3.0 cookies has been removed from core. See <a href="https://github.com/dflydev/dflydev-fig-cookies">FIG Cookies</a> for a PSR-7 compatible cookie component.</p>
 
-<h2 id="removal-of-crypto">Removal of Crypto</h2>
+<h2 id="removal-of-crypto"><a class="dashAnchor" name="//apple_ref/cpp/Section/Removal%20of%20Crypto"></a>Removal of Crypto</h2>
 <p>In v3.0 we have removed the dependency for crypto in core.</p>
 
-<h2 id="new-router">New Router</h2>
+<h2 id="new-router"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Router"></a>New Router</h2>
 <p>Slim now utilizes <a href="https://github.com/nikic/FastRoute">FastRoute</a>, a new, more powerful router!</p>
 
 <p>This means that the specification of route patterns has changed with named parameters now in braces and square brackets used for optional segments:</p>
@@ -421,13 +136,13 @@ $app-&gt;get('/hello/{name}', /*...*/);
 // optional segment:
 $app-&gt;get('/news[/{year}]', /*...*/);</code></pre></figure>
 
-<h2 id="route-middleware">Route Middleware</h2>
+<h2 id="route-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/Route%20Middleware"></a>Route Middleware</h2>
 <p>The syntax for adding route middleware has changed slightly.
 In v3.0:</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">$app-&gt;get(…)-&gt;add($mw2)-&gt;add($mw1);</code></pre></figure>
 
-<h2 id="getting-the-current-route">Getting the current route</h2>
+<h2 id="getting-the-current-route"><a class="dashAnchor" name="//apple_ref/cpp/Section/Getting%20the%20current%20route"></a>Getting the current route</h2>
 <p>The route is an attribute of the Request object in v3.0:</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">$request-&gt;getAttribute('route');</code></pre></figure>
@@ -436,7 +151,7 @@ In v3.0:</p>
 <code class="highlighter-rouge">determineRouteBeforeAppMiddleware</code> must be set to <code class="highlighter-rouge">true</code> in the Application
 configuration, otherwise the getAttribute call returns <code class="highlighter-rouge">null</code>.</p>
 
-<h2 id="urlfor-is-now-pathfor-in-the-router">urlFor() is now pathFor() in the router</h2>
+<h2 id="urlfor-is-now-pathfor-in-the-router"><a class="dashAnchor" name="//apple_ref/cpp/Section/urlFor%28%29%20is%20now%20pathFor%28%29%20in%20the%20router"></a>urlFor() is now pathFor() in the router</h2>
 
 <p><code class="highlighter-rouge">urlFor()</code> has been renamed <code class="highlighter-rouge">pathFor()</code> and can be found in the <code class="highlighter-rouge">router</code> object:</p>
 
@@ -448,7 +163,7 @@ configuration, otherwise the getAttribute call returns <code class="highlighter-
 
 <p>Also, <code class="highlighter-rouge">pathFor()</code> is base path aware.</p>
 
-<h2 id="container-and-di--constructing">Container and DI … Constructing</h2>
+<h2 id="container-and-di--constructing"><a class="dashAnchor" name="//apple_ref/cpp/Section/Container%20and%20DI%20%E2%80%A6%20Constructing"></a>Container and DI … Constructing</h2>
 <p>Slim uses Pimple as a Dependency Injection Container.</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">// index.php
@@ -501,9 +216,9 @@ return [
     }
 ];</code></pre></figure>
 
-<h2 id="psr-7-objects">PSR-7 Objects</h2>
+<h2 id="psr-7-objects"><a class="dashAnchor" name="//apple_ref/cpp/Section/PSR-7%20Objects"></a>PSR-7 Objects</h2>
 
-<h3 id="request-response-uri--uploadfile-are-immutable">Request, Response, Uri &amp; UploadFile are immutable.</h3>
+<h3 id="request-response-uri--uploadfile-are-immutable"><a class="dashAnchor" name="//apple_ref/cpp/Section/Request%2C%20Response%2C%20Uri%20%26%20UploadFile%20are%20immutable."></a>Request, Response, Uri &amp; UploadFile are immutable.</h3>
 <p>This means that when you change one of these objects, the old instance is not updated.</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">// This is WRONG. The change will not pass through.
@@ -518,7 +233,7 @@ $app-&gt;add(function (Request $request, Response $response, $next) {
     return $next($request, $response);
 });</code></pre></figure>
 
-<h3 id="message-bodies-are-streams">Message bodies are streams</h3>
+<h3 id="message-bodies-are-streams"><a class="dashAnchor" name="//apple_ref/cpp/Section/Message%20bodies%20are%20streams"></a>Message bodies are streams</h3>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">// ...
 $image = __DIR__ . '/huge_photo.jpg';
@@ -540,6 +255,435 @@ $response = (new Response())-&gt;write('Hello world!');
 // ...</code></pre></figure>
 
 
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="installation.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Get Started: </small> Installation</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="web-servers.html" rel="next"><small>Get Started: </small> Web Servers <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
             </div>
         </div>
 
@@ -551,29 +695,24 @@ $response = (new Response())-&gt;write('Hello world!');
                 <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
                 <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
             </p>
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="margin: 0; padding-top: 20px" target="_blank">
+                <input name="cmd" type="hidden" value="_s-xclick"/>
+                <input name="hosted_button_id" type="hidden" value="9YRVXHRZT6H3L"/>
+                <input alt="PayPal - The safer, easier way to pay online!" border="0" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" type="image"/>
+                <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"/>
             </form>
         </footer>
     </div>
 </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="../../assets/scripts/build/production.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
-        <script>
-        docsearch({
-          apiKey: 'b6e6f2d1ae81c64677b6192755f83a6e',
-          indexName: 'slimframework',
-          inputSelector: '#docsearch'
-        });
-        </script>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    </body>
+        
+        
+        
+        
+        
+        
+    
 
-<!-- Mirrored from www.slimframework.com/docs/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 06 Sep 2016 07:02:01 GMT -->
-</html>
 
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Sep 2016 20:42:42 GMT --></html>

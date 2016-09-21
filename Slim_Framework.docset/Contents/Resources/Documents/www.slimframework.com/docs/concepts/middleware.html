@@ -1,324 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-    
-<!-- Mirrored from www.slimframework.com/docs/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 06 Sep 2016 07:02:01 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Sep 2016 20:42:42 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
         <title>Middleware - Slim Framework</title>
-        <meta name="description" content=""/>
-        <meta name="robots" content="index, follow"/>
-        <meta property="og:title" content="Middleware"/>
-        <meta property="og:site_name" content="Slim Framework"/>
-        <meta property="og:url" content="middleware.html"/>
-        <meta property="og:description" content=""/>
-        <meta property="og:type" content="website"/>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Middleware" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="middleware.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
         <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-        <link rel="stylesheet" href="../../assets/css/all.css"/>
-        <link rel="shortcut icon" href="../../assets/images/favicon.png"/>
-        <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
-        <script src="https://use.typekit.net/yjz4fyo.js"></script>
-        <script>try{Typekit.load();}catch(e){}</script>
-        <script>
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-19430723-1']);
-            _gaq.push(['_trackPageview']);
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
+        <link href="../../assets/css/all.css" rel="stylesheet"/>
+        <link href="../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
     </head>
     <body style="padding-top: 5em">
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="http://www.slimframework.com/"><img src="../../assets/images/favicon.png" height="24px" alt="Slim"/></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
-                        <li class="active"><a href="../index.html">User Guide</a></li>
-                        <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
-                        <li><a href="https://www.stickermule.com/user/1070648464/stickers" target="_blank"><i class="fa fa-heart"></i> Goodies</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        
 
 <div class="wrapper docs">
     <div class="container-fluid">
-        <header class="site-header">
-            <div class="site-title"><a href="http://www.slimframework.com/">Slim</a></div>
-            <div class="site-slogan">a micro framework for PHP</div>
-        </header>
+        
 
         <div class="row">
-            <div class="col-md-3">
-                <form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0">
-                    <div role="search" class="searchbox__wrapper">
-                        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
-                        <button type="submit" title="Submit your search query." class="searchbox__submit" >
-                            <svg role="img" aria-label="Search">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
-                            </svg>
-                        </button>
-                        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
-                            <svg role="img" aria-label="Reset">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
-                            </svg>
-                        </button>
-                    </div>
-                </form>
-
-                <div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg">
-                        <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
-                        <symbol id="sbx-icon-search-13" viewBox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"/></symbol>
-                    </svg>
-                </div>
-
-                
-                    
-                    
-                    <h3 class="toc-title">Get Started</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../index.html">Home</a></li>
-                        
-                          
-                          <li><a href="../start/installation.html">Installation</a></li>
-                        
-                          
-                          <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
-                        
-                          
-                          <li><a href="../start/web-servers.html">Web Servers</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Tutorial</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../tutorial/first-app.html">First Application</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title active">Concepts</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="value-objects.html">PSR 7</a></li>
-                        
-                          
-                          <li><a href="middleware.html">Middleware</a></li>
-                        
-                          
-                          <li><a href="di.html">Dependency Container</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">The Application</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../objects/application.html">Overview</a></li>
-                        
-                          
-                          <li><a href="../objects/application.html#application-configuration">Configuration</a></li>
-                        
-                          
-                          <li><a href="../objects/application.html#slim-default-settings">Default settings</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">The Request</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../objects/request.html">Overview</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#the-request-method">Method</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#the-request-body">Body</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#route-object">Route object</a></li>
-                        
-                          
-                          <li><a href="../objects/request.html#media-type-parsers">Media type parsers</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">The Response</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../objects/response.html">Overview</a></li>
-                        
-                          
-                          <li><a href="../objects/response.html#the-response-status">Status</a></li>
-                        
-                          
-                          <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
-                        
-                          
-                          <li><a href="../objects/response.html#the-response-body">Body</a></li>
-                        
-                          
-                          <li><a href="../objects/response.html#returning-json">JSON</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Routing</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../objects/router.html">Overview</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#how-to-create-routes">Create Routes</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-callbacks">Callbacks</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-strategies">Strategies</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-placeholders">Placeholders</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-names">Names</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-groups">Groups</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#route-middleware">Middleware</a></li>
-                        
-                          
-                          <li><a href="../objects/router.html#container-resolution">Container Resolution</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Error Handling</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../handlers/error.html">Error Handlers</a></li>
-                        
-                          
-                          <li><a href="../handlers/not-found.html">404 Not Found</a></li>
-                        
-                          
-                          <li><a href="../handlers/not-allowed.html">405 Not Allowed</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Cook book</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
-                        
-                          
-                          <li><a href="../cookbook/ip-address.html">Retrieving IP address</a></li>
-                        
-                          
-                          <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
-                        
-                          
-                          <li><a href="../cookbook/database-eloquent.html">Using Eloquent with Slim</a></li>
-                        
-                          
-                          <li><a href="../cookbook/enable-cors.html">Enabling CORS</a></li>
-                        
-                          
-                          <li><a href="../cookbook/environment.html">Getting and Mocking the Environment</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Add Ons</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../features/templates.html">Templates</a></li>
-                        
-                          
-                          <li><a href="../features/caching.html">HTTP Caching</a></li>
-                        
-                          
-                          <li><a href="../features/csrf.html">CSRF Protection</a></li>
-                        
-                          
-                          <li><a href="../features/flash.html">Flash Messages</a></li>
-                        
-                          
-                          <li><a href="https://github.com/slimphp/Slim/wiki/Middleware-for-Slim-Framework-v3.x/">3rd Party</a></li>
-                        
-                    </ul>
-                
-                    
-                    
-                    <h3 class="toc-title">Contributing</h3>
-                    <ul class="toc-links">
-                        
-                          
-                          <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
-                        
-                          
-                          <li><a href="../contributors/guidelines.html/index.html">Guidelines</a></li>
-                        
-                    </ul>
-                
-            </div>
+            
 
             <div class="col-md-8 docs-content">
-                <h1 class="page-header">Middleware</h1>
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Middleware"></a>Middleware</h1>
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
-                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/concepts/middleware.md" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-github"></i> Edit This Page</a>
+                    <a class="btn btn-default btn-xs" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/concepts/middleware.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
                 <p>You can run code <em>before</em> and <em>after</em> your Slim application to manipulate the
 Request and Response objects as you see fit. This is called <em>middleware</em>.
@@ -326,7 +41,7 @@ Why would you want to do this? Perhaps you want to protect your app
 from cross-site request forgery. Maybe you want to authenticate requests
 before your app runs. Middleware is perfect for these scenarios.</p>
 
-<h2 id="what-is-middleware">What is middleware?</h2>
+<h2 id="what-is-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/What%20is%20middleware%3F"></a>What is middleware?</h2>
 
 <p>Technically speaking, a middleware is a <em>callable</em> that accepts three arguments:</p>
 
@@ -341,7 +56,7 @@ is that a middleware <strong>MUST</strong> return an instance of <code class="hi
 Each middleware <strong>SHOULD</strong> invoke the next middleware and pass it Request and
 Response objects as arguments.</p>
 
-<h2 id="how-does-middleware-work">How does middleware work?</h2>
+<h2 id="how-does-middleware-work"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20does%20middleware%20work%3F"></a>How does middleware work?</h2>
 
 <p>Different frameworks use middleware differently. Slim adds middleware as concentric
 layers surrounding your core application. Each new middleware layer surrounds
@@ -361,14 +76,14 @@ response, and is returned to the HTTP client. Here’s a diagram that illustrate
 the middleware process flow:</p>
 
 <div style="padding: 2em 0; text-align: center">
-    <img src="../images/middleware.png" alt="Middleware architecture" style="max-width: 80%;" />
+    <img alt="Middleware architecture" src="../images/middleware.png" style="max-width: 80%;"/>
 </div>
 
-<h2 id="how-do-i-write-middleware">How do I write middleware?</h2>
+<h2 id="how-do-i-write-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20do%20I%20write%20middleware%3F"></a>How do I write middleware?</h2>
 
 <p>Middleware is a callable that accepts three arguments: a Request object, a Response object, and the next middleware. Each middleware <strong>MUST</strong> return an instance of <code class="highlighter-rouge">\Psr\Http\Message\ResponseInterface</code>.</p>
 
-<h3 id="closure-middleware-example">Closure middleware example.</h3>
+<h3 id="closure-middleware-example"><a class="dashAnchor" name="//apple_ref/cpp/Section/Closure%20middleware%20example."></a>Closure middleware example.</h3>
 
 <p>This example middleware is a Closure.</p>
 
@@ -390,7 +105,7 @@ the middleware process flow:</p>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">};</span></code></pre></figure>
 
-<h3 id="invokable-class-middleware-example">Invokable class middleware example</h3>
+<h3 id="invokable-class-middleware-example"><a class="dashAnchor" name="//apple_ref/cpp/Section/Invokable%20class%20middleware%20example"></a>Invokable class middleware example</h3>
 
 <p>This example middleware is an invokable class that implements the magic <code class="highlighter-rouge">__invoke()</code> method.</p>
 
@@ -420,11 +135,11 @@ the middleware process flow:</p>
 
 <figure class="highlight"><pre><code class="language-php" data-lang="php">$subject-&gt;add( new ExampleMiddleware() );</code></pre></figure>
 
-<h2 id="how-do-i-add-middleware">How do I add middleware?</h2>
+<h2 id="how-do-i-add-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20do%20I%20add%20middleware%3F"></a>How do I add middleware?</h2>
 
 <p>You may add middleware to a Slim application, to an individual Slim application route or to a route group. All scenarios accept the same middleware and implement the same middleware interface.</p>
 
-<h3 id="application-middleware">Application middleware</h3>
+<h3 id="application-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/Application%20middleware"></a>Application middleware</h3>
 
 <p>Application middleware is invoked for every <em>incoming</em> HTTP request. Add application middleware with the Slim application instance’s <code class="highlighter-rouge">add()</code> method. This example adds the Closure middleware example above:</p>
 
@@ -453,7 +168,7 @@ the middleware process flow:</p>
 </code></pre>
 </div>
 
-<h3 id="route-middleware">Route middleware</h3>
+<h3 id="route-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/Route%20middleware"></a>Route middleware</h3>
 
 <p>Route middleware is invoked <em>only if</em> its route matches the current HTTP request method and URI. Route middleware is specified immediately after you invoke any of the Slim application’s routing methods (e.g., <code class="highlighter-rouge">get()</code> or <code class="highlighter-rouge">post()</code>). Each routing method returns an instance of <code class="highlighter-rouge">\Slim\Route</code>, and this class provides the same middleware interface as the Slim application instance. Add middleware to a Route with the Route instance’s <code class="highlighter-rouge">add()</code> method. This example adds the Closure middleware example above:</p>
 
@@ -482,7 +197,7 @@ the middleware process flow:</p>
 </code></pre>
 </div>
 
-<h3 id="group-middleware">Group Middleware</h3>
+<h3 id="group-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/Group%20Middleware"></a>Group Middleware</h3>
 
 <p>In addition to the overall application, and standard routes being able to accept middleware, the <code class="highlighter-rouge">group()</code> multi-route definition functionality, also allows individual routes internally. Route group middleware is invoked <em>only if</em> its route matches one of the defined HTTP request methods and URIs from the group. To add middleware within the callback, and entire-group middleware to be set by chaining <code class="highlighter-rouge">add()</code> after the <code class="highlighter-rouge">group()</code> method.</p>
 
@@ -531,7 +246,7 @@ the middleware process flow:</p>
 </code></pre>
 </div>
 
-<h3 id="passing-variables-from-middleware">Passing variables from middleware</h3>
+<h3 id="passing-variables-from-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/Passing%20variables%20from%20middleware"></a>Passing variables from middleware</h3>
 <p>The easiest way to pass attributes from middleware is to use the request’s
 attributes.</p>
 
@@ -544,6 +259,435 @@ attributes.</p>
 <figure class="highlight"><pre><code class="language-php" data-lang="php">$foo = $request-&gt;getAttribute('foo');</code></pre></figure>
 
 
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="value-objects.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Concepts: </small> PSR 7</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="di.html" rel="next"><small>Concepts: </small> Dependency Container <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
             </div>
         </div>
 
@@ -555,29 +699,24 @@ attributes.</p>
                 <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
                 <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
             </p>
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="margin: 0; padding-top: 20px" target="_blank">
+                <input name="cmd" type="hidden" value="_s-xclick"/>
+                <input name="hosted_button_id" type="hidden" value="9YRVXHRZT6H3L"/>
+                <input alt="PayPal - The safer, easier way to pay online!" border="0" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" type="image"/>
+                <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"/>
             </form>
         </footer>
     </div>
 </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="../../assets/scripts/build/production.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
-        <script>
-        docsearch({
-          apiKey: 'b6e6f2d1ae81c64677b6192755f83a6e',
-          indexName: 'slimframework',
-          inputSelector: '#docsearch'
-        });
-        </script>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    </body>
+        
+        
+        
+        
+        
+        
+    
 
-<!-- Mirrored from www.slimframework.com/docs/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 06 Sep 2016 07:02:01 GMT -->
-</html>
 
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Sep 2016 20:42:42 GMT --></html>

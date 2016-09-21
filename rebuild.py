@@ -58,6 +58,9 @@ for root, dirs, files in os.walk(os.path.join(DOCUMENTS_DIR, HTML_DIR), topdown=
 
         main = soup.find('div', class_='docs-content')
 
+        if not main:
+            continue
+
         for tag in main.find_all(['h1', 'h2', 'h3', 'h4']):
             dashAnchor = tag.find('a', class_='dashAnchor')
             if dashAnchor:

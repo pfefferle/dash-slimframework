@@ -1,0 +1,32 @@
+dist: xenial
+language: python
+
+python:
+  - 3.7
+
+addons:
+  apt:
+    update: true
+    packages:
+      - webhttrack
+      - httrack
+
+cache: pip
+
+install:
+  - pip3 install requests BeautifulSoup4 html5lib
+
+script:
+  - echo Skipping
+
+before_deploy:
+  - python3 deploy.py
+  - export TRAVIS_TAG=$(git describe --tags --abbrev=0)
+
+deploy:
+  provider: releases
+  api_key: $GH_TOKEN
+  file: "Slim_Framework.tgz"
+  skip_cleanup: true
+  on:
+    condition: $TRAVIS_EVENT_TYPE = cron

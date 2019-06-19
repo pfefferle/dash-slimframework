@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v3/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:43 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>First Application Walkthrough - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="First Application Walkthrough" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="first-app.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+    </head>
+    <body style="padding-top: 5em">
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        
+
+        <div class="row">
+            
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/First%20Application%20Walkthrough"></a>First Application Walkthrough</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v3/tutorial/first-app.md" role="button" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                    
+                </div>
+                <p>If you’re looking for a tour through all the ingredients for setting up a very simple Slim application (this one doesn’t use Twig, but does use Monolog and a PDO database connection) then you’re in the right place.  Either walk through the tutorial to build the example application, or adapt each step for your own needs.</p>
+
+<p>Before you start: There is also a <a href="https://github.com/slimphp/Slim-Skeleton">skeleton project</a> which will give you a quick-start for a sample application, so use that if you’d rather just have something working rather than exploring how all the moving parts work.</p>
+
+<blockquote>
+  <p>This tutorial walks through building an example application.  The <a href="https://github.com/slimphp/Tutorial-First-Application">code for the application is available</a> if you want to refer to it.</p>
+</blockquote>
+
+<h2 id="getting-set-up"><a class="dashAnchor" name="//apple_ref/cpp/Section/Getting%20Set%20Up"></a>Getting Set Up</h2>
+
+<p>Start by making a folder for your project (mine is called <code class="highlighter-rouge">project</code>, because naming things is hard).  I like to reserve the top level for things-that-are-not-code and then have a folder for source code, and a folder inside that which is my webroot, so my initial structure looks like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── project
+│   └── src
+│       └── public
+</code></pre></div></div>
+
+<h3 id="installing-slim-framework"><a class="dashAnchor" name="//apple_ref/cpp/Section/Installing%20Slim%20Framework"></a>Installing Slim Framework</h3>
+
+<p><a href="https://getcomposer.org/">Composer</a> is the best way to install Slim Framework.  If you don’t have it already, you can follow the <a href="https://getcomposer.org/download/">installation instructions</a>, in my project I’ve just downloaded the <code class="highlighter-rouge">composer.phar</code> into my <code class="highlighter-rouge">src/</code> directory and I’ll use it locally.  So my first command looks like this (I’m in the <code class="highlighter-rouge">src/</code> directory):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php composer.phar require slim/slim
+</code></pre></div></div>
+
+<p>This does two things:</p>
+
+<ul>
+  <li>Add the Slim Framework dependency to <code class="highlighter-rouge">composer.json</code> (in my case it creates the file for me as I don’t already have one, it’s safe to run this if you do already have a <code class="highlighter-rouge">composer.json</code> file)</li>
+  <li>Run <code class="highlighter-rouge">composer install</code> so that those dependencies are actually available to use in your application</li>
+</ul>
+
+<p>If you look inside the project directory now, you’ll see that you have a <code class="highlighter-rouge">vendor/</code> folder with all the library code in it.  There are also two new files: <code class="highlighter-rouge">composer.json</code> and <code class="highlighter-rouge">composer.lock</code>.  This would be a great time to get our source control setup correct as well: when working with composer, we always exclude the <code class="highlighter-rouge">vendor/</code> directory, but both <code class="highlighter-rouge">composer.json</code> and <code class="highlighter-rouge">composer.lock</code> should be included under source control.  Since I’m using <code class="highlighter-rouge">composer.phar</code> in this directory I’m going to include it in my repo as well; you could equally install the <code class="highlighter-rouge">composer</code> command on all the systems that need it.</p>
+
+<p>To set up the git ignore correctly, create a file called <code class="highlighter-rouge">src/.gitignore</code> and add the following single line to the file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vendor/*
+</code></pre></div></div>
+
+<p>Now git won’t prompt you to add the files in <code class="highlighter-rouge">vendor/</code> to the repository - we don’t want to do this because we’re letting composer manage these dependencies rather than including them in our source control repository.</p>
+
+<h3 id="create-the-application"><a class="dashAnchor" name="//apple_ref/cpp/Section/Create%20The%20Application"></a>Create The Application</h3>
+
+<p>There’s a really excellent and minimal example of an <code class="highlighter-rouge">index.php</code> for Slim Framework on the <a href="http://www.slimframework.com/">project homepage</a> so we’ll use that as our starting point.  Put the following code into <code class="highlighter-rouge">src/public/index.php</code>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">\Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">\Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="s1">'../../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">];</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s2">"Hello, </span><span class="nv">$name</span><span class="s2">"</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+
+</code></pre></div></div>
+
+<p>We just pasted a load of code … let’s take a look at what it does.</p>
+
+<p>The <code class="highlighter-rouge">use</code> statements at the top of the script are just bringing the <code class="highlighter-rouge">Request</code> and <code class="highlighter-rouge">Response</code> classes into our script so we don’t have to refer to them by their long-winded names.  Slim framework supports PSR-7 which is the PHP standard for HTTP messaging, so you’ll notice as you build your application that the <code class="highlighter-rouge">Request</code> and <code class="highlighter-rouge">Response</code> objects are something you see often.  This is a modern and excellent approach to writing web applications.</p>
+
+<p>Next we include the <code class="highlighter-rouge">vendor/autoload.php</code> file - this is created by Composer and allows us to refer to the Slim and other related dependencies we installed earlier.  Look out that if you’re using the same file structure as me then the <code class="highlighter-rouge">vendor/</code> directory is one level up from your <code class="highlighter-rouge">index.php</code> and you may need to adjust the path as I did above.</p>
+
+<p>Finally we create the <code class="highlighter-rouge">$app</code> object which is the start of the Slim goodness.  The <code class="highlighter-rouge">$app-&gt;get()</code> call is our first “route” - when we make a GET request to <code class="highlighter-rouge">/hello/someone</code> then this is the code that will respond to it.  <strong>Don’t forget</strong> you need that final <code class="highlighter-rouge">$app-&gt;run()</code> line to tell Slim that we’re done configuring and it’s time to get on with the main event.</p>
+
+<p>Now we have an application, we’ll need to run it.  I’ll cover two options: the built-in PHP webserver, and an Apache virtual host setup.</p>
+
+<h3 id="run-your-application-with-phps-webserver"><a class="dashAnchor" name="//apple_ref/cpp/Section/Run%20Your%20Application%20With%20PHP%E2%80%99s%20Webserver"></a>Run Your Application With PHP’s Webserver</h3>
+
+<p>This is my preferred “quick start” option because it doesn’t rely on anything else!  From the <code class="highlighter-rouge">src/public</code> directory run the command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php -S localhost:8080
+</code></pre></div></div>
+
+<p>This will make your application available at http://localhost:8080 (if you’re already using port 8080 on your machine, you’ll get a warning.  Just pick a different port number, PHP doesn’t care what you bind it to).</p>
+
+<p><strong>Note</strong> you’ll get an error message about “Page Not Found” at this URL - but it’s an error message <strong>from</strong> Slim, so this is expected.  Try http://localhost:8080/hello/joebloggs instead :)</p>
+
+<h3 id="run-your-application-with-apache-or-nginx"><a class="dashAnchor" name="//apple_ref/cpp/Section/Run%20Your%20Application%20With%20Apache%20or%20nginx"></a>Run Your Application With Apache or nginx</h3>
+
+<p>To get this set up on a standard LAMP stack, we’ll need a couple of extra ingredients: some virtual host configuration, and one rewrite rule.</p>
+
+<p>The vhost configuration should be fairly straightforward; we don’t need anything special here.  Copy your existing default vhost configuration and set the <code class="highlighter-rouge">ServerName</code> to be how you want to refer to your project.  For example you can set:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ServerName slimproject.test
+
+or for nginx:
+
+server_name slimproject.test;
+</code></pre></div></div>
+
+<p>Then you’ll also want to set the <code class="highlighter-rouge">DocumentRoot</code> to point to the <code class="highlighter-rouge">public/</code> directory of your project, something like this (edit the existing line):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DocumentRoot    /home/lorna/projects/slim/project/src/public/
+
+or for nginx:
+
+root    /home/lorna/projects/slim/project/src/public/
+</code></pre></div></div>
+
+<p><strong>Don’t forget</strong> to restart your server process now you’ve changed the configuration!</p>
+
+<p>I also have a <code class="highlighter-rouge">.htaccess</code> file in my <code class="highlighter-rouge">src/public</code> directory; this relies on Apache’s rewrite module being enabled and simply makes all web requests go to index.php so that Slim can then handle all the routing for us.  Here’s my <code class="highlighter-rouge">.htaccess</code> file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . index.php [L]
+</code></pre></div></div>
+
+<p>nginx does not use <code class="highlighter-rouge">.htaccess</code> files, so you will need to add the following to your server configuration in the <code class="highlighter-rouge">location</code> block:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (!-e $request_filename){
+    rewrite ^(.*)$ /index.php break;
+}
+</code></pre></div></div>
+
+<p><em>NOTE:</em> If you want your entry point to be something other than index.php you will need your config to change as well. <code class="highlighter-rouge">api.php</code> is also commonly used as an entry point, so your set up should match accordingly. This example assumes you are using index.php.</p>
+
+<p>With this setup, just remember to use http://slimproject.test instead of http://localhost:8080 in the other examples in this tutorial.  The same health warning as above applies: you’ll see an error page at http://slimproject.test but crucially it’s <em>Slim’s</em> error page.  If you go to http://slimproject.test/hello/joebloggs then something better should happen.</p>
+
+<h2 id="configuration-and-autoloaders"><a class="dashAnchor" name="//apple_ref/cpp/Section/Configuration%20and%20Autoloaders"></a>Configuration and Autoloaders</h2>
+
+<p>Now we’ve set up the platform, we can start getting everything we need in place in the application itself.</p>
+
+<h3 id="add-config-settings-to-your-application"><a class="dashAnchor" name="//apple_ref/cpp/Section/Add%20Config%20Settings%20to%20Your%20Application"></a>Add Config Settings to Your Application</h3>
+
+<p>The initial example uses all the Slim defaults, but we can easily add configuration to our application when we create it.  There are a few options but here I’ve just created an array of config options and then told Slim to take its settings from here when I create it.</p>
+
+<p>First the configuration itself:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$config</span><span class="p">[</span><span class="s1">'displayErrorDetails'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">'addContentLengthHeader'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="nv">$config</span><span class="p">[</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'host'</span><span class="p">]</span>   <span class="o">=</span> <span class="s1">'localhost'</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'user'</span><span class="p">]</span>   <span class="o">=</span> <span class="s1">'user'</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'pass'</span><span class="p">]</span>   <span class="o">=</span> <span class="s1">'password'</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'dbname'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'exampleapp'</span><span class="p">;</span>
+</code></pre></div></div>
+<p>These string should be added into <code class="highlighter-rouge">src/public/index.php</code> before the <code class="highlighter-rouge">$app = new \Slim\App</code> line.</p>
+
+<p>The first line is the most important!  Turn this on in development mode to get information about errors (without it, Slim will at least log errors so if you’re using the built in PHP webserver then you’ll see them in the console output which is helpful). The second line allows the web server to set the Content-Length header which makes Slim behave more predictably.</p>
+
+<p>The other settings here are not specific keys/values, they’re just some data that I want to be able to access later.</p>
+
+<p>Now to feed this into Slim, we need to <em>change</em> where we create the <code class="highlighter-rouge">Slim/App</code> object so that it now looks like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">([</span><span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="nv">$config</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>We’ll be able to access any settings we put into that <code class="highlighter-rouge">$config</code> array from our application later on.</p>
+
+<h2 id="set-up-autoloading-for-your-own-classes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Set%20up%20Autoloading%20for%20Your%20Own%20Classes"></a>Set up Autoloading for Your Own Classes</h2>
+
+<p>Composer can handle the autoloading of your own classes just as well as the vendored ones. For an in-depth guide, take a look at <a href="https://getcomposer.org/doc/04-schema.md#autoload">using Composer to manage autoloading rules</a>.</p>
+
+<p>My setup is pretty simple since I only have a few extra classes, they’re just in the global namespace, and the files are in the <code class="highlighter-rouge">src/classes/</code> directory.  So to autoload them, I add this <code class="highlighter-rouge">autoload</code> section to my <code class="highlighter-rouge">composer.json</code> file:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s2">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"slim/slim"</span><span class="p">:</span> <span class="s2">"^3.1"</span><span class="p">,</span>
+        <span class="s2">"slim/php-view"</span><span class="p">:</span> <span class="s2">"^2.0"</span><span class="p">,</span>
+        <span class="s2">"monolog/monolog"</span><span class="p">:</span> <span class="s2">"^1.17"</span><span class="p">,</span>
+        <span class="s2">"robmorgan/phinx"</span><span class="p">:</span> <span class="s2">"^0.5.1"</span>
+    <span class="p">},</span>
+    <span class="s2">"autoload"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"psr-4"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">""</span><span class="p">:</span> <span class="s2">"classes/"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="add-dependencies"><a class="dashAnchor" name="//apple_ref/cpp/Section/Add%20Dependencies"></a>Add Dependencies</h2>
+
+<p>Most applications will have some dependencies, and Slim handles them nicely using a DIC (Dependency Injection Container) built on <a href="http://pimple.sensiolabs.org/">Pimple</a>.  This example will use both <a href="https://github.com/Seldaek/monolog">Monolog</a> and a <a href="http://php.net/manual/en/book.pdo.php">PDO</a> connection to MySQL.</p>
+
+<p>The idea of the dependency injection container is that you configure the container to be able to load the dependencies that your application needs, when it needs them.  Once the DIC has created/assembled the dependencies, it stores them and can supply them again later if needed.</p>
+
+<p>To get the container, we can add the following after the line where we create <code class="highlighter-rouge">$app</code> and before we start to register the routes in our application:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Now we have the <code class="highlighter-rouge">Slim\Container</code> object, we can add our services to it.</p>
+
+<h3 id="use-monolog-in-your-application"><a class="dashAnchor" name="//apple_ref/cpp/Section/Use%20Monolog%20In%20Your%20Application"></a>Use Monolog In Your Application</h3>
+
+<p>If you’re not already familiar with Monolog, it’s an excellent logging framework for PHP applications, which is why I’m going to use it here.  First of all, get the Monolog library installed via Composer:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php composer.phar require monolog/monolog
+</code></pre></div></div>
+
+<p>The dependency is named <code class="highlighter-rouge">logger</code> and the code to add it looks like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span><span class="p">[</span><span class="s1">'logger'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$logger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Monolog\Logger</span><span class="p">(</span><span class="s1">'my_logger'</span><span class="p">);</span>
+    <span class="nv">$file_handler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Monolog\Handler\StreamHandler</span><span class="p">(</span><span class="s1">'../logs/app.log'</span><span class="p">);</span>
+    <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">pushHandler</span><span class="p">(</span><span class="nv">$file_handler</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$logger</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>We’re adding an element to the container, which is itself an anonymous function (the <code class="highlighter-rouge">$c</code> that is passed in is the container itself so you can access other dependencies if you need to).  This will be called when we try to access this dependency for the first time; the code here does the setup of the dependency.  Next time we try to access the same dependency, the same object that was created the first time will be used the next time.</p>
+
+<p>My Monolog config here is fairly light; just setting up the application to log all errors to a file called <code class="highlighter-rouge">logs/app.log</code> (remember this path is from the point of view of where the script is running, i.e. <code class="highlighter-rouge">index.php</code>).</p>
+
+<p>With the logger in place, I can use it from inside my route code with a line like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="s1">'Something interesting happened'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Having good application logging is a really important foundation for any application so I’d always recommend putting something like this in place.  This allows you to add as much or as little debugging as you want, and by using the appropriate log levels with each message, you can have as much or as little detail as is appropriate for what you’re doing in any one moment.</p>
+
+<h3 id="add-a-database-connection"><a class="dashAnchor" name="//apple_ref/cpp/Section/Add%20A%20Database%20Connection"></a>Add A Database Connection</h3>
+
+<p>There are many database libraries available for PHP, but this example uses PDO - this is available in PHP as standard so it’s probably useful in every project, or you can use your own libraries by adapting the examples below.</p>
+
+<p>Exactly as we did for adding Monolog to the DIC, we’ll add an anonymous function that sets up the dependency, in this case called <code class="highlighter-rouge">db</code>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span><span class="p">[</span><span class="s1">'db'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$db</span> <span class="o">=</span> <span class="nv">$c</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">];</span>
+    <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">'mysql:host='</span> <span class="o">.</span> <span class="nv">$db</span><span class="p">[</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">';dbname='</span> <span class="o">.</span> <span class="nv">$db</span><span class="p">[</span><span class="s1">'dbname'</span><span class="p">],</span>
+        <span class="nv">$db</span><span class="p">[</span><span class="s1">'user'</span><span class="p">],</span> <span class="nv">$db</span><span class="p">[</span><span class="s1">'pass'</span><span class="p">]);</span>
+    <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_EXCEPTION</span><span class="p">);</span>
+    <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_DEFAULT_FETCH_MODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$pdo</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Remember the config that we added into our app earlier?  Well, this is where we use it - the container knows how to access our settings, and so we can grab our configuration very easily from here.  With the config, we create the <code class="highlighter-rouge">PDO</code> object (remember this will throw a <code class="highlighter-rouge">PDOException</code> if it fails and you might like to handle that here) so that we can connect to the database.  I’ve included two <code class="highlighter-rouge">setAttribute()</code> calls that really aren’t necessary but I find these two settings make PDO itself much more usable as a library so I left the settings in this example so you can use them too!  Finally, we return our connection object.</p>
+
+<p>Again, we can access our dependencies with just <code class="highlighter-rouge">$this-&gt;</code> and then the name of the dependency we want which in this case is <code class="highlighter-rouge">$this-&gt;db</code>, so there is code in my application that looks something like:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This will fetch the <code class="highlighter-rouge">db</code> dependency from the DIC, creating it if necessary, and in this example just allows me to pass the <code class="highlighter-rouge">PDO</code> object straight into my mapper class.</p>
+
+<h2 id="create-routes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Create%20Routes"></a>Create Routes</h2>
+
+<p>“Routes” are the URL patterns that we’ll describe and attach functionality to.  Slim doesn’t use any automatic mapping or URL formulae so you can make any route pattern you like map onto any function you like, it’s very flexible.  Routes can be linked to a particular HTTP verb (such as GET or POST), or more than one verb.</p>
+
+<p>As a first example, here’s the code for making a GET request to <code class="highlighter-rouge">/tickets</code> which lists the tickets in my bug tracker example application.  It just spits out the variables since we haven’t added any views to our application yet:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="s2">"Ticket list"</span><span class="p">);</span>
+    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
+    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="na">getTickets</span><span class="p">();</span>
+
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nb">var_export</span><span class="p">(</span><span class="nv">$tickets</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>The use of <code class="highlighter-rouge">$app-&gt;get()</code> here means that this route is only available for GET requests; there’s an equivalent <code class="highlighter-rouge">$app-&gt;post()</code> call that also takes the route pattern and a callback for POST requests.  There are also <a href="../objects/router.html">methods for other verbs</a> - and also the <code class="highlighter-rouge">map()</code> function for situations where more than one verb should use the same code for a particular route.</p>
+
+<p>Slim routes match in the order they are declared, so if you have a route which could overlap another route, you need to put the most specific one first.  Slim will throw an exception if there’s a problem, for example in this application I have both <code class="highlighter-rouge">/ticket/new</code> and <code class="highlighter-rouge">/ticket/{id}</code> and they need to be declared in that order otherwise the routing will think that “new” is an ID!</p>
+
+<p>In this example application, all the routes are in <code class="highlighter-rouge">index.php</code> but in practice this can make for a rather long and unwieldy file!  It’s fine to refactor your application to put routes into a different file or files, or just register a set of routes with callbacks that are actually declared elsewhere.</p>
+
+<p>All route callbacks accept three parameters (the third one is optional):</p>
+
+<ul>
+  <li>Request: this contains all the information about the incoming request, headers, variables, etc.</li>
+  <li>Response: we can add output and headers to this and, once complete, it will be turned into the HTTP response that the client receives</li>
+  <li>Arguments: the named placeholders from the URL (more on those in just a moment), this is optional and is usually omitted if there aren’t any</li>
+</ul>
+
+<p>This emphasis on Request and Response illustrates Slim 3 being based on the PSR-7 standard for HTTP Messaging.  Using the Request and Response object also makes the application more testable as we don’t need to make <strong>actual</strong> requests and responses, we can just set up the objects as desired.</p>
+
+<h3 id="routes-with-named-placeholders"><a class="dashAnchor" name="//apple_ref/cpp/Section/Routes%20with%20Named%20Placeholders"></a>Routes with Named Placeholders</h3>
+
+<p>Sometimes, our URLs have variables in them that we want to use in our application.  In my bug tracking example, I want to have URLs like <code class="highlighter-rouge">/ticket/42</code> to refer to the ticket - and Slim has an easy way of parsing out the “42” bit and making it available for easy use in the code.  Here’s the route that does exactly that:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$ticket_id</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$args</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
+    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="na">getTicketById</span><span class="p">(</span><span class="nv">$ticket_id</span><span class="p">);</span>
+
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nb">var_export</span><span class="p">(</span><span class="nv">$ticket</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Look at where the route itself is defined: we write it as <code class="highlighter-rouge">/ticket/{id}</code>.  When we do this, the route will take the portion of the URL from where the <code class="highlighter-rouge">{id}</code> is declared, and it becomes available as <code class="highlighter-rouge">$args['id']</code> inside the callback.</p>
+
+<h3 id="using-get-parameters"><a class="dashAnchor" name="//apple_ref/cpp/Section/Using%20GET%20Parameters"></a>Using GET Parameters</h3>
+
+<p>Since GET and POST send data in such different ways, then the way that we get that data from the Request object differs hugely in Slim.</p>
+
+<p>It is possible to get all the query parameters from a request by doing <code class="highlighter-rouge">$request-&gt;getQueryParams()</code> which will return an associative array.  So for the URL <code class="highlighter-rouge">/tickets?sort=date&amp;order=desc</code> we’d get an associative array like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['sort' =&gt; 'date', 'order' =&gt; 'desc']
+</code></pre></div></div>
+
+<p>These can then be used (after validating of course) inside your callback.</p>
+
+<h3 id="working-with-post-data"><a class="dashAnchor" name="//apple_ref/cpp/Section/Working%20with%20POST%20Data"></a>Working with POST Data</h3>
+
+<p>When working with incoming data, we can find this in the body.  We’ve already seen how we can parse data from the URL and how to obtain the GET variables by doing <code class="highlighter-rouge">$request-&gt;getQueryParams()</code> but what about POST data?  The POST request data can be found in the body of the request, and Slim has some good built in helpers to make it easier to get the information in a useful format.</p>
+
+<p>For data that comes from a web form, Slim will turn that into an array.  My tickets example application has a form for creating new tickets that just sends two fields: “title” and “description”.  Here is the first part of the route that receives that data, note that for a POST route use <code class="highlighter-rouge">$app-&gt;post()</code> rather than <code class="highlighter-rouge">$app-&gt;get()</code>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/ticket/new'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+    <span class="nv">$ticket_data</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="nv">$ticket_data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">);</span>
+    <span class="nv">$ticket_data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">);</span>
+    <span class="c1">// ...
+</span></code></pre></div></div>
+
+<p>The call to <code class="highlighter-rouge">$request-&gt;getParsedBody()</code> asks Slim to look at the request and the <code class="highlighter-rouge">Content-Type</code> headers of that request, then do something smart and useful with the body.  In this example it’s just a form post and so the resulting <code class="highlighter-rouge">$data</code> array looks very similar to what we’d expect from <code class="highlighter-rouge">$_POST</code> - and we can go ahead and use the <a href="https://php.net/manual/en/book.filter.php">filter</a> extension to check the value is acceptable before we use it.  A huge advantage of using the built in Slim methods is that we can test things by injecting different request objects - if we were to use <code class="highlighter-rouge">$_POST</code> directly, we aren’t able to do that.</p>
+
+<p>What’s really neat here is that if you’re building an API or writing AJAX endpoints, for example, it’s super easy to work with data formats that arrive by POST but which aren’t a web form.  As long as the <code class="highlighter-rouge">Content-Type</code> header is set correctly, Slim will parse a JSON payload into an array and you can access it exactly the same way: by using <code class="highlighter-rouge">$request-&gt;getParsedBody()</code>.</p>
+
+<h2 id="views-and-templates"><a class="dashAnchor" name="//apple_ref/cpp/Section/Views%20and%20Templates"></a>Views and Templates</h2>
+
+<p>Slim doesn’t have an opinion on the views that you should use, although there are some options that are ready to plug in.  Your best choices are either Twig or plain old PHP.  Both options have pros and cons: if you’re already familiar with Twig then it offers lots of excellent features and functionality such as layouts - but if you’re not already using Twig, it can be a large learning curve overhead to add to a microframework project.  If you’re looking for something dirt simple then the PHP views might be for you!  I picked PHP for this example project, but if you’re familiar with Twig then feel free to use that; the basics are mostly the same.</p>
+
+<p>Since we’ll be using the PHP views, we’ll need to add this dependency to our project via Composer.  The command looks like this (similar to the ones you’ve already seen):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php composer.phar require slim/php-view
+</code></pre></div></div>
+
+<p>In order to be able to render the view, we’ll first need to create a view and make it available to our application; we do that by adding it to the DIC.  The code we need goes with the other DIC additions near the top of <code class="highlighter-rouge">src/public/index.php</code> and it looks like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span><span class="p">[</span><span class="s1">'view'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\Views\PhpRenderer</span><span class="p">(</span><span class="s1">'../templates/'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Now we have a <code class="highlighter-rouge">view</code> element in the DIC, and by default it will look for its templates in the <code class="highlighter-rouge">src/templates/</code> directory.  We can use it to render templates in our actions - here’s the ticket list route again, this time including the call to pass data into the template and render it:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="s1">'Ticket list'</span><span class="p">);</span>
+    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
+    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="na">getTickets</span><span class="p">();</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'tickets.phtml'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'tickets'</span> <span class="o">=&gt;</span> <span class="nv">$tickets</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>The only new part here is the penultimate line where we set the <code class="highlighter-rouge">$response</code> variable.  Now that the <code class="highlighter-rouge">view</code> is in the DIC, we can refer to it as <code class="highlighter-rouge">$this-&gt;view</code>.  Calling <code class="highlighter-rouge">render()</code> needs us to supply three arguments: the <code class="highlighter-rouge">$response</code> to use, the template file (inside the default templates directory), and any data we want to pass in.  Response objects are <em>immutable</em> which means that the call to <code class="highlighter-rouge">render()</code> won’t update the response object; instead it will return us a new object which is why it needs to be captured like this.  This is always true when you operate on the response object.</p>
+
+<p>When passing the data to templates, you can add as many elements to the array as you want to make available in the template.  The keys of the array are the variables that the data will exist in once we get to the template itself.</p>
+
+<p>As an example, here’s a snippet from the template that displays the ticket list (i.e. the code from <code class="highlighter-rouge">src/templates/tickets.phtml</code> - which uses <a href="http://purecss.io/">Pure.css</a> to help cover my lack of frontend skills):</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>All Tickets<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/ticket/new"</span><span class="nt">&gt;</span>Add new ticket<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+
+<span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"pure-table"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+        <span class="nt">&lt;th&gt;</span>Title<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;th&gt;</span>Component<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;th&gt;</span>Description<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;th&gt;</span>Actions<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$tickets</span> <span class="k">as</span> <span class="nv">$ticket</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span>
+
+    <span class="nt">&lt;tr&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">getTitle</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">getComponent</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">getShortDescription</span><span class="p">()</span> <span class="cp">?&gt;</span> ...<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">&lt;?=</span><span class="nv">$router</span><span class="o">-&gt;</span><span class="na">pathFor</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">()])</span><span class="cp">?&gt;</span><span class="s">"</span><span class="nt">&gt;</span>view<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">endforeach</span><span class="p">;</span> <span class="cp">?&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</code></pre></div></div>
+
+<p>In this case, <code class="highlighter-rouge">$tickets</code> is actually a <code class="highlighter-rouge">TicketEntity</code> class with getters and setters, but if you passed in an array, you’d be able to access it using array rather than object notation here.</p>
+
+<p>Did you notice something fun going on with <code class="highlighter-rouge">$router-&gt;pathFor()</code> right at the end of the example?  Let’s talk about named routes next :)</p>
+
+<h3 id="easy-url-building-with-named-routes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Easy%20URL%20Building%20with%20Named%20Routes"></a>Easy URL Building with Named Routes</h3>
+
+<p>When we create a route, we can give it a name by calling <code class="highlighter-rouge">-&gt;setName()</code> on the route object.  In this case, I am adding the name to the route that lets me view an individual ticket so that I can quickly create the right URL for a ticket by just giving the name of the route, so my code now looks something like this (just the changed bits shown here):</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span><span class="p">})</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>To use this in my template, I need to make the router available in the template that’s going to want to create this URL, so I’ve amended the <code class="highlighter-rouge">tickets/</code> route to pass a router through to the template by changing the render line to look like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'tickets.phtml'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'tickets'</span> <span class="o">=&gt;</span> <span class="nv">$tickets</span><span class="p">,</span> <span class="s1">'router'</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">router</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>With the <code class="highlighter-rouge">/tickets/{id}</code> route having a friendly name, and the router now available in our template, this is what makes the <code class="highlighter-rouge">pathFor()</code> call in our template work.  By supplying the <code class="highlighter-rouge">id</code>, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it’s used.  This approach is definitely recommended, especially for links you’ll use a lot.</p>
+
+<h2 id="where-next"><a class="dashAnchor" name="//apple_ref/cpp/Section/Where%20Next%3F"></a>Where Next?</h2>
+
+<p>This article gave a walkthrough of how to get set up with a simple application of your own, which I hope will let you get quickly started, see some working examples, and build something awesome.</p>
+
+<p>From here, I’d recommend you take a look at the other parts of the project documentation for anything you need that wasn’t already covered or that you want to see an alternative example of.  A great next step would be to take a look at the <a href="../concepts/middleware.html">Middleware</a> section - this technique is how we layer up our application and add functionality such as authentication which can be applied to multiple routes.</p>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="../deployment/deployment.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Get Started: </small> Deployment</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="../concepts/value-objects.html" rel="next"><small>Concepts: </small> PSR 7 <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <p>
+                Created and maintained by <br/>
+                <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+                <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+                <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
+                <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+            </p>
+            <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=HNUWP9UUGC7L4">Donate with PayPal</a>
+        </footer>
+    </div>
+</div>
+        
+        
+        
+        
+            
+            
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v3/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:43 GMT --></html>

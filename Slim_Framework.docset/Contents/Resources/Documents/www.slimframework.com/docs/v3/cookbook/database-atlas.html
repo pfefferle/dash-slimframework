@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-atlas.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:44 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Using Atlas 3 with Slim - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Using Atlas 3 with Slim" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="database-atlas.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+    </head>
+    <body style="padding-top: 5em">
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        
+
+        <div class="row">
+            
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Using%20Atlas%203%20with%20Slim"></a>Using Atlas 3 with Slim</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v3/cookbook/database-atlas.md" role="button" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                    
+                </div>
+                <p>This cookbook entry describes how to use the <a href="http://atlasphp.io/">Atlas 3</a> ORM
+and its command-line tooling with Slim.</p>
+
+<h2 id="installation"><a class="dashAnchor" name="//apple_ref/cpp/Section/Installation"></a>Installation</h2>
+
+<p>Install Atlas using Composer. The ORM and CLI packages are delivered separately,
+since you are likely to need the command line tooling only in development:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require atlas/orm ~3.0
+composer require --dev atlas/cli ~2.0
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note:</strong></p>
+
+  <p>If you are using PHPStorm, you may wish to copy the IDE meta file to your
+project to get full autocompletion on Atlas classes:</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp ./vendor/atlas/orm/resources/phpstorm.meta.php ./.phpstorm.meta.php
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="settings-and-configuration"><a class="dashAnchor" name="//apple_ref/cpp/Section/Settings%20and%20Configuration"></a>Settings and Configuration</h2>
+
+<p>Now you need to add some database connection settings to your configuration.
+You can add them under any array key you like; the following example uses
+<code class="highlighter-rouge">['settings']['atlas']</code>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="c1">// ./config/settings.php
+</span><span class="k">return</span> <span class="p">[</span>
+    <span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">'displayErrorDetails'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s1">'determineRouteBeforeAppMiddleware'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="s1">'atlas'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">'pdo'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">'mysql:dbname=testdb;host=localhost'</span><span class="p">,</span>
+                <span class="s1">'username'</span><span class="p">,</span>
+                <span class="s1">'password'</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="s1">'namespace'</span> <span class="o">=&gt;</span> <span class="s1">'DataSource'</span><span class="p">,</span>
+            <span class="s1">'directory'</span> <span class="o">=&gt;</span> <span class="nb">dirname</span><span class="p">(</span><span class="nx">__DIR__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/src/classes/DataSource'</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">];</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">pdo</code> elements are used as arguments for your
+<a href="https://secure.php.net/manual/en/pdo.construct.php">PDO connection</a>.</p>
+
+<p>The <code class="highlighter-rouge">namespace</code> and <code class="highlighter-rouge">directory</code> elements specify the namespace for your Atlas
+data source classes, and the directory where they will be saved by the skeleton
+generator. Your <code class="highlighter-rouge">composer.json</code> will need have a PSR autoloader entry for these;
+the above example corresponds to the Slim
+<a href="https://github.com/slimphp/Tutorial-First-Application">tutorial application</a>.</p>
+
+<h2 id="generating-skeleton-classes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Generating%20Skeleton%20Classes"></a>Generating Skeleton Classes</h2>
+
+<p>Now you can generate your skeleton data source classes with the Atlas CLI
+tooling. First, create the target directory, then issue the skeleton command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p ./src/classes/DataSource
+php ./vendor/bin/atlas-skeleton.php ./config/settings.php settings.atlas
+</code></pre></div></div>
+
+<p>The first argument to <code class="highlighter-rouge">atlas-skeleton</code> is the path to your Slim config file. The
+second argument is a dot-separated list of the keys leading to the Atlas array
+within the settings.</p>
+
+<p>With that command, Atlas will examine your database and generate a series of
+classes and traits for each table in the schema. You can see the files generated
+for each table <a href="http://atlasphp.io/cassini/skeleton/usage.html#1-2-1-2">here</a>.</p>
+
+<h2 id="container-service-definition"><a class="dashAnchor" name="//apple_ref/cpp/Section/Container%20Service%20Definition"></a>Container Service Definition</h2>
+
+<p>With the data mapper classes in place, you can now add the Atlas ORM as a
+service in the Slim container:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+<span class="nv">$container</span><span class="p">[</span><span class="s1">'atlas'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$args</span> <span class="o">=</span> <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'atlas'</span><span class="p">][</span><span class="s1">'pdo'</span><span class="p">];</span>
+    <span class="nv">$atlasBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasBuilder</span><span class="p">(</span><span class="o">...</span><span class="nv">$args</span><span class="p">);</span>
+    <span class="nv">$atlasBuilder</span><span class="o">-&gt;</span><span class="na">setFactory</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="nv">$class</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nv">$class</span><span class="p">();</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="nv">$atlasBuilder</span><span class="o">-&gt;</span><span class="na">newAtlas</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>This uses the AtlasBuilder class to create and return a new ORM instance, with
+the PDO connection arguments from your settings configuration.</p>
+
+<blockquote>
+  <p><strong>Note:</strong></p>
+
+  <p>This service definition tells Atlas to use the Container itself as a factory
+for certain class constructions. If you have Atlas TableEvent or MapperEvent
+classes defined as services in the Container, Atlas will use the Container
+to build them for you.</p>
+</blockquote>
+
+<h2 id="using-the-orm"><a class="dashAnchor" name="//apple_ref/cpp/Section/Using%20the%20ORM"></a>Using the ORM</h2>
+
+<p>At this point, you can use the full power of the Atlas ORM in your action code.
+The following examples are adapted from the
+<a href="https://github.com/slimphp/Tutorial-First-Application">tutorial application</a>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">DataSource\Ticket\Ticket</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">DataSource\Component\Component</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="s2">"Ticket list"</span><span class="p">);</span>
+    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">Ticket</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fetchRecordSet</span><span class="p">();</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
+        <span class="nv">$response</span><span class="p">,</span>
+        <span class="s2">"tickets.phtml"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"tickets"</span> <span class="o">=&gt;</span> <span class="nv">$tickets</span><span class="p">,</span>
+            <span class="s2">"router"</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">router</span>
+        <span class="p">]</span>
+    <span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$ticket_id</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">(</span><span class="nx">Ticket</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$ticket_id</span><span class="p">);</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
+        <span class="nv">$response</span><span class="p">,</span>
+        <span class="s2">"ticketdetail.phtml"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"ticket"</span> <span class="o">=&gt;</span> <span class="nv">$ticket</span>
+        <span class="p">]</span>
+    <span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">);</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/ticket/new'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+
+    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">newRecord</span><span class="p">(</span><span class="nx">Ticket</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">);</span>
+    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">description</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">);</span>
+
+    <span class="nv">$component_id</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">'component'</span><span class="p">];</span>
+    <span class="nv">$component</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">(</span><span class="nx">Component</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$component_id</span><span class="p">)</span>
+    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">component</span> <span class="o">=</span> <span class="nv">$component</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$ticket</span><span class="p">);</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withRedirect</span><span class="p">(</span><span class="s2">"/tickets"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>That’s it!</p>
+
+<p>For more information on how to use Atlas to its greatest extent, be sure to
+<a href="http://atlasphp.io/cassini/orm/">read the official documentation</a>:</p>
+
+<ul>
+  <li>
+    <p><a href="http://atlasphp.io/cassini/orm/relationships.html">Defining relationships between mappers</a></p>
+  </li>
+  <li>
+    <p><a href="http://atlasphp.io/cassini/orm/reading.html">Fetching Records and RecordSets</a></p>
+  </li>
+  <li>
+    <p>Working with <a href="http://atlasphp.io/cassini/orm/records.html">Records</a>
+and <a href="http://atlasphp.io/cassini/orm/record-sets.html">RecordSets</a></p>
+  </li>
+  <li>
+    <p><a href="http://atlasphp.io/cassini/orm/transactions.html">Managing transactions</a></p>
+  </li>
+  <li>
+    <p><a href="http://atlasphp.io/cassini/orm/behavior.html">Adding behaviors</a></p>
+  </li>
+  <li>
+    <p><a href="http://atlasphp.io/cassini/orm/events.html">Handling events</a></p>
+  </li>
+  <li>
+    <p><a href="http://atlasphp.io/cassini/orm/direct.html">Direct lower-level queries</a></p>
+  </li>
+  <li>
+    <p><a href="http://atlasphp.io/cassini/orm/other.html">Other topics</a> such as custom mapper
+methods, single table inheritance, many-to-many relationships, and automated
+validation</p>
+  </li>
+</ul>
+
+<p>Enjoy!</p>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="database-doctrine.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Cook book: </small> Using Doctrine with Slim</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="enable-cors.html" rel="next"><small>Cook book: </small> Enabling CORS <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <p>
+                Created and maintained by <br/>
+                <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+                <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+                <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
+                <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+            </p>
+            <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=HNUWP9UUGC7L4">Donate with PayPal</a>
+        </footer>
+    </div>
+</div>
+        
+        
+        
+        
+            
+            
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-atlas.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:44 GMT --></html>

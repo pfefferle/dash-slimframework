@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:20 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v3/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:43 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-        <title>Documentation - Slim Framework</title>
+        <title>Web Servers - Slim Framework</title>
         <meta content="" name="description"/>
         <meta content="index, follow" name="robots"/>
-        <meta content="Documentation" property="og:title"/>
+        <meta content="Web Servers" property="og:title"/>
         <meta content="Slim Framework" property="og:site_name"/>
-        <meta content="index.html" property="og:url"/>
+        <meta content="web-servers.html" property="og:url"/>
         <meta content="" property="og:description"/>
         <meta content="website" property="og:type"/>
         <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-        <link href="../assets/css/all.css" rel="stylesheet"/>
-        <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-        <link href="../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
         
         
         
@@ -31,104 +31,132 @@
             
 
             <div class="col-md-8 docs-content">
-                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Documentation"></a>Documentation</h1>
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Web%20Servers"></a>Web Servers</h1>
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
-                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/index.md" role="button" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v3/start/web-servers.md" role="button" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                     
                 </div>
-                
+                <p>It is typical to use the front-controller pattern to funnel appropriate HTTP
+requests received by your web server to a single PHP file. The instructions
+below explain how to tell your web server to send HTTP requests to your PHP
+front-controller file.</p>
 
-<p style="text-align: center;">
-    
-    <br/>
-    This website and documentation is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="license">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
-</p>
+<h2 id="php-built-in-server"><a class="dashAnchor" name="//apple_ref/cpp/Section/PHP%20built-in%20server"></a>PHP built-in server</h2>
 
-<h2 id="welcome"><a class="dashAnchor" name="//apple_ref/cpp/Section/Welcome"></a>Welcome</h2>
+<p>Run the following command in terminal to start localhost web server,
+assuming <code class="highlighter-rouge">./public/</code> is public-accessible directory with <code class="highlighter-rouge">index.php</code> file:</p>
 
-<p>Slim is a PHP micro framework that helps you
-quickly write simple yet powerful web applications and APIs. At its core, Slim
-is a dispatcher that receives an HTTP request, invokes an appropriate callback
-routine, and returns an HTTP response. That’s it.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php <span class="nt">-S</span> localhost:8888 <span class="nt">-t</span> public public/index.php
+</code></pre></div></div>
 
-<h2 id="whats-the-point"><a class="dashAnchor" name="//apple_ref/cpp/Section/What%E2%80%99s%20the%20point%3F"></a>What’s the point?</h2>
+<p>If you are not using <code class="highlighter-rouge">index.php</code> as your entry point then change appropriately.</p>
 
-<p>Slim is an ideal tool to create APIs that consume, repurpose, or publish data. Slim is also
-a great tool for rapid prototyping. Heck, you can even build full-featured web
-applications with user interfaces. More importantly, Slim is super fast
-and has very little code. In fact, you can read and understand its source code
-in only an afternoon!</p>
+<h2 id="apache-configuration"><a class="dashAnchor" name="//apple_ref/cpp/Section/Apache%20configuration"></a>Apache configuration</h2>
 
-<blockquote>
-  <p>At its core, Slim
-is a dispatcher that receives an HTTP request, invokes an appropriate callback
-routine, and returns an HTTP response. That’s it.</p>
-</blockquote>
+<p>Ensure your <code class="highlighter-rouge">.htaccess</code> and <code class="highlighter-rouge">index.php</code> files are in the same
+public-accessible directory. The <code class="highlighter-rouge">.htaccess</code> file should contain this code:</p>
 
-<p>You don’t always need a kitchen-sink solution like <a href="https://symfony.com/">Symfony</a> or <a href="https://laravel.com/">Laravel</a>.
-These are great tools, for sure. But they are often overkill. Instead, Slim
-provides only a minimal set of tools that do what you need and nothing else.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+</code></pre></div></div>
 
-<h2 id="how-does-it-work"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20does%20it%20work%3F"></a>How does it work?</h2>
+<p>This <code class="highlighter-rouge">.htaccess</code> file requires URL rewriting. Make sure to enable Apache’s mod_rewrite module and your virtual host is configured with the <code class="highlighter-rouge">AllowOverride</code> option so that the <code class="highlighter-rouge">.htaccess</code> rewrite rules can be used:</p>
 
-<p>First, you need a web server like Nginx or Apache. You should <a href="v3/start/web-servers.html">configure
-your web server</a> so that it sends all appropriate
-requests to one “front-controller” PHP file. You instantiate and run your Slim
-app in this PHP file.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AllowOverride All
+</code></pre></div></div>
 
-<p>A Slim app contains routes that respond to specific HTTP requests. Each route
-invokes a callback and returns an HTTP response. To get started, you first
-instantiate and configure the Slim application. Next, you define your application
-routes. Finally, you run the Slim application. It’s that easy. Here’s an
-example application:</p>
+<h2 id="nginx-configuration"><a class="dashAnchor" name="//apple_ref/cpp/Section/Nginx%20configuration"></a>Nginx configuration</h2>
 
-<figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="c1">// Create and configure Slim app
-</span><span class="nv">$config</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="s1">'addContentLengthHeader'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
-<span class="p">]];</span>
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+<p>This is an example Nginx virtual host configuration for the domain <code class="highlighter-rouge">example.com</code>.
+It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server
+is running on port 9000. You should update the <code class="highlighter-rouge">server_name</code>, <code class="highlighter-rouge">error_log</code>,
+<code class="highlighter-rouge">access_log</code>, and <code class="highlighter-rouge">root</code> directives with your own values. The <code class="highlighter-rouge">root</code> directive
+is the path to your application’s public document root directory; your Slim app’s
+<code class="highlighter-rouge">index.php</code> front-controller file should be in this directory.</p>
 
-<span class="c1">// Define app routes
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s2">"Hello "</span> <span class="o">.</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
-<span class="p">});</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+    listen 80;
+    server_name example.com;
+    index index.php;
+    error_log /path/to/example.error.log;
+    access_log /path/to/example.access.log;
+    root /path/to/public;
 
-<span class="c1">// Run app
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
-</code></pre></div>  </div>
-  <figcaption>Figure 1: Example Slim application</figcaption>
-</figure>
+    location / {
+        try_files $uri /index.php$is_args$args;
+    }
 
-<h2 id="request-and-response"><a class="dashAnchor" name="//apple_ref/cpp/Section/Request%20and%20response"></a>Request and response</h2>
+    location ~ \.php {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+        fastcgi_index index.php;
+        fastcgi_pass 127.0.0.1:9000;
+    }
+}
+</code></pre></div></div>
 
-<p>When you build a Slim app, you are often working directly with Request
-and Response objects. These objects represent the actual HTTP request received
-by the web server and the eventual HTTP response returned to the client.</p>
+<h2 id="hiphop-virtual-machine"><a class="dashAnchor" name="//apple_ref/cpp/Section/HipHop%20Virtual%20Machine"></a>HipHop Virtual Machine</h2>
 
-<p>Every Slim app route is given the current Request and Response objects as arguments
-to its callback routine. These objects implement the popular <a href="v3/concepts/value-objects.html">PSR 7</a> interfaces. The Slim app route can inspect
-or manipulate these objects as necessary. Ultimately, each Slim app route
-<strong>MUST</strong> return a PSR 7 Response object.</p>
+<p>Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the <code class="highlighter-rouge">SourceRoot</code> setting to point to your Slim app’s document root directory.</p>
 
-<h2 id="bring-your-own-components"><a class="dashAnchor" name="//apple_ref/cpp/Section/Bring%20your%20own%20components"></a>Bring your own components</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server {
+    SourceRoot = /path/to/public/directory
+}
 
-<p>Slim is designed to play well with other PHP components, too. You can register
-additional first-party components such as <a href="https://github.com/slimphp/Slim-Csrf/">Slim-Csrf</a>, <a href="https://github.com/slimphp/Slim-HttpCache">Slim-HttpCache</a>,
-or <a href="https://github.com/slimphp/Slim-Flash">Slim-Flash</a> that build upon Slim’s default functionality. It’s also
-easy to integrate third-party components found on <a href="https://packagist.org/">Packagist</a>.</p>
+ServerVariables {
+    SCRIPT_NAME = /index.php
+}
 
-<h2 id="how-to-read-this-documentation"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20to%20read%20this%20documentation"></a>How to read this documentation</h2>
+VirtualHost {
+    * {
+        Pattern = .*
+        RewriteRules {
+                * {
+                        pattern = ^(.*)$
+                        to = index.php/$1
+                        qsa = true
+                }
+        }
+    }
+}
+</code></pre></div></div>
 
-<p>If you are new to Slim, I recommend you read this documentation from start
-to finish. If you are already familiar with Slim, you can instead jump straight
-to the appropriate section.</p>
+<h2 id="iis"><a class="dashAnchor" name="//apple_ref/cpp/Section/IIS"></a>IIS</h2>
 
-<p>This documentation begins by explaining Slim’s concepts and architecture
-before venturing into specific topics like request and response handling,
-routing, and error handling.</p>
+<p>Ensure the <code class="highlighter-rouge">Web.config</code> and <code class="highlighter-rouge">index.php</code> files are in the same public-accessible directory. The <code class="highlighter-rouge">Web.config</code> file should contain this code:</p>
 
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;configuration&gt;</span>
+    <span class="nt">&lt;system.webServer&gt;</span>
+        <span class="nt">&lt;rewrite&gt;</span>
+            <span class="nt">&lt;rules&gt;</span>
+                <span class="nt">&lt;rule</span> <span class="na">name=</span><span class="s">"slim"</span> <span class="na">patternSyntax=</span><span class="s">"Wildcard"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;match</span> <span class="na">url=</span><span class="s">"*"</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;conditions&gt;</span>
+                        <span class="nt">&lt;add</span> <span class="na">input=</span><span class="s">"{REQUEST_FILENAME}"</span> <span class="na">matchType=</span><span class="s">"IsFile"</span> <span class="na">negate=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+                        <span class="nt">&lt;add</span> <span class="na">input=</span><span class="s">"{REQUEST_FILENAME}"</span> <span class="na">matchType=</span><span class="s">"IsDirectory"</span> <span class="na">negate=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;/conditions&gt;</span>
+                    <span class="nt">&lt;action</span> <span class="na">type=</span><span class="s">"Rewrite"</span> <span class="na">url=</span><span class="s">"index.php"</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;/rule&gt;</span>
+            <span class="nt">&lt;/rules&gt;</span>
+        <span class="nt">&lt;/rewrite&gt;</span>
+    <span class="nt">&lt;/system.webServer&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+
+<h2 id="lighttpd"><a class="dashAnchor" name="//apple_ref/cpp/Section/lighttpd"></a>lighttpd</h2>
+
+<p>Your lighttpd configuration file should contain this code (along with other settings you may need). This code requires lighttpd &gt;= 1.4.24.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>url.rewrite-if-not-file = ("(.*)" =&gt; "/index.php/$0")
+</code></pre></div></div>
+
+<p>This assumes that Slim’s <code class="highlighter-rouge">index.php</code> is in the root folder of your project (www root).</p>
 
 
                 <nav>
@@ -142,6 +170,49 @@ routing, and error handling.</p>
 
                                 
                                 
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="upgrade.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Get Started: </small> Upgrade Guide</a>
+                                        </li>
                                     
                                 
 
@@ -160,47 +231,8 @@ routing, and error handling.</p>
 
                                 
                                     <li class="next">
-                                        <a href="v3/start/installation.html" rel="next"><small>Get Started: </small> Installation <i class="fa fa-arrow-right"></i></a>
+                                        <a href="../deployment/deployment.html" rel="next"><small>Get Started: </small> Deployment <i class="fa fa-arrow-right"></i></a>
                                     </li>
-                                
-
-                                
-                                
-                                
-                            
-
-                                
-                                
-
-                                
-                                
-
-                                
-
-                                
-                                
-                                
-                            
-
-                                
-                                
-
-                                
-                                
-
-                                
-
-                                
-                                
-                                
-                            
-
-                                
-                                
-
-                                
-                                
-
                                 
 
                                 
@@ -661,4 +693,4 @@ routing, and error handling.</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:38 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v3/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:43 GMT --></html>

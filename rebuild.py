@@ -2,7 +2,7 @@
 
 # encoding: utf-8
 
-import copy, os, re, sqlite3, string, urllib
+import copy, os, re, sqlite3, string, urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 DOCUMENTS_DIR = os.path.join('Slim_Framework.docset', 'Contents', 'Resources', 'Documents')
@@ -16,7 +16,7 @@ except: pass
 cur.execute('CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT);')
 cur.execute('CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);')
 
-page = open(os.path.join(DOCUMENTS_DIR, HTML_DIR, 'index.html')).read()
+page = open(os.path.join(DOCUMENTS_DIR, HTML_DIR, 'index.html'), encoding='utf8').read()
 
 soup = BeautifulSoup(page, 'html5lib')
 
@@ -40,7 +40,7 @@ for item in menu.find_all():
             path = os.path.join(HTML_DIR, item.attrs["href"])
 
             cur.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Guide', path))
-            print 'name: %s, path: %s' % (name, path)
+            print('name: %s, path: %s' % (name, path))
 
             continue
 
@@ -52,7 +52,7 @@ for root, dirs, files in os.walk(os.path.join(DOCUMENTS_DIR, HTML_DIR), topdown=
         if not filename.endswith('.html'):
             continue
 
-        page = open(os.path.join(root, filename)).read()
+        page = open(os.path.join(root, filename), encoding='utf8').read()
 
         soup = BeautifulSoup(page, 'html5lib')
 
@@ -68,8 +68,10 @@ for root, dirs, files in os.walk(os.path.join(DOCUMENTS_DIR, HTML_DIR), topdown=
 
             text = tag.text.strip()
 
-            print 'adding toc tag for section: %s' % text
-            name = '//apple_ref/cpp/Section/' + urllib.quote(text.encode('utf8'), '')
+            try: print('adding toc tag for section: %s' % text)
+            except: pass
+
+            name = '//apple_ref/cpp/Section/' + urllib.parse.quote(text.encode('utf8'), '')
             dashAnchor = BeautifulSoup('<a name="%s" class="dashAnchor"></a>' % name, 'html5lib').a
             tag.insert(0, dashAnchor)
 
@@ -90,13 +92,52 @@ for root, dirs, files in os.walk(os.path.join(DOCUMENTS_DIR, HTML_DIR), topdown=
                 a.extract()
 
         # remove header navbar with blog link
-        soup.find('nav', class_='navbar-fixed-top').decompose()
+        try:
+            soup.find('nav', class_='navbar-fixed-top').decompose()
+        except AttributeError:
+            pass
         # remove Slim logo
-        soup.find('header', class_='site-header').decompose()
+        try:
+            soup.find('header', class_='site-header').decompose()
+        except AttributeError:
+            pass
         # remove left menu
-        soup.find('form', class_='searchbox').parent.decompose()
+        try:
+            soup.find('form', class_='searchbox').parent.decompose()
+        except AttributeError:
+            pass
+        # remove version switcher
+        try:
+            soup.find('button', class_='dropdown-toggle').parent.decompose()
+        except AttributeError:
+            pass
+        # remove link to v2 docs
+        try:
+            for alert in soup.find_all('div', class_='alert-info'):
+                if 'Slim 2 Docs' in str(alert):
+                    alert.decompose()
+        except (AttributeError, TypeError):
+            pass
+        # remove license icon
+        try:
+            soup.find('a', {'rel': 'license'}).decompose()
+        except AttributeError:
+            pass
+        # replace donation icon with a tag
+        try:
+            donation = soup.find('input', {'type': 'image'}).parent
+            id = soup.find('input', {'name': 'hosted_button_id'}).get('value')
 
-        fp = open(os.path.join(root, filename), 'w')
+            link = BeautifulSoup(
+                '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=' + id + '" alt="Donate with PayPal">Donate with PayPal</a>',
+                'html.parser'
+            )
+            donation.replaceWith(link)
+
+        except AttributeError:
+            pass
+
+        fp = open(os.path.join(root, filename), 'w', encoding='utf8')
         fp.write(str(soup))
         fp.close()
 

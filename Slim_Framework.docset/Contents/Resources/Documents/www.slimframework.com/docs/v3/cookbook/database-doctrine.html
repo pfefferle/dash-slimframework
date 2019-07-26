@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:44 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Using Doctrine with Slim - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Using Doctrine with Slim" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="database-doctrine.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+    </head>
+    <body style="padding-top: 5em">
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        
+
+        <div class="row">
+            
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Using%20Doctrine%20with%20Slim"></a>Using Doctrine with Slim</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v3/cookbook/database-doctrine.md" role="button" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                    
+                </div>
+                <p>This cookbook entry describes how to integrate from scratch the widely used <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/">Doctrine ORM</a> into a Slim application.</p>
+
+<h2 id="adding-doctrine-to-your-application"><a class="dashAnchor" name="//apple_ref/cpp/Section/Adding%20Doctrine%20to%20your%20application"></a>Adding Doctrine to your application</h2>
+
+<p>The first step is importing the library into the <code class="highlighter-rouge">vendor</code> directory of your project using <a href="https://getcomposer.org/">composer</a>.</p>
+
+<figure>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require doctrine/orm:^2
+</code></pre></div>  </div>
+  <figcaption>Figure 1: Require doctrine in your application.</figcaption>
+</figure>
+
+<h2 id="provide-database-credentials"><a class="dashAnchor" name="//apple_ref/cpp/Section/Provide%20database%20credentials"></a>Provide database credentials</h2>
+
+<p>Next, add the Doctrine settings alongside your Slim configuration.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// settings.php
+</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'APP_ROOT'</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="p">);</span>
+
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">'displayErrorDetails'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s1">'determineRouteBeforeAppMiddleware'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
+
+        <span class="s1">'doctrine'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// if true, metadata caching is forcefully disabled
+</span>            <span class="s1">'dev_mode'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+
+            <span class="c1">// path where the compiled metadata info will be cached
+</span>            <span class="c1">// make sure the path exists and it is writable
+</span>            <span class="s1">'cache_dir'</span> <span class="o">=&gt;</span> <span class="nx">APP_ROOT</span> <span class="o">.</span> <span class="s1">'/var/doctrine'</span><span class="p">,</span>
+
+            <span class="c1">// you should add any other path containing annotated entity classes
+</span>            <span class="s1">'metadata_dirs'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">APP_ROOT</span> <span class="o">.</span> <span class="s1">'/src/Domain'</span><span class="p">],</span>
+
+            <span class="s1">'connection'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_mysql'</span><span class="p">,</span>
+                <span class="s1">'host'</span> <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
+                <span class="s1">'port'</span> <span class="o">=&gt;</span> <span class="mi">3306</span><span class="p">,</span>
+                <span class="s1">'dbname'</span> <span class="o">=&gt;</span> <span class="s1">'mydb'</span><span class="p">,</span>
+                <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'user'</span><span class="p">,</span>
+                <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'secret'</span><span class="p">,</span>
+                <span class="s1">'charset'</span> <span class="o">=&gt;</span> <span class="s1">'utf-8'</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">];</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 2: Slim settings array.</figcaption>
+</figure>
+
+<h2 id="define-the-entitymanager-service"><a class="dashAnchor" name="//apple_ref/cpp/Section/Define%20the%20EntityManager%20service"></a>Define the EntityManager service</h2>
+
+<p>Now we define the <code class="highlighter-rouge">EntityManager</code> service, which is the primary way to interact with Doctrine.
+Here we show how to configure the metadata reader to work with PHP annotations, which is at the
+same time the most used mode and the most tricky to set up. Alternatively, XML or YAML can also
+be used to describe the database schema.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// bootstrap.php
+</span>
+<span class="k">use</span> <span class="nx">Doctrine\Common\Annotations\AnnotationReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\Common\Cache\FilesystemCache</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\EntityManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\Mapping\Driver\AnnotationDriver</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\Tools\Setup</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Container</span><span class="p">;</span>
+
+<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">(</span><span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/settings.php'</span><span class="p">);</span>
+
+<span class="nv">$container</span><span class="p">[</span><span class="nx">EntityManager</span><span class="o">::</span><span class="na">class</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Container</span> <span class="nv">$container</span><span class="p">)</span><span class="o">:</span> <span class="nx">EntityManager</span> <span class="p">{</span>
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nx">Setup</span><span class="o">::</span><span class="na">createAnnotationMetadataConfiguration</span><span class="p">(</span>
+        <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'metadata_dirs'</span><span class="p">],</span>
+        <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'dev_mode'</span><span class="p">]</span>
+    <span class="p">);</span>
+
+    <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">setMetadataDriverImpl</span><span class="p">(</span>
+        <span class="k">new</span> <span class="nx">AnnotationDriver</span><span class="p">(</span>
+            <span class="k">new</span> <span class="nx">AnnotationReader</span><span class="p">,</span>
+            <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'metadata_dirs'</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">setMetadataCacheImpl</span><span class="p">(</span>
+        <span class="k">new</span> <span class="nx">FilesystemCache</span><span class="p">(</span>
+            <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'cache_dir'</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">return</span> <span class="nx">EntityManager</span><span class="o">::</span><span class="na">create</span><span class="p">(</span>
+        <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'connection'</span><span class="p">],</span>
+        <span class="nv">$config</span>
+    <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">return</span> <span class="nv">$container</span><span class="p">;</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 3: Defining the EntityManager service.</figcaption>
+</figure>
+
+<h2 id="create-the-doctrine-console"><a class="dashAnchor" name="//apple_ref/cpp/Section/Create%20the%20Doctrine%20console"></a>Create the Doctrine console</h2>
+
+<p>To run database migrations, validate class annotations and so on you will use the <code class="highlighter-rouge">doctrine</code> CLI application that is
+already present at <code class="highlighter-rouge">vendor/bin</code>. But in order to work, this script needs a <a href="http://docs.doctrine-project.org/en/latest/reference/configuration.html#setting-up-the-commandline-tool"><code class="highlighter-rouge">cli-config.php</code></a>
+file at the root of the project telling it how to find the <code class="highlighter-rouge">EntityManager</code> we just set up:</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// cli-config.php
+</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\EntityManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\Tools\Console\ConsoleRunner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Container</span><span class="p">;</span>
+
+<span class="sd">/** @var Container $container */</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/bootstrap.php'</span><span class="p">;</span>
+
+<span class="nx">ConsoleRunner</span><span class="o">::</span><span class="na">run</span><span class="p">(</span>
+    <span class="nx">ConsoleRunner</span><span class="o">::</span><span class="na">createHelperSet</span><span class="p">(</span><span class="nv">$container</span><span class="p">[</span><span class="nx">EntityManager</span><span class="o">::</span><span class="na">class</span><span class="p">])</span>
+<span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 4: Enabling Doctrine's console app.</figcaption>
+</figure>
+
+<p>Take a moment to verify that the console app works. When properly configured, its output will look more or less like this:</p>
+
+<figure>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>php vendor/bin/doctrine
+Doctrine Command Line Interface 2.5.12
+
+Usage:
+  <span class="nb">command</span> <span class="o">[</span>options] <span class="o">[</span>arguments]
+
+Options:
+  <span class="nt">-h</span>, <span class="nt">--help</span>            Display this <span class="nb">help </span>message
+  <span class="nt">-q</span>, <span class="nt">--quiet</span>           Do not output any message
+  <span class="nt">-V</span>, <span class="nt">--version</span>         Display this application version
+      <span class="nt">--ansi</span>            Force ANSI output
+      <span class="nt">--no-ansi</span>         Disable ANSI output
+  <span class="nt">-n</span>, <span class="nt">--no-interaction</span>  Do not ask any interactive question
+  <span class="nt">-v</span>|vv|vvv, <span class="nt">--verbose</span>  Increase the verbosity of messages: 1 <span class="k">for </span>normal output, 2 <span class="k">for </span>more verbose output and 3 <span class="k">for </span>debug
+
+Available commands:
+  <span class="nb">help                            </span>Displays <span class="nb">help </span><span class="k">for </span>a <span class="nb">command
+  </span>list                            Lists commands
+ dbal
+  dbal:import                     Import SQL file<span class="o">(</span>s<span class="o">)</span> directly to Database.
+  dbal:run-sql                    Executes arbitrary SQL directly from the <span class="nb">command </span>line.
+ orm
+  orm:clear-cache:metadata        Clear all metadata cache of the various cache drivers.
+  orm:clear-cache:query           Clear all query cache of the various cache drivers.
+  orm:clear-cache:result          Clear all result cache of the various cache drivers.
+  orm:convert-d1-schema           <span class="o">[</span>orm:convert:d1-schema] Converts Doctrine 1.X schema into a Doctrine 2.X schema.
+  orm:convert-mapping             <span class="o">[</span>orm:convert:mapping] Convert mapping information between supported formats.
+  orm:ensure-production-settings  Verify that Doctrine is properly configured <span class="k">for </span>a production environment.
+  orm:generate-entities           <span class="o">[</span>orm:generate:entities] Generate entity classes and method stubs from your mapping information.
+  orm:generate-proxies            <span class="o">[</span>orm:generate:proxies] Generates proxy classes <span class="k">for </span>entity classes.
+  orm:generate-repositories       <span class="o">[</span>orm:generate:repositories] Generate repository classes from your mapping information.
+  orm:info                        Show basic information about all mapped entities
+  orm:mapping:describe            Display information about mapped objects
+  orm:run-dql                     Executes arbitrary DQL directly from the <span class="nb">command </span>line.
+  orm:schema-tool:create          Processes the schema and either create it directly on EntityManager Storage Connection or generate the SQL output.
+  orm:schema-tool:drop            Drop the <span class="nb">complete </span>database schema of EntityManager Storage Connection or generate the corresponding SQL output.
+  orm:schema-tool:update          Executes <span class="o">(</span>or dumps<span class="o">)</span> the SQL needed to update the database schema to match the current mapping metadata.
+  orm:validate-schema             Validate the mapping files.
+</code></pre></div>  </div>
+  <figcaption>Figure 5: Test-driving Docrine's console application.</figcaption>
+</figure>
+
+<p>If it works, you can now create your database and load the schema by running <code class="highlighter-rouge">php vendor/bin/doctrine orm:schema-tool:update</code></p>
+
+<h2 id="using-the-entitymanager-in-our-own-code"><a class="dashAnchor" name="//apple_ref/cpp/Section/Using%20the%20EntityManager%20in%20our%20own%20code"></a>Using the EntityManager in our own code</h2>
+
+<p>Congratulations! Now you can already manage your database from the command line, and use the <code class="highlighter-rouge">EntityManager</code> wherever you need it.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nv">$container</span><span class="p">[</span><span class="nx">UserRepository</span><span class="o">::</span><span class="na">class</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">UserRepository</span><span class="p">(</span><span class="nv">$container</span><span class="p">[</span><span class="nx">EntityManager</span><span class="o">::</span><span class="na">class</span><span class="p">]);</span>
+<span class="p">};</span>
+
+<span class="c1">// src/UserRepository.php
+</span>
+<span class="k">class</span> <span class="nc">UserRepository</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var EntityManager
+     */</span>
+    <span class="k">private</span> <span class="nv">$em</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">EntityManager</span> <span class="nv">$em</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">em</span> <span class="o">=</span> <span class="nv">$em</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">signUp</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$password</span><span class="p">)</span><span class="o">:</span> <span class="nx">User</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">em</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">em</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$user</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 6: Using the EntityManager service.</figcaption>
+</figure>
+
+<h2 id="other-resources"><a class="dashAnchor" name="//apple_ref/cpp/Section/Other%20resources"></a>Other resources</h2>
+
+<ul>
+  <li>The <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/">official Doctrine ORM documentation</a>.</li>
+  <li><a href="https://github.com/1ma/Slim-Doctrine-Demo">A full example</a> of the above configuration in a small, functioning project.</li>
+</ul>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="database-eloquent.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Cook book: </small> Using Eloquent with Slim</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="database-atlas.html" rel="next"><small>Cook book: </small> Using Atlas with Slim <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <p>
+                Created and maintained by <br/>
+                <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+                <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+                <a href="http://akrabat.com/" target="_blank">Rob Allen</a>, and the
+                <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+            </p>
+            <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=HNUWP9UUGC7L4">Donate with PayPal</a>
+        </footer>
+    </div>
+</div>
+        
+        
+        
+        
+            
+            
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Jun 2019 12:43:44 GMT --></html>

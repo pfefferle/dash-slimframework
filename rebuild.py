@@ -6,7 +6,7 @@ import copy, os, re, sqlite3, string, urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 DOCUMENTS_DIR = os.path.join('Slim_Framework.docset', 'Contents', 'Resources', 'Documents')
-HTML_DIR = os.path.join('www.slimframework.com/docs')
+HTML_DIR = os.path.join('www.slimframework.com/docs/v4')
 
 db = sqlite3.connect('Slim_Framework.docset/Contents/Resources/docSet.dsidx')
 cur = db.cursor()
@@ -91,6 +91,12 @@ for root, dirs, files in os.walk(os.path.join(DOCUMENTS_DIR, HTML_DIR), topdown=
             if "href" in a.attrs and test.match(a["href"].strip()):
                 a.extract()
 
+        for a in soup.find_all("a"):
+            test = re.compile("^https?.*cdn.jsdelivr.*", re.IGNORECASE)
+
+            if "href" in a.attrs and test.match(a["href"].strip()):
+                a.extract()
+
         # remove header navbar with blog link
         try:
             soup.find('nav', class_='navbar-fixed-top').decompose()
@@ -111,10 +117,10 @@ for root, dirs, files in os.walk(os.path.join(DOCUMENTS_DIR, HTML_DIR), topdown=
             soup.find('button', class_='dropdown-toggle').parent.decompose()
         except AttributeError:
             pass
-        # remove link to v2 docs
+        # remove link to v3 docs
         try:
             for alert in soup.find_all('div', class_='alert-info'):
-                if 'Slim 2 Docs' in str(alert):
+                if 'Slim 3 Docs' in str(alert):
                     alert.decompose()
         except (AttributeError, TypeError):
             pass

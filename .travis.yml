@@ -29,4 +29,4 @@ deploy:
   file: "Slim_Framework.tgz"
   skip_cleanup: true
   on:
-    condition: $TRAVIS_EVENT_TYPE = cron
+    condition: ($TRAVIS_EVENT_TYPE = api) || ($TRAVIS_EVENT_TYPE = cron)

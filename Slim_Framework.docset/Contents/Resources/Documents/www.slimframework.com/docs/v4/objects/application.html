@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/application.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Application - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Application" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="application.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button aria-controls="tocNav" aria-expanded="false" class="btn btn-primary" data-target="#tocNav" data-toggle="collapse" type="button">
+                        Toggle Navigation
+                    </button>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Application"></a>Application</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/objects/application.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>The Application <code class="highlighter-rouge">Slim\App</code> is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="c1">// Instantiate app
+</span><span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="c1">// Add Error Handling Middleware
+</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+
+<span class="c1">// Add route callbacks
+</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// Run application
+</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="advanced-notices-and-warnings-handling"><a class="dashAnchor" name="//apple_ref/cpp/Section/Advanced%20Notices%20and%20Warnings%20Handling"></a>Advanced Notices and Warnings Handling</h2>
+
+<p><strong>Warnings</strong> and <strong>Notices</strong> are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following <code class="highlighter-rouge">index.php</code>.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">MyApp\Handlers\ErrorHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">MyApp\Handlers\ShutdownHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpInternalServerErrorException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\ServerRequestCreatorFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="c1">// Set that to your needs
+</span><span class="nv">$displayErrorDetails</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$callableResolver</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCallableResolver</span><span class="p">();</span>
+<span class="nv">$responseFactory</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getResponseFactory</span><span class="p">();</span>
+
+<span class="nv">$serverRequestCreator</span> <span class="o">=</span> <span class="nx">ServerRequestCreatorFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nv">$serverRequestCreator</span><span class="o">-&gt;</span><span class="na">createFromGlobals</span><span class="p">();</span>
+
+<span class="nv">$errorHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpErrorHandler</span><span class="p">(</span><span class="nv">$callableResolver</span><span class="p">,</span> <span class="nv">$responseFactory</span><span class="p">);</span>
+<span class="nv">$shutdownHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ShutdownHandler</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$errorHandler</span><span class="p">,</span> <span class="nv">$displayErrorDetails</span><span class="p">);</span>
+<span class="nb">register_shutdown_function</span><span class="p">(</span><span class="nv">$shutdownHandler</span><span class="p">);</span>
+
+<span class="c1">// Add Routing Middleware
+</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+
+<span class="c1">// Add Error Handling Middleware
+</span><span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="nv">$displayErrorDetails</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="na">setDefaultErrorHandler</span><span class="p">(</span><span class="nv">$errorHandler</span><span class="p">);</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="advanced-custom-error-handler"><a class="dashAnchor" name="//apple_ref/cpp/Section/Advanced%20Custom%20Error%20Handler"></a>Advanced Custom Error Handler</h2>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">MyApp\Handlers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpBadRequestException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpForbiddenException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpMethodNotAllowedException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpNotFoundException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpNotImplementedException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpUnauthorizedException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Handlers\ErrorHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Exception</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Throwable</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">HttpErrorHandler</span> <span class="k">extends</span> <span class="nx">ErrorHandler</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">BAD_REQUEST</span> <span class="o">=</span> <span class="s1">'BAD_REQUEST'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">INSUFFICIENT_PRIVILEGES</span> <span class="o">=</span> <span class="s1">'INSUFFICIENT_PRIVILEGES'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">NOT_ALLOWED</span> <span class="o">=</span> <span class="s1">'NOT_ALLOWED'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">NOT_IMPLEMENTED</span> <span class="o">=</span> <span class="s1">'NOT_IMPLEMENTED'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">RESOURCE_NOT_FOUND</span> <span class="o">=</span> <span class="s1">'RESOURCE_NOT_FOUND'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">SERVER_ERROR</span> <span class="o">=</span> <span class="s1">'SERVER_ERROR'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">UNAUTHENTICATED</span> <span class="o">=</span> <span class="s1">'UNAUTHENTICATED'</span><span class="p">;</span>
+    
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">respond</span><span class="p">()</span><span class="o">:</span> <span class="nx">ResponseInterface</span>
+    <span class="p">{</span>
+        <span class="nv">$exception</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">exception</span><span class="p">;</span>
+        <span class="nv">$statusCode</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+        <span class="nv">$type</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">SERVER_ERROR</span><span class="p">;</span>
+        <span class="nv">$description</span> <span class="o">=</span> <span class="s1">'An internal error has occurred while processing your request.'</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">HttpException</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$statusCode</span> <span class="o">=</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getCode</span><span class="p">();</span>
+            <span class="nv">$description</span> <span class="o">=</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">HttpNotFoundException</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$type</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">RESOURCE_NOT_FOUND</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">HttpMethodNotAllowedException</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$type</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">NOT_ALLOWED</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">HttpUnauthorizedException</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$type</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">UNAUTHENTICATED</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">HttpForbiddenException</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$type</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">UNAUTHENTICATED</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">HttpBadRequestException</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$type</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">BAD_REQUEST</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">HttpNotImplementedException</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$type</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">NOT_IMPLEMENTED</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="o">!</span><span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">HttpException</span><span class="p">)</span>
+            <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">Exception</span> <span class="o">||</span> <span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">Throwable</span><span class="p">)</span>
+            <span class="o">&amp;&amp;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">displayErrorDetails</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$description</span> <span class="o">=</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$error</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">'statusCode'</span> <span class="o">=&gt;</span> <span class="nv">$statusCode</span><span class="p">,</span>
+            <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">'type'</span> <span class="o">=&gt;</span> <span class="nv">$type</span><span class="p">,</span>
+                <span class="s1">'description'</span> <span class="o">=&gt;</span> <span class="nv">$description</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">];</span>
+        
+        <span class="nv">$payload</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$error</span><span class="p">,</span> <span class="nx">JSON_PRETTY_PRINT</span><span class="p">);</span>
+        
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">responseFactory</span><span class="o">-&gt;</span><span class="na">createResponse</span><span class="p">(</span><span class="nv">$statusCode</span><span class="p">);</span>        
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nv">$payload</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="advanced-shutdown-handler"><a class="dashAnchor" name="//apple_ref/cpp/Section/Advanced%20Shutdown%20Handler"></a>Advanced Shutdown Handler</h2>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">MyApp\Handlers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">MyApp\Handlers\HttpErrorHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Exception\HttpInternalServerErrorException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\ResponseEmitter</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ShutdownHandler</span>
+<span class="p">{</span>
+    <span class="sd">/**
+     * @var Request
+     */</span>
+    <span class="k">private</span> <span class="nv">$request</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @var HttpErrorHandler
+     */</span>
+    <span class="k">private</span> <span class="nv">$errorHandler</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * @var bool
+     */</span>
+    <span class="k">private</span> <span class="nv">$displayErrorDetails</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * ShutdownHandler constructor.
+     *
+     * @param Request           $request
+     * @param HttpErrorHandler  $errorHandler
+     * @param bool              $displayErrorDetails
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">HttpErrorHandler</span> <span class="nv">$errorHandler</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span> <span class="o">=</span> <span class="nv">$request</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">errorHandler</span> <span class="o">=</span> <span class="nv">$errorHandler</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">displayErrorDetails</span> <span class="o">=</span> <span class="nv">$displayErrorDetails</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__invoke</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$error</span> <span class="o">=</span> <span class="nb">error_get_last</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$errorFile</span> <span class="o">=</span> <span class="nv">$error</span><span class="p">[</span><span class="s1">'file'</span><span class="p">];</span>
+            <span class="nv">$errorLine</span> <span class="o">=</span> <span class="nv">$error</span><span class="p">[</span><span class="s1">'line'</span><span class="p">];</span>
+            <span class="nv">$errorMessage</span> <span class="o">=</span> <span class="nv">$error</span><span class="p">[</span><span class="s1">'message'</span><span class="p">];</span>
+            <span class="nv">$errorType</span> <span class="o">=</span> <span class="nv">$error</span><span class="p">[</span><span class="s1">'type'</span><span class="p">];</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">'An error while processing your request. Please try again later.'</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">displayErrorDetails</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">switch</span> <span class="p">(</span><span class="nv">$errorType</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">case</span> <span class="nx">E_USER_ERROR</span><span class="o">:</span>
+                        <span class="nv">$message</span> <span class="o">=</span> <span class="s2">"FATAL ERROR: </span><span class="si">{</span><span class="nv">$errorMessage</span><span class="si">}</span><span class="s2">. "</span><span class="p">;</span>
+                        <span class="nv">$message</span> <span class="o">.=</span> <span class="s2">" on line </span><span class="si">{</span><span class="nv">$errorLine</span><span class="si">}</span><span class="s2"> in file </span><span class="si">{</span><span class="nv">$errorFile</span><span class="si">}</span><span class="s2">."</span><span class="p">;</span>
+                        <span class="k">break</span><span class="p">;</span>
+
+                    <span class="k">case</span> <span class="nx">E_USER_WARNING</span><span class="o">:</span>
+                        <span class="nv">$message</span> <span class="o">=</span> <span class="s2">"WARNING: </span><span class="si">{</span><span class="nv">$errorMessage</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+                        <span class="k">break</span><span class="p">;</span>
+
+                    <span class="k">case</span> <span class="nx">E_USER_NOTICE</span><span class="o">:</span>
+                        <span class="nv">$message</span> <span class="o">=</span> <span class="s2">"NOTICE: </span><span class="si">{</span><span class="nv">$errorMessage</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+                        <span class="k">break</span><span class="p">;</span>
+
+                    <span class="k">default</span><span class="o">:</span>
+                        <span class="nv">$message</span> <span class="o">=</span> <span class="s2">"ERROR: </span><span class="si">{</span><span class="nv">$errorMessage</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+                        <span class="nv">$message</span> <span class="o">.=</span> <span class="s2">" on line </span><span class="si">{</span><span class="nv">$errorLine</span><span class="si">}</span><span class="s2"> in file </span><span class="si">{</span><span class="nv">$errorFile</span><span class="si">}</span><span class="s2">."</span><span class="p">;</span>
+                        <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="nv">$exception</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpInternalServerErrorException</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">,</span> <span class="nv">$message</span><span class="p">);</span>
+            <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">errorHandler</span><span class="o">-&gt;</span><span class="na">__invoke</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">,</span> <span class="nv">$exception</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">displayErrorDetails</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+            
+            <span class="nb">ob_clean</span><span class="p">();</span>
+            <span class="nv">$responseEmitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ResponseEmitter</span><span class="p">();</span>
+            <span class="nv">$responseEmitter</span><span class="o">-&gt;</span><span class="na">emit</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="../concepts/di.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Concepts: </small> Dependency Container</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="request.html" rel="next"><small>The Request: </small> Overview <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br/>
+        <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9YRVXHRZT6H3L">Donate with PayPal</a>
+</footer>
+
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/application.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --></html>

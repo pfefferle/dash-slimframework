@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Uploading files using POST forms - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Uploading files using POST forms" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="uploading-files.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button aria-controls="tocNav" aria-expanded="false" class="btn btn-primary" data-target="#tocNav" data-toggle="collapse" type="button">
+                        Toggle Navigation
+                    </button>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Uploading%20files%20using%20POST%20forms"></a>Uploading files using POST forms</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/cookbook/uploading-files.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>Files that are uploaded using forms in POST requests can be retrieved with the Request method <code class="highlighter-rouge">getUploadedFiles()</code>.</p>
+
+<p>When uploading files using a POST request, make sure your file upload form has the
+attribute <code class="highlighter-rouge">enctype="multipart/form-data"</code> otherwise <code class="highlighter-rouge">getUploadedFiles()</code> will return an empty array.</p>
+
+<p>If multiple files are uploaded for the same input name, add brackets after the input name in the HTML, otherwise
+only one uploaded file will be returned for the input name by <code class="highlighter-rouge">getUploadedFiles()</code>.</p>
+
+<p>Below is an example HTML form that contains both single and multiple file uploads.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- make sure the attribute enctype is set to multipart/form-data --&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- upload of a single file --&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;label&gt;</span>Add file (single): <span class="nt">&lt;/label&gt;&lt;br/&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"example1"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+
+    <span class="c">&lt;!-- multiple input fields for the same input name, use brackets --&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;label&gt;</span>Add files (up to 2): <span class="nt">&lt;/label&gt;&lt;br/&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"example2[]"</span><span class="nt">/&gt;&lt;br/&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"example2[]"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+
+    <span class="c">&lt;!-- one file input field that allows multiple files to be uploaded, use brackets --&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;label&gt;</span>Add files (multiple): <span class="nt">&lt;/label&gt;&lt;br/&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"example3[]"</span> <span class="na">multiple=</span><span class="s">"multiple"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 1: Example HTML form for file uploads</figcaption>
+</figure>
+
+<p>Uploaded files can be moved to a directory using the <code class="highlighter-rouge">moveTo</code> method. Below is an example application
+that handles the uploaded files of the HTML form above.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">DI\Container</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'upload_directory'</span><span class="p">,</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/uploads'</span><span class="p">);</span>
+
+<span class="nx">AppFactory</span><span class="o">::</span><span class="na">setContainer</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$directory</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'upload_directory'</span><span class="p">);</span>
+    <span class="nv">$uploadedFiles</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUploadedFiles</span><span class="p">();</span>
+
+    <span class="c1">// handle single input with single file upload
+</span>    <span class="nv">$uploadedFile</span> <span class="o">=</span> <span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example1'</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// handle multiple inputs with the same key
+</span>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example2'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$uploadedFile</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
+            <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// handle single input with multiple file uploads
+</span>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example3'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$uploadedFile</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
+            <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="sd">/**
+ * Moves the uploaded file to the upload directory and assigns it a unique name
+ * to avoid overwriting an existing uploaded file.
+ *
+ * @param string $directory directory to which the file is moved
+ * @param UploadedFileInterface $uploaded file uploaded file to move
+ * @return string filename of moved file
+ */</span>
+<span class="k">function</span> <span class="nf">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nx">UploadedFileInterface</span> <span class="nv">$uploadedFile</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$extension</span> <span class="o">=</span> <span class="nb">pathinfo</span><span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getClientFilename</span><span class="p">(),</span> <span class="nx">PATHINFO_EXTENSION</span><span class="p">);</span>
+    <span class="nv">$basename</span> <span class="o">=</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nb">random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span> <span class="c1">// see http://php.net/manual/en/function.random-bytes.php
+</span>    <span class="nv">$filename</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">'%s.%0.8s'</span><span class="p">,</span> <span class="nv">$basename</span><span class="p">,</span> <span class="nv">$extension</span><span class="p">);</span>
+
+    <span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">moveTo</span><span class="p">(</span><span class="nv">$directory</span> <span class="o">.</span> <span class="nx">DIRECTORY_SEPARATOR</span> <span class="o">.</span> <span class="nv">$filename</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$filename</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 2: Example Slim application to handle the uploaded files</figcaption>
+</figure>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="enable-cors.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Cook book: </small> Enabling CORS</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="../contributors/strategy.html" rel="next"><small>Contributing: </small> Branching Strategy <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br/>
+        <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9YRVXHRZT6H3L">Donate with PayPal</a>
+</footer>
+
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --></html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/value-objects.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>PSR-7 and Value Objects - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="PSR-7 and Value Objects" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="value-objects.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button aria-controls="tocNav" aria-expanded="false" class="btn btn-primary" data-target="#tocNav" data-toggle="collapse" type="button">
+                        Toggle Navigation
+                    </button>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/PSR-7%20and%20Value%20Objects"></a>PSR-7 and Value Objects</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/concepts/value-objects.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>Slim supports <a href="https://github.com/php-fig/http-message">PSR-7</a> interfaces for
+its Request and Response objects. This makes Slim flexible because it can
+use <em>any</em> PSR-7 implementation. For example, you could return an instance of <code class="highlighter-rouge">GuzzleHttp\Psr7\CachingStream</code> or any instance
+returned by the <code class="highlighter-rouge">GuzzleHttp\Psr7\stream_for()</code> function.</p>
+
+<p>Slim provides its own PSR-7 implementation so that it works out of the box. However,
+you are free to replace Slim’s default PSR-7 objects with a third-party implementation.
+Just override the application container’s <code class="highlighter-rouge">request</code> and <code class="highlighter-rouge">response</code> services so
+they return an instance of <code class="highlighter-rouge">Psr\Http\Message\ServerRequestInterface</code> and
+<code class="highlighter-rouge">Psr\Http\Message\ResponseInterface</code>, respectively.</p>
+
+<h2 id="value-objects"><a class="dashAnchor" name="//apple_ref/cpp/Section/Value%20objects"></a>Value objects</h2>
+
+<p>Request and Response objects are <a href="http://en.wikipedia.org/wiki/Value_object"><em>immutable value objects</em></a>.
+They can be “changed” only by requesting a cloned version that has updated
+property values. Value objects have a nominal overhead because they must be
+cloned when their properties are updated. This overhead does not affect
+performance in any meaningful way.</p>
+
+<p>You can request a copy of a value object by invoking any of its PSR-7
+interface methods (these methods typically have a <code class="highlighter-rouge">with</code> prefix). For example,
+a PSR-7 Response object has a <code class="highlighter-rouge">withHeader($name, $value)</code> method that returns a
+cloned value object with the new HTTP header.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$payload</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">([</span><span class="s1">'hello'</span> <span class="o">=&gt;</span> <span class="s1">'world'</span><span class="p">],</span> <span class="nx">JSON_PRETTY_PRINT</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nv">$payload</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>The PSR-7 interface provides these methods to transform Request and Response
+objects:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">withProtocolVersion($version)</code></li>
+  <li><code class="highlighter-rouge">withHeader($name, $value)</code></li>
+  <li><code class="highlighter-rouge">withAddedHeader($name, $value)</code></li>
+  <li><code class="highlighter-rouge">withoutHeader($name)</code></li>
+  <li><code class="highlighter-rouge">withBody(StreamInterface $body)</code></li>
+</ul>
+
+<p>The PSR-7 interface provides these methods to transform Request objects:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">withMethod($method)</code></li>
+  <li><code class="highlighter-rouge">withUri(UriInterface $uri, $preserveHost = false)</code></li>
+  <li><code class="highlighter-rouge">withCookieParams(array $cookies)</code></li>
+  <li><code class="highlighter-rouge">withQueryParams(array $query)</code></li>
+  <li><code class="highlighter-rouge">withUploadedFiles(array $uploadedFiles)</code></li>
+  <li><code class="highlighter-rouge">withParsedBody($data)</code></li>
+  <li><code class="highlighter-rouge">withAttribute($name, $value)</code></li>
+  <li><code class="highlighter-rouge">withoutAttribute($name)</code></li>
+</ul>
+
+<p>The PSR-7 interface provides these methods to transform Response objects:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">withStatus($code, $reasonPhrase = '')</code></li>
+</ul>
+
+<p>Refer to the <a href="http://www.php-fig.org/psr/psr-7/">PSR-7 documentation</a> for more information about these methods.</p>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="life-cycle.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Concepts: </small> Application Life Cycle</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="middleware.html" rel="next"><small>Concepts: </small> Middleware <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br/>
+        <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9YRVXHRZT6H3L">Donate with PayPal</a>
+</footer>
+
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/value-objects.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --></html>

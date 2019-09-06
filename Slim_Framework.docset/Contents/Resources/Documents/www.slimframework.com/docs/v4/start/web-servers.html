@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Web Servers - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Web Servers" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="web-servers.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button aria-controls="tocNav" aria-expanded="false" class="btn btn-primary" data-target="#tocNav" data-toggle="collapse" type="button">
+                        Toggle Navigation
+                    </button>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Web%20Servers"></a>Web Servers</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/start/web-servers.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>It is typical to use the front-controller pattern to funnel appropriate HTTP
+requests received by your web server to a single PHP file. The instructions
+below explain how to tell your web server to send HTTP requests to your PHP
+front-controller file.</p>
+
+<h2 id="php-built-in-server"><a class="dashAnchor" name="//apple_ref/cpp/Section/PHP%20built-in%20server"></a>PHP built-in server</h2>
+
+<p>Run the following command in terminal to start localhost web server,
+assuming <code class="highlighter-rouge">./public/</code> is public-accessible directory with <code class="highlighter-rouge">index.php</code> file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php <span class="nt">-S</span> localhost:8888 <span class="nt">-t</span> public public/index.php
+</code></pre></div></div>
+
+<p>If you are not using <code class="highlighter-rouge">index.php</code> as your entry point then change appropriately.</p>
+
+<h2 id="apache-configuration"><a class="dashAnchor" name="//apple_ref/cpp/Section/Apache%20configuration"></a>Apache configuration</h2>
+
+<p>Ensure your <code class="highlighter-rouge">.htaccess</code> and <code class="highlighter-rouge">index.php</code> files are in the same
+public-accessible directory. The <code class="highlighter-rouge">.htaccess</code> file should contain this code:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RewriteEngine On
+RewriteCond %<span class="o">{</span>REQUEST_FILENAME<span class="o">}</span> <span class="o">!</span><span class="nt">-f</span>
+RewriteCond %<span class="o">{</span>REQUEST_FILENAME<span class="o">}</span> <span class="o">!</span><span class="nt">-d</span>
+RewriteRule ^ index.php <span class="o">[</span>QSA,L]
+</code></pre></div></div>
+
+<p>This <code class="highlighter-rouge">.htaccess</code> file requires URL rewriting. Make sure to enable Apache’s mod_rewrite module and your virtual host is configured with the <code class="highlighter-rouge">AllowOverride</code> option so that the <code class="highlighter-rouge">.htaccess</code> rewrite rules can be used:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AllowOverride All
+</code></pre></div></div>
+
+<h2 id="nginx-configuration"><a class="dashAnchor" name="//apple_ref/cpp/Section/Nginx%20configuration"></a>Nginx configuration</h2>
+
+<p>This is an example Nginx virtual host configuration for the domain <code class="highlighter-rouge">example.com</code>.
+It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server
+is running on port 9000. You should update the <code class="highlighter-rouge">server_name</code>, <code class="highlighter-rouge">error_log</code>,
+<code class="highlighter-rouge">access_log</code>, and <code class="highlighter-rouge">root</code> directives with your own values. The <code class="highlighter-rouge">root</code> directive
+is the path to your application’s public document root directory; your Slim app’s
+<code class="highlighter-rouge">index.php</code> front-controller file should be in this directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
+    listen 80<span class="p">;</span>
+    server_name example.com<span class="p">;</span>
+    index index.php<span class="p">;</span>
+    error_log /path/to/example.error.log<span class="p">;</span>
+    access_log /path/to/example.access.log<span class="p">;</span>
+    root /path/to/public<span class="p">;</span>
+
+    location / <span class="o">{</span>
+        try_files <span class="nv">$uri</span> /index.php<span class="nv">$is_args$args</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    location ~ <span class="se">\.</span>php <span class="o">{</span>
+        try_files <span class="nv">$uri</span> <span class="o">=</span>404<span class="p">;</span>
+        fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>/.+<span class="o">)</span><span class="nv">$;</span>
+        include fastcgi_params<span class="p">;</span>
+        fastcgi_param SCRIPT_FILENAME <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+        fastcgi_param SCRIPT_NAME <span class="nv">$fastcgi_script_name</span><span class="p">;</span>
+        fastcgi_index index.php<span class="p">;</span>
+        fastcgi_pass 127.0.0.1:9000<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="hiphop-virtual-machine"><a class="dashAnchor" name="//apple_ref/cpp/Section/HipHop%20Virtual%20Machine"></a>HipHop Virtual Machine</h2>
+
+<p>Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the <code class="highlighter-rouge">SourceRoot</code> setting to point to your Slim app’s document root directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server <span class="o">{</span>
+    SourceRoot <span class="o">=</span> /path/to/public/directory
+<span class="o">}</span>
+
+ServerVariables <span class="o">{</span>
+    SCRIPT_NAME <span class="o">=</span> /index.php
+<span class="o">}</span>
+
+VirtualHost <span class="o">{</span>
+    <span class="k">*</span> <span class="o">{</span>
+        Pattern <span class="o">=</span> .<span class="k">*</span>
+        RewriteRules <span class="o">{</span>
+            <span class="k">*</span> <span class="o">{</span>
+                pattern <span class="o">=</span> ^<span class="o">(</span>.<span class="k">*</span><span class="o">)</span><span class="err">$</span>
+                to <span class="o">=</span> index.php/<span class="nv">$1</span>
+                qsa <span class="o">=</span> <span class="nb">true</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="iis"><a class="dashAnchor" name="//apple_ref/cpp/Section/IIS"></a>IIS</h2>
+
+<p>Ensure the <code class="highlighter-rouge">Web.config</code> and <code class="highlighter-rouge">index.php</code> files are in the same public-accessible directory. The <code class="highlighter-rouge">Web.config</code> file should contain this code:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> <span class="nv">encoding</span><span class="o">=</span><span class="s2">"UTF-8"</span>?&gt;
+&lt;configuration&gt;
+    &lt;system.webServer&gt;
+        &lt;rewrite&gt;
+            &lt;rules&gt;
+                &lt;rule <span class="nv">name</span><span class="o">=</span><span class="s2">"slim"</span> <span class="nv">patternSyntax</span><span class="o">=</span><span class="s2">"Wildcard"</span><span class="o">&gt;</span>
+                    &lt;match <span class="nv">url</span><span class="o">=</span><span class="s2">"*"</span> /&gt;
+                    &lt;conditions&gt;
+                        &lt;add <span class="nv">input</span><span class="o">=</span><span class="s2">"{REQUEST_FILENAME}"</span> <span class="nv">matchType</span><span class="o">=</span><span class="s2">"IsFile"</span> <span class="nv">negate</span><span class="o">=</span><span class="s2">"true"</span> /&gt;
+                        &lt;add <span class="nv">input</span><span class="o">=</span><span class="s2">"{REQUEST_FILENAME}"</span> <span class="nv">matchType</span><span class="o">=</span><span class="s2">"IsDirectory"</span> <span class="nv">negate</span><span class="o">=</span><span class="s2">"true"</span> /&gt;
+                    &lt;/conditions&gt;
+                    &lt;action <span class="nb">type</span><span class="o">=</span><span class="s2">"Rewrite"</span> <span class="nv">url</span><span class="o">=</span><span class="s2">"index.php"</span> /&gt;
+                &lt;/rule&gt;
+            &lt;/rules&gt;
+        &lt;/rewrite&gt;
+    &lt;/system.webServer&gt;
+&lt;/configuration&gt;
+</code></pre></div></div>
+
+<h2 id="lighttpd"><a class="dashAnchor" name="//apple_ref/cpp/Section/lighttpd"></a>lighttpd</h2>
+
+<p>Your lighttpd configuration file should contain this code (along with other settings you may need). This code requires lighttpd &gt;= 1.4.24.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>url.rewrite-if-not-file <span class="o">=</span> <span class="o">(</span><span class="s2">"(.*)"</span> <span class="o">=&gt;</span> <span class="s2">"/index.php/</span><span class="nv">$0</span><span class="s2">"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This assumes that Slim’s <code class="highlighter-rouge">index.php</code> is in the root folder of your project (www root).</p>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="upgrade.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Get Started: </small> Upgrade Guide</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="../deployment/deployment.html" rel="next"><small>Get Started: </small> Deployment <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br/>
+        <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9YRVXHRZT6H3L">Donate with PayPal</a>
+</footer>
+
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --></html>

@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Request - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Request" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="request.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button aria-controls="tocNav" aria-expanded="false" class="btn btn-primary" data-target="#tocNav" data-toggle="collapse" type="button">
+                        Toggle Navigation
+                    </button>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Request"></a>Request</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/objects/request.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>Your Slim app’s routes and middleware are given a PSR-7 request object that
+represents the current HTTP request received by your web server. The request
+object implements the <a href="http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-serverrequestinterface">PSR-7 ServerRequestInterface</a> with which you can
+inspect and manipulate the HTTP request method, headers, and body.</p>
+
+<h2 id="how-to-get-the-request-object"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20to%20get%20the%20Request%20object"></a>How to get the Request object</h2>
+
+<p>The PSR-7 request object is injected into your Slim application routes as the
+first argument to the route callback like this:</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 1: Inject PSR-7 request into application route callback.</figcaption>
+</figure>
+
+<p>The PSR-7 request object is injected into your Slim application <em>middleware</em>
+as the first argument of the middleware callable like this:</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nx">RequestHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// ...define app routes...
+</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 2: Inject PSR-7 request into application middleware.</figcaption>
+</figure>
+
+<h2 id="the-request-method"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Request%20Method"></a>The Request Method</h2>
+
+<p>Every HTTP request has a method that is typically one of:</p>
+
+<ul>
+  <li>GET</li>
+  <li>POST</li>
+  <li>PUT</li>
+  <li>DELETE</li>
+  <li>HEAD</li>
+  <li>PATCH</li>
+  <li>OPTIONS</li>
+</ul>
+
+<p>You can inspect the HTTP request’s method with the Request object method
+appropriately named <code class="highlighter-rouge">getMethod()</code>.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$method</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>It is possible to fake or <em>override</em> the HTTP request method. This is
+useful if, for example, you need to mimic a <code class="highlighter-rouge">PUT</code> request using a traditional
+web browser that only supports <code class="highlighter-rouge">GET</code> or <code class="highlighter-rouge">POST</code> requests.</p>
+
+<div class="alert alert-info">
+    <div><strong>Heads Up!</strong></div>
+    To enable request method overriding the <a href="../middleware/method-overriding.html">Method Overriding Middleware</a> must be injected into your application.
+</div>
+
+<p>There are two ways to override the HTTP request method. You can include a
+<code class="highlighter-rouge">METHOD</code> parameter in a <code class="highlighter-rouge">POST</code> request’s body. The HTTP request must use the
+<code class="highlighter-rouge">application/x-www-form-urlencoded</code> content type.</p>
+
+<figure>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /path HTTP/1.1
+Host: example.com
+Content-type: application/x-www-form-urlencoded
+Content-length: 22
+
+<span class="nv">data</span><span class="o">=</span>value&amp;_METHOD<span class="o">=</span>PUT
+</code></pre></div>  </div>
+  <figcaption>Figure 3: Override HTTP method with _METHOD parameter.</figcaption>
+</figure>
+
+<p>You can also override the HTTP request method with a custom
+<code class="highlighter-rouge">X-Http-Method-Override</code> HTTP request header. This works with any HTTP request
+content type.</p>
+
+<figure>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /path HTTP/1.1
+Host: example.com
+Content-type: application/json
+Content-length: 16
+X-Http-Method-Override: PUT
+
+<span class="o">{</span><span class="s2">"data"</span>:<span class="s2">"value"</span><span class="o">}</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 4: Override HTTP method with X-Http-Method-Override header.</figcaption>
+</figure>
+
+<h2 id="the-request-uri"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Request%20URI"></a>The Request URI</h2>
+
+<p>Every HTTP request has a URI that identifies the requested application
+resource. The HTTP request URI has several parts:</p>
+
+<ul>
+  <li>Scheme (e.g. <code class="highlighter-rouge">http</code> or <code class="highlighter-rouge">https</code>)</li>
+  <li>Host (e.g. <code class="highlighter-rouge">example.com</code>)</li>
+  <li>Port (e.g. <code class="highlighter-rouge">80</code> or <code class="highlighter-rouge">443</code>)</li>
+  <li>Path (e.g. <code class="highlighter-rouge">/users/1</code>)</li>
+  <li>Query string (e.g. <code class="highlighter-rouge">sort=created&amp;dir=asc</code>)</li>
+</ul>
+
+<p>You can fetch the PSR-7 Request object’s <a href="http://www.php-fig.org/psr/psr-7/#3-5-psr-http-message-uriinterface">URI object</a> with its <code class="highlighter-rouge">getUri()</code> method:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>The PSR-7 Request object’s URI is itself an object that provides the following
+methods to inspect the HTTP request’s URL parts:</p>
+
+<ul>
+  <li>getScheme()</li>
+  <li>getAuthority()</li>
+  <li>getUserInfo()</li>
+  <li>getHost()</li>
+  <li>getPort()</li>
+  <li>getPath()</li>
+  <li>getBasePath()</li>
+  <li>getQuery() <small>(returns the full query string, e.g. <code class="highlighter-rouge">a=1&amp;b=2</code>)</small></li>
+  <li>getFragment()</li>
+  <li>getBaseUrl()</li>
+</ul>
+
+<p>You can get the query parameters as an associative array on the Request object using <code class="highlighter-rouge">getQueryParams()</code>.</p>
+
+<div class="alert alert-info">
+    <div><strong>Base Path</strong></div>
+    If your Slim application's front-controller lives in a physical subdirectory
+    beneath your document root directory, you can fetch the HTTP request's physical
+    base path (relative to the document root) with the Uri object's <code>getBasePath()</code>
+    method. This will be an empty string if the Slim application is installed
+    in the document root's top-most directory.
+</div>
+
+<h2 id="the-request-headers"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Request%20Headers"></a>The Request Headers</h2>
+
+<p>Every HTTP request has headers. These are metadata that describe the HTTP
+request but are not visible in the request’s body. Slim’s PSR-7
+Request object provides several methods to inspect its headers.</p>
+
+<h3 id="get-all-headers"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20All%20Headers"></a>Get All Headers</h3>
+
+<p>You can fetch all HTTP request headers as an associative array with the PSR-7
+Request object’s <code class="highlighter-rouge">getHeaders()</code> method. The resultant associative array’s keys
+are the header names and its values are themselves a numeric array of string
+values for their respective header name.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">();</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$headers</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$values</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s2">": "</span> <span class="o">.</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">", "</span><span class="p">,</span> <span class="nv">$values</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 5: Fetch and iterate all HTTP request headers as an associative array.</figcaption>
+</figure>
+
+<h3 id="get-one-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20One%20Header"></a>Get One Header</h3>
+
+<p>You can get a single header’s value(s) with the PSR-7 Request object’s <code class="highlighter-rouge">getHeader($name)</code> method. This returns an array of values for the given header name. Remember, <em>a single
+HTTP header may have more than one value!</em></p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueArray</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeader</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 6: Get values for a specific HTTP header.</figcaption>
+</figure>
+
+<p>You may also fetch a comma-separated string with all values for a given header
+with the PSR-7 Request object’s <code class="highlighter-rouge">getHeaderLine($name)</code> method. Unlike the
+<code class="highlighter-rouge">getHeader($name)</code> method, this method returns a comma-separated string.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueString</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 7: Get single header's values as comma-separated string.</figcaption>
+</figure>
+
+<h3 id="detect-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Detect%20Header"></a>Detect Header</h3>
+
+<p>You can test for the presence of a header with the PSR-7 Request object’s
+<code class="highlighter-rouge">hasHeader($name)</code> method.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">hasHeader</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Do something
+</span><span class="p">}</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 8: Detect presence of a specific HTTP request header.</figcaption>
+</figure>
+
+<h2 id="the-request-body"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Request%20Body"></a>The Request Body</h2>
+
+<p>Every HTTP request has a body. If you are building a Slim application that
+consumes JSON or XML data, you can use the PSR-7 Request object’s
+<code class="highlighter-rouge">getParsedBody()</code> method to parse the HTTP request body into a native PHP format. 
+Note that body parsing differs from one PSR-7 implementation to another.</p>
+
+<p>You may need to implement middleware in order to parse the incoming input depending on the PSR-7 implementation you have installed. Here is an example for parsing incoming <code class="highlighter-rouge">JSON</code> input:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Server\MiddlewareInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nx">RequestHandler</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">JsonBodyParserMiddleware</span> <span class="k">implements</span> <span class="nx">MiddlewareInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">process</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$contentType</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">strstr</span><span class="p">(</span><span class="nv">$contentType</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$contents</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="s1">'php://input'</span><span class="p">),</span> <span class="kc">true</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">json_last_error</span><span class="p">()</span> <span class="o">===</span> <span class="nx">JSON_ERROR_NONE</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">withParsedBody</span><span class="p">(</span><span class="nv">$contents</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$parsedBody</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 9: Parse HTTP request body into native PHP format</figcaption>
+</figure>
+
+<p>Technically speaking, the PSR-7 Request object represents the HTTP request
+body as an instance of <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</code>. You can get
+the HTTP request body <code class="highlighter-rouge">StreamInterface</code> instance with the PSR-7 Request object’s
+<code class="highlighter-rouge">getBody()</code> method. The <code class="highlighter-rouge">getBody()</code> method is preferable if the incoming HTTP
+request size is unknown or too large for available memory.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 10: Get HTTP request body</figcaption>
+</figure>
+
+<p>The resultant <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</code> instance provides the following
+methods to read and iterate its underlying PHP <code class="highlighter-rouge">resource</code>.</p>
+
+<ul>
+  <li>getSize()</li>
+  <li>tell()</li>
+  <li>eof()</li>
+  <li>isSeekable()</li>
+  <li>seek()</li>
+  <li>rewind()</li>
+  <li>isWritable()</li>
+  <li>write($string)</li>
+  <li>isReadable()</li>
+  <li>read($length)</li>
+  <li>getContents()</li>
+  <li>getMetadata($key = null)</li>
+</ul>
+
+<h2 id="uploaded-files"><a class="dashAnchor" name="//apple_ref/cpp/Section/Uploaded%20Files"></a>Uploaded Files</h2>
+
+<p>The file uploads in <code class="highlighter-rouge">$_FILES</code> are available from the Request object’s
+<code class="highlighter-rouge">getUploadedFiles()</code> method. This returns an array keyed by the name of the
+<code class="highlighter-rouge">input</code> element.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$files</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUploadedFiles</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 11: Get uploaded files</figcaption>
+</figure>
+
+<p>Each object in the <code class="highlighter-rouge">$files</code> array is a instance of
+<code class="highlighter-rouge">Psr\Http\Message\UploadedFileInterface</code> and supports the following methods:</p>
+
+<ul>
+  <li>getStream()</li>
+  <li>moveTo($targetPath)</li>
+  <li>getSize()</li>
+  <li>getError()</li>
+  <li>getClientFilename()</li>
+  <li>getClientMediaType()</li>
+</ul>
+
+<p>See the <a href="../cookbook/uploading-files.html">cookbook</a> on how to upload files using a POST form.</p>
+
+<h2 id="request-helpers"><a class="dashAnchor" name="//apple_ref/cpp/Section/Request%20Helpers"></a>Request Helpers</h2>
+
+<p>Slim’s PSR-7 Request implementation provides these additional proprietary methods
+to help you further inspect the HTTP request.</p>
+
+<h3 id="detect-xhr-requests"><a class="dashAnchor" name="//apple_ref/cpp/Section/Detect%20XHR%20requests"></a>Detect XHR requests</h3>
+
+<p>You can detect XHR requests by checking if the header <code class="highlighter-rouge">X-Requested-With</code> is <code class="highlighter-rouge">XMLHttpRequest</code> using the Request’s <code class="highlighter-rouge">getHeaderLine()</code> method.</p>
+
+<figure>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /path HTTP/1.1
+Host: example.com
+Content-type: application/x-www-form-urlencoded
+Content-length: 7
+X-Requested-With: XMLHttpRequest
+
+<span class="nv">foo</span><span class="o">=</span>bar
+</code></pre></div>  </div>
+  <figcaption>Figure 13: Example XHR request.</figcaption>
+</figure>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'X-Requested-With'</span><span class="p">)</span> <span class="o">===</span> <span class="s1">'XMLHttpRequest'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do something
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="content-type"><a class="dashAnchor" name="//apple_ref/cpp/Section/Content%20Type"></a>Content Type</h3>
+
+<p>You can fetch the HTTP request content type with the Request object’s <code class="highlighter-rouge">getHeaderLine()</code> method.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$contentType</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="content-length"><a class="dashAnchor" name="//apple_ref/cpp/Section/Content%20Length"></a>Content Length</h3>
+
+<p>You can fetch the HTTP request content length with the Request object’s <code class="highlighter-rouge">getHeaderLine()</code> method.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$length</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Length'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="request-parameter"><a class="dashAnchor" name="//apple_ref/cpp/Section/Request%20Parameter"></a>Request Parameter</h3>
+
+<p>To fetch single request parameter value. You will need to use <code class="highlighter-rouge">getServerParams()</code></p>
+
+<p>For example, to get a single Server Parameter:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$params</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getServerParams</span><span class="p">();</span>
+<span class="nv">$authorization</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$params</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">])</span> <span class="o">:</span> <span class="nv">$params</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">]</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="route-object"><a class="dashAnchor" name="//apple_ref/cpp/Section/Route%20Object"></a>Route Object</h2>
+
+<p>Sometimes in middleware you require the parameter of your route.</p>
+
+<p>In this example we are checking first that the user is logged in and second that the user has permissions to view the particular video they are attempting to view.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="nv">$app</span>
+  <span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/course/{id}'</span><span class="p">,</span> <span class="nx">Video</span><span class="o">::</span><span class="na">class</span><span class="o">.</span><span class="s2">":watch"</span><span class="p">)</span>
+  <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nx">PermissionMiddleware</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nx">RequestHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Routing\RouteContext</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PermissionMiddleware</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__invoke</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nx">RouteContext</span><span class="o">::</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="na">getRoute</span><span class="p">();</span>
+        
+        <span class="nv">$courseId</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getArgument</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+        
+        <span class="c1">// ...do permission logic...
+</span>        
+        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="attributes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Attributes"></a>Attributes</h2>
+
+<p>With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do is it is to add it to the request object via an attribute.</p>
+
+<p>Example, Setting a value on your request object.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// add the session storage to your request as [READ-ONLY]
+</span>    <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">withAttribute</span><span class="p">(</span><span class="s1">'session'</span><span class="p">,</span> <span class="nv">$_SESSION</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Example, how to retrieve the value.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/test'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$session</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAttribute</span><span class="p">(</span><span class="s1">'session'</span><span class="p">);</span> <span class="c1">// get the session from the request
+</span>    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Yay, '</span> <span class="o">.</span> <span class="nv">$session</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>The request object also has bulk functions as well. <code class="highlighter-rouge">$request-&gt;getAttributes()</code> and <code class="highlighter-rouge">$request-&gt;withAttributes()</code></p>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="application.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>The Application: </small> Overview</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="response.html" rel="next"><small>The Response: </small> Overview <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br/>
+        <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9YRVXHRZT6H3L">Donate with PayPal</a>
+</footer>
+
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --></html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Response - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Response" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="response.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button aria-controls="tocNav" aria-expanded="false" class="btn btn-primary" data-target="#tocNav" data-toggle="collapse" type="button">
+                        Toggle Navigation
+                    </button>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Response"></a>Response</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/objects/response.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>Your Slim app’s routes and middleware are given a PSR-7 response object that
+represents the current HTTP response to be returned to the client. The response
+object implements the <a href="http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-responseinterface">PSR-7 ResponseInterface</a> with which you can
+inspect and manipulate the HTTP response status, headers, and body.</p>
+
+<h2 id="how-to-get-the-response-object"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20to%20get%20the%20Response%20object"></a>How to get the Response object</h2>
+
+<p>The PSR-7 response object is injected into your Slim application routes as the
+second argument to the route callback like this:</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequest</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 1: Inject PSR-7 response into application route callback.</figcaption>
+</figure>
+
+<h2 id="the-response-status"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Response%20Status"></a>The Response Status</h2>
+
+<p>Every HTTP response has a numeric <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">status code</a>. The status code
+identifies the <em>type</em> of HTTP response to be returned to the client. The PSR-7
+Response object’s default status code is <code class="highlighter-rouge">200</code> (OK). You can get the PSR-7
+Response object’s status code with the <code class="highlighter-rouge">getStatusCode()</code> method like this.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$status</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 3: Get response status code.</figcaption>
+</figure>
+
+<p>You can copy a PSR-7 Response object and assign a new status code like this:</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withStatus</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 4: Create response with new status code.</figcaption>
+</figure>
+
+<h2 id="the-response-headers"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Response%20Headers"></a>The Response Headers</h2>
+
+<p>Every HTTP response has headers. These are metadata that describe the HTTP
+response but are not visible in the response’s body. The PSR-7
+Response object provides several methods to inspect and manipulate its headers.</p>
+
+<h3 id="get-all-headers"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20All%20Headers"></a>Get All Headers</h3>
+
+<p>You can fetch all HTTP response headers as an associative array with the PSR-7
+Response object’s <code class="highlighter-rouge">getHeaders()</code> method. The resultant associative array’s keys
+are the header names and its values are themselves a numeric array of string
+values for their respective header name.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">();</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$headers</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$values</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s2">": "</span> <span class="o">.</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">", "</span><span class="p">,</span> <span class="nv">$values</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 5: Fetch and iterate all HTTP response headers as an associative array.</figcaption>
+</figure>
+
+<h3 id="get-one-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20One%20Header"></a>Get One Header</h3>
+
+<p>You can get a single header’s value(s) with the PSR-7 Response object’s
+<code class="highlighter-rouge">getHeader($name)</code> method. This returns an array of values for the given header
+name. Remember, <em>a single HTTP header may have more than one value!</em></p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueArray</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeader</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 6: Get values for a specific HTTP header.</figcaption>
+</figure>
+
+<p>You may also fetch a comma-separated string with all values for a given header
+with the PSR-7 Response object’s <code class="highlighter-rouge">getHeaderLine($name)</code> method. Unlike the
+<code class="highlighter-rouge">getHeader($name)</code> method, this method returns a comma-separated string.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueString</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 7: Get single header's values as comma-separated string.</figcaption>
+</figure>
+
+<h3 id="detect-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Detect%20Header"></a>Detect Header</h3>
+
+<p>You can test for the presence of a header with the PSR-7 Response object’s
+<code class="highlighter-rouge">hasHeader($name)</code> method.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">hasHeader</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Do something
+</span><span class="p">}</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 8: Detect presence of a specific HTTP header.</figcaption>
+</figure>
+
+<h3 id="set-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Set%20Header"></a>Set Header</h3>
+
+<p>You can set a header value with the PSR-7 Response object’s
+<code class="highlighter-rouge">withHeader($name, $value)</code> method.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Content-type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 9: Set HTTP header</figcaption>
+</figure>
+
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        The Response object is immutable. This method returns a <em>copy</em> of
+        the Response object that has the new header value. <strong>This method is
+        destructive</strong>, and it <em>replaces</em> existing header
+        values already associated with the same header name.
+    </div>
+</div>
+
+<h3 id="append-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Append%20Header"></a>Append Header</h3>
+
+<p>You can append a header value with the PSR-7 Response object’s
+<code class="highlighter-rouge">withAddedHeader($name, $value)</code> method.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withAddedHeader</span><span class="p">(</span><span class="s1">'Allow'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 10: Append HTTP header</figcaption>
+</figure>
+
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        Unlike the <code>withHeader()</code> method, this method <em>appends</em>
+        the new value to the set of values that already exist for the same header
+        name. The Response object is immutable. This method returns a
+        <em>copy</em> of the Response object that has the appended header value.
+    </div>
+</div>
+
+<h3 id="remove-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Remove%20Header"></a>Remove Header</h3>
+
+<p>You can remove a header with the Response object’s <code class="highlighter-rouge">withoutHeader($name)</code> method.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withoutHeader</span><span class="p">(</span><span class="s1">'Allow'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 11: Remove HTTP header</figcaption>
+</figure>
+
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        The Response object is immutable. This method returns a <em>copy</em>
+        of the Response object that has the appended header value.
+    </div>
+</div>
+
+<h2 id="the-response-body"><a class="dashAnchor" name="//apple_ref/cpp/Section/The%20Response%20Body"></a>The Response Body</h2>
+
+<p>An HTTP response typically has a body.</p>
+
+<p>Just like the PSR-7 Request object, the PSR-7 Response object implements
+the body as an instance of <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</code>. You can get
+the HTTP response body <code class="highlighter-rouge">StreamInterface</code> instance with the PSR-7 Response
+object’s <code class="highlighter-rouge">getBody()</code> method. The <code class="highlighter-rouge">getBody()</code> method is preferable if the
+outgoing HTTP response length is unknown or too large for available memory.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 12: Get HTTP response body</figcaption>
+</figure>
+
+<p>The resultant <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</code> instance provides the following
+methods to read from, iterate, and write to its underlying PHP <code class="highlighter-rouge">resource</code>.</p>
+
+<ul>
+  <li>getSize()</li>
+  <li>tell()</li>
+  <li>eof()</li>
+  <li>isSeekable()</li>
+  <li>seek()</li>
+  <li>rewind()</li>
+  <li>isWritable()</li>
+  <li>write($string)</li>
+  <li>isReadable()</li>
+  <li>read($length)</li>
+  <li>getContents()</li>
+  <li>getMetadata($key = null)</li>
+</ul>
+
+<p>Most often, you’ll need to write to the PSR-7 Response object. You can write
+content to the <code class="highlighter-rouge">StreamInterface</code> instance with its <code class="highlighter-rouge">write()</code> method like this:</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="nv">$body</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 13: Write content to the HTTP response body</figcaption>
+</figure>
+
+<p>You can also <em>replace</em> the PSR-7 Response object’s body with an entirely new
+<code class="highlighter-rouge">StreamInterface</code> instance. This is particularly useful when you want to pipe
+content from a remote destination (e.g. the filesystem or a remote API) into
+the HTTP response. You can replace the PSR-7 Response object’s body with
+its <code class="highlighter-rouge">withBody(StreamInterface $body)</code> method. Its argument <strong>MUST</strong> be an
+instance of <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</code>.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\LazyOpenStream</span><span class="p">;</span>
+
+<span class="nv">$newStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LazyOpenStream</span><span class="p">(</span><span class="s1">'/path/to/file'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">);</span>
+<span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withBody</span><span class="p">(</span><span class="nv">$newStream</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 14: Replace the HTTP response body</figcaption>
+</figure>
+
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        The Response object is immutable. This method returns a <em>copy</em>
+        of the Response object that contains the new body.
+    </div>
+</div>
+
+<h2 id="returning-json"><a class="dashAnchor" name="//apple_ref/cpp/Section/Returning%20JSON"></a>Returning JSON</h2>
+
+<p>In it’s simplest form, JSON data can be returned with a default 200 HTTP status code.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Bob'</span><span class="p">,</span> <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">40</span><span class="p">);</span>
+<span class="nv">$payload</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nv">$payload</span><span class="p">);</span>
+<span class="k">return</span> <span class="nv">$response</span>
+          <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 15: Returning JSON with a 200 HTTP status code.</figcaption>
+</figure>
+
+<p>We can also return JSON data with a custom HTTP status code.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Rob'</span><span class="p">,</span> <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">40</span><span class="p">);</span>
+<span class="nv">$payload</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nv">$payload</span><span class="p">);</span>
+<span class="k">return</span> <span class="nv">$response</span>
+          <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">)</span>
+          <span class="o">-&gt;</span><span class="na">withStatus</span><span class="p">(</span><span class="mi">201</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 16: Returning JSON with a 201 HTTP status code.</figcaption>
+</figure>
+
+<div class="alert alert-info">
+    <div><strong>Reminder</strong></div>
+    <div>
+        The Response object is immutable. This method returns a <em>copy</em> of
+        the Response object that has a new Content-Type header. <strong>This method is destructive</strong>, and it <em>replaces</em> the existing Content-Type header.
+    </div>
+</div>
+
+<h2 id="returning-a-redirect"><a class="dashAnchor" name="//apple_ref/cpp/Section/Returning%20a%20Redirect"></a>Returning a Redirect</h2>
+
+<p>You can redirect the HTTP client by using the <code class="highlighter-rouge">Location</code> header.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="nv">$response</span>
+  <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Location'</span><span class="p">,</span> <span class="s1">'https://www.example.com'</span><span class="p">)</span>
+  <span class="o">-&gt;</span><span class="na">withStatus</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 17: Returning a redirect to https://www.example.com</figcaption>
+</figure>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="request.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>The Request: </small> Overview</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="routing.html" rel="next"><small>Routing: </small> Overview <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br/>
+        <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9YRVXHRZT6H3L">Donate with PayPal</a>
+</footer>
+
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --></html>

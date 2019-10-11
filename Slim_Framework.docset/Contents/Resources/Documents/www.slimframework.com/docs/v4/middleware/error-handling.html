@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/error-handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/error-handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -124,7 +124,8 @@
 
 <span class="k">use</span> <span class="nx">Slim\Handlers\ErrorHandler</span><span class="p">;</span>
 
-<span class="k">class</span> <span class="nc">MyErrorHandler</span> <span class="k">extends</span> <span class="nx">ErrorHandler</span> <span class="p">{</span>
+<span class="k">class</span> <span class="nc">MyErrorHandler</span> <span class="k">extends</span> <span class="nx">ErrorHandler</span>
+<span class="p">{</span>
     <span class="k">protected</span> <span class="k">function</span> <span class="nf">logError</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$error</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
     <span class="p">{</span>
         <span class="c1">// Insert custom error logging function.
@@ -140,13 +141,12 @@
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-
 <span class="c1">// Add Routing Middleware
 </span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
 
 <span class="c1">// Instantiate Your Custom Error Handler
-</span><span class="nv">$myErrorHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyErrorHandler</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span> <span class="c1">// Constructor parameter is $logErrors (bool)
-</span>
+</span><span class="nv">$myErrorHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyErrorHandler</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCallableResolver</span><span class="p">(),</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getResponseFactory</span><span class="p">());</span>
+
 <span class="c1">// Add Error Middleware
 </span><span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 <span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="na">setDefaultErrorHandler</span><span class="p">(</span><span class="nv">$myErrorHandler</span><span class="p">);</span>
@@ -641,4 +641,4 @@ write the following.</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/error-handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/error-handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>

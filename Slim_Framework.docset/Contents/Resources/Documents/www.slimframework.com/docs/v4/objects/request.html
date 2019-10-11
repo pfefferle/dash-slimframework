@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -433,6 +433,28 @@ X-Requested-With: XMLHttpRequest
 <span class="p">}</span>
 </code></pre></div></div>
 
+<h2 id="obtain-base-path-from-within-route"><a class="dashAnchor" name="//apple_ref/cpp/Section/Obtain%20Base%20Path%20From%20Within%20Route"></a>Obtain Base Path From Within Route</h2>
+
+<p>To obtain the base path from within a route simply do the following:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Slim\Routing\RouteContext</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nx">RouteContext</span><span class="o">::</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$basePath</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="na">getBasePath</span><span class="p">();</span>
+    
+    <span class="c1">// ...
+</span>    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
 <h2 id="attributes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Attributes"></a>Attributes</h2>
 
 <p>With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do is it is to add it to the request object via an attribute.</p>
@@ -856,4 +878,4 @@ X-Requested-With: XMLHttpRequest
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 20:14:29 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>

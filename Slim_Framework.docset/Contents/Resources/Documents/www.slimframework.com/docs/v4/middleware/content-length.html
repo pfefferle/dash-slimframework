@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/content-length.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/content-length.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -42,12 +42,12 @@
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
                     <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/middleware/content-length.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
-                <p>The Content Length Middleware will automatically append a <code class="highlighter-rouge">Content-Length</code> header to the response. This is to replace the <code class="highlighter-rouge">addContentLengthHeader</code> setting that was removed from Slim 3. This middleware should be placed on the center of the middleware stack so it gets executed last.</p>
+                <p>The Content Length Middleware will automatically append a <code class="language-plaintext highlighter-rouge">Content-Length</code> header to the response. This is to replace the <code class="language-plaintext highlighter-rouge">addContentLengthHeader</code> setting that was removed from Slim 3. This middleware should be placed on the center of the middleware stack so it gets executed last.</p>
 
 <h2 id="usage"><a class="dashAnchor" name="//apple_ref/cpp/Section/Usage"></a>Usage</h2>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Middleware\ContentLengthMiddleware</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Middleware\ContentLengthMiddleware</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -56,8 +56,8 @@
 <span class="nv">$contentLengthMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContentLengthMiddleware</span><span class="p">();</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$contentLengthMiddleware</span><span class="p">);</span>
 
-<span class="c1">// ...
-</span>
+<span class="c1">// ...</span>
+
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
@@ -328,9 +328,22 @@
 
                                 
                                 
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
                                     
                                         <li class="previous">
-                                            <a href="output-buffering.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Packaged Middleware: </small> Output Buffering</a>
+                                            <a href="body-parsing.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Packaged Middleware: </small> Body Parsing</a>
                                         </li>
                                     
                                 
@@ -461,4 +474,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/content-length.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/content-length.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -42,17 +42,17 @@
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
                     <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/cookbook/route-patterns.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
-                <p>Slim treats a URL pattern with a trailing slash as different to one without. That is, <code class="highlighter-rouge">/user</code> and <code class="highlighter-rouge">/user/</code> are different and so can have different callbacks attached.</p>
+                <p>Slim treats a URL pattern with a trailing slash as different to one without. That is, <code class="language-plaintext highlighter-rouge">/user</code> and <code class="language-plaintext highlighter-rouge">/user/</code> are different and so can have different callbacks attached.</p>
 
 <p>For GET requests a permanent redirect is fine, but for other request methods like POST or PUT the browser will send the second request with the GET method. To avoid this you simply need to remove the trailing slash and pass the manipulated url to the next middleware.</p>
 
-<p>If you want to redirect/rewrite all URLs that end in a <code class="highlighter-rouge">/</code> to the non-trailing <code class="highlighter-rouge">/</code> equivalent, then you can add this middleware:</p>
+<p>If you want to redirect/rewrite all URLs that end in a <code class="language-plaintext highlighter-rouge">/</code> to the non-trailing <code class="language-plaintext highlighter-rouge">/</code> equivalent, then you can add this middleware:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\RequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Server\RequestHandlerInterface</span> <span class="nx">RequestHandler</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Psr7\Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\RequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Server\RequestHandlerInterface</span><span class="err"> RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Psr7\Response</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -63,9 +63,9 @@
     <span class="nv">$path</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">();</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="nv">$path</span> <span class="o">!=</span> <span class="s1">'/'</span> <span class="o">&amp;&amp;</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'/'</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// permanently redirect paths with a trailing slash
-</span>        <span class="c1">// to their non-trailing counterpart
-</span>        <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+        <span class="c1">// permanently redirect paths with a trailing slash</span>
+        <span class="c1">// to their non-trailing counterpart</span>
+        <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
         
         <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'GET'</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
@@ -83,10 +83,10 @@
 
 <p>Alternatively, consider <a href="http://github.com/middlewares/trailing-slash">middlewares/trailing-slash</a> middleware which also allows you to force a trailing slash to be appended to all URLs:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nx">Middlewares\TrailingSlash</span><span class="p">;</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nn">Middlewares\TrailingSlash</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">TrailingSlash</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span> <span class="c1">// true adds the trailing slash (false removes it)
-</span></code></pre></div></div>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">TrailingSlash</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span> <span class="c1">// true adds the trailing slash (false removes it)</span>
+</code></pre></div></div>
 
 
                 <nav>
@@ -362,6 +362,19 @@
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -488,4 +501,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

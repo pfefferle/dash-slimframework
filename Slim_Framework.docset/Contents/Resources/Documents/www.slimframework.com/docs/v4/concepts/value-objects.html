@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/value-objects.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/value-objects.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -44,14 +44,14 @@
                 </div>
                 <p>Slim supports <a href="https://github.com/php-fig/http-message">PSR-7</a> interfaces for
 its Request and Response objects. This makes Slim flexible because it can
-use <em>any</em> PSR-7 implementation. For example, you could return an instance of <code class="highlighter-rouge">GuzzleHttp\Psr7\CachingStream</code> or any instance
-returned by the <code class="highlighter-rouge">GuzzleHttp\Psr7\stream_for()</code> function.</p>
+use <em>any</em> PSR-7 implementation. For example, you could return an instance of <code class="language-plaintext highlighter-rouge">GuzzleHttp\Psr7\CachingStream</code> or any instance
+returned by the <code class="language-plaintext highlighter-rouge">GuzzleHttp\Psr7\stream_for()</code> function.</p>
 
 <p>Slim provides its own PSR-7 implementation so that it works out of the box. However,
 you are free to replace Slim’s default PSR-7 objects with a third-party implementation.
-Just override the application container’s <code class="highlighter-rouge">request</code> and <code class="highlighter-rouge">response</code> services so
-they return an instance of <code class="highlighter-rouge">Psr\Http\Message\ServerRequestInterface</code> and
-<code class="highlighter-rouge">Psr\Http\Message\ResponseInterface</code>, respectively.</p>
+Just override the application container’s <code class="language-plaintext highlighter-rouge">request</code> and <code class="language-plaintext highlighter-rouge">response</code> services so
+they return an instance of <code class="language-plaintext highlighter-rouge">Psr\Http\Message\ServerRequestInterface</code> and
+<code class="language-plaintext highlighter-rouge">Psr\Http\Message\ResponseInterface</code>, respectively.</p>
 
 <h2 id="value-objects"><a class="dashAnchor" name="//apple_ref/cpp/Section/Value%20objects"></a>Value objects</h2>
 
@@ -62,14 +62,14 @@ cloned when their properties are updated. This overhead does not affect
 performance in any meaningful way.</p>
 
 <p>You can request a copy of a value object by invoking any of its PSR-7
-interface methods (these methods typically have a <code class="highlighter-rouge">with</code> prefix). For example,
-a PSR-7 Response object has a <code class="highlighter-rouge">withHeader($name, $value)</code> method that returns a
+interface methods (these methods typically have a <code class="language-plaintext highlighter-rouge">with</code> prefix). For example,
+a PSR-7 Response object has a <code class="language-plaintext highlighter-rouge">withHeader($name, $value)</code> method that returns a
 cloned value object with the new HTTP header.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -88,30 +88,30 @@ cloned value object with the new HTTP header.</p>
 objects:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">withProtocolVersion($version)</code></li>
-  <li><code class="highlighter-rouge">withHeader($name, $value)</code></li>
-  <li><code class="highlighter-rouge">withAddedHeader($name, $value)</code></li>
-  <li><code class="highlighter-rouge">withoutHeader($name)</code></li>
-  <li><code class="highlighter-rouge">withBody(StreamInterface $body)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withProtocolVersion($version)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withHeader($name, $value)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withAddedHeader($name, $value)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withoutHeader($name)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withBody(StreamInterface $body)</code></li>
 </ul>
 
 <p>The PSR-7 interface provides these methods to transform Request objects:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">withMethod($method)</code></li>
-  <li><code class="highlighter-rouge">withUri(UriInterface $uri, $preserveHost = false)</code></li>
-  <li><code class="highlighter-rouge">withCookieParams(array $cookies)</code></li>
-  <li><code class="highlighter-rouge">withQueryParams(array $query)</code></li>
-  <li><code class="highlighter-rouge">withUploadedFiles(array $uploadedFiles)</code></li>
-  <li><code class="highlighter-rouge">withParsedBody($data)</code></li>
-  <li><code class="highlighter-rouge">withAttribute($name, $value)</code></li>
-  <li><code class="highlighter-rouge">withoutAttribute($name)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withMethod($method)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withUri(UriInterface $uri, $preserveHost = false)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withCookieParams(array $cookies)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withQueryParams(array $query)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withUploadedFiles(array $uploadedFiles)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withParsedBody($data)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withAttribute($name, $value)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withoutAttribute($name)</code></li>
 </ul>
 
 <p>The PSR-7 interface provides these methods to transform Response objects:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">withStatus($code, $reasonPhrase = '')</code></li>
+  <li><code class="language-plaintext highlighter-rouge">withStatus($code, $reasonPhrase = '')</code></li>
 </ul>
 
 <p>Refer to the <a href="http://www.php-fig.org/psr/psr-7/">PSR-7 documentation</a> for more information about these methods.</p>
@@ -400,6 +400,19 @@ objects:</p>
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -516,4 +529,4 @@ objects:</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/value-objects.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/value-objects.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

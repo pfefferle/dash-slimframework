@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -42,13 +42,13 @@
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
                     <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/cookbook/uploading-files.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
-                <p>Files that are uploaded using forms in POST requests can be retrieved with the Request method <code class="highlighter-rouge">getUploadedFiles()</code>.</p>
+                <p>Files that are uploaded using forms in POST requests can be retrieved with the Request method <code class="language-plaintext highlighter-rouge">getUploadedFiles()</code>.</p>
 
 <p>When uploading files using a POST request, make sure your file upload form has the
-attribute <code class="highlighter-rouge">enctype="multipart/form-data"</code> otherwise <code class="highlighter-rouge">getUploadedFiles()</code> will return an empty array.</p>
+attribute <code class="language-plaintext highlighter-rouge">enctype="multipart/form-data"</code> otherwise <code class="language-plaintext highlighter-rouge">getUploadedFiles()</code> will return an empty array.</p>
 
 <p>If multiple files are uploaded for the same input name, add brackets after the input name in the HTML, otherwise
-only one uploaded file will be returned for the input name by <code class="highlighter-rouge">getUploadedFiles()</code>.</p>
+only one uploaded file will be returned for the input name by <code class="language-plaintext highlighter-rouge">getUploadedFiles()</code>.</p>
 
 <p>Below is an example HTML form that contains both single and multiple file uploads.</p>
 
@@ -82,15 +82,15 @@ only one uploaded file will be returned for the input name by <code class="highl
   <figcaption>Figure 1: Example HTML form for file uploads</figcaption>
 </figure>
 
-<p>Uploaded files can be moved to a directory using the <code class="highlighter-rouge">moveTo</code> method. Below is an example application
+<p>Uploaded files can be moved to a directory using the <code class="language-plaintext highlighter-rouge">moveTo</code> method. Below is an example application
 that handles the uploaded files of the HTML form above.</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">DI\Container</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">DI\Container</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -104,23 +104,23 @@ that handles the uploaded files of the HTML form above.</p>
     <span class="nv">$directory</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'upload_directory'</span><span class="p">);</span>
     <span class="nv">$uploadedFiles</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUploadedFiles</span><span class="p">();</span>
 
-    <span class="c1">// handle single input with single file upload
-</span>    <span class="nv">$uploadedFile</span> <span class="o">=</span> <span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example1'</span><span class="p">];</span>
+    <span class="c1">// handle single input with single file upload</span>
+    <span class="nv">$uploadedFile</span> <span class="o">=</span> <span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example1'</span><span class="p">];</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
         <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
         <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="c1">// handle multiple inputs with the same key
-</span>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example2'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$uploadedFile</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle multiple inputs with the same key</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example2'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$uploadedFile</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
             <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="c1">// handle single input with multiple file uploads
-</span>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example3'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$uploadedFile</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle single input with multiple file uploads</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example3'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$uploadedFile</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
             <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
@@ -130,7 +130,7 @@ that handles the uploaded files of the HTML form above.</p>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="sd">/**
+<span class="cd">/**
  * Moves the uploaded file to the upload directory and assigns it a unique name
  * to avoid overwriting an existing uploaded file.
  *
@@ -141,8 +141,8 @@ that handles the uploaded files of the HTML form above.</p>
 <span class="k">function</span> <span class="nf">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nx">UploadedFileInterface</span> <span class="nv">$uploadedFile</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="nv">$extension</span> <span class="o">=</span> <span class="nb">pathinfo</span><span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getClientFilename</span><span class="p">(),</span> <span class="nx">PATHINFO_EXTENSION</span><span class="p">);</span>
-    <span class="nv">$basename</span> <span class="o">=</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nb">random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span> <span class="c1">// see http://php.net/manual/en/function.random-bytes.php
-</span>    <span class="nv">$filename</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">'%s.%0.8s'</span><span class="p">,</span> <span class="nv">$basename</span><span class="p">,</span> <span class="nv">$extension</span><span class="p">);</span>
+    <span class="nv">$basename</span> <span class="o">=</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nb">random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span> <span class="c1">// see http://php.net/manual/en/function.random-bytes.php</span>
+    <span class="nv">$filename</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">'%s.%0.8s'</span><span class="p">,</span> <span class="nv">$basename</span><span class="p">,</span> <span class="nv">$extension</span><span class="p">);</span>
 
     <span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">moveTo</span><span class="p">(</span><span class="nv">$directory</span> <span class="o">.</span> <span class="nx">DIRECTORY_SEPARATOR</span> <span class="o">.</span> <span class="nv">$filename</span><span class="p">);</span>
 
@@ -428,6 +428,19 @@ that handles the uploaded files of the HTML form above.</p>
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -554,4 +567,4 @@ that handles the uploaded files of the HTML form above.</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

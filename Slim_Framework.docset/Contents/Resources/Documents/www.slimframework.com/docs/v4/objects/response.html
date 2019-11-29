@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -54,9 +54,9 @@ second argument to the route callback like this:</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -76,8 +76,8 @@ second argument to the route callback like this:</p>
 
 <p>Every HTTP response has a numeric <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">status code</a>. The status code
 identifies the <em>type</em> of HTTP response to be returned to the client. The PSR-7
-Response object’s default status code is <code class="highlighter-rouge">200</code> (OK). You can get the PSR-7
-Response object’s status code with the <code class="highlighter-rouge">getStatusCode()</code> method like this.</p>
+Response object’s default status code is <code class="language-plaintext highlighter-rouge">200</code> (OK). You can get the PSR-7
+Response object’s status code with the <code class="language-plaintext highlighter-rouge">getStatusCode()</code> method like this.</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$status</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">();</span>
@@ -102,7 +102,7 @@ Response object provides several methods to inspect and manipulate its headers.<
 <h3 id="get-all-headers"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20All%20Headers"></a>Get All Headers</h3>
 
 <p>You can fetch all HTTP response headers as an associative array with the PSR-7
-Response object’s <code class="highlighter-rouge">getHeaders()</code> method. The resultant associative array’s keys
+Response object’s <code class="language-plaintext highlighter-rouge">getHeaders()</code> method. The resultant associative array’s keys
 are the header names and its values are themselves a numeric array of string
 values for their respective header name.</p>
 
@@ -118,7 +118,7 @@ values for their respective header name.</p>
 <h3 id="get-one-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Get%20One%20Header"></a>Get One Header</h3>
 
 <p>You can get a single header’s value(s) with the PSR-7 Response object’s
-<code class="highlighter-rouge">getHeader($name)</code> method. This returns an array of values for the given header
+<code class="language-plaintext highlighter-rouge">getHeader($name)</code> method. This returns an array of values for the given header
 name. Remember, <em>a single HTTP header may have more than one value!</em></p>
 
 <figure>
@@ -128,8 +128,8 @@ name. Remember, <em>a single HTTP header may have more than one value!</em></p>
 </figure>
 
 <p>You may also fetch a comma-separated string with all values for a given header
-with the PSR-7 Response object’s <code class="highlighter-rouge">getHeaderLine($name)</code> method. Unlike the
-<code class="highlighter-rouge">getHeader($name)</code> method, this method returns a comma-separated string.</p>
+with the PSR-7 Response object’s <code class="language-plaintext highlighter-rouge">getHeaderLine($name)</code> method. Unlike the
+<code class="language-plaintext highlighter-rouge">getHeader($name)</code> method, this method returns a comma-separated string.</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueString</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">);</span>
@@ -140,12 +140,12 @@ with the PSR-7 Response object’s <code class="highlighter-rouge">getHeaderLine
 <h3 id="detect-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Detect%20Header"></a>Detect Header</h3>
 
 <p>You can test for the presence of a header with the PSR-7 Response object’s
-<code class="highlighter-rouge">hasHeader($name)</code> method.</p>
+<code class="language-plaintext highlighter-rouge">hasHeader($name)</code> method.</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">hasHeader</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">))</span> <span class="p">{</span>
-    <span class="c1">// Do something
-</span><span class="p">}</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
 </code></pre></div>  </div>
   <figcaption>Figure 8: Detect presence of a specific HTTP header.</figcaption>
 </figure>
@@ -153,7 +153,7 @@ with the PSR-7 Response object’s <code class="highlighter-rouge">getHeaderLine
 <h3 id="set-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Set%20Header"></a>Set Header</h3>
 
 <p>You can set a header value with the PSR-7 Response object’s
-<code class="highlighter-rouge">withHeader($name, $value)</code> method.</p>
+<code class="language-plaintext highlighter-rouge">withHeader($name, $value)</code> method.</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Content-type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
@@ -174,7 +174,7 @@ with the PSR-7 Response object’s <code class="highlighter-rouge">getHeaderLine
 <h3 id="append-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Append%20Header"></a>Append Header</h3>
 
 <p>You can append a header value with the PSR-7 Response object’s
-<code class="highlighter-rouge">withAddedHeader($name, $value)</code> method.</p>
+<code class="language-plaintext highlighter-rouge">withAddedHeader($name, $value)</code> method.</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withAddedHeader</span><span class="p">(</span><span class="s1">'Allow'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">);</span>
@@ -194,7 +194,7 @@ with the PSR-7 Response object’s <code class="highlighter-rouge">getHeaderLine
 
 <h3 id="remove-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Remove%20Header"></a>Remove Header</h3>
 
-<p>You can remove a header with the Response object’s <code class="highlighter-rouge">withoutHeader($name)</code> method.</p>
+<p>You can remove a header with the Response object’s <code class="language-plaintext highlighter-rouge">withoutHeader($name)</code> method.</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withoutHeader</span><span class="p">(</span><span class="s1">'Allow'</span><span class="p">);</span>
@@ -215,9 +215,9 @@ with the PSR-7 Response object’s <code class="highlighter-rouge">getHeaderLine
 <p>An HTTP response typically has a body.</p>
 
 <p>Just like the PSR-7 Request object, the PSR-7 Response object implements
-the body as an instance of <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</code>. You can get
-the HTTP response body <code class="highlighter-rouge">StreamInterface</code> instance with the PSR-7 Response
-object’s <code class="highlighter-rouge">getBody()</code> method. The <code class="highlighter-rouge">getBody()</code> method is preferable if the
+the body as an instance of <code class="language-plaintext highlighter-rouge">Psr\Http\Message\StreamInterface</code>. You can get
+the HTTP response body <code class="language-plaintext highlighter-rouge">StreamInterface</code> instance with the PSR-7 Response
+object’s <code class="language-plaintext highlighter-rouge">getBody()</code> method. The <code class="language-plaintext highlighter-rouge">getBody()</code> method is preferable if the
 outgoing HTTP response length is unknown or too large for available memory.</p>
 
 <figure>
@@ -226,8 +226,8 @@ outgoing HTTP response length is unknown or too large for available memory.</p>
   <figcaption>Figure 12: Get HTTP response body</figcaption>
 </figure>
 
-<p>The resultant <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</code> instance provides the following
-methods to read from, iterate, and write to its underlying PHP <code class="highlighter-rouge">resource</code>.</p>
+<p>The resultant <code class="language-plaintext highlighter-rouge">Psr\Http\Message\StreamInterface</code> instance provides the following
+methods to read from, iterate, and write to its underlying PHP <code class="language-plaintext highlighter-rouge">resource</code>.</p>
 
 <ul>
   <li>getSize()</li>
@@ -245,7 +245,7 @@ methods to read from, iterate, and write to its underlying PHP <code class="high
 </ul>
 
 <p>Most often, you’ll need to write to the PSR-7 Response object. You can write
-content to the <code class="highlighter-rouge">StreamInterface</code> instance with its <code class="highlighter-rouge">write()</code> method like this:</p>
+content to the <code class="language-plaintext highlighter-rouge">StreamInterface</code> instance with its <code class="language-plaintext highlighter-rouge">write()</code> method like this:</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
@@ -255,14 +255,14 @@ content to the <code class="highlighter-rouge">StreamInterface</code> instance w
 </figure>
 
 <p>You can also <em>replace</em> the PSR-7 Response object’s body with an entirely new
-<code class="highlighter-rouge">StreamInterface</code> instance. This is particularly useful when you want to pipe
+<code class="language-plaintext highlighter-rouge">StreamInterface</code> instance. This is particularly useful when you want to pipe
 content from a remote destination (e.g. the filesystem or a remote API) into
 the HTTP response. You can replace the PSR-7 Response object’s body with
-its <code class="highlighter-rouge">withBody(StreamInterface $body)</code> method. Its argument <strong>MUST</strong> be an
-instance of <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</code>.</p>
+its <code class="language-plaintext highlighter-rouge">withBody(StreamInterface $body)</code> method. Its argument <strong>MUST</strong> be an
+instance of <code class="language-plaintext highlighter-rouge">Psr\Http\Message\StreamInterface</code>.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\LazyOpenStream</span><span class="p">;</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nn">GuzzleHttp\Psr7\LazyOpenStream</span><span class="p">;</span>
 
 <span class="nv">$newStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LazyOpenStream</span><span class="p">(</span><span class="s1">'/path/to/file'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">);</span>
 <span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withBody</span><span class="p">(</span><span class="nv">$newStream</span><span class="p">);</span>
@@ -317,7 +317,7 @@ instance of <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</co
 
 <h2 id="returning-a-redirect"><a class="dashAnchor" name="//apple_ref/cpp/Section/Returning%20a%20Redirect"></a>Returning a Redirect</h2>
 
-<p>You can redirect the HTTP client by using the <code class="highlighter-rouge">Location</code> header.</p>
+<p>You can redirect the HTTP client by using the <code class="language-plaintext highlighter-rouge">Location</code> header.</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="nv">$response</span>
@@ -611,6 +611,19 @@ instance of <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</co
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -727,4 +740,4 @@ instance of <code class="highlighter-rouge">Psr\Http\Message\StreamInterface</co
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

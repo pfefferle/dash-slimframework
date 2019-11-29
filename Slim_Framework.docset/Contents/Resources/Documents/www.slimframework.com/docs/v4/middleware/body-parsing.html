@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/body-parsing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <title>Body Parsing Middleware - Slim Framework</title>
+        <meta content="" name="description"/>
+        <meta content="index, follow" name="robots"/>
+        <meta content="Body Parsing Middleware" property="og:title"/>
+        <meta content="Slim Framework" property="og:site_name"/>
+        <meta content="body-parsing.html" property="og:url"/>
+        <meta content="" property="og:description"/>
+        <meta content="website" property="og:type"/>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link href="../../../assets/css/all.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet"/>
+        <link href="../../../assets/images/favicon.png" rel="shortcut icon"/>
+        <link href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button aria-controls="tocNav" aria-expanded="false" class="btn btn-primary" data-target="#tocNav" data-toggle="collapse" type="button">
+                        Toggle Navigation
+                    </button>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header"><a class="dashAnchor" name="//apple_ref/cpp/Section/Body%20Parsing%20Middleware"></a>Body Parsing Middleware</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/middleware/body-parsing.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>It’s very common in web APIs to send data in JSON or XML format. 
+Out of the box, PSR-7 implementations do not support these formats, 
+you have to decode the Request object’s getBody() yourself. 
+As this is a common requirement, Slim 4 provides <code class="language-plaintext highlighter-rouge">BodyParsingMiddleware</code> 
+to handle this task.</p>
+
+<h2 id="usage"><a class="dashAnchor" name="//apple_ref/cpp/Section/Usage"></a>Usage</h2>
+
+<p>It’s recommended to put the body parsing middleware before before the call to 
+<code class="language-plaintext highlighter-rouge">addErrorMiddlware</code>, so that the stack looks like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="c1">// Parse json, form data and xml</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addBodyParsingMiddleware</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="posted-json-form-or-xml-data"><a class="dashAnchor" name="//apple_ref/cpp/Section/Posted%20JSON%2C%20form%20or%20XML%20data"></a>Posted JSON, form or XML data</h2>
+
+<p>No changes are required to the POST handler because the <code class="language-plaintext highlighter-rouge">BodyParsingMiddleware</code> 
+detects that the <code class="language-plaintext highlighter-rouge">Content-Type</code> is set to a <code class="language-plaintext highlighter-rouge">JSON</code> media type and so places 
+the decoded body into the Request’s parsed body property.</p>
+
+<p>For data posted to the website from a browser, 
+you can use the $request’s <code class="language-plaintext highlighter-rouge">getParsedBody()</code> method.</p>
+
+<p>This will return an array of the posted data.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+    
+    <span class="nv">$html</span> <span class="o">=</span> <span class="nb">var_export</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nv">$html</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="media-type-detection"><a class="dashAnchor" name="//apple_ref/cpp/Section/Media%20type%20detection"></a>Media type detection</h2>
+
+<ul>
+  <li>The middleware reads the <code class="language-plaintext highlighter-rouge">Content-Type</code> from the request header to detect the media type.</li>
+  <li>Checks if this specific media type has a parser registered</li>
+  <li>If not, look for a media type with a structured syntax suffix (RFC 6839), e.g. <code class="language-plaintext highlighter-rouge">application/*</code></li>
+</ul>
+
+<h2 id="supported-media-types"><a class="dashAnchor" name="//apple_ref/cpp/Section/Supported%20media%20types"></a>Supported media types</h2>
+
+<ul>
+  <li>application/json</li>
+  <li>application/x-www-form-urlencoded</li>
+  <li>application/xml</li>
+  <li>text/xml</li>
+</ul>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="output-buffering.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Packaged Middleware: </small> Output Buffering</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="content-length.html" rel="next"><small>Packaged Middleware: </small> Content Length <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br/>
+        <a href="http://joshlockhart.com/">Josh Lockhart</a>,
+        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <a alt="Donate with PayPal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9YRVXHRZT6H3L">Donate with PayPal</a>
+</footer>
+
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+
+
+
+
+</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/body-parsing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

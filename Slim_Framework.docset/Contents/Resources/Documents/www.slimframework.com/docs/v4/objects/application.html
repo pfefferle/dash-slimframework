@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/application.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/application.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -42,46 +42,46 @@
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
                     <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/objects/application.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
-                <p>The Application <code class="highlighter-rouge">Slim\App</code> is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.</p>
+                <p>The Application <code class="language-plaintext highlighter-rouge">Slim\App</code> is the entry point to your Slim application and is used to register the routes that link to your callbacks or controllers.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="c1">// Instantiate app
-</span><span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="c1">// Instantiate app</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-<span class="c1">// Add Error Handling Middleware
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="c1">// Add Error Handling Middleware</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 
-<span class="c1">// Add route callbacks
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// Add route callbacks</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="c1">// Run application
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="c1">// Run application</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="advanced-notices-and-warnings-handling"><a class="dashAnchor" name="//apple_ref/cpp/Section/Advanced%20Notices%20and%20Warnings%20Handling"></a>Advanced Notices and Warnings Handling</h2>
 
-<p><strong>Warnings</strong> and <strong>Notices</strong> are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following <code class="highlighter-rouge">index.php</code>.</p>
+<p><strong>Warnings</strong> and <strong>Notices</strong> are not caught by default. If you wish your application to display an error page when they happen, you will need to implement code similar to the following <code class="language-plaintext highlighter-rouge">index.php</code>.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">MyApp\Handlers\ErrorHandler</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">MyApp\Handlers\ShutdownHandler</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpInternalServerErrorException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\ServerRequestCreatorFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">MyApp\Handlers\ErrorHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">MyApp\Handlers\ShutdownHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpInternalServerErrorException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\ServerRequestCreatorFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="c1">// Set that to your needs
-</span><span class="nv">$displayErrorDetails</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="c1">// Set that to your needs</span>
+<span class="nv">$displayErrorDetails</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 <span class="nv">$callableResolver</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCallableResolver</span><span class="p">();</span>
@@ -94,11 +94,11 @@
 <span class="nv">$shutdownHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ShutdownHandler</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$errorHandler</span><span class="p">,</span> <span class="nv">$displayErrorDetails</span><span class="p">);</span>
 <span class="nb">register_shutdown_function</span><span class="p">(</span><span class="nv">$shutdownHandler</span><span class="p">);</span>
 
-<span class="c1">// Add Routing Middleware
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="c1">// Add Routing Middleware</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
 
-<span class="c1">// Add Error Handling Middleware
-</span><span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="nv">$displayErrorDetails</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="c1">// Add Error Handling Middleware</span>
+<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="nv">$displayErrorDetails</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 <span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="na">setDefaultErrorHandler</span><span class="p">(</span><span class="nv">$errorHandler</span><span class="p">);</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
@@ -106,21 +106,21 @@
 
 <h2 id="advanced-custom-error-handler"><a class="dashAnchor" name="//apple_ref/cpp/Section/Advanced%20Custom%20Error%20Handler"></a>Advanced Custom Error Handler</h2>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">namespace</span> <span class="nx">MyApp\Handlers</span><span class="p">;</span>
+<span class="kn">namespace</span> <span class="nn">MyApp\Handlers</span><span class="p">;</span>
 
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpBadRequestException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpForbiddenException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpMethodNotAllowedException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpNotFoundException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpNotImplementedException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpUnauthorizedException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Handlers\ErrorHandler</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Exception</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Throwable</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpBadRequestException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpForbiddenException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpMethodNotAllowedException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpNotFoundException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpNotImplementedException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpUnauthorizedException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Handlers\ErrorHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Exception</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Throwable</span><span class="p">;</span>
 
-<span class="k">class</span> <span class="nc">HttpErrorHandler</span> <span class="k">extends</span> <span class="nx">ErrorHandler</span>
+<span class="kd">class</span> <span class="nc">HttpErrorHandler</span> <span class="k">extends</span> <span class="nx">ErrorHandler</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">const</span> <span class="no">BAD_REQUEST</span> <span class="o">=</span> <span class="s1">'BAD_REQUEST'</span><span class="p">;</span>
     <span class="k">public</span> <span class="k">const</span> <span class="no">INSUFFICIENT_PRIVILEGES</span> <span class="o">=</span> <span class="s1">'INSUFFICIENT_PRIVILEGES'</span><span class="p">;</span>
@@ -184,31 +184,31 @@
 
 <h2 id="advanced-shutdown-handler"><a class="dashAnchor" name="//apple_ref/cpp/Section/Advanced%20Shutdown%20Handler"></a>Advanced Shutdown Handler</h2>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">namespace</span> <span class="nx">MyApp\Handlers</span><span class="p">;</span>
+<span class="kn">namespace</span> <span class="nn">MyApp\Handlers</span><span class="p">;</span>
 
-<span class="k">use</span> <span class="nx">MyApp\Handlers\HttpErrorHandler</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Exception\HttpInternalServerErrorException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\ResponseEmitter</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">MyApp\Handlers\HttpErrorHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpInternalServerErrorException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\ResponseEmitter</span><span class="p">;</span>
 
-<span class="k">class</span> <span class="nc">ShutdownHandler</span>
+<span class="kd">class</span> <span class="nc">ShutdownHandler</span>
 <span class="p">{</span>
-    <span class="sd">/**
+    <span class="cd">/**
      * @var Request
      */</span>
     <span class="k">private</span> <span class="nv">$request</span><span class="p">;</span>
 
-    <span class="sd">/**
+    <span class="cd">/**
      * @var HttpErrorHandler
      */</span>
     <span class="k">private</span> <span class="nv">$errorHandler</span><span class="p">;</span>
 
-    <span class="sd">/**
+    <span class="cd">/**
      * @var bool
      */</span>
     <span class="k">private</span> <span class="nv">$displayErrorDetails</span><span class="p">;</span>
 
-    <span class="sd">/**
+    <span class="cd">/**
      * ShutdownHandler constructor.
      *
      * @param Request           $request
@@ -256,7 +256,7 @@
             <span class="nv">$exception</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpInternalServerErrorException</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">,</span> <span class="nv">$message</span><span class="p">);</span>
             <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">errorHandler</span><span class="o">-&gt;</span><span class="na">__invoke</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">,</span> <span class="nv">$exception</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">displayErrorDetails</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
             
-            <span class="k">if</span> <span class="p">(</span><span class="nb">ob_get_contents</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">ob_get_length</span><span class="p">())</span> <span class="p">{</span>
               <span class="nb">ob_clean</span><span class="p">();</span>
             <span class="p">}</span>
 
@@ -551,6 +551,19 @@
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -667,4 +680,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/application.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/application.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

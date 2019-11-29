@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -50,17 +50,17 @@ front-controller file.</p>
 <h2 id="php-built-in-server"><a class="dashAnchor" name="//apple_ref/cpp/Section/PHP%20built-in%20server"></a>PHP built-in server</h2>
 
 <p>Run the following command in terminal to start localhost web server,
-assuming <code class="highlighter-rouge">./public/</code> is public-accessible directory with <code class="highlighter-rouge">index.php</code> file:</p>
+assuming <code class="language-plaintext highlighter-rouge">./public/</code> is public-accessible directory with <code class="language-plaintext highlighter-rouge">index.php</code> file:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php <span class="nt">-S</span> localhost:8888 <span class="nt">-t</span> public public/index.php
 </code></pre></div></div>
 
-<p>If you are not using <code class="highlighter-rouge">index.php</code> as your entry point then change appropriately.</p>
+<p>If you are not using <code class="language-plaintext highlighter-rouge">index.php</code> as your entry point then change appropriately.</p>
 
 <h2 id="apache-configuration"><a class="dashAnchor" name="//apple_ref/cpp/Section/Apache%20configuration"></a>Apache configuration</h2>
 
-<p>Ensure your <code class="highlighter-rouge">.htaccess</code> and <code class="highlighter-rouge">index.php</code> files are in the same
-public-accessible directory. The <code class="highlighter-rouge">.htaccess</code> file should contain this code:</p>
+<p>Ensure your <code class="language-plaintext highlighter-rouge">.htaccess</code> and <code class="language-plaintext highlighter-rouge">index.php</code> files are in the same
+public-accessible directory. The <code class="language-plaintext highlighter-rouge">.htaccess</code> file should contain this code:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RewriteEngine On
 RewriteCond %<span class="o">{</span>REQUEST_FILENAME<span class="o">}</span> <span class="o">!</span><span class="nt">-f</span>
@@ -68,19 +68,19 @@ RewriteCond %<span class="o">{</span>REQUEST_FILENAME<span class="o">}</span> <s
 RewriteRule ^ index.php <span class="o">[</span>QSA,L]
 </code></pre></div></div>
 
-<p>This <code class="highlighter-rouge">.htaccess</code> file requires URL rewriting. Make sure to enable Apache’s mod_rewrite module and your virtual host is configured with the <code class="highlighter-rouge">AllowOverride</code> option so that the <code class="highlighter-rouge">.htaccess</code> rewrite rules can be used:</p>
+<p>This <code class="language-plaintext highlighter-rouge">.htaccess</code> file requires URL rewriting. Make sure to enable Apache’s mod_rewrite module and your virtual host is configured with the <code class="language-plaintext highlighter-rouge">AllowOverride</code> option so that the <code class="language-plaintext highlighter-rouge">.htaccess</code> rewrite rules can be used:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AllowOverride All
 </code></pre></div></div>
 
 <h2 id="nginx-configuration"><a class="dashAnchor" name="//apple_ref/cpp/Section/Nginx%20configuration"></a>Nginx configuration</h2>
 
-<p>This is an example Nginx virtual host configuration for the domain <code class="highlighter-rouge">example.com</code>.
+<p>This is an example Nginx virtual host configuration for the domain <code class="language-plaintext highlighter-rouge">example.com</code>.
 It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server
-is running on port 9000. You should update the <code class="highlighter-rouge">server_name</code>, <code class="highlighter-rouge">error_log</code>,
-<code class="highlighter-rouge">access_log</code>, and <code class="highlighter-rouge">root</code> directives with your own values. The <code class="highlighter-rouge">root</code> directive
+is running on port 9000. You should update the <code class="language-plaintext highlighter-rouge">server_name</code>, <code class="language-plaintext highlighter-rouge">error_log</code>,
+<code class="language-plaintext highlighter-rouge">access_log</code>, and <code class="language-plaintext highlighter-rouge">root</code> directives with your own values. The <code class="language-plaintext highlighter-rouge">root</code> directive
 is the path to your application’s public document root directory; your Slim app’s
-<code class="highlighter-rouge">index.php</code> front-controller file should be in this directory.</p>
+<code class="language-plaintext highlighter-rouge">index.php</code> front-controller file should be in this directory.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
     listen 80<span class="p">;</span>
@@ -108,7 +108,7 @@ is the path to your application’s public document root directory; your Slim ap
 
 <h2 id="hiphop-virtual-machine"><a class="dashAnchor" name="//apple_ref/cpp/Section/HipHop%20Virtual%20Machine"></a>HipHop Virtual Machine</h2>
 
-<p>Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the <code class="highlighter-rouge">SourceRoot</code> setting to point to your Slim app’s document root directory.</p>
+<p>Your HipHop Virtual Machine configuration file should contain this code (along with other settings you may need). Be sure you change the <code class="language-plaintext highlighter-rouge">SourceRoot</code> setting to point to your Slim app’s document root directory.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server <span class="o">{</span>
     SourceRoot <span class="o">=</span> /path/to/public/directory
@@ -134,7 +134,7 @@ VirtualHost <span class="o">{</span>
 
 <h2 id="iis"><a class="dashAnchor" name="//apple_ref/cpp/Section/IIS"></a>IIS</h2>
 
-<p>Ensure the <code class="highlighter-rouge">Web.config</code> and <code class="highlighter-rouge">index.php</code> files are in the same public-accessible directory. The <code class="highlighter-rouge">Web.config</code> file should contain this code:</p>
+<p>Ensure the <code class="language-plaintext highlighter-rouge">Web.config</code> and <code class="language-plaintext highlighter-rouge">index.php</code> files are in the same public-accessible directory. The <code class="language-plaintext highlighter-rouge">Web.config</code> file should contain this code:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> <span class="nv">encoding</span><span class="o">=</span><span class="s2">"UTF-8"</span>?&gt;
 &lt;configuration&gt;
@@ -162,20 +162,20 @@ VirtualHost <span class="o">{</span>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>url.rewrite-if-not-file <span class="o">=</span> <span class="o">(</span><span class="s2">"(.*)"</span> <span class="o">=&gt;</span> <span class="s2">"/index.php/</span><span class="nv">$0</span><span class="s2">"</span><span class="o">)</span>
 </code></pre></div></div>
 
-<p>This assumes that Slim’s <code class="highlighter-rouge">index.php</code> is in the root folder of your project (www root).</p>
+<p>This assumes that Slim’s <code class="language-plaintext highlighter-rouge">index.php</code> is in the root folder of your project (www root).</p>
 
 <h2 id="run-from-a-sub-directory"><a class="dashAnchor" name="//apple_ref/cpp/Section/Run%20From%20a%20Sub-Directory"></a>Run From a Sub-Directory</h2>
-<p>If you want to run your Slim Application from a sub-directory in your Server’s Root instead of creating a Virtual Host, you can configure <code class="highlighter-rouge">$app-&gt;setBasePath('path-to-your-app')</code> right after the <code class="highlighter-rouge">AppFactory::create()</code>.
-Assuming that your Server’s Root is <code class="highlighter-rouge">/var/www/html/</code> and path to your Slim Application is <code class="highlighter-rouge">/var/www/html/my-slim-app</code> you can set the base path to <code class="highlighter-rouge">$app-&gt;setBasePath('/my-slim-app')</code>.</p>
+<p>If you want to run your Slim Application from a sub-directory in your Server’s Root instead of creating a Virtual Host, you can configure <code class="language-plaintext highlighter-rouge">$app-&gt;setBasePath('path-to-your-app')</code> right after the <code class="language-plaintext highlighter-rouge">AppFactory::create()</code>.
+Assuming that your Server’s Root is <code class="language-plaintext highlighter-rouge">/var/www/html/</code> and path to your Slim Application is <code class="language-plaintext highlighter-rouge">/var/www/html/my-slim-app</code> you can set the base path to <code class="language-plaintext highlighter-rouge">$app-&gt;setBasePath('/my-slim-app')</code>.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Middleware\OutputBufferingMiddleware</span><span class="p">;</span>
-<span class="c1">// ...
-</span><span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Middleware\OutputBufferingMiddleware</span><span class="p">;</span>
+<span class="c1">// ...</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setBasePath</span><span class="p">(</span><span class="s1">'/my-slim-app'</span><span class="p">);</span>
-<span class="c1">// ...
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="c1">// ...</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 
@@ -462,6 +462,19 @@ Assuming that your Server’s Root is <code class="highlighter-rouge">/var/www/h
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -578,4 +591,4 @@ Assuming that your Server’s Root is <code class="highlighter-rouge">/var/www/h
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

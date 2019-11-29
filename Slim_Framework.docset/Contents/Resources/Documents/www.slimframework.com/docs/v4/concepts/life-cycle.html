@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/life-cycle.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/life-cycle.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -46,23 +46,23 @@
 
 <h3 id="1-instantiation"><a class="dashAnchor" name="//apple_ref/cpp/Section/1.%20Instantiation"></a>1. Instantiation</h3>
 
-<p>First, you instantiate the <code class="highlighter-rouge">Slim\App</code> class. This is the Slim application object. During instantiation, Slim registers default services for each application dependency. The application constructor accepts an optional settings array that configures the application’s behavior.</p>
+<p>First, you instantiate the <code class="language-plaintext highlighter-rouge">Slim\App</code> class. This is the Slim application object. During instantiation, Slim registers default services for each application dependency. The application constructor accepts an optional settings array that configures the application’s behavior.</p>
 
 <h3 id="2-route-definitions"><a class="dashAnchor" name="//apple_ref/cpp/Section/2.%20Route%20Definitions"></a>2. Route Definitions</h3>
 
-<p>Second, you define routes using the application instance’s <code class="highlighter-rouge">get()</code>, <code class="highlighter-rouge">post()</code>, <code class="highlighter-rouge">put()</code>, <code class="highlighter-rouge">delete()</code>, <code class="highlighter-rouge">patch()</code>, <code class="highlighter-rouge">head()</code>, and <code class="highlighter-rouge">options()</code> routing methods. These instance methods register a route with the application’s Router object. Each routing method returns the Route instance so you can immediately invoke the Route instance’s methods to add middleware or assign a name.</p>
+<p>Second, you define routes using the application instance’s <code class="language-plaintext highlighter-rouge">get()</code>, <code class="language-plaintext highlighter-rouge">post()</code>, <code class="language-plaintext highlighter-rouge">put()</code>, <code class="language-plaintext highlighter-rouge">delete()</code>, <code class="language-plaintext highlighter-rouge">patch()</code>, <code class="language-plaintext highlighter-rouge">head()</code>, and <code class="language-plaintext highlighter-rouge">options()</code> routing methods. These instance methods register a route with the application’s Router object. Each routing method returns the Route instance so you can immediately invoke the Route instance’s methods to add middleware or assign a name.</p>
 
 <h3 id="3-application-runner"><a class="dashAnchor" name="//apple_ref/cpp/Section/3.%20Application%20Runner"></a>3. Application Runner</h3>
 
-<p>Third, you invoke the application instance’s <code class="highlighter-rouge">run()</code> method. This method starts the following process:</p>
+<p>Third, you invoke the application instance’s <code class="language-plaintext highlighter-rouge">run()</code> method. This method starts the following process:</p>
 
 <h4 id="a-enter-middleware-stack"><a class="dashAnchor" name="//apple_ref/cpp/Section/A.%20Enter%20Middleware%20Stack"></a>A. Enter Middleware Stack</h4>
 
-<p>The <code class="highlighter-rouge">run()</code> method begins to inwardly traverse the application’s middleware stack. This is a concentric structure of middleware layers that receive (and optionally manipulate) the Environment, Request, and Response objects before (and after) the Slim application runs. The Slim application is the inner-most layer of the concentric middleware structure. Each middleware layer is invoked inwardly beginning from the outer-most layer.</p>
+<p>The <code class="language-plaintext highlighter-rouge">run()</code> method begins to inwardly traverse the application’s middleware stack. This is a concentric structure of middleware layers that receive (and optionally manipulate) the Environment, Request, and Response objects before (and after) the Slim application runs. The Slim application is the inner-most layer of the concentric middleware structure. Each middleware layer is invoked inwardly beginning from the outer-most layer.</p>
 
 <h4 id="b-run-application"><a class="dashAnchor" name="//apple_ref/cpp/Section/B.%20Run%20Application"></a>B. Run Application</h4>
 
-<p>After the <code class="highlighter-rouge">run()</code> method reaches the inner-most middleware layer, it invokes the application instance and dispatches the current HTTP request to the appropriate application route object. If a route matches the HTTP method and URI, the route’s middleware and callable are invoked. If a matching route is not found, the Not Found or Not Allowed handler is invoked.</p>
+<p>After the <code class="language-plaintext highlighter-rouge">run()</code> method reaches the inner-most middleware layer, it invokes the application instance and dispatches the current HTTP request to the appropriate application route object. If a route matches the HTTP method and URI, the route’s middleware and callable are invoked. If a matching route is not found, the Not Found or Not Allowed handler is invoked.</p>
 
 <h4 id="c-exit-middleware-stack"><a class="dashAnchor" name="//apple_ref/cpp/Section/C.%20Exit%20Middleware%20Stack"></a>C. Exit Middleware Stack</h4>
 
@@ -70,7 +70,7 @@
 
 <h4 id="d-send-http-response"><a class="dashAnchor" name="//apple_ref/cpp/Section/D.%20Send%20HTTP%20Response"></a>D. Send HTTP Response</h4>
 
-<p>After the outer-most middleware layer cedes control, the application instance prepares, serializes, and returns the HTTP response. The HTTP response headers are set with PHP’s native <code class="highlighter-rouge">header()</code> method, and the HTTP response body is output to the current output buffer.</p>
+<p>After the outer-most middleware layer cedes control, the application instance prepares, serializes, and returns the HTTP response. The HTTP response headers are set with PHP’s native <code class="language-plaintext highlighter-rouge">header()</code> method, and the HTTP response body is output to the current output buffer.</p>
 
 
                 <nav>
@@ -356,6 +356,19 @@
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -472,4 +485,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/life-cycle.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/life-cycle.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

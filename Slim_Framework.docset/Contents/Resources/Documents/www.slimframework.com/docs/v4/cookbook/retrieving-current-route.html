@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/retrieving-current-route.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/retrieving-current-route.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -42,28 +42,28 @@
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
                     <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/cookbook/retrieving-current-route.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
-                <p>If you ever need to get access to the current route within your application all you have to do is call the request class’ <code class="highlighter-rouge">getAttribute</code> method with an argument of <code class="highlighter-rouge">'route'</code> and it will return the current route, which is an instance of the <code class="highlighter-rouge">Slim\Route</code> class.</p>
+                <p>If you ever need to get access to the current route within your application, you will need to instantiate the <code class="language-plaintext highlighter-rouge">RouteContext</code> object using the incoming <code class="language-plaintext highlighter-rouge">ServerRequestInterface</code>.</p>
 
-<p>From there you can get the route’s name by using <code class="highlighter-rouge">getName()</code> or get the methods supported by this route via <code class="highlighter-rouge">getMethods()</code>, etc.</p>
+<p>From there you can get the route via <code class="language-plaintext highlighter-rouge">$routeContext-&gt;getRoute()</code> and access the route’s name by using <code class="language-plaintext highlighter-rouge">getName()</code> or get the methods supported by this route via <code class="language-plaintext highlighter-rouge">getMethods()</code>, etc.</p>
 
-<p>Note: If you need to access the route from within your app middleware you must set <code class="highlighter-rouge">'determineRouteBeforeAppMiddleware'</code> to true in your configuration otherwise <code class="highlighter-rouge">getAttribute('route')</code> will return null. Also <code class="highlighter-rouge">getAttribute('route')</code> will return null on non existent routes.</p>
+<p>Note: If you need to access the <code class="language-plaintext highlighter-rouge">RouteContext</code> object during the middleware cycle before reaching the route handler you will need to add the <code class="language-plaintext highlighter-rouge">RoutingMiddleware</code> as the outermost middleware before the error handling middleware (See example below).</p>
 
 <p>Example:</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Routing\RouteContext</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Routing\RouteContext</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-<span class="c1">// Via this middleware you could access the route and routing results from the resolved route
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// Via this middleware you could access the route and routing results from the resolved route</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nx">RouteContext</span><span class="o">::</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
     <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="na">getRoute</span><span class="p">();</span>
 
-    <span class="c1">// return NotFound for non existent route
-</span>    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$route</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// return NotFound for non existent route</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$route</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
     <span class="p">}</span>
 
@@ -72,16 +72,19 @@
     <span class="nv">$methods</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getMethods</span><span class="p">();</span>
     <span class="nv">$arguments</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getArguments</span><span class="p">();</span>
 
-    <span class="c1">// ... do something with the data ...
-</span>
+    <span class="c1">// ... do something with the data ...</span>
+
     <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="c1">// The RoutingMiddleware should be added after our CORS middleware so routing is performed first
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="c1">// The RoutingMiddleware should be added after our CORS middleware so routing is performed first</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
  
-<span class="c1">// ...
-</span> 
+<span class="c1">// The ErrorMiddleware should always be the outermost middleware</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+ 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
@@ -359,6 +362,19 @@
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -485,4 +501,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/retrieving-current-route.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/retrieving-current-route.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

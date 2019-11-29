@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -47,21 +47,21 @@ dependencies. Slim supports containers that implement <a href="http://www.php-fi
 
 <h2 id="example-usage-with-php-di"><a class="dashAnchor" name="//apple_ref/cpp/Section/Example%20usage%20with%20PHP-DI"></a>Example usage with PHP-DI</h2>
 
-<p>You don’t <em>have</em> to provide a dependency container. If you do, however, you must provide an instance of the container to <code class="highlighter-rouge">AppFactory</code> before creating an <code class="highlighter-rouge">App</code>.</p>
+<p>You don’t <em>have</em> to provide a dependency container. If you do, however, you must provide an instance of the container to <code class="language-plaintext highlighter-rouge">AppFactory</code> before creating an <code class="language-plaintext highlighter-rouge">App</code>.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">DI\Container</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">DI\Container</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="c1">// Create Container using PHP-DI
-</span><span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
+<span class="c1">// Create Container using PHP-DI</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
 
-<span class="c1">// Set container to create App with on AppFactory
-</span><span class="nx">AppFactory</span><span class="o">::</span><span class="na">setContainer</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
+<span class="c1">// Set container to create App with on AppFactory</span>
+<span class="nx">AppFactory</span><span class="o">::</span><span class="na">setContainer</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 </code></pre></div></div>
 
@@ -76,7 +76,7 @@ dependencies. Slim supports containers that implement <a href="http://www.php-fi
 <p>You can fetch services from your container explicitly as well as from inside a Slim
 application route like this:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/**
  * Example GET route
  *
  * @param  ServerRequestInterface $request  PSR-7 request
@@ -88,15 +88,15 @@ application route like this:</p>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$myService</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'myService'</span><span class="p">);</span>
 
-    <span class="c1">// ...do something with $myService...
-</span>
+    <span class="c1">// ...do something with $myService...</span>
+
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
-<p>To test if a service exists in the container before using it, use the <code class="highlighter-rouge">has()</code> method, like this:</p>
+<p>To test if a service exists in the container before using it, use the <code class="language-plaintext highlighter-rouge">has()</code> method, like this:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/**
  * Example GET route
  *
  * @param  ServerRequestInterface $request  PSR-7 request
@@ -397,6 +397,19 @@ application route like this:</p>
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -513,4 +526,4 @@ application route like this:</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

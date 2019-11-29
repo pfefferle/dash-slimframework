@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:11 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -50,7 +50,7 @@ you need to be aware of.</p>
 
 <h2 id="breaking-changes-to-slimapp-constructor"><a class="dashAnchor" name="//apple_ref/cpp/Section/Breaking%20changes%20to%20Slim%5CApp%20constructor"></a>Breaking changes to Slim\App constructor</h2>
 <p>Slim’s App settings used to be a part of the container and they have now been decoupled from it.</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sd">/**
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/**
  * Slim 3 App::__construct($container = [])
  * As seen here the settings used to be nested
  */</span>
@@ -58,7 +58,7 @@ you need to be aware of.</p>
     <span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="o">...</span><span class="p">],</span>
 <span class="p">]);</span>
 
-<span class="sd">/**
+<span class="cd">/**
  * Slim 4 App::__constructor() method takes 1 mandatory parameter and 4 optional parameters
  * 
  * @param ResponseFactoryInterface Any implementation of a ResponseFactory
@@ -72,19 +72,47 @@ you need to be aware of.</p>
 
 <h2 id="removed-app-settings"><a class="dashAnchor" name="//apple_ref/cpp/Section/Removed%20App%20Settings"></a>Removed App Settings</h2>
 <ul>
-  <li><code class="highlighter-rouge">addContentLengthHeader</code> See <a href="../middleware/content-length.html">Content Length Middleware</a> for new implementation of this setting.</li>
-  <li><code class="highlighter-rouge">determineRouteBeforeAppMiddleware</code> Position <a href="../middleware/routing.html">Routing Middleware</a> at the right position in your middleware stack to replicate existing behavior.</li>
-  <li><code class="highlighter-rouge">outputBuffering</code> See <a href="../middleware/output-buffering.html">Output Buffering Middleware</a> for new implementation of this setting.</li>
-  <li><code class="highlighter-rouge">displayErrorDetails</code> See <a href="../middleware/error-handling.html">Error Handling Middleware</a> for new implementation of this setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">addContentLengthHeader</code> See <a href="../middleware/content-length.html">Content Length Middleware</a> for new implementation of this setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">determineRouteBeforeAppMiddleware</code> Position <a href="../middleware/routing.html">Routing Middleware</a> at the right position in your middleware stack to replicate existing behavior.</li>
+  <li><code class="language-plaintext highlighter-rouge">outputBuffering</code> See <a href="../middleware/output-buffering.html">Output Buffering Middleware</a> for new implementation of this setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">displayErrorDetails</code> See <a href="../middleware/error-handling.html">Error Handling Middleware</a> for new implementation of this setting.</li>
 </ul>
 
 <h2 id="changes-to-container"><a class="dashAnchor" name="//apple_ref/cpp/Section/Changes%20to%20Container"></a>Changes to Container</h2>
-<p>Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, <code class="highlighter-rouge">App::__call()</code> method has been removed, so accessing a container property via <code class="highlighter-rouge">$app-&gt;key_name()</code> no longer works.</p>
+<p>Slim no longer has a Container so you need to supply your own. If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. Also, <code class="language-plaintext highlighter-rouge">App::__call()</code> method has been removed, so accessing a container property via <code class="language-plaintext highlighter-rouge">$app-&gt;key_name()</code> no longer works.</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/**
+ * Slim 3.x shipped with the Pimple container implementation and enabled the following synthax
+ */</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+
+<span class="c1">//Assign dependencies as array</span>
+<span class="nv">$container</span><span class="p">[</span><span class="s1">'view'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">\Psr\Container\ContainerInterface</span> <span class="nv">$container</span><span class="p">){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">\Slim\Views\Twig</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="p">};</span>
+
+
+<span class="cd">/**
+ * Slim 4.x does not ship with a container library. It supports all PSR-11 implementations such as PHP-DI
+ * To install PHP-DI `composer require php-di/php-di`
+ */</span>
+
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DI\Container</span><span class="p">();</span>
+
+<span class="nx">AppFactory</span><span class="o">::</span><span class="na">setContainer</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'view'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">\Psr\Container\ContainerInterface</span> <span class="nv">$container</span><span class="p">){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">\Slim\Views\Twig</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
 
 <h2 id="changes-to-routing-components"><a class="dashAnchor" name="//apple_ref/cpp/Section/Changes%20to%20Routing%20components"></a>Changes to Routing components</h2>
-<p>The <code class="highlighter-rouge">Router</code> component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the <code class="highlighter-rouge">App</code> core and offer more flexibility to the end user. It has been split into
-<code class="highlighter-rouge">RouteCollector</code>, <code class="highlighter-rouge">RouteParser</code> and <code class="highlighter-rouge">RouteResolver</code>. Those 3 components can all have their respective interfaces which you can implement on your own and inject into
-the <code class="highlighter-rouge">App</code> constructor. The following pull requests offer a lot of insight on the public interfaces of these new components:</p>
+<p>The <code class="language-plaintext highlighter-rouge">Router</code> component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the <code class="language-plaintext highlighter-rouge">App</code> core and offer more flexibility to the end user. It has been split into
+<code class="language-plaintext highlighter-rouge">RouteCollector</code>, <code class="language-plaintext highlighter-rouge">RouteParser</code> and <code class="language-plaintext highlighter-rouge">RouteResolver</code>. Those 3 components can all have their respective interfaces which you can implement on your own and inject into
+the <code class="language-plaintext highlighter-rouge">App</code> constructor. The following pull requests offer a lot of insight on the public interfaces of these new components:</p>
 <ul>
   <li><a href="https://github.com/slimphp/Slim/pull/2604">Pull Request #2604</a></li>
   <li><a href="https://github.com/slimphp/Slim/pull/2622">Pull Request #2622</a></li>
@@ -98,12 +126,12 @@ the <code class="highlighter-rouge">App</code> constructor. The following pull r
 <p>In Slim 4 we wanted to give more flexibility to the developers by decoupling some of Slim’s App core functionality and implementing it as middleware. This gives you the ability to swap in custom implementations of the core components.</p>
 
 <h2 id="middleware-execution"><a class="dashAnchor" name="//apple_ref/cpp/Section/Middleware%20Execution"></a>Middleware Execution</h2>
-<p>Middleware execution has not changed and is still <code class="highlighter-rouge">Last In First Out (LIFO)</code> like in Slim 3.</p>
+<p>Middleware execution has not changed and is still <code class="language-plaintext highlighter-rouge">Last In First Out (LIFO)</code> like in Slim 3.</p>
 
 <h2 id="new-app-factory"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20App%20Factory"></a>New App Factory</h2>
-<p>The <code class="highlighter-rouge">AppFactory</code> component was introduced to reduce some of the friction caused by decoupling the PSR-7 implementation from the <code class="highlighter-rouge">App</code> core. It detects which PSR-7
-implementation and ServerRequest creator is installed in your project root and enables you to instantiate an app via <code class="highlighter-rouge">AppFactory::create()</code> and use <code class="highlighter-rouge">App::run()</code> without
-having to pass in a <code class="highlighter-rouge">ServerRequest</code> object. The following PSR-7 implementations and ServerRequest creator combos are supported:</p>
+<p>The <code class="language-plaintext highlighter-rouge">AppFactory</code> component was introduced to reduce some of the friction caused by decoupling the PSR-7 implementation from the <code class="language-plaintext highlighter-rouge">App</code> core. It detects which PSR-7
+implementation and ServerRequest creator is installed in your project root and enables you to instantiate an app via <code class="language-plaintext highlighter-rouge">AppFactory::create()</code> and use <code class="language-plaintext highlighter-rouge">App::run()</code> without
+having to pass in a <code class="language-plaintext highlighter-rouge">ServerRequest</code> object. The following PSR-7 implementations and ServerRequest creator combos are supported:</p>
 <ul>
   <li><a href="https://github.com/slimphp/Slim-Psr7">Slim PSR-7</a></li>
   <li><a href="https://github.com/Nyholm/psr7">Nyholm PSR-7</a> and <a href="https://github.com/Nyholm/psr7-server">Nyholm PSR-7 Server</a></li>
@@ -113,21 +141,21 @@ having to pass in a <code class="highlighter-rouge">ServerRequest</code> object.
 
 <h2 id="new-routing-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Routing%20Middleware"></a>New Routing Middleware</h2>
 <p>The routing has been implemented as middleware. We are still using <a href="https://github.com/nikic/FastRoute">FastRoute</a> for our routing needs.
-If you were using <code class="highlighter-rouge">determineRouteBeforeAppMiddleware</code>, you need to add the <code class="highlighter-rouge">Middleware\RoutingMiddleware</code> middleware to your application just before you call <code class="highlighter-rouge">run()</code> to maintain the previous behaviour.
+If you were using <code class="language-plaintext highlighter-rouge">determineRouteBeforeAppMiddleware</code>, you need to add the <code class="language-plaintext highlighter-rouge">Middleware\RoutingMiddleware</code> middleware to your application just before you call <code class="language-plaintext highlighter-rouge">run()</code> to maintain the previous behaviour.
 See <a href="https://github.com/slimphp/Slim/pull/2288">Pull Request #2288</a> for more information.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-<span class="c1">// Add Routing Middleware
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="c1">// Add Routing Middleware</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
 
-<span class="c1">// ...
-</span>
+<span class="c1">// ...</span>
+
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
@@ -135,7 +163,7 @@ See <a href="https://github.com/slimphp/Slim/pull/2288">Pull Request #2288</a> f
 <p>Error handling has also been implemented as middleware.
 See <a href="https://github.com/slimphp/Slim/pull/2398">Pull Request #2398</a> for more information.</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -160,20 +188,59 @@ See <a href="https://github.com/slimphp/Slim/pull/2398">Pull Request #2398</a> f
  */</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
-<span class="c1">// ...
-</span>
+<span class="c1">// ...</span>
+
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="new-not-found--and-not-allowed-handler"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Not%20Found-%20and%20Not%20Allowed%20Handler"></a>New Not Found- and Not Allowed Handler</h2>
+
+<p>The <a href="../../v3/handlers/not-found.html">404 Not Found Handler</a> and 
+the <a href="../../v3/handlers/not-allowed.html">405 Not Allowed Handler</a> from v3
+can be migrated as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Exception\HttpNotFoundException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Psr7\Response</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+
+<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Set the Not Found Handler</span>
+<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="na">setErrorHandler</span><span class="p">(</span>
+    <span class="nx">HttpNotFoundException</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Throwable</span> <span class="nv">$exception</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'404 NOT FOUND'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withStatus</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
+    <span class="p">});</span>
+
+<span class="c1">// Set the Not Allowed Handler</span>
+<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="na">setErrorHandler</span><span class="p">(</span>
+    <span class="nx">HttpMethodNotAllowedException</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Throwable</span> <span class="nv">$exception</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'405 NOT ALLOWED'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withStatus</span><span class="p">(</span><span class="mi">405</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div></div>
 
 <h2 id="new-dispatcher--routing-results"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Dispatcher%20%26%20Routing%20Results"></a>New Dispatcher &amp; Routing Results</h2>
 <p>We created a wrapper around the FastRoute dispatcher which adds a result wrapper and access to a route’s full list of allowed methods instead of only having access to those when an exception arises.
-The Request attribute <code class="highlighter-rouge">routeInfo</code> is now deprecated and replaced with <code class="highlighter-rouge">routingResults</code>.
+The Request attribute <code class="language-plaintext highlighter-rouge">routeInfo</code> is now deprecated and replaced with <code class="language-plaintext highlighter-rouge">routingResults</code>.
 See <a href="https://github.com/slimphp/Slim/pull/2405">Pull Request #2405</a> for more information.</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Routing\RouteContext</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Routing\RouteContext</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -183,44 +250,44 @@ See <a href="https://github.com/slimphp/Slim/pull/2405">Pull Request #2405</a> f
     <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nx">RouteContext</span><span class="o">::</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
     <span class="nv">$routingResults</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="na">getRoutingResults</span><span class="p">();</span>
     
-    <span class="c1">// Get all of the route's parsed arguments e.g. ['name' =&gt; 'John']
-</span>    <span class="nv">$routeArguments</span> <span class="o">=</span> <span class="nv">$routingResults</span><span class="o">-&gt;</span><span class="na">getRouteArguments</span><span class="p">();</span>
+    <span class="c1">// Get all of the route's parsed arguments e.g. ['name' =&gt; 'John']</span>
+    <span class="nv">$routeArguments</span> <span class="o">=</span> <span class="nv">$routingResults</span><span class="o">-&gt;</span><span class="na">getRouteArguments</span><span class="p">();</span>
     
-    <span class="c1">// A route's allowed methods are available at all times now and not only when an error arises like in Slim 3
-</span>    <span class="nv">$allowedMethods</span> <span class="o">=</span> <span class="nv">$routingResults</span><span class="o">-&gt;</span><span class="na">getAllowedMethods</span><span class="p">();</span>
+    <span class="c1">// A route's allowed methods are available at all times now and not only when an error arises like in Slim 3</span>
+    <span class="nv">$allowedMethods</span> <span class="o">=</span> <span class="nv">$routingResults</span><span class="o">-&gt;</span><span class="na">getAllowedMethods</span><span class="p">();</span>
     
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="c1">// ...
-</span>
+<span class="c1">// ...</span>
+
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="new-method-overriding-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Method%20Overriding%20Middleware"></a>New Method Overriding Middleware</h2>
-<p>If you were overriding the HTTP method using either the custom header or the body param, you need to add the <code class="highlighter-rouge">Middleware\MethodOverrideMiddleware</code> middleware to be able to override the method like before.
+<p>If you were overriding the HTTP method using either the custom header or the body param, you need to add the <code class="language-plaintext highlighter-rouge">Middleware\MethodOverrideMiddleware</code> middleware to be able to override the method like before.
 See <a href="https://github.com/slimphp/Slim/pull/2329">Pull Request #2329</a> for more information.</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Middleware\MethodOverridingMiddleware</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Middleware\MethodOverridingMiddleware</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-<span class="nv">$methodOverridingMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MethodOverridingMiddleware</span><span class="p">();</span>
+<span class="nv">$methodOverridingMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MethodOverrideMiddleware</span><span class="p">();</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$methodOverridingMiddleware</span><span class="p">);</span>
 
-<span class="c1">// ...
-</span>
+<span class="c1">// ...</span>
+
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="new-content-length-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Content%20Length%20Middleware"></a>New Content Length Middleware</h2>
-<p>The Content Length Middleware will automatically append a <code class="highlighter-rouge">Content-Length</code> header to the response. This is to replace the <code class="highlighter-rouge">addContentLengthHeader</code> setting that was removed from Slim 3. This middleware should be placed on the center of the middleware stack so it gets executed last.</p>
+<p>The Content Length Middleware will automatically append a <code class="language-plaintext highlighter-rouge">Content-Length</code> header to the response. This is to replace the <code class="language-plaintext highlighter-rouge">addContentLengthHeader</code> setting that was removed from Slim 3. This middleware should be placed on the center of the middleware stack so it gets executed last.</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Middleware\ContentLengthMiddleware</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Middleware\ContentLengthMiddleware</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -229,22 +296,22 @@ See <a href="https://github.com/slimphp/Slim/pull/2329">Pull Request #2329</a> f
 <span class="nv">$contentLengthMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContentLengthMiddleware</span><span class="p">();</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$contentLengthMiddleware</span><span class="p">);</span>
 
-<span class="c1">// ...
-</span>
+<span class="c1">// ...</span>
+
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="new-output-buffering-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Output%20Buffering%20Middleware"></a>New Output Buffering Middleware</h2>
-<p>The Output Buffering Middleware enables you to switch between two modes of output buffering: <code class="highlighter-rouge">APPEND</code> (default) and <code class="highlighter-rouge">PREPEND</code> mode. The <code class="highlighter-rouge">APPEND</code> mode will use the existing response body to append the content while <code class="highlighter-rouge">PREPEND</code> mode will create a new response body and append it to the existing response. This middleware should be placed on the center of the middleware stack so it gets executed last.</p>
+<p>The Output Buffering Middleware enables you to switch between two modes of output buffering: <code class="language-plaintext highlighter-rouge">APPEND</code> (default) and <code class="language-plaintext highlighter-rouge">PREPEND</code> mode. The <code class="language-plaintext highlighter-rouge">APPEND</code> mode will use the existing response body to append the content while <code class="language-plaintext highlighter-rouge">PREPEND</code> mode will create a new response body and append it to the existing response. This middleware should be placed on the center of the middleware stack so it gets executed last.</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Middleware\OutputBufferingMiddleware</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Middleware\OutputBufferingMiddleware</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-<span class="sd">/**
+<span class="cd">/**
  * The two modes available are
  * OutputBufferingMiddleware::APPEND (default mode) - Appends to existing response body
  * OutputBufferingMiddleware::PREPEND - Creates entirely new response body
@@ -252,8 +319,8 @@ See <a href="https://github.com/slimphp/Slim/pull/2329">Pull Request #2329</a> f
 <span class="nv">$mode</span> <span class="o">=</span> <span class="nx">OutputBufferingMiddleware</span><span class="o">::</span><span class="na">APPEND</span><span class="p">;</span>
 <span class="nv">$outputBufferingMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OutputBufferingMiddleware</span><span class="p">(</span><span class="nv">$mode</span><span class="p">);</span>
 
-<span class="c1">// ...
-</span>
+<span class="c1">// ...</span>
+
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
@@ -541,6 +608,19 @@ See <a href="https://github.com/slimphp/Slim/pull/2329">Pull Request #2329</a> f
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -657,4 +737,4 @@ See <a href="https://github.com/slimphp/Slim/pull/2329">Pull Request #2329</a> f
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:12 GMT --></html>

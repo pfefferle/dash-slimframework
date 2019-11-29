@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:11 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -58,15 +58,15 @@
 <p>We recommend you install Slim with <a href="https://getcomposer.org/">Composer</a>.
 Navigate into your project’s root directory and execute the bash command
 shown below. This command downloads the Slim Framework and its third-party
-dependencies into your project’s <code class="highlighter-rouge">vendor/</code> directory.</p>
+dependencies into your project’s <code class="language-plaintext highlighter-rouge">vendor/</code> directory.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require slim/slim:4.0.0
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require slim/slim:^4.0
 </code></pre></div></div>
 
 <h2 id="step-3-install-a-psr-7-implementation-and-serverrequest-creator"><a class="dashAnchor" name="//apple_ref/cpp/Section/Step%203%3A%20Install%20a%20PSR-7%20Implementation%20and%20ServerRequest%20Creator"></a>Step 3: Install a PSR-7 Implementation and ServerRequest Creator</h2>
 
 <p>Before you can get up and running with Slim you will need to choose a PSR-7 implementation that best fits your application.
-In order for auto-detection to work and enable you to use <code class="highlighter-rouge">AppFactory::create()</code> and <code class="highlighter-rouge">App::run()</code> without having to manually create a <code class="highlighter-rouge">ServerRequest</code> you need to install one of the following implementations:</p>
+In order for auto-detection to work and enable you to use <code class="language-plaintext highlighter-rouge">AppFactory::create()</code> and <code class="language-plaintext highlighter-rouge">App::run()</code> without having to manually create a <code class="language-plaintext highlighter-rouge">ServerRequest</code> you need to install one of the following implementations:</p>
 
 <h3 id="slim-psr-7"><a class="dashAnchor" name="//apple_ref/cpp/Section/Slim%20PSR-7"></a><a href="https://github.com/slimphp/Slim-Psr7">Slim PSR-7</a></h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require slim/psr7
@@ -85,10 +85,13 @@ In order for auto-detection to work and enable you to use <code class="highlight
 </code></pre></div></div>
 
 <h2 id="step-4-hello-world"><a class="dashAnchor" name="//apple_ref/cpp/Section/Step%204%3A%20Hello%20World"></a>Step 4: Hello World</h2>
+
+<p>File: <code class="language-plaintext highlighter-rouge">public/index.php</code></p>
+
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
@@ -386,6 +389,19 @@ In order for auto-detection to work and enable you to use <code class="highlight
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -502,4 +518,4 @@ In order for auto-detection to work and enable you to use <code class="highlight
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/start/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/start/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:11 GMT --></html>

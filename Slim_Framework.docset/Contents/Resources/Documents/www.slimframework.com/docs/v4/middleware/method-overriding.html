@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/method-overriding.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/method-overriding.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -42,26 +42,26 @@
                 <div class="edit-panel" style="margin: 0 0 1em 0;">
                     <a class="btn btn-default btn-sm" href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/middleware/method-overriding.md" target="_blank"><i class="fa fa-github"></i> Edit This Page</a>
                 </div>
-                <p>The Method Overidding Middleware enables you to use the <code class="highlighter-rouge">X-Http-Method-Override</code> request header or the request body parameter <code class="highlighter-rouge">_METHOD</code> to override an incoming request’s method. The middleware should be placed after the routing middleware has been added.</p>
+                <p>The Method Overidding Middleware enables you to use the <code class="language-plaintext highlighter-rouge">X-Http-Method-Override</code> request header or the request body parameter <code class="language-plaintext highlighter-rouge">_METHOD</code> to override an incoming request’s method. The middleware should be placed after the routing middleware has been added.</p>
 
 <h2 id="usage"><a class="dashAnchor" name="//apple_ref/cpp/Section/Usage"></a>Usage</h2>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Slim\Middleware\MethodOverrideMiddleware</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Middleware\MethodOverrideMiddleware</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-<span class="c1">// Add RoutingMiddleware before we add the MethodOverrideMiddleware so the method is overrode before routing is done
-</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="c1">// Add RoutingMiddleware before we add the MethodOverrideMiddleware so the method is overrode before routing is done</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
 
-<span class="c1">// Add MethodOverride middleware
-</span><span class="nv">$methodOverrideMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MethodOverrideMiddleware</span><span class="p">();</span>
+<span class="c1">// Add MethodOverride middleware</span>
+<span class="nv">$methodOverrideMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MethodOverrideMiddleware</span><span class="p">();</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$methodOverrideMiddleware</span><span class="p">);</span>
 
-<span class="c1">// ...
-</span>
+<span class="c1">// ...</span>
+
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </code></pre></div></div>
 
@@ -349,6 +349,19 @@
                                 
                                 
                             
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
                         
                             
                             
@@ -465,4 +478,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/method-overriding.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2019 20:16:40 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/method-overriding.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>

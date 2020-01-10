@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:11 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:30 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -46,7 +46,7 @@
 
 <ul>
   <li>Web server with URL rewriting</li>
-  <li>PHP 7.1 or newer</li>
+  <li>PHP 7.2 or newer</li>
 </ul>
 
 <h2 id="step-1-install-composer"><a class="dashAnchor" name="//apple_ref/cpp/Section/Step%201%3A%20Install%20Composer"></a>Step 1: Install Composer</h2>
@@ -60,7 +60,7 @@ Navigate into your project’s root directory and execute the bash command
 shown below. This command downloads the Slim Framework and its third-party
 dependencies into your project’s <code class="language-plaintext highlighter-rouge">vendor/</code> directory.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require slim/slim:^4.0
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require slim/slim:<span class="s2">"4.*"</span>
 </code></pre></div></div>
 
 <h2 id="step-3-install-a-psr-7-implementation-and-serverrequest-creator"><a class="dashAnchor" name="//apple_ref/cpp/Section/Step%203%3A%20Install%20a%20PSR-7%20Implementation%20and%20ServerRequest%20Creator"></a>Step 3: Install a PSR-7 Implementation and ServerRequest Creator</h2>
@@ -80,8 +80,8 @@ In order for auto-detection to work and enable you to use <code class="language-
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require guzzlehttp/psr7 http-interop/http-factory-guzzle
 </code></pre></div></div>
 
-<h3 id="zend-diactoros"><a class="dashAnchor" name="//apple_ref/cpp/Section/Zend%20Diactoros"></a><a href="https://github.com/zendframework/zend-diactoros">Zend Diactoros</a></h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require zendframework/zend-diactoros
+<h3 id="laminas-diactoros"><a class="dashAnchor" name="//apple_ref/cpp/Section/Laminas%20Diactoros"></a><a href="https://github.com/laminas/laminas-diactoros">Laminas Diactoros</a></h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require laminas/laminas-diactoros
 </code></pre></div></div>
 
 <h2 id="step-4-hello-world"><a class="dashAnchor" name="//apple_ref/cpp/Section/Step%204%3A%20Hello%20World"></a>Step 4: Hello World</h2>
@@ -518,4 +518,4 @@ In order for auto-detection to work and enable you to use <code class="language-
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/start/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:11 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/start/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:30 GMT --></html>

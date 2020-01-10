@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -52,10 +52,16 @@ front-controller file.</p>
 <p>Run the following command in terminal to start localhost web server,
 assuming <code class="language-plaintext highlighter-rouge">./public/</code> is public-accessible directory with <code class="language-plaintext highlighter-rouge">index.php</code> file:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php <span class="nt">-S</span> localhost:8888 <span class="nt">-t</span> public public/index.php
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>public/
+php <span class="nt">-S</span> localhost:8888
 </code></pre></div></div>
 
 <p>If you are not using <code class="language-plaintext highlighter-rouge">index.php</code> as your entry point then change appropriately.</p>
+
+<blockquote>
+  <p><strong>Warning:</strong> The built-in web server was designed to aid application development. 
+It may also be useful for testing purposes or for application demonstrations that are run in controlled environments. It is not intended to be a full-featured web server. It should not be used on a public network.</p>
+</blockquote>
 
 <h2 id="apache-configuration"><a class="dashAnchor" name="//apple_ref/cpp/Section/Apache%20configuration"></a>Apache configuration</h2>
 
@@ -591,4 +597,4 @@ Assuming that your Server’s Root is <code class="language-plaintext highlighte
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/start/web-servers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --></html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:11 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:30 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -46,7 +46,7 @@
 you need to be aware of.</p>
 
 <h2 id="php-version-requirement"><a class="dashAnchor" name="//apple_ref/cpp/Section/PHP%20Version%20Requirement"></a>PHP Version Requirement</h2>
-<p>Slim 4 requires <strong>PHP 7.1 or newer</strong>.</p>
+<p>Slim 4 requires <strong>PHP 7.2 or newer</strong>.</p>
 
 <h2 id="breaking-changes-to-slimapp-constructor"><a class="dashAnchor" name="//apple_ref/cpp/Section/Breaking%20changes%20to%20Slim%5CApp%20constructor"></a>Breaking changes to Slim\App constructor</h2>
 <p>Slim’s App settings used to be a part of the container and they have now been decoupled from it.</p>
@@ -136,7 +136,7 @@ having to pass in a <code class="language-plaintext highlighter-rouge">ServerReq
   <li><a href="https://github.com/slimphp/Slim-Psr7">Slim PSR-7</a></li>
   <li><a href="https://github.com/Nyholm/psr7">Nyholm PSR-7</a> and <a href="https://github.com/Nyholm/psr7-server">Nyholm PSR-7 Server</a></li>
   <li><a href="https://github.com/guzzle/psr7">Guzzle PSR-7</a> and <a href="https://github.com/http-interop/http-factory-guzzle">Guzzle HTTP Factory</a></li>
-  <li><a href="https://github.com/zendframework/zend-diactoros">Zend Diactoros</a></li>
+  <li><a href="https://github.com/laminas/laminas-diactoros">Laminas Diactoros</a></li>
 </ul>
 
 <h2 id="new-routing-middleware"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Routing%20Middleware"></a>New Routing Middleware</h2>
@@ -169,13 +169,13 @@ See <a href="https://github.com/slimphp/Slim/pull/2398">Pull Request #2398</a> f
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-<span class="cm">/*
+<span class="cd">/**
  * The routing middleware should be added before the ErrorMiddleware
  * Otherwise exceptions thrown from it will not be handled
  */</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
 
-<span class="cm">/*
+<span class="cd">/**
  * Add Error Handling Middleware
  *
  * @param bool $displayErrorDetails -&gt; Should be set to false in production
@@ -737,4 +737,4 @@ See <a href="https://github.com/slimphp/Slim/pull/2329">Pull Request #2329</a> f
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:12 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:30 GMT --></html>

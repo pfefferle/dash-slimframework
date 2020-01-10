@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -44,7 +44,7 @@
                 </div>
                 <p>Your Slim app’s routes and middleware are given a PSR-7 request object that
 represents the current HTTP request received by your web server. The request
-object implements the <a href="http://www.php-fig.org/psr/psr-7/#3-2-1-psr-http-message-serverrequestinterface">PSR-7 ServerRequestInterface</a> with which you can
+object implements the <a href="https://www.php-fig.org/psr/psr-7/#321-psrhttpmessageserverrequestinterface">PSR-7 ServerRequestInterface</a> with which you can
 inspect and manipulate the HTTP request method, headers, and body.</p>
 
 <h2 id="how-to-get-the-request-object"><a class="dashAnchor" name="//apple_ref/cpp/Section/How%20to%20get%20the%20Request%20object"></a>How to get the Request object</h2>
@@ -170,7 +170,7 @@ resource. The HTTP request URI has several parts:</p>
   <li>Query string (e.g. <code class="language-plaintext highlighter-rouge">sort=created&amp;dir=asc</code>)</li>
 </ul>
 
-<p>You can fetch the PSR-7 Request object’s <a href="http://www.php-fig.org/psr/psr-7/#3-5-psr-http-message-uriinterface">URI object</a> with its <code class="language-plaintext highlighter-rouge">getUri()</code> method:</p>
+<p>You can fetch the PSR-7 Request object’s <a href="https://www.php-fig.org/psr/psr-7/#35-psrhttpmessageuriinterface">URI object</a> with its <code class="language-plaintext highlighter-rouge">getUri()</code> method:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">();</span>
 </code></pre></div></div>
@@ -891,4 +891,4 @@ X-Requested-With: XMLHttpRequest
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --></html>

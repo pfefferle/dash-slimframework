@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -103,14 +103,14 @@ the middleware process flow:</p>
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
-<span class="o">/</span><span class="err">`</span>
- <span class="o">*</span> <span class="nx">Example</span> <span class="nx">middleware</span> <span class="nx">closure</span>
- <span class="o">*</span>
- <span class="o">*</span> <span class="o">@</span><span class="nx">param</span>  <span class="nx">ServerRequest</span>  <span class="nv">$request</span> <span class="nx">PSR</span><span class="o">-</span><span class="mi">7</span> <span class="nx">request</span>
- <span class="o">*</span> <span class="o">@</span><span class="nx">param</span>  <span class="nx">RequestHandler</span> <span class="nv">$handler</span> <span class="nx">PSR</span><span class="o">-</span><span class="mi">15</span> <span class="nx">request</span> <span class="nx">handler</span>
- <span class="o">*</span>
- <span class="o">*</span> <span class="o">@</span><span class="k">return</span> <span class="nx">Response</span>
- <span class="o">*/</span>
+<span class="cd">/**
+ * Example middleware closure
+ *
+ * @param  ServerRequest  $request PSR-7 request
+ * @param  RequestHandler $handler PSR-15 request handler
+ *
+ * @return Response
+ */</span>
 <span class="nv">$beforeMiddleware</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
     <span class="nv">$existingContent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
@@ -790,4 +790,4 @@ attributes.</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --></html>

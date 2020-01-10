@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -112,6 +112,49 @@ application route like this:</p>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
+
+<h2 id="configuring-the-application-via-a-container"><a class="dashAnchor" name="//apple_ref/cpp/Section/Configuring%20the%20application%20via%20a%20container"></a>Configuring the application via a container</h2>
+
+<p>In case you want to create the <code class="language-plaintext highlighter-rouge">App</code> with dependencies already defined in your container, 
+you can use the <code class="language-plaintext highlighter-rouge">AppFactory::createFromContainer()</code> method.</p>
+
+<p><strong>Example</strong></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nn">App\Factory\MyResponseFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">DI\Container</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseFactoryInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="c1">// Create Container using PHP-DI</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">();</span>
+
+<span class="c1">// Add custom response factory</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">ResponseFactoryInterface</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ContainerInterface</span> <span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">MyResponseFactory</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Configure the application via container</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">createFromContainer</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Supported <code class="language-plaintext highlighter-rouge">App</code> dependencies are:</p>
+
+<ul>
+  <li>Psr\Http\Message\ResponseFactoryInterface</li>
+  <li>Slim\Interfaces\CallableResolverInterface</li>
+  <li>Slim\Interfaces\RouteCollectorInterface</li>
+  <li>Slim\Interfaces\RouteResolverInterface</li>
+  <li>Slim\Interfaces\MiddlewareDispatcherInterface</li>
+</ul>
 
 
                 <nav>
@@ -526,4 +569,4 @@ application route like this:</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Nov 2019 20:20:13 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/di.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --></html>

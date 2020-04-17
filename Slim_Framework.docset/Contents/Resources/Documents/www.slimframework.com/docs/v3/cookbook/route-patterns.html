@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:38 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -394,9 +394,14 @@
     <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">();</span>
     <span class="nv">$path</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$path</span> <span class="o">!=</span> <span class="s1">'/'</span> <span class="o">&amp;&amp;</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'/'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// recursively remove slashes when its more than 1 slash</span>
+        <span class="k">while</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'/'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$path</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
         <span class="c1">// permanently redirect paths with a trailing slash</span>
         <span class="c1">// to their non-trailing counterpart</span>
-        <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+        <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
         
         <span class="k">if</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'GET'</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withRedirect</span><span class="p">((</span><span class="nx">string</span><span class="p">)</span><span class="nv">$uri</span><span class="p">,</span> <span class="mi">301</span><span class="p">);</span>
@@ -992,6 +997,6 @@
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:38 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
 </html>
 

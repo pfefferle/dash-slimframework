@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -63,9 +63,12 @@
     <span class="nv">$path</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">();</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="nv">$path</span> <span class="o">!=</span> <span class="s1">'/'</span> <span class="o">&amp;&amp;</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'/'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// recursively remove slashes when its more than 1 slash</span>
+        <span class="nv">$path</span> <span class="o">=</span> <span class="nb">rtrim</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">);</span>
+
         <span class="c1">// permanently redirect paths with a trailing slash</span>
         <span class="c1">// to their non-trailing counterpart</span>
-        <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+        <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
         
         <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'GET'</span><span class="p">)</span> <span class="p">{</span>
             <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
@@ -501,4 +504,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>

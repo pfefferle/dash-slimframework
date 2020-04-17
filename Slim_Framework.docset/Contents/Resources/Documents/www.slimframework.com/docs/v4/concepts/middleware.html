@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -249,8 +249,8 @@ the middleware process flow:</p>
 <span class="p">});</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
-	<span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
@@ -313,7 +313,8 @@ the middleware process flow:</p>
 <span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="s1">'/utils'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteCollectorProxy</span> <span class="nv">$group</span><span class="p">)</span> <span class="p">{</span>
@@ -790,4 +791,4 @@ attributes.</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:31 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/concepts/middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:38 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -388,7 +388,7 @@
 <p>The first step is importing the library into the <code class="language-plaintext highlighter-rouge">vendor</code> directory of your project using <a href="https://getcomposer.org/">composer</a>.</p>
 
 <figure>
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require doctrine/orm:^2
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require doctrine/orm
 </code></pre></div>  </div>
   <figcaption>Figure 1: Require doctrine in your application.</figcaption>
 </figure>
@@ -508,7 +508,7 @@ file at the root of the project telling it how to find the <code class="language
 <span class="cd">/** @var Container $container */</span>
 <span class="nv">$container</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/bootstrap.php'</span><span class="p">;</span>
 
-<span class="k">return</span> <span class="nx">ConsoleRunner</span><span class="o">::</span><span class="na">createHelperSet</span><span class="p">(</span><span class="nv">$container</span><span class="p">[</span><span class="nx">EntityManager</span><span class="o">::</span><span class="na">class</span><span class="p">])</span>
+<span class="k">return</span> <span class="nx">ConsoleRunner</span><span class="o">::</span><span class="na">createHelperSet</span><span class="p">(</span><span class="nv">$container</span><span class="p">[</span><span class="nx">EntityManager</span><span class="o">::</span><span class="na">class</span><span class="p">]);</span>
 </code></pre></div>  </div>
 
   <figcaption>Figure 4: Enabling Doctrine's console app.</figcaption>
@@ -1181,6 +1181,6 @@ Available commands:
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:38 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
 </html>
 

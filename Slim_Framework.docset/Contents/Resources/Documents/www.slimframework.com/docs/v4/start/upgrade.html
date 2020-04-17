@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:30 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:23 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -109,6 +109,16 @@ you need to be aware of.</p>
 <span class="p">});</span>
 </code></pre></div></div>
 
+<h2 id="changes-to-base-path-handling"><a class="dashAnchor" name="//apple_ref/cpp/Section/Changes%20to%20base%20path%20handling"></a>Changes to base path handling</h2>
+<p>Up to v3, Slim extracted the base path from the folder where the application was instantiated. This is no longer the case, and the base path must be explicitly declared <a href="web-servers.html#run-from-a-sub-directory">in case your application is not executed from the root of your domain</a>:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="c1">// ...</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">setBasePath</span><span class="p">(</span><span class="s1">'/my-app-subpath'</span><span class="p">);</span>
+<span class="c1">// ...</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</code></pre></div></div>
+
 <h2 id="changes-to-routing-components"><a class="dashAnchor" name="//apple_ref/cpp/Section/Changes%20to%20Routing%20components"></a>Changes to Routing components</h2>
 <p>The <code class="language-plaintext highlighter-rouge">Router</code> component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the <code class="language-plaintext highlighter-rouge">App</code> core and offer more flexibility to the end user. It has been split into
 <code class="language-plaintext highlighter-rouge">RouteCollector</code>, <code class="language-plaintext highlighter-rouge">RouteParser</code> and <code class="language-plaintext highlighter-rouge">RouteResolver</code>. Those 3 components can all have their respective interfaces which you can implement on your own and inject into
@@ -121,6 +131,13 @@ the <code class="language-plaintext highlighter-rouge">App</code> constructor. T
   <li><a href="https://github.com/slimphp/Slim/pull/2641">Pull Request #2641</a></li>
   <li><a href="https://github.com/slimphp/Slim/pull/2642">Pull Request #2642</a></li>
 </ul>
+
+<p>This also means that <a href="../objects/routing.html#route-groups">Route Groups</a> have changed their signatures:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="s1">'/user'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">\Slim\Routing\RouteCollectorProxy</span> <span class="nv">$app</span><span class="p">){</span>
+    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <span class="c1">//...</span>
+<span class="p">});</span>
+</code></pre></div></div>
 
 <h2 id="new-middleware-approach"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20Middleware%20Approach"></a>New Middleware Approach</h2>
 <p>In Slim 4 we wanted to give more flexibility to the developers by decoupling some of Slim’s App core functionality and implementing it as middleware. This gives you the ability to swap in custom implementations of the core components.</p>
@@ -737,4 +754,4 @@ See <a href="https://github.com/slimphp/Slim/pull/2329">Pull Request #2329</a> f
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2020 20:23:30 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/start/upgrade.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>

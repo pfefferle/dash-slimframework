@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/enable-cors.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/enable-cors.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -61,30 +61,30 @@
 
 <p>The following code should enable lazy CORS.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="s1">'/{routes:.+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">options</span><span class="p">(</span><span class="s1">'/{routes:.+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
     <span class="k">return</span> <span class="nv">$response</span>
-            <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Origin'</span><span class="p">,</span> <span class="s1">'http://mysite'</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Headers'</span><span class="p">,</span> <span class="s1">'X-Requested-With, Content-Type, Accept, Origin, Authorization'</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Methods'</span><span class="p">,</span> <span class="s1">'GET, POST, PUT, DELETE, PATCH, OPTIONS'</span><span class="p">);</span>
+            <span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Origin'</span><span class="p">,</span> <span class="s1">'http://mysite'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Headers'</span><span class="p">,</span> <span class="s1">'X-Requested-With, Content-Type, Accept, Origin, Authorization'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Methods'</span><span class="p">,</span> <span class="s1">'GET, POST, PUT, DELETE, PATCH, OPTIONS'</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
 <p>Add the following route as the last route:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Slim\Exception\HttpNotFoundException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Exception\HttpNotFoundException</span><span class="p">;</span>
 
 <span class="cd">/**
  * Catch-all route to serve a 404 Not Found page if none of the routes match
  * NOTE: make sure this route is defined last
  */</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">([</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">,</span> <span class="s1">'DELETE'</span><span class="p">,</span> <span class="s1">'PATCH'</span><span class="p">],</span> <span class="s1">'/{routes:.+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nx">HttpNotFoundException</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">map</span><span class="p">([</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">,</span> <span class="s1">'DELETE'</span><span class="p">,</span> <span class="s1">'PATCH'</span><span class="p">],</span> <span class="s1">'/{routes:.+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nc">HttpNotFoundException</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -96,31 +96,31 @@
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
 
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Server\RequestHandlerInterface</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Routing\RouteCollectorProxy</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Routing\RouteContext</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteCollectorProxy</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteContext</span><span class="p">;</span>
 
-<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addBodyParsingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addBodyParsingMiddleware</span><span class="p">();</span>
 
 <span class="c1">// This middleware will append the response header Access-Control-Allow-Methods with all allowed methods</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandlerInterface</span> <span class="nv">$handler</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
-    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nx">RouteContext</span><span class="o">::</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
-    <span class="nv">$routingResults</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="na">getRoutingResults</span><span class="p">();</span>
-    <span class="nv">$methods</span> <span class="o">=</span> <span class="nv">$routingResults</span><span class="o">-&gt;</span><span class="na">getAllowedMethods</span><span class="p">();</span>
-    <span class="nv">$requestHeaders</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Access-Control-Request-Headers'</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandlerInterface</span> <span class="nv">$handler</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
+    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nc">RouteContext</span><span class="o">::</span><span class="nf">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$routingResults</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="nf">getRoutingResults</span><span class="p">();</span>
+    <span class="nv">$methods</span> <span class="o">=</span> <span class="nv">$routingResults</span><span class="o">-&gt;</span><span class="nf">getAllowedMethods</span><span class="p">();</span>
+    <span class="nv">$requestHeaders</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeaderLine</span><span class="p">(</span><span class="s1">'Access-Control-Request-Headers'</span><span class="p">);</span>
 
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
 
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Origin'</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">);</span>
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Methods'</span><span class="p">,</span> <span class="nb">implode</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="nv">$methods</span><span class="p">));</span>
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Headers'</span><span class="p">,</span> <span class="nv">$requestHeaders</span><span class="p">);</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Origin'</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">);</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Methods'</span><span class="p">,</span> <span class="nb">implode</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="nv">$methods</span><span class="p">));</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Headers'</span><span class="p">,</span> <span class="nv">$requestHeaders</span><span class="p">);</span>
 
     <span class="c1">// Optional: Allow Ajax CORS requests with Authorization header</span>
     <span class="c1">// $response = $response-&gt;withHeader('Access-Control-Allow-Credentials', 'true');</span>
@@ -129,34 +129,34 @@
 <span class="p">});</span>
 
 <span class="c1">// The RoutingMiddleware should be added after our CORS middleware so routing is performed first</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
 
 <span class="c1">// The routes</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/api/v0/users'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'List all users'</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/api/v0/users'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'List all users'</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/api/v0/users/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$arguments</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
-    <span class="nv">$userId</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Get user: %s'</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">));</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/api/v0/users/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$arguments</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
+    <span class="nv">$userId</span> <span class="o">=</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Get user: %s'</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">));</span>
 
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/api/v0/users'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'/api/v0/users'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
     <span class="c1">// Retrieve the JSON data</span>
-    <span class="nv">$parameters</span> <span class="o">=</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+    <span class="nv">$parameters</span> <span class="o">=</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getParsedBody</span><span class="p">();</span>
 
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Create user'</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'Create user'</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">'/api/v0/users/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$arguments</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
-    <span class="nv">$userId</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Delete user: %s'</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">));</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nb">delete</span><span class="p">(</span><span class="s1">'/api/v0/users/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$arguments</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
+    <span class="nv">$userId</span> <span class="o">=</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Delete user: %s'</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">));</span>
 
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
@@ -164,40 +164,40 @@
 <span class="c1">// Allow preflight requests</span>
 <span class="c1">// Due to the behaviour of browsers when sending a request,</span>
 <span class="c1">// you must add the OPTIONS method. Read about preflight.</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="s1">'/api/v0/users'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">options</span><span class="p">(</span><span class="s1">'/api/v0/users'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
     <span class="c1">// Do nothing here. Just return the response.</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
 <span class="c1">// Allow additional preflight requests</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="s1">'/api/v0/users/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">options</span><span class="p">(</span><span class="s1">'/api/v0/users/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
 <span class="c1">// Using groups</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="s1">'/api/v0/users/{id:[0-9]+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteCollectorProxy</span> <span class="nv">$group</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$arguments</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">group</span><span class="p">(</span><span class="s1">'/api/v0/users/{id:[0-9]+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">RouteCollectorProxy</span> <span class="nv">$group</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">put</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$arguments</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
         <span class="c1">// Your code here...</span>
-        <span class="nv">$userId</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
-        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Put user: %s'</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">));</span>
+        <span class="nv">$userId</span> <span class="o">=</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Put user: %s'</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">));</span>
 
         <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
     <span class="p">});</span>
 
-    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">patch</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$arguments</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
-        <span class="nv">$userId</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
-        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Patch user: %s'</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">));</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">patch</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$arguments</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
+        <span class="nv">$userId</span> <span class="o">=</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Patch user: %s'</span><span class="p">,</span> <span class="nv">$userId</span><span class="p">));</span>
 
         <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
     <span class="p">});</span>
 
     <span class="c1">// Allow preflight requests</span>
-    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">options</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
     <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="access-control-allow-credentials"><a class="dashAnchor" name="//apple_ref/cpp/Section/Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h2>
@@ -205,7 +205,7 @@
 <p>If the request contains credentials (cookies, authorization headers or TLS client certificates), 
 you might need to add an <code class="language-plaintext highlighter-rouge">Access-Control-Allow-Credentials</code> header to the response object.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Credentials'</span><span class="p">,</span> <span class="s1">'true'</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Credentials'</span><span class="p">,</span> <span class="s1">'true'</span><span class="p">);</span>
 </code></pre></div></div>
 
 
@@ -598,7 +598,7 @@ you might need to add an <code class="language-plaintext highlighter-rouge">Acce
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -621,4 +621,4 @@ you might need to add an <code class="language-plaintext highlighter-rouge">Acce
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/enable-cors.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/enable-cors.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --></html>

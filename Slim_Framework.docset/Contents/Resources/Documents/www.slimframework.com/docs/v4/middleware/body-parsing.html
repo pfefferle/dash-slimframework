@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/body-parsing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/body-parsing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -55,22 +55,22 @@ to handle this task.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
 
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
 
-<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
 <span class="c1">// Parse json, form data and xml</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addBodyParsingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addBodyParsingMiddleware</span><span class="p">();</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
 <span class="c1">// ...</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="posted-json-form-or-xml-data"><a class="dashAnchor" name="//apple_ref/cpp/Section/Posted%20JSON%2C%20form%20or%20XML%20data"></a>Posted JSON, form or XML data</h2>
@@ -84,11 +84,11 @@ you can use the $request’s <code class="language-plaintext highlighter-rouge">
 
 <p>This will return an array of the posted data.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span> <span class="p">{</span>
-    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">):</span> <span class="kt">Response</span> <span class="p">{</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getParsedBody</span><span class="p">();</span>
     
     <span class="nv">$html</span> <span class="o">=</span> <span class="nb">var_export</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nv">$html</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nv">$html</span><span class="p">);</span>
     
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
@@ -501,7 +501,7 @@ you can use the $request’s <code class="language-plaintext highlighter-rouge">
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -524,4 +524,4 @@ you can use the $request’s <code class="language-plaintext highlighter-rouge">
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/body-parsing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/body-parsing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --></html>

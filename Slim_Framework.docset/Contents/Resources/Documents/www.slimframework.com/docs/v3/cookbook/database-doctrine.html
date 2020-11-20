@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -402,7 +402,7 @@
 
 <span class="c1">// settings.php</span>
 
-<span class="nb">define</span><span class="p">(</span><span class="s1">'APP_ROOT'</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'APP_ROOT'</span><span class="p">,</span> <span class="k">__DIR__</span><span class="p">);</span>
 
 <span class="k">return</span> <span class="p">[</span>
     <span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span>
@@ -415,10 +415,10 @@
 
             <span class="c1">// path where the compiled metadata info will be cached</span>
             <span class="c1">// make sure the path exists and it is writable</span>
-            <span class="s1">'cache_dir'</span> <span class="o">=&gt;</span> <span class="nx">APP_ROOT</span> <span class="o">.</span> <span class="s1">'/var/doctrine'</span><span class="p">,</span>
+            <span class="s1">'cache_dir'</span> <span class="o">=&gt;</span> <span class="no">APP_ROOT</span> <span class="mf">.</span> <span class="s1">'/var/doctrine'</span><span class="p">,</span>
 
             <span class="c1">// you should add any other path containing annotated entity classes</span>
-            <span class="s1">'metadata_dirs'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">APP_ROOT</span> <span class="o">.</span> <span class="s1">'/src/Domain'</span><span class="p">],</span>
+            <span class="s1">'metadata_dirs'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="no">APP_ROOT</span> <span class="mf">.</span> <span class="s1">'/src/Domain'</span><span class="p">],</span>
 
             <span class="s1">'connection'</span> <span class="o">=&gt;</span> <span class="p">[</span>
                 <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_mysql'</span><span class="p">,</span>
@@ -448,37 +448,37 @@ be used to describe the database schema.</p>
 
 <span class="c1">// bootstrap.php</span>
 
-<span class="kn">use</span> <span class="nn">Doctrine\Common\Annotations\AnnotationReader</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Doctrine\Common\Cache\FilesystemCache</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Doctrine\ORM\EntityManager</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Doctrine\ORM\Mapping\Driver\AnnotationDriver</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Doctrine\ORM\Tools\Setup</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Container</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\Common\Annotations\AnnotationReader</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\Common\Cache\FilesystemCache</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\EntityManager</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Mapping\Driver\AnnotationDriver</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Tools\Setup</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Container</span><span class="p">;</span>
 
-<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Container</span><span class="p">(</span><span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/settings.php'</span><span class="p">);</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Container</span><span class="p">(</span><span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/settings.php'</span><span class="p">);</span>
 
-<span class="nv">$container</span><span class="p">[</span><span class="nx">EntityManager</span><span class="o">::</span><span class="na">class</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Container</span> <span class="nv">$container</span><span class="p">)</span><span class="o">:</span> <span class="nx">EntityManager</span> <span class="p">{</span>
-    <span class="nv">$config</span> <span class="o">=</span> <span class="nx">Setup</span><span class="o">::</span><span class="na">createAnnotationMetadataConfiguration</span><span class="p">(</span>
+<span class="nv">$container</span><span class="p">[</span><span class="nc">EntityManager</span><span class="o">::</span><span class="n">class</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Container</span> <span class="nv">$container</span><span class="p">):</span> <span class="kt">EntityManager</span> <span class="p">{</span>
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nc">Setup</span><span class="o">::</span><span class="nf">createAnnotationMetadataConfiguration</span><span class="p">(</span>
         <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'metadata_dirs'</span><span class="p">],</span>
         <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'dev_mode'</span><span class="p">]</span>
     <span class="p">);</span>
 
-    <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">setMetadataDriverImpl</span><span class="p">(</span>
-        <span class="k">new</span> <span class="nx">AnnotationDriver</span><span class="p">(</span>
-            <span class="k">new</span> <span class="nx">AnnotationReader</span><span class="p">,</span>
+    <span class="nv">$config</span><span class="o">-&gt;</span><span class="nf">setMetadataDriverImpl</span><span class="p">(</span>
+        <span class="k">new</span> <span class="nc">AnnotationDriver</span><span class="p">(</span>
+            <span class="k">new</span> <span class="nc">AnnotationReader</span><span class="p">,</span>
             <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'metadata_dirs'</span><span class="p">]</span>
         <span class="p">)</span>
     <span class="p">);</span>
 
-    <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">setMetadataCacheImpl</span><span class="p">(</span>
-        <span class="k">new</span> <span class="nx">FilesystemCache</span><span class="p">(</span>
+    <span class="nv">$config</span><span class="o">-&gt;</span><span class="nf">setMetadataCacheImpl</span><span class="p">(</span>
+        <span class="k">new</span> <span class="nc">FilesystemCache</span><span class="p">(</span>
             <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'cache_dir'</span><span class="p">]</span>
         <span class="p">)</span>
     <span class="p">);</span>
 
-    <span class="k">return</span> <span class="nx">EntityManager</span><span class="o">::</span><span class="na">create</span><span class="p">(</span>
+    <span class="k">return</span> <span class="nc">EntityManager</span><span class="o">::</span><span class="nf">create</span><span class="p">(</span>
         <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'connection'</span><span class="p">],</span>
         <span class="nv">$config</span>
     <span class="p">);</span>
@@ -501,14 +501,14 @@ file at the root of the project telling it how to find the <code class="language
 
 <span class="c1">// cli-config.php</span>
 
-<span class="kn">use</span> <span class="nn">Doctrine\ORM\EntityManager</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Doctrine\ORM\Tools\Console\ConsoleRunner</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Container</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\EntityManager</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Tools\Console\ConsoleRunner</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Container</span><span class="p">;</span>
 
 <span class="cd">/** @var Container $container */</span>
-<span class="nv">$container</span> <span class="o">=</span> <span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/bootstrap.php'</span><span class="p">;</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">require_once</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/bootstrap.php'</span><span class="p">;</span>
 
-<span class="k">return</span> <span class="nx">ConsoleRunner</span><span class="o">::</span><span class="na">createHelperSet</span><span class="p">(</span><span class="nv">$container</span><span class="p">[</span><span class="nx">EntityManager</span><span class="o">::</span><span class="na">class</span><span class="p">]);</span>
+<span class="k">return</span> <span class="nc">ConsoleRunner</span><span class="o">::</span><span class="nf">createHelperSet</span><span class="p">(</span><span class="nv">$container</span><span class="p">[</span><span class="nc">EntityManager</span><span class="o">::</span><span class="n">class</span><span class="p">]);</span>
 </code></pre></div>  </div>
 
   <figcaption>Figure 4: Enabling Doctrine's console app.</figcaption>
@@ -567,8 +567,8 @@ Available commands:
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nv">$container</span><span class="p">[</span><span class="nx">UserRepository</span><span class="o">::</span><span class="na">class</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nx">UserRepository</span><span class="p">(</span><span class="nv">$container</span><span class="p">[</span><span class="nx">EntityManager</span><span class="o">::</span><span class="na">class</span><span class="p">]);</span>
+<span class="nv">$container</span><span class="p">[</span><span class="nc">UserRepository</span><span class="o">::</span><span class="n">class</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">UserRepository</span><span class="p">(</span><span class="nv">$container</span><span class="p">[</span><span class="nc">EntityManager</span><span class="o">::</span><span class="n">class</span><span class="p">]);</span>
 <span class="p">};</span>
 
 <span class="c1">// src/UserRepository.php</span>
@@ -580,17 +580,17 @@ Available commands:
      */</span>
     <span class="k">private</span> <span class="nv">$em</span><span class="p">;</span>
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">EntityManager</span> <span class="nv">$em</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">EntityManager</span> <span class="nv">$em</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">em</span> <span class="o">=</span> <span class="nv">$em</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">em</span> <span class="o">=</span> <span class="nv">$em</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">signUp</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$password</span><span class="p">)</span><span class="o">:</span> <span class="nx">User</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">signUp</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$password</span><span class="p">):</span> <span class="kt">User</span>
     <span class="p">{</span>
-        <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
 
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">em</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">em</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">em</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">em</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span>
 
         <span class="k">return</span> <span class="nv">$user</span><span class="p">;</span>
     <span class="p">}</span>
@@ -1132,7 +1132,7 @@ Available commands:
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1164,7 +1164,7 @@ Available commands:
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1181,6 +1181,6 @@ Available commands:
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-doctrine.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 

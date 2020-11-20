@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/retrieving-current-route.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/retrieving-current-route.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -50,42 +50,43 @@
 
 <p>Example:</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Routing\RouteContext</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Exception\HttpNotFoundException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteContext</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
 <span class="c1">// Via this middleware you could access the route and routing results from the resolved route</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nx">RouteContext</span><span class="o">::</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
-    <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="na">getRoute</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nc">RouteContext</span><span class="o">::</span><span class="nf">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="nf">getRoute</span><span class="p">();</span>
 
     <span class="c1">// return NotFound for non existent route</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$route</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">empty</span><span class="p">(</span><span class="nv">$route</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nc">HttpNotFoundException</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
-    <span class="nv">$groups</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getGroups</span><span class="p">();</span>
-    <span class="nv">$methods</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getMethods</span><span class="p">();</span>
-    <span class="nv">$arguments</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getArguments</span><span class="p">();</span>
+    <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getName</span><span class="p">();</span>
+    <span class="nv">$groups</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getGroups</span><span class="p">();</span>
+    <span class="nv">$methods</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getMethods</span><span class="p">();</span>
+    <span class="nv">$arguments</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getArguments</span><span class="p">();</span>
 
     <span class="c1">// ... do something with the data ...</span>
 
-    <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="c1">// The RoutingMiddleware should be added after our CORS middleware so routing is performed first</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
  
 <span class="c1">// The ErrorMiddleware should always be the outermost middleware</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
 <span class="c1">// ...</span>
  
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 
@@ -478,7 +479,7 @@
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -501,4 +502,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/retrieving-current-route.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/retrieving-current-route.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --></html>

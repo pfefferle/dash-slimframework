@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -429,43 +429,43 @@ that handles the uploaded files of the HTML form above.</p>
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
 
-<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="kn">use</span> <span class="nn">Slim\Http\Request</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Http\Response</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Http\UploadedFile</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Http\Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Http\Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Http\UploadedFile</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\App</span><span class="p">();</span>
 
-<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
-<span class="nv">$container</span><span class="p">[</span><span class="s1">'upload_directory'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/uploads'</span><span class="p">;</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
+<span class="nv">$container</span><span class="p">[</span><span class="s1">'upload_directory'</span><span class="p">]</span> <span class="o">=</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/uploads'</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$directory</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'upload_directory'</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$directory</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'upload_directory'</span><span class="p">);</span>
 
-    <span class="nv">$uploadedFiles</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUploadedFiles</span><span class="p">();</span>
+    <span class="nv">$uploadedFiles</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getUploadedFiles</span><span class="p">();</span>
 
     <span class="c1">// handle single input with single file upload</span>
     <span class="nv">$uploadedFile</span> <span class="o">=</span> <span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example1'</span><span class="p">];</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
-        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="nf">getError</span><span class="p">()</span> <span class="o">===</span> <span class="no">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$filename</span> <span class="o">=</span> <span class="nf">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="mf">.</span> <span class="nv">$filename</span> <span class="mf">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
     <span class="p">}</span>
 
 
     <span class="c1">// handle multiple inputs with the same key</span>
     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example2'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$uploadedFile</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
-            <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="nf">getError</span><span class="p">()</span> <span class="o">===</span> <span class="no">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$filename</span> <span class="o">=</span> <span class="nf">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
+            <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="mf">.</span> <span class="nv">$filename</span> <span class="mf">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
     <span class="c1">// handle single input with multiple file uploads</span>
     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$uploadedFiles</span><span class="p">[</span><span class="s1">'example3'</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$uploadedFile</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getError</span><span class="p">()</span> <span class="o">===</span> <span class="nx">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
-            <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="o">.</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="nf">getError</span><span class="p">()</span> <span class="o">===</span> <span class="no">UPLOAD_ERR_OK</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$filename</span> <span class="o">=</span> <span class="nf">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nv">$uploadedFile</span><span class="p">);</span>
+            <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'uploaded '</span> <span class="mf">.</span> <span class="nv">$filename</span> <span class="mf">.</span> <span class="s1">'&lt;br/&gt;'</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
@@ -479,18 +479,18 @@ that handles the uploaded files of the HTML form above.</p>
  * @param UploadedFile $uploadedFile file uploaded file to move
  * @return string filename of moved file
  */</span>
-<span class="k">function</span> <span class="nf">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="nx">UploadedFile</span> <span class="nv">$uploadedFile</span><span class="p">)</span>
+<span class="k">function</span> <span class="n">moveUploadedFile</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="kt">UploadedFile</span> <span class="nv">$uploadedFile</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="nv">$extension</span> <span class="o">=</span> <span class="nb">pathinfo</span><span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">getClientFilename</span><span class="p">(),</span> <span class="nx">PATHINFO_EXTENSION</span><span class="p">);</span>
+    <span class="nv">$extension</span> <span class="o">=</span> <span class="nb">pathinfo</span><span class="p">(</span><span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="nf">getClientFilename</span><span class="p">(),</span> <span class="no">PATHINFO_EXTENSION</span><span class="p">);</span>
     <span class="nv">$basename</span> <span class="o">=</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nb">random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span> <span class="c1">// see http://php.net/manual/en/function.random-bytes.php</span>
     <span class="nv">$filename</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">'%s.%0.8s'</span><span class="p">,</span> <span class="nv">$basename</span><span class="p">,</span> <span class="nv">$extension</span><span class="p">);</span>
 
-    <span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="na">moveTo</span><span class="p">(</span><span class="nv">$directory</span> <span class="o">.</span> <span class="nx">DIRECTORY_SEPARATOR</span> <span class="o">.</span> <span class="nv">$filename</span><span class="p">);</span>
+    <span class="nv">$uploadedFile</span><span class="o">-&gt;</span><span class="nf">moveTo</span><span class="p">(</span><span class="nv">$directory</span> <span class="mf">.</span> <span class="no">DIRECTORY_SEPARATOR</span> <span class="mf">.</span> <span class="nv">$filename</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$filename</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 2: Example Slim application to handle the uploaded files</figcaption>
 </figure>
@@ -1026,7 +1026,7 @@ that handles the uploaded files of the HTML form above.</p>
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1058,7 +1058,7 @@ that handles the uploaded files of the HTML form above.</p>
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1075,6 +1075,6 @@ that handles the uploaded files of the HTML form above.</p>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/uploading-files.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 

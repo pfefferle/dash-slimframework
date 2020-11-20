@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/features/caching.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/features/caching.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -399,19 +399,19 @@ when and how long application output is retained by client-side caches. You may 
 middleware. You should add both to your application like this:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Register service provider with the container</span>
-<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\Container</span><span class="p">;</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Slim\Container</span><span class="p">;</span>
 <span class="nv">$container</span><span class="p">[</span><span class="s1">'cache'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nx">\Slim\HttpCache\CacheProvider</span><span class="p">();</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\HttpCache\CacheProvider</span><span class="p">();</span>
 <span class="p">};</span>
 
 <span class="c1">// Add middleware to the application</span>
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Slim\HttpCache\Cache</span><span class="p">(</span><span class="s1">'public'</span><span class="p">,</span> <span class="mi">86400</span><span class="p">));</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\App</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="err">\</span><span class="nf">Slim\HttpCache\Cache</span><span class="p">(</span><span class="s1">'public'</span><span class="p">,</span> <span class="mi">86400</span><span class="p">));</span>
 
 <span class="c1">// Create your application routes...</span>
 
 <span class="c1">// Run application</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="etag">ETag</h2>
@@ -420,8 +420,8 @@ middleware. You should add both to your application like this:</p>
 with the desired <code class="language-plaintext highlighter-rouge">ETag</code> header. This method accepts a PSR7 response object,
 and it returns a cloned PSR7 response with the new HTTP header.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$resWithEtag</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">withEtag</span><span class="p">(</span><span class="nv">$res</span><span class="p">,</span> <span class="s1">'abc'</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$resWithEtag</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cache</span><span class="o">-&gt;</span><span class="nf">withEtag</span><span class="p">(</span><span class="nv">$res</span><span class="p">,</span> <span class="s1">'abc'</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$resWithEtag</span><span class="p">;</span>
 <span class="p">});</span>
@@ -433,8 +433,8 @@ and it returns a cloned PSR7 response with the new HTTP header.</p>
 with the desired <code class="language-plaintext highlighter-rouge">Expires</code> header. This method accepts a PSR7 response object,
 and it returns a cloned PSR7 response with the new HTTP header.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/bar'</span><span class="p">,</span><span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$resWithExpires</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">withExpires</span><span class="p">(</span><span class="nv">$res</span><span class="p">,</span> <span class="nb">time</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3600</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/bar'</span><span class="p">,</span><span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$resWithExpires</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cache</span><span class="o">-&gt;</span><span class="nf">withExpires</span><span class="p">(</span><span class="nv">$res</span><span class="p">,</span> <span class="nb">time</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3600</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$resWithExpires</span><span class="p">;</span>
 <span class="p">});</span>
@@ -447,8 +447,8 @@ with the desired <code class="language-plaintext highlighter-rouge">Last-Modifie
 and it returns a cloned PSR7 response with the new HTTP header.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Example route with LastModified</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/foobar'</span><span class="p">,</span><span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$resWithLastMod</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">withLastModified</span><span class="p">(</span><span class="nv">$res</span><span class="p">,</span> <span class="nb">time</span><span class="p">()</span> <span class="o">-</span> <span class="mi">3600</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/foobar'</span><span class="p">,</span><span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$resWithLastMod</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">cache</span><span class="o">-&gt;</span><span class="nf">withLastModified</span><span class="p">(</span><span class="nv">$res</span><span class="p">,</span> <span class="nb">time</span><span class="p">()</span> <span class="o">-</span> <span class="mi">3600</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$resWithLastMod</span><span class="p">;</span>
 <span class="p">});</span>
@@ -980,7 +980,7 @@ and it returns a cloned PSR7 response with the new HTTP header.</p>
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1012,7 +1012,7 @@ and it returns a cloned PSR7 response with the new HTTP header.</p>
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1029,6 +1029,6 @@ and it returns a cloned PSR7 response with the new HTTP header.</p>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/features/caching.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/features/caching.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 

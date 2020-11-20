@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -49,18 +49,18 @@
 <p>If you want to redirect/rewrite all URLs that end in a <code class="language-plaintext highlighter-rouge">/</code> to the non-trailing <code class="language-plaintext highlighter-rouge">/</code> equivalent, then you can add this middleware:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\RequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Server\RequestHandlerInterface</span><span class="err"> RequestHandler</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Psr7\Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\RequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Psr7\Response</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">();</span>
-    <span class="nv">$path</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getUri</span><span class="p">();</span>
+    <span class="nv">$path</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="nf">getPath</span><span class="p">();</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="nv">$path</span> <span class="o">!=</span> <span class="s1">'/'</span> <span class="o">&amp;&amp;</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'/'</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// recursively remove slashes when its more than 1 slash</span>
@@ -68,27 +68,27 @@
 
         <span class="c1">// permanently redirect paths with a trailing slash</span>
         <span class="c1">// to their non-trailing counterpart</span>
-        <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+        <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="nf">withPath</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
         
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'GET'</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getMethod</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'GET'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Response</span><span class="p">();</span>
             <span class="k">return</span> <span class="nv">$response</span>
-                <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Location'</span><span class="p">,</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$uri</span><span class="p">)</span>
-                <span class="o">-&gt;</span><span class="na">withStatus</span><span class="p">(</span><span class="mi">301</span><span class="p">);</span>
+                <span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Location'</span><span class="p">,</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="nv">$uri</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="nf">withStatus</span><span class="p">(</span><span class="mi">301</span><span class="p">);</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">withUri</span><span class="p">(</span><span class="nv">$uri</span><span class="p">);</span>
+            <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">withUri</span><span class="p">(</span><span class="nv">$uri</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
 <p>Alternatively, consider <a href="http://github.com/middlewares/trailing-slash">middlewares/trailing-slash</a> middleware which also allows you to force a trailing slash to be appended to all URLs:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nn">Middlewares\TrailingSlash</span><span class="p">;</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Middlewares\TrailingSlash</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">TrailingSlash</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span> <span class="c1">// true adds the trailing slash (false removes it)</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">TrailingSlash</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span> <span class="c1">// true adds the trailing slash (false removes it)</span>
 </code></pre></div></div>
 
 
@@ -481,7 +481,7 @@
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -504,4 +504,4 @@
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/cookbook/route-patterns.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --></html>

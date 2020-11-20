@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/features/flash.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/features/flash.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -395,36 +395,36 @@
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Start PHP session</span>
 <span class="nb">session_start</span><span class="p">();</span> <span class="c1">//by default requires session storage</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\App</span><span class="p">();</span>
 
 <span class="c1">// Fetch DI Container</span>
-<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
 
 <span class="c1">// Register provider</span>
 <span class="nv">$container</span><span class="p">[</span><span class="s1">'flash'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nx">\Slim\Flash\Messages</span><span class="p">();</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\Flash\Messages</span><span class="p">();</span>
 <span class="p">};</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Set flash message for next request</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">flash</span><span class="o">-&gt;</span><span class="na">addMessage</span><span class="p">(</span><span class="s1">'Test'</span><span class="p">,</span> <span class="s1">'This is a message'</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">flash</span><span class="o">-&gt;</span><span class="nf">addMessage</span><span class="p">(</span><span class="s1">'Test'</span><span class="p">,</span> <span class="s1">'This is a message'</span><span class="p">);</span>
 
     <span class="c1">// Redirect</span>
-    <span class="k">return</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="na">withStatus</span><span class="p">(</span><span class="mi">302</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Location'</span><span class="p">,</span> <span class="s1">'/bar'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="nf">withStatus</span><span class="p">(</span><span class="mi">302</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Location'</span><span class="p">,</span> <span class="s1">'/bar'</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/bar'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/bar'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Add message to be used in current request</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">flash</span><span class="o">-&gt;</span><span class="na">addMessageNow</span><span class="p">(</span><span class="s1">'Test'</span><span class="p">,</span> <span class="s1">'This is another message'</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">flash</span><span class="o">-&gt;</span><span class="nf">addMessageNow</span><span class="p">(</span><span class="s1">'Test'</span><span class="p">,</span> <span class="s1">'This is another message'</span><span class="p">);</span>
 
     <span class="c1">// Get flash messages from previous request</span>
-    <span class="nv">$messages</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">flash</span><span class="o">-&gt;</span><span class="na">getMessages</span><span class="p">();</span>
+    <span class="nv">$messages</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">flash</span><span class="o">-&gt;</span><span class="nf">getMessages</span><span class="p">();</span>
 
     <span class="c1">// Returns both flash messages</span>
     <span class="nb">print_r</span><span class="p">(</span><span class="nv">$messages</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>Please note that a message could be a string, object or array. Please check what your storage can handle.</p>
@@ -955,7 +955,7 @@
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -987,7 +987,7 @@
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1004,6 +1004,6 @@
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/features/flash.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/features/flash.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 

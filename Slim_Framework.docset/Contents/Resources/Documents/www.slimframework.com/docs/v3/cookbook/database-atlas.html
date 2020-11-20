@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-atlas.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-atlas.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -422,7 +422,7 @@ You can add them under any array key you like; the following example uses
                 <span class="s1">'password'</span><span class="p">,</span>
             <span class="p">],</span>
             <span class="s1">'namespace'</span> <span class="o">=&gt;</span> <span class="s1">'DataSource'</span><span class="p">,</span>
-            <span class="s1">'directory'</span> <span class="o">=&gt;</span> <span class="nb">dirname</span><span class="p">(</span><span class="nx">__DIR__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/src/classes/DataSource'</span><span class="p">,</span>
+            <span class="s1">'directory'</span> <span class="o">=&gt;</span> <span class="nb">dirname</span><span class="p">(</span><span class="k">__DIR__</span><span class="p">)</span> <span class="mf">.</span> <span class="s1">'/src/classes/DataSource'</span><span class="p">,</span>
         <span class="p">]</span>
     <span class="p">]</span>
 <span class="p">];</span>
@@ -460,18 +460,18 @@ for each table <a href="http://atlasphp.io/cassini/skeleton/usage.html#1-2-1-2">
 service in the Slim container:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
 <span class="nv">$container</span><span class="p">[</span><span class="s1">'atlas'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$args</span> <span class="o">=</span> <span class="nv">$container</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'atlas'</span><span class="p">][</span><span class="s1">'pdo'</span><span class="p">];</span>
-    <span class="nv">$atlasBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasBuilder</span><span class="p">(</span><span class="o">...</span><span class="nv">$args</span><span class="p">);</span>
-    <span class="nv">$atlasBuilder</span><span class="o">-&gt;</span><span class="na">setFactory</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="nv">$class</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+    <span class="nv">$atlasBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AtlasBuilder</span><span class="p">(</span><span class="mf">...</span><span class="nv">$args</span><span class="p">);</span>
+    <span class="nv">$atlasBuilder</span><span class="o">-&gt;</span><span class="nf">setFactory</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">has</span><span class="p">(</span><span class="nv">$class</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
         <span class="p">}</span>
 
         <span class="k">return</span> <span class="k">new</span> <span class="nv">$class</span><span class="p">();</span>
     <span class="p">});</span>
-    <span class="k">return</span> <span class="nv">$atlasBuilder</span><span class="o">-&gt;</span><span class="na">newAtlas</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nv">$atlasBuilder</span><span class="o">-&gt;</span><span class="nf">newAtlas</span><span class="p">();</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
@@ -494,29 +494,29 @@ The following examples are adapted from the
 <a href="https://github.com/slimphp/Tutorial-First-Application">tutorial application</a>:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">DataSource\Ticket\Ticket</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">DataSource\Component\Component</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DataSource\Ticket\Ticket</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">DataSource\Component\Component</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="s2">"Ticket list"</span><span class="p">);</span>
-    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">Ticket</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fetchRecordSet</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">logger</span><span class="o">-&gt;</span><span class="nf">addInfo</span><span class="p">(</span><span class="s2">"Ticket list"</span><span class="p">);</span>
+    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">atlas</span><span class="o">-&gt;</span><span class="nf">select</span><span class="p">(</span><span class="nc">Ticket</span><span class="o">::</span><span class="n">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">fetchRecordSet</span><span class="p">();</span>
 
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">view</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">(</span>
         <span class="nv">$response</span><span class="p">,</span>
         <span class="s2">"tickets.phtml"</span><span class="p">,</span>
         <span class="p">[</span>
             <span class="s2">"tickets"</span> <span class="o">=&gt;</span> <span class="nv">$tickets</span><span class="p">,</span>
-            <span class="s2">"router"</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">router</span>
+            <span class="s2">"router"</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">router</span>
         <span class="p">]</span>
     <span class="p">);</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$ticket_id</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
-    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">(</span><span class="nx">Ticket</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$ticket_id</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$ticket_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">atlas</span><span class="o">-&gt;</span><span class="nf">fetchRecord</span><span class="p">(</span><span class="nc">Ticket</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="nv">$ticket_id</span><span class="p">);</span>
 
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">view</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">(</span>
         <span class="nv">$response</span><span class="p">,</span>
         <span class="s2">"ticketdetail.phtml"</span><span class="p">,</span>
         <span class="p">[</span>
@@ -524,22 +524,22 @@ The following examples are adapted from the
         <span class="p">]</span>
     <span class="p">);</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
-<span class="p">})</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">);</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">);</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/ticket/new'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'/ticket/new'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getParsedBody</span><span class="p">();</span>
 
-    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">newRecord</span><span class="p">(</span><span class="nx">Ticket</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
-    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">);</span>
-    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">description</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">);</span>
+    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">atlas</span><span class="o">-&gt;</span><span class="nf">newRecord</span><span class="p">(</span><span class="nc">Ticket</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="n">title</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span> <span class="no">FILTER_SANITIZE_STRING</span><span class="p">);</span>
+    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="n">description</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">],</span> <span class="no">FILTER_SANITIZE_STRING</span><span class="p">);</span>
 
-    <span class="nv">$component_id</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">'component'</span><span class="p">];</span>
-    <span class="nv">$component</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">(</span><span class="nx">Component</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$component_id</span><span class="p">)</span>
-    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">component</span> <span class="o">=</span> <span class="nv">$component</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+    <span class="nv">$component_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">'component'</span><span class="p">];</span>
+    <span class="nv">$component</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">atlas</span><span class="o">-&gt;</span><span class="nf">fetchRecord</span><span class="p">(</span><span class="nc">Component</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="nv">$component_id</span><span class="p">)</span>
+    <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="n">component</span> <span class="o">=</span> <span class="nv">$component</span><span class="o">-&gt;</span><span class="nf">getName</span><span class="p">();</span>
 
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$ticket</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">atlas</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$ticket</span><span class="p">);</span>
 
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withRedirect</span><span class="p">(</span><span class="s2">"/tickets"</span><span class="p">);</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withRedirect</span><span class="p">(</span><span class="s2">"/tickets"</span><span class="p">);</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
@@ -1107,7 +1107,7 @@ validation</p>
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1139,7 +1139,7 @@ validation</p>
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1156,6 +1156,6 @@ validation</p>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-atlas.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/database-atlas.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 

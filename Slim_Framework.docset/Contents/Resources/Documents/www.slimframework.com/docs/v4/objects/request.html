@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -54,20 +54,20 @@ first argument to the route callback like this:</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 1: Inject PSR-7 request into application route callback.</figcaption>
 </figure>
@@ -77,22 +77,22 @@ as the first argument of the middleware callable like this:</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="n">RequestHandler</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
-   <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="c1">// ...define app routes...</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 2: Inject PSR-7 request into application middleware.</figcaption>
 </figure>
@@ -114,7 +114,7 @@ as the first argument of the middleware callable like this:</p>
 <p>You can inspect the HTTP request’s method with the Request object method
 appropriately named <code class="language-plaintext highlighter-rouge">getMethod()</code>.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$method</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">();</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$method</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getMethod</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>It is possible to fake or <em>override</em> the HTTP request method. This is
@@ -172,7 +172,7 @@ resource. The HTTP request URI has several parts:</p>
 
 <p>You can fetch the PSR-7 Request object’s <a href="https://www.php-fig.org/psr/psr-7/#35-psrhttpmessageuriinterface">URI object</a> with its <code class="language-plaintext highlighter-rouge">getUri()</code> method:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">();</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getUri</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>The PSR-7 Request object’s URI is itself an object that provides the following
@@ -216,9 +216,9 @@ are the header names and its values are themselves a numeric array of string
 values for their respective header name.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">();</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeaders</span><span class="p">();</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$headers</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$values</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s2">": "</span> <span class="o">.</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">", "</span><span class="p">,</span> <span class="nv">$values</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="nv">$name</span> <span class="mf">.</span> <span class="s2">": "</span> <span class="mf">.</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">", "</span><span class="p">,</span> <span class="nv">$values</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>  </div>
   <figcaption>Figure 5: Fetch and iterate all HTTP request headers as an associative array.</figcaption>
@@ -230,7 +230,7 @@ values for their respective header name.</p>
 HTTP header may have more than one value!</em></p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueArray</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeader</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueArray</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeader</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 6: Get values for a specific HTTP header.</figcaption>
 </figure>
@@ -240,7 +240,7 @@ with the PSR-7 Request object’s <code class="language-plaintext highlighter-ro
 <code class="language-plaintext highlighter-rouge">getHeader($name)</code> method, this method returns a comma-separated string.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueString</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueString</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeaderLine</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 7: Get single header's values as comma-separated string.</figcaption>
 </figure>
@@ -251,7 +251,7 @@ with the PSR-7 Request object’s <code class="language-plaintext highlighter-ro
 <code class="language-plaintext highlighter-rouge">hasHeader($name)</code> method.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">hasHeader</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">))</span> <span class="p">{</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">hasHeader</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// Do something</span>
 <span class="p">}</span>
 </code></pre></div>  </div>
@@ -267,31 +267,32 @@ Note that body parsing differs from one PSR-7 implementation to another.</p>
 
 <p>You may need to implement middleware in order to parse the incoming input depending on the PSR-7 implementation you have installed. Here is an example for parsing incoming <code class="language-plaintext highlighter-rouge">JSON</code> input:</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="n">Response</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Server\MiddlewareInterface</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="n">RequestHandler</span><span class="p">;</span>
 
-<span class="kd">class</span> <span class="nc">JsonBodyParserMiddleware</span> <span class="k">implements</span> <span class="nx">MiddlewareInterface</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\MiddlewareInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">JsonBodyParserMiddleware</span> <span class="kd">implements</span> <span class="nc">MiddlewareInterface</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">process</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">process</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">):</span> <span class="kt">Response</span>
     <span class="p">{</span>
-        <span class="nv">$contentType</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">);</span>
+        <span class="nv">$contentType</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">);</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="nb">strstr</span><span class="p">(</span><span class="nv">$contentType</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">))</span> <span class="p">{</span>
             <span class="nv">$contents</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="s1">'php://input'</span><span class="p">),</span> <span class="kc">true</span><span class="p">);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nb">json_last_error</span><span class="p">()</span> <span class="o">===</span> <span class="nx">JSON_ERROR_NONE</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">withParsedBody</span><span class="p">(</span><span class="nv">$contents</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">json_last_error</span><span class="p">()</span> <span class="o">===</span> <span class="no">JSON_ERROR_NONE</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">withParsedBody</span><span class="p">(</span><span class="nv">$contents</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">}</span>
 
-        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$parsedBody</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$parsedBody</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getParsedBody</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 9: Parse HTTP request body into native PHP format</figcaption>
 </figure>
@@ -303,7 +304,7 @@ the HTTP request body <code class="language-plaintext highlighter-rouge">StreamI
 request size is unknown or too large for available memory.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 10: Get HTTP request body</figcaption>
 </figure>
@@ -333,12 +334,12 @@ methods to read and iterate its underlying PHP <code class="language-plaintext h
 <code class="language-plaintext highlighter-rouge">input</code> element.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$files</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUploadedFiles</span><span class="p">();</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$files</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getUploadedFiles</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 11: Get uploaded files</figcaption>
 </figure>
 
-<p>Each object in the <code class="language-plaintext highlighter-rouge">$files</code> array is a instance of
+<p>Each object in the <code class="language-plaintext highlighter-rouge">$files</code> array is an instance of
 <code class="language-plaintext highlighter-rouge">Psr\Http\Message\UploadedFileInterface</code> and supports the following methods:</p>
 
 <ul>
@@ -373,7 +374,7 @@ X-Requested-With: XMLHttpRequest
   <figcaption>Figure 13: Example XHR request.</figcaption>
 </figure>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'X-Requested-With'</span><span class="p">)</span> <span class="o">===</span> <span class="s1">'XMLHttpRequest'</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeaderLine</span><span class="p">(</span><span class="s1">'X-Requested-With'</span><span class="p">)</span> <span class="o">===</span> <span class="s1">'XMLHttpRequest'</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Do something</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -382,24 +383,36 @@ X-Requested-With: XMLHttpRequest
 
 <p>You can fetch the HTTP request content type with the Request object’s <code class="language-plaintext highlighter-rouge">getHeaderLine()</code> method.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$contentType</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$contentType</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h3 id="content-length"><a class="dashAnchor" name="//apple_ref/cpp/Section/Content%20Length"></a>Content Length</h3>
 
 <p>You can fetch the HTTP request content length with the Request object’s <code class="language-plaintext highlighter-rouge">getHeaderLine()</code> method.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$length</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Length'</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$length</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeaderLine</span><span class="p">(</span><span class="s1">'Content-Length'</span><span class="p">);</span>
 </code></pre></div></div>
 
-<h3 id="request-parameter"><a class="dashAnchor" name="//apple_ref/cpp/Section/Request%20Parameter"></a>Request Parameter</h3>
+<h3 id="server-parameter"><a class="dashAnchor" name="//apple_ref/cpp/Section/Server%20Parameter"></a>Server Parameter</h3>
 
-<p>To fetch single request parameter value. You will need to use <code class="language-plaintext highlighter-rouge">getServerParams()</code></p>
+<p>To fetch data related to the incoming request environment, you will need to use <code class="language-plaintext highlighter-rouge">getServerParams()</code>.</p>
 
 <p>For example, to get a single Server Parameter:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$params</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getServerParams</span><span class="p">();</span>
-<span class="nv">$authorization</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$params</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">])</span> <span class="o">:</span> <span class="nv">$params</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">]</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$params</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getServerParams</span><span class="p">();</span>
+<span class="nv">$authorization</span> <span class="o">=</span> <span class="nv">$params</span><span class="p">[</span><span class="s1">'HTTP_AUTHORIZATION'</span><span class="p">]</span> <span class="o">??</span> <span class="kc">null</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="post-parameters"><a class="dashAnchor" name="//apple_ref/cpp/Section/POST%20Parameters"></a>POST Parameters</h3>
+
+<p>If the request method is <code class="language-plaintext highlighter-rouge">POST</code> and the <code class="language-plaintext highlighter-rouge">Content-Type</code> is either <code class="language-plaintext highlighter-rouge">application/x-www-form-urlencoded</code> 
+or <code class="language-plaintext highlighter-rouge">multipart/form-data</code>, you can retrieve all <code class="language-plaintext highlighter-rouge">POST</code> parameters as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Get all POST parameters</span>
+<span class="nv">$params</span> <span class="o">=</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getParsedBody</span><span class="p">();</span>
+
+<span class="c1">// Get a single POST parameter</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$params</span><span class="p">[</span><span class="s1">'foo'</span><span class="p">];</span>
 </code></pre></div></div>
 
 <h2 id="route-object"><a class="dashAnchor" name="//apple_ref/cpp/Section/Route%20Object"></a>Route Object</h2>
@@ -408,27 +421,29 @@ X-Requested-With: XMLHttpRequest
 
 <p>In this example we are checking first that the user is logged in and second that the user has permissions to view the particular video they are attempting to view.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="nv">$app</span>
-  <span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/course/{id}'</span><span class="p">,</span> <span class="nx">Video</span><span class="o">::</span><span class="na">class</span><span class="o">.</span><span class="s2">":watch"</span><span class="p">)</span>
-  <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nx">PermissionMiddleware</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span>
+  <span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/course/{id}'</span><span class="p">,</span> <span class="nc">Video</span><span class="o">::</span><span class="n">class</span> <span class="mf">.</span> <span class="s1">':watch'</span><span class="p">)</span>
+  <span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nc">PermissionMiddleware</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
 </code></pre></div></div>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="n">Request</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="n">RequestHandler</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Routing\RouteContext</span><span class="p">;</span>
 
-<span class="kd">class</span> <span class="nc">PermissionMiddleware</span> <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">__invoke</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nx">RouteContext</span><span class="o">::</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
-        <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="na">getRoute</span><span class="p">();</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteContext</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">PermissionMiddleware</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__invoke</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nc">RouteContext</span><span class="o">::</span><span class="nf">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="nf">getRoute</span><span class="p">();</span>
         
-        <span class="nv">$courseId</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getArgument</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+        <span class="nv">$courseId</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getArgument</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
         
-        <span class="c1">// ...do permission logic...</span>
+        <span class="c1">// do permission logic...</span>
         
-        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -438,17 +453,19 @@ X-Requested-With: XMLHttpRequest
 <p>To obtain the base path from within a route simply do the following:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Routing\RouteContext</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteContext</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nx">RouteContext</span><span class="o">::</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
-    <span class="nv">$basePath</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="na">getBasePath</span><span class="p">();</span>
-    
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nc">RouteContext</span><span class="o">::</span><span class="nf">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$basePath</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="nf">getBasePath</span><span class="p">();</span>
     <span class="c1">// ...</span>
     
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
@@ -457,22 +474,34 @@ X-Requested-With: XMLHttpRequest
 
 <h2 id="attributes"><a class="dashAnchor" name="//apple_ref/cpp/Section/Attributes"></a>Attributes</h2>
 
-<p>With PSR-7 it is possible to inject objects/values into the request object for further processing. In your applications middleware often need to pass along information to your route closure and the way to do is it is to add it to the request object via an attribute.</p>
+<p>With PSR-7 it is possible to inject objects/values into the request object for further processing. 
+In your applications middleware often need to pass along information to your route closure and the way to do it is to add it to the request object via an attribute.</p>
 
 <p>Example, Setting a value on your request object.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// add the session storage to your request as [READ-ONLY]</span>
-    <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">withAttribute</span><span class="p">(</span><span class="s1">'session'</span><span class="p">,</span> <span class="nv">$_SESSION</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Add the session storage to your request as [READ-ONLY]</span>
+    <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">withAttribute</span><span class="p">(</span><span class="s1">'session'</span><span class="p">,</span> <span class="nv">$_SESSION</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
 <p>Example, how to retrieve the value.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/test'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$session</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAttribute</span><span class="p">(</span><span class="s1">'session'</span><span class="p">);</span> <span class="c1">// get the session from the request</span>
-    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Yay, '</span> <span class="o">.</span> <span class="nv">$session</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/test'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Get the session from the request</span>
+    <span class="nv">$session</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getAttribute</span><span class="p">(</span><span class="s1">'session'</span><span class="p">);</span>
+    
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'Yay, '</span> <span class="mf">.</span> <span class="nv">$session</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -868,7 +897,7 @@ X-Requested-With: XMLHttpRequest
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -891,4 +920,4 @@ X-Requested-With: XMLHttpRequest
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/objects/request.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --></html>

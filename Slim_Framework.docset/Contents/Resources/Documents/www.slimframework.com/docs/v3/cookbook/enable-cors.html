@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/enable-cors.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/enable-cors.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -399,16 +399,16 @@
 
 <p>The following code should enable lazy CORS.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="s1">'/{routes:.+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">options</span><span class="p">(</span><span class="s1">'/{routes:.+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">);</span>
     <span class="k">return</span> <span class="nv">$response</span>
-            <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Origin'</span><span class="p">,</span> <span class="s1">'http://mysite'</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Headers'</span><span class="p">,</span> <span class="s1">'X-Requested-With, Content-Type, Accept, Origin, Authorization'</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Methods'</span><span class="p">,</span> <span class="s1">'GET, POST, PUT, DELETE, PATCH, OPTIONS'</span><span class="p">);</span>
+            <span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Origin'</span><span class="p">,</span> <span class="s1">'http://mysite'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Headers'</span><span class="p">,</span> <span class="s1">'X-Requested-With, Content-Type, Accept, Origin, Authorization'</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Methods'</span><span class="p">,</span> <span class="s1">'GET, POST, PUT, DELETE, PATCH, OPTIONS'</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -416,8 +416,8 @@
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Catch-all route to serve a 404 Not Found page if none of the routes match</span>
 <span class="c1">// NOTE: make sure this route is defined last</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">([</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">,</span> <span class="s1">'DELETE'</span><span class="p">,</span> <span class="s1">'PATCH'</span><span class="p">],</span> <span class="s1">'/{routes:.+}'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$handler</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notFoundHandler</span><span class="p">;</span> <span class="c1">// handle using the default Slim page not found handler</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">map</span><span class="p">([</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">,</span> <span class="s1">'DELETE'</span><span class="p">,</span> <span class="s1">'PATCH'</span><span class="p">],</span> <span class="s1">'/{routes:.+}'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$handler</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">notFoundHandler</span><span class="p">;</span> <span class="c1">// handle using the default Slim page not found handler</span>
     <span class="k">return</span> <span class="nv">$handler</span><span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
@@ -428,10 +428,10 @@
 
 <p>Here is a complete example application:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s2">"/vendor/autoload.php"</span><span class="p">;</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s2">"/vendor/autoload.php"</span><span class="p">;</span>
 
 <span class="c1">// This Slim setting is required for the middleware to work</span>
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Slim\App</span><span class="p">([</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Slim\App</span><span class="p">([</span>
     <span class="s2">"settings"</span>  <span class="o">=&gt;</span> <span class="p">[</span>
         <span class="s2">"determineRouteBeforeAppMiddleware"</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
     <span class="p">]</span>
@@ -440,48 +440,48 @@
 <span class="c1">// This is the middleware</span>
 <span class="c1">// It will add the Access-Control-Allow-Methods header to every request</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAttribute</span><span class="p">(</span><span class="s2">"route"</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getAttribute</span><span class="p">(</span><span class="s2">"route"</span><span class="p">);</span>
 
     <span class="nv">$methods</span> <span class="o">=</span> <span class="p">[];</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$route</span><span class="p">))</span> <span class="p">{</span>
-        <span class="nv">$pattern</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getPattern</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">empty</span><span class="p">(</span><span class="nv">$route</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$pattern</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getPattern</span><span class="p">();</span>
 
-        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">router</span><span class="o">-&gt;</span><span class="na">getRoutes</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$route</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nv">$pattern</span> <span class="o">===</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getPattern</span><span class="p">())</span> <span class="p">{</span>
-                <span class="nv">$methods</span> <span class="o">=</span> <span class="nb">array_merge_recursive</span><span class="p">(</span><span class="nv">$methods</span><span class="p">,</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="na">getMethods</span><span class="p">());</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">router</span><span class="o">-&gt;</span><span class="nf">getRoutes</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$route</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$pattern</span> <span class="o">===</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getPattern</span><span class="p">())</span> <span class="p">{</span>
+                <span class="nv">$methods</span> <span class="o">=</span> <span class="nb">array_merge_recursive</span><span class="p">(</span><span class="nv">$methods</span><span class="p">,</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getMethods</span><span class="p">());</span>
             <span class="p">}</span>
         <span class="p">}</span>
         <span class="c1">//Methods holds all of the HTTP Verbs that a particular route handles.</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nv">$methods</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">();</span>
+        <span class="nv">$methods</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getMethod</span><span class="p">();</span>
     <span class="p">}</span>
 
     <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
 
 
-    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s2">"Access-Control-Allow-Methods"</span><span class="p">,</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="nv">$methods</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s2">"Access-Control-Allow-Methods"</span><span class="p">,</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="nv">$methods</span><span class="p">));</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s2">"/api/</span><span class="si">{</span><span class="nv">id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s2">"/api/</span><span class="si">{</span><span class="nv">id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s2">"/api/</span><span class="si">{</span><span class="nv">id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s2">"/api/</span><span class="si">{</span><span class="nv">id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">([</span><span class="s2">"DELETE"</span><span class="p">,</span> <span class="s2">"PATCH"</span><span class="p">],</span> <span class="s2">"/api/</span><span class="si">{</span><span class="nv">id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">map</span><span class="p">([</span><span class="s2">"DELETE"</span><span class="p">,</span> <span class="s2">"PATCH"</span><span class="p">],</span> <span class="s2">"/api/</span><span class="si">{</span><span class="nv">id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">});</span>
 
 <span class="c1">// Pay attention to this when you are using some javascript front-end framework and you are using groups in slim php</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="s1">'/api'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">group</span><span class="p">(</span><span class="s1">'/api'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Due to the behaviour of browsers when sending PUT or DELETE request, you must add the OPTIONS method. Read about preflight.</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">map</span><span class="p">([</span><span class="s1">'PUT'</span><span class="p">,</span> <span class="s1">'OPTIONS'</span><span class="p">],</span> <span class="s1">'/{user_id:[0-9]+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">map</span><span class="p">([</span><span class="s1">'PUT'</span><span class="p">,</span> <span class="s1">'OPTIONS'</span><span class="p">],</span> <span class="s1">'/{user_id:[0-9]+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Your code here...</span>
     <span class="p">});</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>A big thank you to <a href="https://github.com/tuupola">tuupola</a> for coming up with this!</p>
@@ -1012,7 +1012,7 @@
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1044,7 +1044,7 @@
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1061,6 +1061,6 @@
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/enable-cors.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/cookbook/enable-cors.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 

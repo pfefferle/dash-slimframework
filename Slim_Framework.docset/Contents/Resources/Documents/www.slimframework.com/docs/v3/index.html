@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:31 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:58 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -383,7 +383,7 @@
                 </div>
                 <div class="alert alert-info">
     <p>
-        This documentation is for <strong>Slim 3</strong>. Looking for <a href="http://www.slimframework.com/docs/v2">Slim 2 Docs</a>?.
+        This documentation is for <strong>Slim 3</strong>. Looking for <a href="https://www.slimframework.com/docs/v2">Slim 2 Docs</a>?.
     </p>
 </div>
 
@@ -431,15 +431,15 @@ example application:</p>
 <span class="nv">$config</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="s1">'addContentLengthHeader'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
 <span class="p">]];</span>
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\App</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
 
 <span class="c1">// Define app routes</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s2">"Hello "</span> <span class="o">.</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s2">"Hello "</span> <span class="mf">.</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
 <span class="p">});</span>
 
 <span class="c1">// Run app</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 1: Example Slim application</figcaption>
 </figure>
@@ -1004,7 +1004,7 @@ routing, and error handling.</p>
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1036,7 +1036,7 @@ routing, and error handling.</p>
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1053,6 +1053,6 @@ routing, and error handling.</p>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:31 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:58 GMT -->
 </html>
 

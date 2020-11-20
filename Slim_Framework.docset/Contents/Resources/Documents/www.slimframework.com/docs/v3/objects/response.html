@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -393,16 +393,16 @@ second argument to the route callback like this:</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">;</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">ResponseInterface</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Slim\App</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">ResponseInterface</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Use the PSR-7 $response object</span>
 
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 1: Inject PSR-7 response into application route callback.</figcaption>
 </figure>
@@ -412,17 +412,17 @@ as the second argument of the middleware callable like this:</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">;</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">ResponseInterface</span> <span class="nv">$response</span><span class="p">,</span> <span class="nx">callable</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Slim\App</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">ResponseInterface</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">callable</span> <span class="nv">$next</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Use the PSR-7 $response object</span>
 
     <span class="k">return</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// Define app routes...</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 2: Inject PSR-7 response into application middleware.</figcaption>
 </figure>
@@ -435,7 +435,7 @@ Response object’s default status code is <code class="language-plaintext highl
 Response object’s status code with the <code class="language-plaintext highlighter-rouge">getStatusCode()</code> method like this.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$status</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">();</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$status</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getStatusCode</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 3: Get response status code.</figcaption>
 </figure>
@@ -443,7 +443,7 @@ Response object’s status code with the <code class="language-plaintext highlig
 <p>You can copy a PSR-7 Response object and assign a new status code like this:</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withStatus</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withStatus</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 4: Create response with new status code.</figcaption>
 </figure>
@@ -462,9 +462,9 @@ are the header names and its values are themselves a numeric array of string
 values for their respective header name.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">();</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getHeaders</span><span class="p">();</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$headers</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$values</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s2">": "</span> <span class="o">.</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">", "</span><span class="p">,</span> <span class="nv">$values</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="nv">$name</span> <span class="mf">.</span> <span class="s2">": "</span> <span class="mf">.</span> <span class="nb">implode</span><span class="p">(</span><span class="s2">", "</span><span class="p">,</span> <span class="nv">$values</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>  </div>
   <figcaption>Figure 5: Fetch and iterate all HTTP response headers as an associative array.</figcaption>
@@ -477,7 +477,7 @@ values for their respective header name.</p>
 name. Remember, <em>a single HTTP header may have more than one value!</em></p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueArray</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeader</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueArray</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getHeader</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 6: Get values for a specific HTTP header.</figcaption>
 </figure>
@@ -487,7 +487,7 @@ with the PSR-7 Response object’s <code class="language-plaintext highlighter-r
 <code class="language-plaintext highlighter-rouge">getHeader($name)</code> method, this method returns a comma-separated string.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueString</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeaderLine</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$headerValueString</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getHeaderLine</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 7: Get single header's values as comma-separated string.</figcaption>
 </figure>
@@ -498,7 +498,7 @@ with the PSR-7 Response object’s <code class="language-plaintext highlighter-r
 <code class="language-plaintext highlighter-rouge">hasHeader($name)</code> method.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">hasHeader</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">))</span> <span class="p">{</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">hasHeader</span><span class="p">(</span><span class="s1">'Vary'</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// Do something</span>
 <span class="p">}</span>
 </code></pre></div>  </div>
@@ -511,7 +511,7 @@ with the PSR-7 Response object’s <code class="language-plaintext highlighter-r
 <code class="language-plaintext highlighter-rouge">withHeader($name, $value)</code> method.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withHeader</span><span class="p">(</span><span class="s1">'Content-type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'Content-type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 9: Set HTTP header</figcaption>
 </figure>
@@ -532,7 +532,7 @@ with the PSR-7 Response object’s <code class="language-plaintext highlighter-r
 <code class="language-plaintext highlighter-rouge">withAddedHeader($name, $value)</code> method.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withAddedHeader</span><span class="p">(</span><span class="s1">'Allow'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="nf">withAddedHeader</span><span class="p">(</span><span class="s1">'Allow'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 10: Append HTTP header</figcaption>
 </figure>
@@ -552,7 +552,7 @@ with the PSR-7 Response object’s <code class="language-plaintext highlighter-r
 <p>You can remove a header with the Response object’s <code class="language-plaintext highlighter-rouge">withoutHeader($name)</code> method.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withoutHeader</span><span class="p">(</span><span class="s1">'Allow'</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="nf">withoutHeader</span><span class="p">(</span><span class="s1">'Allow'</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 11: Remove HTTP header</figcaption>
 </figure>
@@ -577,7 +577,7 @@ object’s <code class="language-plaintext highlighter-rouge">getBody()</code> m
 outgoing HTTP response length is unknown or too large for available memory.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 12: Get HTTP response body</figcaption>
 </figure>
@@ -604,8 +604,8 @@ methods to read from, iterate, and write to its underlying PHP <code class="lang
 content to the <code class="language-plaintext highlighter-rouge">StreamInterface</code> instance with its <code class="language-plaintext highlighter-rouge">write()</code> method like this:</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
-<span class="nv">$body</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
+<span class="nv">$body</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 13: Write content to the HTTP response body</figcaption>
 </figure>
@@ -618,8 +618,8 @@ its <code class="language-plaintext highlighter-rouge">withBody(StreamInterface 
 instance of <code class="language-plaintext highlighter-rouge">\Psr\Http\Message\StreamInterface</code>.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\GuzzleHttp\Psr7\LazyOpenStream</span><span class="p">(</span><span class="s1">'/path/to/file'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">);</span>
-<span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withBody</span><span class="p">(</span><span class="nv">$newStream</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$newStream</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">GuzzleHttp\Psr7\LazyOpenStream</span><span class="p">(</span><span class="s1">'/path/to/file'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">);</span>
+<span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="nf">withBody</span><span class="p">(</span><span class="nv">$newStream</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 14: Replace the HTTP response body</figcaption>
 </figure>
@@ -642,7 +642,7 @@ instance of <code class="language-plaintext highlighter-rouge">\Psr\Http\Message
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Bob'</span><span class="p">,</span> <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">40</span><span class="p">);</span>
-<span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withJson</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="nf">withJson</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 15: Returning JSON with a 200 HTTP status code.</figcaption>
 </figure>
@@ -651,7 +651,7 @@ instance of <code class="language-plaintext highlighter-rouge">\Psr\Http\Message
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Rob'</span><span class="p">,</span> <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">40</span><span class="p">);</span>
-<span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="na">withJson</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="mi">201</span><span class="p">);</span>
+<span class="nv">$newResponse</span> <span class="o">=</span> <span class="nv">$oldResponse</span><span class="o">-&gt;</span><span class="nf">withJson</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="mi">201</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 16: Returning JSON with a 201 HTTP status code.</figcaption>
 </figure>
@@ -674,7 +674,7 @@ instance of <code class="language-plaintext highlighter-rouge">\Psr\Http\Message
 <p>Slim’s Response object has a custom method <code class="language-plaintext highlighter-rouge">withRedirect($url, $status = null)</code> when you wish to return a redirect to another URL. You provide the <code class="language-plaintext highlighter-rouge">$url</code> where you wish the client to be redirected to along with an optional <code class="language-plaintext highlighter-rouge">$status</code> code. The status code defaults to <code class="language-plaintext highlighter-rouge">302</code> if not provided.</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">withRedirect</span><span class="p">(</span><span class="s1">'/new-url'</span><span class="p">,</span> <span class="mi">301</span><span class="p">);</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withRedirect</span><span class="p">(</span><span class="s1">'/new-url'</span><span class="p">,</span> <span class="mi">301</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 17: Returning a redirect with an optional status code.</figcaption>
 </figure>
@@ -1205,7 +1205,7 @@ instance of <code class="language-plaintext highlighter-rouge">\Psr\Http\Message
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1237,7 +1237,7 @@ instance of <code class="language-plaintext highlighter-rouge">\Psr\Http\Message
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1254,6 +1254,6 @@ instance of <code class="language-plaintext highlighter-rouge">\Psr\Http\Message
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/objects/response.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 

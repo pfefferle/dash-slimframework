@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/features/templates.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/features/templates.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -411,21 +411,21 @@ container like this:</p>
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
 <span class="c1">// Create app</span>
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\App</span><span class="p">();</span>
 
 <span class="c1">// Get container</span>
-<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
 
 <span class="c1">// Register component on container</span>
 <span class="nv">$container</span><span class="p">[</span><span class="s1">'view'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\Views\Twig</span><span class="p">(</span><span class="s1">'path/to/templates'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="nv">$view</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\Views\Twig</span><span class="p">(</span><span class="s1">'path/to/templates'</span><span class="p">,</span> <span class="p">[</span>
         <span class="s1">'cache'</span> <span class="o">=&gt;</span> <span class="s1">'path/to/cache'</span>
     <span class="p">]);</span>
 
     <span class="c1">// Instantiate and add Slim specific extension</span>
-    <span class="nv">$router</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'router'</span><span class="p">);</span>
-    <span class="nv">$uri</span> <span class="o">=</span> <span class="nx">\Slim\Http\Uri</span><span class="o">::</span><span class="na">createFromEnvironment</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Slim\Http\Environment</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">));</span>
-    <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">addExtension</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Slim\Views\TwigExtension</span><span class="p">(</span><span class="nv">$router</span><span class="p">,</span> <span class="nv">$uri</span><span class="p">));</span>
+    <span class="nv">$router</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'router'</span><span class="p">);</span>
+    <span class="nv">$uri</span> <span class="o">=</span> <span class="err">\</span><span class="nc">Slim\Http\Uri</span><span class="o">::</span><span class="nf">createFromEnvironment</span><span class="p">(</span><span class="k">new</span> <span class="err">\</span><span class="nf">Slim\Http\Environment</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">));</span>
+    <span class="nv">$view</span><span class="o">-&gt;</span><span class="nf">addExtension</span><span class="p">(</span><span class="k">new</span> <span class="err">\</span><span class="nf">Slim\Views\TwigExtension</span><span class="p">(</span><span class="nv">$router</span><span class="p">,</span> <span class="nv">$uri</span><span class="p">));</span>
 
     <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
 <span class="p">};</span>
@@ -440,14 +440,14 @@ to render a template and write it to a PSR-7 Response object like this:</p>
 
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Render Twig template in route</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'profile.html'</span><span class="p">,</span> <span class="p">[</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">view</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'profile.html'</span><span class="p">,</span> <span class="p">[</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span>
     <span class="p">]);</span>
-<span class="p">})</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">'profile'</span><span class="p">);</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'profile'</span><span class="p">);</span>
 
 <span class="c1">// Run app</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 3: Render template with slim/twig-view container service.</figcaption>
 </figure>
@@ -495,11 +495,11 @@ and more.</p>
 with the container:</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$filter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Twig_SimpleFilter</span><span class="p">(</span><span class="s1">'rot13'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$string</span><span class="p">)</span> <span class="p">{</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$filter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Twig_SimpleFilter</span><span class="p">(</span><span class="s1">'rot13'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$string</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nb">str_rot13</span><span class="p">(</span><span class="nv">$string</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'view'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getEnvironment</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addFilter</span><span class="p">(</span><span class="nv">$filter</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'view'</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">getEnvironment</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">addFilter</span><span class="p">(</span><span class="nv">$filter</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 4: Registering a filter with Twig</figcaption>
 </figure>
@@ -516,11 +516,11 @@ with the container:</p>
 with the container:</p>
 
 <figure>
-  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$function</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Twig_SimpleFunction</span><span class="p">(</span><span class="s1">'shortest'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$function</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Twig_SimpleFunction</span><span class="p">(</span><span class="s1">'shortest'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$b</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$a</span> <span class="o">:</span> <span class="nv">$b</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'view'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getEnvironment</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addFunction</span><span class="p">(</span><span class="nv">$function</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'view'</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">getEnvironment</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">addFunction</span><span class="p">(</span><span class="nv">$function</span><span class="p">);</span>
 </code></pre></div>  </div>
   <figcaption>Figure 5: Registering a function with Twig</figcaption>
 </figure>
@@ -553,14 +553,14 @@ Composer like this:</p>
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
 <span class="c1">// Create app</span>
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\App</span><span class="p">();</span>
 
 <span class="c1">// Get container</span>
-<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
 
 <span class="c1">// Register component on container</span>
 <span class="nv">$container</span><span class="p">[</span><span class="s1">'view'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nx">\Slim\Views\PhpRenderer</span><span class="p">(</span><span class="s1">'path/to/templates/with/trailing/slash/'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\Views\PhpRenderer</span><span class="p">(</span><span class="s1">'path/to/templates/with/trailing/slash/'</span><span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div>  </div>
   <figcaption>Figure 7: Register slim/php-view component with container.</figcaption>
@@ -571,14 +571,14 @@ Composer like this:</p>
 <figure>
   <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="c1">// Render PHP template in route</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'profile.html'</span><span class="p">,</span> <span class="p">[</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">view</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'profile.html'</span><span class="p">,</span> <span class="p">[</span>
         <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span>
     <span class="p">]);</span>
-<span class="p">})</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">'profile'</span><span class="p">);</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'profile'</span><span class="p">);</span>
 
 <span class="c1">// Run app</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div>  </div>
   <figcaption>Figure 8: Render template with slim/php-view container service.</figcaption>
 </figure>
@@ -1115,7 +1115,7 @@ template output to the PSR-7 Response object’s body.</p>
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1147,7 +1147,7 @@ template output to the PSR-7 Response object’s body.</p>
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1164,6 +1164,6 @@ template output to the PSR-7 Response object’s body.</p>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/features/templates.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/features/templates.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 

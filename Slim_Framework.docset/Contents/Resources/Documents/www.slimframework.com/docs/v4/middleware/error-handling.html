@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/error-handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
+<html lang="en"><!-- Mirrored from www.slimframework.com/docs/v4/middleware/error-handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --><!-- Added by HTTrack --><head><meta content="text/html;charset=utf-8" http-equiv="content-type"/><!-- /Added by HTTrack -->
 
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
@@ -46,17 +46,17 @@
 
 <h2 id="usage"><a class="dashAnchor" name="//apple_ref/cpp/Section/Usage"></a>Usage</h2>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
 <span class="cd">/**
  * The routing middleware should be added earlier than the ErrorMiddleware
  * Otherwise exceptions thrown from it will not be handled by the middleware
  */</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
 
 <span class="cd">/**
  * @param bool $displayErrorDetails -&gt; Should be set to false in production
@@ -68,56 +68,56 @@
  * Note: This middleware should be added last. It will not handle any exceptions/errors
  * for middleware added after it.
  */</span>
-<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">$logger</span><span class="p">);</span>
+<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">$logger</span><span class="p">);</span>
 
 <span class="c1">// ...</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="adding-custom-error-handlers"><a class="dashAnchor" name="//apple_ref/cpp/Section/Adding%20Custom%20Error%20Handlers"></a>Adding Custom Error Handlers</h2>
 <p>You can now map custom handlers for any type of Exception or Throwable.</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Psr\Log\LoggerInterface</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Psr7\Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Log\LoggerInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Psr7\Response</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
 <span class="c1">// Add Routing Middleware</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
 
 <span class="c1">// Define Custom Error Handler</span>
 <span class="nv">$customErrorHandler</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span>
-    <span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span>
-    <span class="nx">Throwable</span> <span class="nv">$exception</span><span class="p">,</span>
-    <span class="nx">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">,</span>
-    <span class="nx">bool</span> <span class="nv">$logErrors</span><span class="p">,</span>
-    <span class="nx">bool</span> <span class="nv">$logErrorDetails</span><span class="p">,</span>
-    <span class="o">?</span><span class="nx">LoggerInterface</span> <span class="nv">$logger</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span>
+    <span class="kt">Throwable</span> <span class="nv">$exception</span><span class="p">,</span>
+    <span class="kt">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">,</span>
+    <span class="kt">bool</span> <span class="nv">$logErrors</span><span class="p">,</span>
+    <span class="kt">bool</span> <span class="nv">$logErrorDetails</span><span class="p">,</span>
+    <span class="kt">?LoggerInterface</span> <span class="nv">$logger</span> <span class="o">=</span> <span class="kc">null</span>
 <span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+    <span class="nv">$logger</span><span class="o">-&gt;</span><span class="nf">error</span><span class="p">(</span><span class="nv">$exception</span><span class="o">-&gt;</span><span class="nf">getMessage</span><span class="p">());</span>
 
-    <span class="nv">$payload</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()];</span>
+    <span class="nv">$payload</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="nf">getMessage</span><span class="p">()];</span>
 
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getResponseFactory</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createResponse</span><span class="p">();</span>
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span>
-        <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$payload</span><span class="p">,</span> <span class="nx">JSON_UNESCAPED_UNICODE</span><span class="p">)</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getResponseFactory</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">createResponse</span><span class="p">();</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span>
+        <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$payload</span><span class="p">,</span> <span class="no">JSON_UNESCAPED_UNICODE</span><span class="p">)</span>
     <span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="c1">// Add Error Middleware</span>
-<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">$logger</span><span class="p">);</span>
-<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="na">setDefaultErrorHandler</span><span class="p">(</span><span class="nv">$customErrorHandler</span><span class="p">);</span>
+<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">$logger</span><span class="p">);</span>
+<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="nf">setDefaultErrorHandler</span><span class="p">(</span><span class="nv">$customErrorHandler</span><span class="p">);</span>
 
 <span class="c1">// ...</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="error-logging"><a class="dashAnchor" name="//apple_ref/cpp/Section/Error%20Logging"></a>Error Logging</h2>
@@ -128,11 +128,11 @@
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
 <span class="kn">namespace</span> <span class="nn">MyApp\Handlers</span><span class="p">;</span>
 
-<span class="kn">use</span> <span class="nn">Slim\Handlers\ErrorHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Handlers\ErrorHandler</span><span class="p">;</span>
 
-<span class="kd">class</span> <span class="nc">MyErrorHandler</span> <span class="k">extends</span> <span class="nx">ErrorHandler</span>
+<span class="kd">class</span> <span class="nc">MyErrorHandler</span> <span class="kd">extends</span> <span class="nc">ErrorHandler</span>
 <span class="p">{</span>
-    <span class="k">protected</span> <span class="k">function</span> <span class="nf">logError</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$error</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">logError</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$error</span><span class="p">):</span> <span class="kt">void</span>
     <span class="p">{</span>
         <span class="c1">// Insert custom error logging function.</span>
     <span class="p">}</span>
@@ -140,26 +140,26 @@
 </code></pre></div></div>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">MyApp\Handlers\MyErrorHandler</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">MyApp\Handlers\MyErrorHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
 <span class="c1">// Add Routing Middleware</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
 
 <span class="c1">// Instantiate Your Custom Error Handler</span>
-<span class="nv">$myErrorHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyErrorHandler</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getCallableResolver</span><span class="p">(),</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getResponseFactory</span><span class="p">());</span>
+<span class="nv">$myErrorHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyErrorHandler</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getCallableResolver</span><span class="p">(),</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getResponseFactory</span><span class="p">());</span>
 
 <span class="c1">// Add Error Middleware</span>
-<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="na">setDefaultErrorHandler</span><span class="p">(</span><span class="nv">$myErrorHandler</span><span class="p">);</span>
+<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="nf">setDefaultErrorHandler</span><span class="p">(</span><span class="nv">$myErrorHandler</span><span class="p">);</span>
 
 <span class="c1">// ...</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>With the second method, you can supply a logger that conforms to the
@@ -167,25 +167,25 @@
 <a href="https://github.com/Seldaek/monolog/">Monolog</a> library.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">MyApp\Handlers\MyErrorHandler</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">MyApp\Handlers\MyErrorHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
 <span class="c1">// Add Routing Middleware</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
 
 <span class="c1">// Instantiate Logger</span>
 <span class="c1">// $logger = ...</span>
 
 <span class="c1">// Add Error Middleware with Logger</span>
-<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">$logger</span><span class="p">);</span>
+<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">$logger</span><span class="p">);</span>
 
 <span class="c1">// ...</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="error-handlingrendering"><a class="dashAnchor" name="//apple_ref/cpp/Section/Error%20Handling%2FRendering"></a>Error Handling/Rendering</h2>
@@ -205,11 +205,11 @@ By default it will call the appropriate <code class="language-plaintext highligh
 that implements <code class="language-plaintext highlighter-rouge">\Slim\Interfaces\ErrorRendererInterface</code>.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">Slim\Interfaces\ErrorRendererInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Interfaces\ErrorRendererInterface</span><span class="p">;</span>
 
-<span class="kd">class</span> <span class="nc">MyCustomErrorRenderer</span> <span class="k">implements</span> <span class="nx">ErrorRendererInterface</span>
+<span class="kd">class</span> <span class="nc">MyCustomErrorRenderer</span> <span class="kd">implements</span> <span class="nc">ErrorRendererInterface</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">__invoke</span><span class="p">(</span><span class="nx">Throwable</span> <span class="nv">$exception</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__invoke</span><span class="p">(</span><span class="kt">Throwable</span> <span class="nv">$exception</span><span class="p">,</span> <span class="kt">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">):</span> <span class="kt">string</span>
     <span class="p">{</span>
         <span class="k">return</span> <span class="s1">'My awesome format'</span><span class="p">;</span>
     <span class="p">}</span>
@@ -219,26 +219,26 @@ that implements <code class="language-plaintext highlighter-rouge">\Slim\Interfa
 <p>And then register that error renderer in the core error handler. In the example below we
 will register the renderer to be used for <code class="language-plaintext highlighter-rouge">text/html</code> content types.</p>
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="kn">use</span> <span class="nn">MyApp\Handlers\MyErrorHandler</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nn">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">MyApp\Handlers\MyErrorHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
 
-<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="nx">AppFactory</span><span class="o">::</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
 
 <span class="c1">// Add Routing Middleware</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addRoutingMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
 
 <span class="c1">// Add Error Middleware</span>
-<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
 <span class="c1">// Get the default error handler and register my custom error renderer.</span>
-<span class="nv">$errorHandler</span> <span class="o">=</span> <span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="na">getDefaultErrorHandler</span><span class="p">();</span>
-<span class="nv">$errorHandler</span><span class="o">-&gt;</span><span class="na">registerErrorRenderer</span><span class="p">(</span><span class="s1">'text/html'</span><span class="p">,</span> <span class="nx">MyCustomErrorRenderer</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$errorHandler</span> <span class="o">=</span> <span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="nf">getDefaultErrorHandler</span><span class="p">();</span>
+<span class="nv">$errorHandler</span><span class="o">-&gt;</span><span class="nf">registerErrorRenderer</span><span class="p">(</span><span class="s1">'text/html'</span><span class="p">,</span> <span class="nc">MyCustomErrorRenderer</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
 
 <span class="c1">// ...</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h3 id="force-a-specific-content-type-for-error-rendering"><a class="dashAnchor" name="//apple_ref/cpp/Section/Force%20a%20specific%20content%20type%20for%20error%20rendering"></a>Force a specific content type for error rendering</h3>
@@ -246,7 +246,7 @@ will register the renderer to be used for <code class="language-plaintext highli
 request. If you need to force the error handler to use a specific error renderer you can 
 write the following.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$errorHandler</span><span class="o">-&gt;</span><span class="na">forceContentType</span><span class="p">(</span><span class="s1">'application/json'</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$errorHandler</span><span class="o">-&gt;</span><span class="nf">forceContentType</span><span class="p">(</span><span class="s1">'application/json'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h2 id="new-http-exceptions"><a class="dashAnchor" name="//apple_ref/cpp/Section/New%20HTTP%20Exceptions"></a>New HTTP Exceptions</h2>
@@ -264,7 +264,7 @@ write the following.</p>
 </ul>
 
 <p>You can extend the <code class="language-plaintext highlighter-rouge">HttpSpecializedException</code> class if they need any other response codes that we decide not to provide with the base repository. Example if you wanted a 504 gateway timeout exception that behaves like the native ones you would do the following:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">HttpForbiddenException</span> <span class="k">extends</span> <span class="nx">HttpException</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">HttpForbiddenException</span> <span class="kd">extends</span> <span class="nc">HttpException</span>
 <span class="p">{</span>
     <span class="k">protected</span> <span class="nv">$code</span> <span class="o">=</span> <span class="mi">504</span><span class="p">;</span>
     <span class="k">protected</span> <span class="nv">$message</span> <span class="o">=</span> <span class="s1">'Gateway Timeout.'</span><span class="p">;</span>
@@ -663,7 +663,7 @@ write the following.</p>
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -686,4 +686,4 @@ write the following.</p>
 
 
 
-</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/error-handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:24 GMT --></html>
+</body><!-- Mirrored from www.slimframework.com/docs/v4/middleware/error-handling.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:51 GMT --></html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:31 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:58 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -427,19 +427,19 @@
 <p>There’s a really excellent and minimal example of an <code class="language-plaintext highlighter-rouge">index.php</code> for Slim Framework on the <a href="http://www.slimframework.com/">project homepage</a> so we’ll use that as our starting point.  Put the following code into <code class="language-plaintext highlighter-rouge">src/public/index.php</code>:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">use</span> <span class="nx">\Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">\Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="err">\</span><span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="err">\</span><span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
 
 <span class="k">require</span> <span class="s1">'../vendor/autoload.php'</span><span class="p">;</span>
 
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">;</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Slim\App</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">];</span>
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s2">"Hello, </span><span class="nv">$name</span><span class="s2">"</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s2">"Hello, </span><span class="nv">$name</span><span class="s2">"</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 
 </code></pre></div></div>
 
@@ -533,7 +533,7 @@ RewriteRule . index.php [L]
 
 <p>Now to feed this into Slim, we need to <em>change</em> where we create the <code class="language-plaintext highlighter-rouge">Slim/App</code> object so that it now looks like this:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">([</span><span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="nv">$config</span><span class="p">]);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\App</span><span class="p">([</span><span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="nv">$config</span><span class="p">]);</span>
 </code></pre></div></div>
 
 <p>We’ll be able to access any settings we put into that <code class="language-plaintext highlighter-rouge">$config</code> array from our application later on.</p>
@@ -567,7 +567,7 @@ RewriteRule . index.php [L]
 
 <p>To get the container, we can add the following after the line where we create <code class="language-plaintext highlighter-rouge">$app</code> and before we start to register the routes in our application:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getContainer</span><span class="p">();</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>Now we have the <code class="language-plaintext highlighter-rouge">Slim\Container</code> object, we can add our services to it.</p>
@@ -582,9 +582,9 @@ RewriteRule . index.php [L]
 <p>The dependency is named <code class="language-plaintext highlighter-rouge">logger</code> and the code to add it looks like this:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span><span class="p">[</span><span class="s1">'logger'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$logger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Monolog\Logger</span><span class="p">(</span><span class="s1">'my_logger'</span><span class="p">);</span>
-    <span class="nv">$file_handler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Monolog\Handler\StreamHandler</span><span class="p">(</span><span class="s1">'../logs/app.log'</span><span class="p">);</span>
-    <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">pushHandler</span><span class="p">(</span><span class="nv">$file_handler</span><span class="p">);</span>
+    <span class="nv">$logger</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Monolog\Logger</span><span class="p">(</span><span class="s1">'my_logger'</span><span class="p">);</span>
+    <span class="nv">$file_handler</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Monolog\Handler\StreamHandler</span><span class="p">(</span><span class="s1">'../logs/app.log'</span><span class="p">);</span>
+    <span class="nv">$logger</span><span class="o">-&gt;</span><span class="nf">pushHandler</span><span class="p">(</span><span class="nv">$file_handler</span><span class="p">);</span>
     <span class="k">return</span> <span class="nv">$logger</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></div>
@@ -595,7 +595,7 @@ RewriteRule . index.php [L]
 
 <p>With the logger in place, I can use it from inside my route code with a line like this:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="s1">'Something interesting happened'</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">logger</span><span class="o">-&gt;</span><span class="nf">addInfo</span><span class="p">(</span><span class="s1">'Something interesting happened'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>Having good application logging is a really important foundation for any application so I’d always recommend putting something like this in place.  This allows you to add as much or as little debugging as you want, and by using the appropriate log levels with each message, you can have as much or as little detail as is appropriate for what you’re doing in any one moment.</p>
@@ -608,10 +608,10 @@ RewriteRule . index.php [L]
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span><span class="p">[</span><span class="s1">'db'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$c</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$db</span> <span class="o">=</span> <span class="nv">$c</span><span class="p">[</span><span class="s1">'settings'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">];</span>
-    <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">'mysql:host='</span> <span class="o">.</span> <span class="nv">$db</span><span class="p">[</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">';dbname='</span> <span class="o">.</span> <span class="nv">$db</span><span class="p">[</span><span class="s1">'dbname'</span><span class="p">],</span>
+    <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PDO</span><span class="p">(</span><span class="s1">'mysql:host='</span> <span class="mf">.</span> <span class="nv">$db</span><span class="p">[</span><span class="s1">'host'</span><span class="p">]</span> <span class="mf">.</span> <span class="s1">';dbname='</span> <span class="mf">.</span> <span class="nv">$db</span><span class="p">[</span><span class="s1">'dbname'</span><span class="p">],</span>
         <span class="nv">$db</span><span class="p">[</span><span class="s1">'user'</span><span class="p">],</span> <span class="nv">$db</span><span class="p">[</span><span class="s1">'pass'</span><span class="p">]);</span>
-    <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_ERRMODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">ERRMODE_EXCEPTION</span><span class="p">);</span>
-    <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">setAttribute</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">ATTR_DEFAULT_FETCH_MODE</span><span class="p">,</span> <span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">);</span>
+    <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="nf">setAttribute</span><span class="p">(</span><span class="no">PDO</span><span class="o">::</span><span class="no">ATTR_ERRMODE</span><span class="p">,</span> <span class="no">PDO</span><span class="o">::</span><span class="no">ERRMODE_EXCEPTION</span><span class="p">);</span>
+    <span class="nv">$pdo</span><span class="o">-&gt;</span><span class="nf">setAttribute</span><span class="p">(</span><span class="no">PDO</span><span class="o">::</span><span class="no">ATTR_DEFAULT_FETCH_MODE</span><span class="p">,</span> <span class="no">PDO</span><span class="o">::</span><span class="no">FETCH_ASSOC</span><span class="p">);</span>
     <span class="k">return</span> <span class="nv">$pdo</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></div>
@@ -620,7 +620,7 @@ RewriteRule . index.php [L]
 
 <p>Again, we can access our dependencies with just <code class="language-plaintext highlighter-rouge">$this-&gt;</code> and then the name of the dependency we want which in this case is <code class="language-plaintext highlighter-rouge">$this-&gt;db</code>, so there is code in my application that looks something like:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>This will fetch the <code class="language-plaintext highlighter-rouge">db</code> dependency from the DIC, creating it if necessary, and in this example just allows me to pass the <code class="language-plaintext highlighter-rouge">PDO</code> object straight into my mapper class.</p>
@@ -631,12 +631,12 @@ RewriteRule . index.php [L]
 
 <p>As a first example, here’s the code for making a GET request to <code class="language-plaintext highlighter-rouge">/tickets</code> which lists the tickets in my bug tracker example application.  It just spits out the variables since we haven’t added any views to our application yet:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="s2">"Ticket list"</span><span class="p">);</span>
-    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
-    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="na">getTickets</span><span class="p">();</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">logger</span><span class="o">-&gt;</span><span class="nf">addInfo</span><span class="p">(</span><span class="s2">"Ticket list"</span><span class="p">);</span>
+    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">);</span>
+    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="nf">getTickets</span><span class="p">();</span>
 
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nb">var_export</span><span class="p">(</span><span class="nv">$tickets</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nb">var_export</span><span class="p">(</span><span class="nv">$tickets</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
@@ -661,12 +661,12 @@ RewriteRule . index.php [L]
 
 <p>Sometimes, our URLs have variables in them that we want to use in our application.  In my bug tracking example, I want to have URLs like <code class="language-plaintext highlighter-rouge">/ticket/42</code> to refer to the ticket - and Slim has an easy way of parsing out the “42” bit and making it available for easy use in the code.  Here’s the route that does exactly that:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$ticket_id</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$args</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
-    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
-    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="na">getTicketById</span><span class="p">(</span><span class="nv">$ticket_id</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$ticket_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="nv">$args</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span>
+    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">);</span>
+    <span class="nv">$ticket</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="nf">getTicketById</span><span class="p">(</span><span class="nv">$ticket_id</span><span class="p">);</span>
 
-    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nb">var_export</span><span class="p">(</span><span class="nv">$ticket</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nb">var_export</span><span class="p">(</span><span class="nv">$ticket</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
@@ -690,11 +690,11 @@ RewriteRule . index.php [L]
 
 <p>For data that comes from a web form, Slim will turn that into an array.  My tickets example application has a form for creating new tickets that just sends two fields: “title” and “description”.  Here is the first part of the route that receives that data, note that for a POST route use <code class="language-plaintext highlighter-rouge">$app-&gt;post()</code> rather than <code class="language-plaintext highlighter-rouge">$app-&gt;get()</code>:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/ticket/new'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getParsedBody</span><span class="p">();</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'/ticket/new'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getParsedBody</span><span class="p">();</span>
     <span class="nv">$ticket_data</span> <span class="o">=</span> <span class="p">[];</span>
-    <span class="nv">$ticket_data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">);</span>
-    <span class="nv">$ticket_data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">],</span> <span class="nx">FILTER_SANITIZE_STRING</span><span class="p">);</span>
+    <span class="nv">$ticket_data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span> <span class="no">FILTER_SANITIZE_STRING</span><span class="p">);</span>
+    <span class="nv">$ticket_data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'description'</span><span class="p">],</span> <span class="no">FILTER_SANITIZE_STRING</span><span class="p">);</span>
     <span class="c1">// ...</span>
 </code></pre></div></div>
 
@@ -713,17 +713,17 @@ RewriteRule . index.php [L]
 
 <p>In order to be able to render the view, we’ll first need to create a view and make it available to our application; we do that by adding it to the DIC.  The code we need goes with the other DIC additions near the top of <code class="language-plaintext highlighter-rouge">src/public/index.php</code> and it looks like this:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span><span class="p">[</span><span class="s1">'view'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\Views\PhpRenderer</span><span class="p">(</span><span class="s1">'../templates/'</span><span class="p">);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$container</span><span class="p">[</span><span class="s1">'view'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\Views\PhpRenderer</span><span class="p">(</span><span class="s1">'../templates/'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>Now we have a <code class="language-plaintext highlighter-rouge">view</code> element in the DIC, and by default it will look for its templates in the <code class="language-plaintext highlighter-rouge">src/templates/</code> directory.  We can use it to render templates in our actions - here’s the ticket list route again, this time including the call to pass data into the template and render it:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="s1">'Ticket list'</span><span class="p">);</span>
-    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="p">);</span>
-    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="na">getTickets</span><span class="p">();</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/tickets'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">logger</span><span class="o">-&gt;</span><span class="nf">addInfo</span><span class="p">(</span><span class="s1">'Ticket list'</span><span class="p">);</span>
+    <span class="nv">$mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TicketMapper</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">);</span>
+    <span class="nv">$tickets</span> <span class="o">=</span> <span class="nv">$mapper</span><span class="o">-&gt;</span><span class="nf">getTickets</span><span class="p">();</span>
 
-    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'tickets.phtml'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'tickets'</span> <span class="o">=&gt;</span> <span class="nv">$tickets</span><span class="p">]);</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">view</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'tickets.phtml'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'tickets'</span> <span class="o">=&gt;</span> <span class="nv">$tickets</span><span class="p">]);</span>
     <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
@@ -749,11 +749,11 @@ RewriteRule . index.php [L]
 <span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$tickets</span> <span class="k">as</span> <span class="nv">$ticket</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span>
 
     <span class="nt">&lt;tr&gt;</span>
-        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">getTitle</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="nt">&lt;/td&gt;</span>
-        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">getComponent</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="nt">&lt;/td&gt;</span>
-        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">getShortDescription</span><span class="p">()</span> <span class="cp">?&gt;</span> ...<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="nf">getTitle</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="nf">getComponent</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?=</span><span class="nv">$ticket</span><span class="o">-&gt;</span><span class="nf">getShortDescription</span><span class="p">()</span> <span class="cp">?&gt;</span> ...<span class="nt">&lt;/td&gt;</span>
         <span class="nt">&lt;td&gt;</span>
-            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">&lt;?=</span><span class="nv">$router</span><span class="o">-&gt;</span><span class="na">pathFor</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">()])</span><span class="cp">?&gt;</span><span class="s">"</span><span class="nt">&gt;</span>view<span class="nt">&lt;/a&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">&lt;?=</span><span class="nv">$router</span><span class="o">-&gt;</span><span class="nf">pathFor</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="nv">$ticket</span><span class="o">-&gt;</span><span class="nf">getId</span><span class="p">()])</span><span class="cp">?&gt;</span><span class="s">"</span><span class="nt">&gt;</span>view<span class="nt">&lt;/a&gt;</span>
         <span class="nt">&lt;/td&gt;</span>
     <span class="nt">&lt;/tr&gt;</span>
 
@@ -769,14 +769,14 @@ RewriteRule . index.php [L]
 
 <p>When we create a route, we can give it a name by calling <code class="language-plaintext highlighter-rouge">-&gt;setName()</code> on the route object.  In this case, I am adding the name to the route that lets me view an individual ticket so that I can quickly create the right URL for a ticket by just giving the name of the route, so my code now looks something like this (just the changed bits shown here):</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/ticket/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
-<span class="p">})</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">);</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'ticket-detail'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>To use this in my template, I need to make the router available in the template that’s going to want to create this URL, so I’ve amended the <code class="language-plaintext highlighter-rouge">tickets/</code> route to pass a router through to the template by changing the render line to look like this:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'tickets.phtml'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'tickets'</span> <span class="o">=&gt;</span> <span class="nv">$tickets</span><span class="p">,</span> <span class="s1">'router'</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">router</span><span class="p">]);</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">view</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="s1">'tickets.phtml'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'tickets'</span> <span class="o">=&gt;</span> <span class="nv">$tickets</span><span class="p">,</span> <span class="s1">'router'</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">router</span><span class="p">]);</span>
 </code></pre></div></div>
 
 <p>With the <code class="language-plaintext highlighter-rouge">/tickets/{id}</code> route having a friendly name, and the router now available in our template, this is what makes the <code class="language-plaintext highlighter-rouge">pathFor()</code> call in our template work.  By supplying the <code class="language-plaintext highlighter-rouge">id</code>, this gets used as a named placeholder in the URL pattern, and the correct URL for linking to that route with those values is created.  This feature is brilliant for readable template URLs and is even better if you ever need to change a URL format for any reason - no need to grep templates to see where it’s used.  This approach is definitely recommended, especially for links you’ll use a lot.</p>
@@ -1313,7 +1313,7 @@ RewriteRule . index.php [L]
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -1345,7 +1345,7 @@ RewriteRule . index.php [L]
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1362,6 +1362,6 @@ RewriteRule . index.php [L]
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:31 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/tutorial/first-app.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:58 GMT -->
 </html>
 

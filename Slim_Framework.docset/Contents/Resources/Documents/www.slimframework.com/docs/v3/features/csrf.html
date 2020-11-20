@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from www.slimframework.com/docs/v3/features/csrf.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/features/csrf.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="utf-8"/>
@@ -45,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-logo" href="http://www.slimframework.com/">Slim</a>
+                    <a class="navbar-logo" href="https://www.slimframework.com/">Slim</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="http://www.slimframework.com/blog">Blog</a></li>
+                        <li><a href="https://www.slimframework.com/blog">Blog</a></li>
                         <li class="active"><a href="../../v4/index.html">User Guide</a></li>
                         <li><a href="http://discourse.slimframework.com/">Support</a></li>
-                        <li><a href="http://www.slimframework.com/contribute">Contribute</a></li>
+                        <li><a href="https://www.slimframework.com/contribute">Contribute</a></li>
                     </ul>
                     
                         
@@ -399,13 +399,13 @@ POST requests from client-side HTML forms.</p>
 to your application like this:</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Add middleware to the application</span>
-<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Slim\App</span><span class="p">;</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Slim\Csrf\Guard</span><span class="p">);</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nc">Slim\App</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="err">\</span><span class="nc">Slim\Csrf\Guard</span><span class="p">);</span>
 
 <span class="c1">// Create your application routes...</span>
 
 <span class="c1">// Run application</span>
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
 </code></pre></div></div>
 
 <h2 id="fetch-the-csrf-token-name-and-value">Fetch the CSRF token name and value</h2>
@@ -414,12 +414,12 @@ to your application like this:</p>
 PSR7 request object. The CSRF token name and value are unique for each request.
 You can fetch the current CSRF token name and value like this.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// CSRF token name and value</span>
-    <span class="nv">$nameKey</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">csrf</span><span class="o">-&gt;</span><span class="na">getTokenNameKey</span><span class="p">();</span>
-    <span class="nv">$valueKey</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">csrf</span><span class="o">-&gt;</span><span class="na">getTokenValueKey</span><span class="p">();</span>
-    <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$req</span><span class="o">-&gt;</span><span class="na">getAttribute</span><span class="p">(</span><span class="nv">$nameKey</span><span class="p">);</span>
-    <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$req</span><span class="o">-&gt;</span><span class="na">getAttribute</span><span class="p">(</span><span class="nv">$valueKey</span><span class="p">);</span>
+    <span class="nv">$nameKey</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">csrf</span><span class="o">-&gt;</span><span class="nf">getTokenNameKey</span><span class="p">();</span>
+    <span class="nv">$valueKey</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">csrf</span><span class="o">-&gt;</span><span class="nf">getTokenValueKey</span><span class="p">();</span>
+    <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$req</span><span class="o">-&gt;</span><span class="nf">getAttribute</span><span class="p">(</span><span class="nv">$nameKey</span><span class="p">);</span>
+    <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$req</span><span class="o">-&gt;</span><span class="nf">getAttribute</span><span class="p">(</span><span class="nv">$valueKey</span><span class="p">);</span>
 
     <span class="c1">// Render HTML form which POSTs to /bar with two hidden input fields for the</span>
     <span class="c1">// name and value:</span>
@@ -427,7 +427,7 @@ You can fetch the current CSRF token name and value like this.</p>
     <span class="c1">// &lt;input type="hidden" name="&lt;?= $valueKey ?&gt;" value="&lt;?= $value ?&gt;"&gt;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'/bar'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'/bar'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$req</span><span class="p">,</span> <span class="nv">$res</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// CSRF protection successful if you reached</span>
     <span class="c1">// this far.</span>
 <span class="p">});</span>
@@ -965,7 +965,7 @@ field with HTML forms.</p>
     <p>
         Created and maintained by <br/>
         <a href="http://joshlockhart.com/">Josh Lockhart</a>,
-        <a href="http://www.silentworks.co.uk/" target="_blank">Andrew Smith</a>,
+        <a href="https://www.donielsmith.com/" target="_blank">Andrew Smith</a>,
         <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
         <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
         <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
@@ -997,7 +997,7 @@ field with HTML forms.</p>
                 var suggestion = suggestions[i];
 
                 var docVersion = null;
-                var urlFragments = suggestion.url.split("http://www.slimframework.com/");
+                var urlFragments = suggestion.url.split("https://www.slimframework.com/");
                 if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
                   docVersion = urlFragments[2];
                 }
@@ -1014,6 +1014,6 @@ field with HTML forms.</p>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </body>
 
-<!-- Mirrored from www.slimframework.com/docs/v3/features/csrf.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Apr 2020 20:29:32 GMT -->
+<!-- Mirrored from www.slimframework.com/docs/v3/features/csrf.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Nov 2020 20:48:59 GMT -->
 </html>
 
